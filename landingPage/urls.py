@@ -4,6 +4,6 @@ from django.urls import include, path
 from . import views
 
 urlpatterns = [
-    path('', views.home, name='landing-page'),
+    path('', views.home, name='landing'),
     path('registration/', include('registration.urls'), name='registration'),
 ]

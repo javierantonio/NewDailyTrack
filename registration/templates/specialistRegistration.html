@@ -44,6 +44,7 @@ User Registration
 
                                 <!--PAGE 1-->
                                   <form role="form" method="post">
+                                      {% csrf_token %}
                                   <!--Email, password, first name, last name, sex, bday, cnum -->
 
                                     <div id="sregisterPage1">
@@ -76,7 +77,7 @@ User Registration
                                             <option value="What is the name of the town where you were born?">What is the name of the town where you were born?</option>
                                           </select>
 
-                                          <input type="text" class="form-control form-control-user" id="newSecAnswer" name="newSecAnswer"
+                                          <input type="text" class="form-control form-control-user" id="securityAnswer" name="securityAnswer"
                                           placeholder="Enter your answer here" style="margin: 15px 0 20px 0;">
 
                                           <hr>
@@ -137,8 +138,8 @@ User Registration
 
                                         <div style="display:flex;flex-direction:row;">
 
-                                          <button id="sprevRegister" class="btn-light2 btn-circle2 btn-xl2 prevSRegister">🡰</button>
-                                          <button id="snextRegister2" class="btn-light2 btn-circle2 btn-xl2 nextSRegister2">🡲</button>
+                                          <button id="sprevRegister" type="button" class="btn-light2 btn-circle2 btn-xl2 prevSRegister">🡰</button>
+                                          <button id="snextRegister2" type="button" class="btn-light2 btn-circle2 btn-xl2 nextSRegister2">🡲</button>
 
                                         </div>
                                     </div>
@@ -167,14 +168,14 @@ User Registration
 
 
                                         <br>
-                                        <button id="sprevRegister2" type="button" class="btn-light2 btn-circle2 btn-xl2 prevSRegister2">🡰</button>
+                                        <button id="prevSRegister2" type="button" class="btn-light2 btn-circle2 btn-xl2 prevSRegister2">🡰</button>
 
                                         <button type="submit" class="btn-info btn-user btn-block">Register</button>
                                         </div>
 
                                     </form>
                                     <br>
-                                    <button id="snextRegister" class="btn-light2 btn-circle2 btn-xl2 nextSRegister">🡲</button>
+                                    <button id="snextRegister" type="button" class="btn-light2 btn-circle2 btn-xl2 nextSRegister">🡲</button>
 
                                     <br>
                                     <p align="center"><a href="login">Login instead?</a></p>

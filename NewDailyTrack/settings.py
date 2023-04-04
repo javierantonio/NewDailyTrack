@@ -40,7 +40,7 @@ INSTALLED_APPS = [
 
     'landingPage.apps.LandingpageConfig',
     'registration.apps.RegistrationConfig',
-
+    'login.apps.LoginConfig',
 
 
 ]
