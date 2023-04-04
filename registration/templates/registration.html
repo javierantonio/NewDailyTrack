@@ -2,33 +2,7 @@
 {% load static %}
 
 //add form validations on email and confirm password?
-
-
-<html>
-  <head>
-      <!-- Required meta tags -->
-      <meta charset="utf-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <!--Bootstrap CSS-->
-      <link href='fontawesome/css/fontawesome.css' rel="stylesheet" type="text/css">
-      <link href='fontawesome/css/brands.css' rel="stylesheet" type="text/css">
-      <link href='fontawesome/css/solid.css' rel="stylesheet" type="text/css">
-      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
-      <!-- <link rel="stylesheet" href="{% static 'css/aeza.css' %}"> -->
-      <!-- Delete after django -->
-      <link rel="stylesheet" href="fontawesome/css/all.min.css">
-      <link rel="stylesheet" href='css/registration.css'>
-      
-      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  
-  <style>
-  
-  </style>
-  </head>
-  <body>
-
-
+//add form validations on email and confirm password?
 {% block title %}
 User Registration
 {% endblock title %}
@@ -66,17 +40,17 @@ User Registration
                                           <input type="text" class="form-control form-control-user"
                                               id="email" name="email" placeholder="ex. juandelacruz34@example.com" required>
                                       </div>
-                                      <div class="form-group">
-                                          <label for="password">Password:</label>
-                                          <input type="password" class="form-control form-control-user"
-                                              id="password" name="password" placeholder="*******" required>
-                                      </div>
-                                      <div class="form-group">
-                                          <label for="confirmPassword">Confirm Password:</label>
-                                          <input type="password" class="form-control form-control-user"
-                                              id="confirmPassword" name="confirmPassword" placeholder="*******" required>
-                                            <span id="passwordMatchError" style="display:none; color:red;">Passwords do not match</span>
-                                      </div>
+                                            <div class="form-group">
+                                                <label for="password">Password:</label>
+                                                <input type="password" class="form-control form-control-user" id="password" name="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" placeholder="*******" required>
+
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="confirmPassword">Confirm Password:</label>
+                                                <input type="password" class="form-control form-control-user"
+                                                    id="confirmPassword" name="confirmPassword" placeholder="*******" required>
+                                                <span id="passwordMatchError" style="display:none; color:red;">Passwords do not match</span>
+                                            </div>
 
                                       <hr>
                                         <div class="form-group">
@@ -160,7 +134,7 @@ User Registration
 
                                         </div>
 
-                                        <button id="nextRegister" class="btn-light2 btn-circle2 btn-xl2 nextRegister">
+                                        <button id="nextRegister" class="btn-light2 btn-circle2 btn-xl2 nextRegister" disabled>
                                           <i class="fa-solid fa-arrow-right"></i>
                                         </button>
 
@@ -186,27 +160,55 @@ User Registration
       <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
       <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 
-        <script>
+<script>
+  // Helper function to check if an email is valid
+  function isValidEmail(email) {
+    var emailRegex = /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/;
+    return emailRegex.test(email);
+  }
 
-            document.getElementById("submit").disabled = true;
-            document.getElementById("nextRegister").disabled = true;
-            function validatePassword() {
-                var password = document.getElementById("password").value;
-                var confirmPassword = document.getElementById("confirmPassword").value;
-                if (password != confirmPassword) {
-                    document.getElementById("passwordMatchError").style.display = "block";
-                    //get the submit button and disable it
-                    document.getElementById("submit").disabled = true;
-                    document.getElementById("nextRegister").disabled = true;
-                }
-                else {
-                    document.getElementById("passwordMatchError").style.display = "none";
-                    document.getElementById("submit").disabled = false;
-                    document.getElementById("nextRegister").disabled = false;
-                }
-            }
-            confirmPassword.onkeyup = validatePassword;
+  // Helper function to enable or disable the nextRegister button
+  function updateNextRegisterButton() {
+    var email = document.getElementById("email").value;
+    var password = document.getElementById("password").value;
+    var confirmPassword = document.getElementById("confirmPassword").value;
+    var securityQuestion = document.getElementById("securityQuestion").value;
+    var securityAnswer = document.getElementById("securityAnswer").value;
 
-        </script>
+    // Disable the nextRegister button if any of the fields are empty or invalid
+    if (!isValidEmail(email) || password !== confirmPassword || !password || !confirmPassword || !securityQuestion || !securityAnswer) {
+      document.getElementById("nextRegister").disabled = true;
+    } else {
+      document.getElementById("nextRegister").disabled = false;
+    }
+  }
 
+  document.getElementById("email").addEventListener("input", updateNextRegisterButton);
+  document.getElementById("password").addEventListener("input", updateNextRegisterButton);
+  document.getElementById("confirmPassword").addEventListener("input", updateNextRegisterButton);
+  document.getElementById("securityQuestion").addEventListener("change", updateNextRegisterButton);
+  document.getElementById("securityAnswer").addEventListener("input", updateNextRegisterButton);
+
+  // Call the function once to update the button on page load
+  updateNextRegisterButton();
+
+  // Add form validation to prevent submitting the form if there are invalid fields
+  document.querySelector("form").addEventListener("submit", function(event) {
+    event.preventDefault(); // prevent form submission
+    updateNextRegisterButton(); // update the button one last time before submission
+    if (!document.getElementById("nextRegister").disabled) {
+      event.target.submit(); // submit the form if all fields are valid
+    }
+  });
+
+    // Helper function to check if a date is valid
+    function isValidDate(date) {
+      var dateRegex = /^(0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])[- /.](19|20)\d\d$/;
+      return dateRegex.test(date);
+    }
+
+
+
+
+</script>
 {% endblock content %}
