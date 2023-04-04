@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     'landingPage.apps.LandingpageConfig',
     'registration.apps.RegistrationConfig',
 
+
+
 ]
 
 MIDDLEWARE = [

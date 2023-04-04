@@ -1,3 +1,5 @@
+
+
 $(".nextRegister").click(function(){
     document.getElementById("registerPage1").style.display = "none";
     document.getElementById("registerPage2").style.display = "block";
@@ -46,8 +48,5 @@ $(".nextRegister").click(function(){
     document.getElementById("sprevRegister3").style.display = "none";
   
   });
-  $(".prevLogin").click(function(){
-    window.location = "index.php?route=login";
-  
-  });
+
   
