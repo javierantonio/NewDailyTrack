@@ -3,10 +3,13 @@ from django.urls import include, path
 
 import landingPage.views
 from . import views
+import login.views
 
 urlpatterns = [
     path('patient/', views.patientRegistration, name='patientRegistration'),
     path('specialist/', views.specialistRegistration, name='specialistRegistration'),
-    path('', landingPage.views.home, name='landing-page'),
+    path('', views.home, name='userSelection'),
+    path('login/', login.views.login, name='loginPage')
+
 
 ]

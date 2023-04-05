@@ -1,0 +1,159 @@
+{% load static %}
+
+<html>
+  <head>
+      <!-- Required meta tags -->
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+      <!-- Delete after django -->
+      <link rel="stylesheet" href="{% static 'css/registration.css' %}" >
+      <script src="https://code.jquery.com/jquery-3.6.0.min.js' %}"></script>
+      <link rel="stylesheet" href="{% static 'fontawesome/css/all.min.css' %}">
+
+  <style>
+
+  </style>
+  </head>
+  <body>
+
+
+      <div class="row justify-content-center">
+
+      <div class="col-xl-6 col-lg-6 col-md-6">
+
+          <div class="card o-hidden border-20 shadow-lg my-5" >
+              <div class="card-body p-0">
+                  <!-- Nested Row within Card Body -->
+                  <div class="row">
+                      <div class="col-lg-6 d-none d-lg-block pams-login">
+
+                      </div>
+                      <div class="col-lg-6">
+                          <div class="p-5">
+                              <div class="text-center">
+                                  <img src="{% static 'img/logo.png' %}" alt="logo" class="logo">
+                                  <h4 class="reg_title">User Registration</h4>
+                              </div>
+
+
+                              <!--PAGE 1-->
+                                <form role="form" method="post">
+                                  <!--Email, password, first name, last name, sex, bday, cnum -->
+                                  <div id="registerPage1">
+                                      <div class="form-group">
+                                          <label for="newEmail">E-mail Address:</label>
+                                          <input type="text" class="form-control form-control-user"
+                                              id="newEmail" name="newEmail" placeholder="ex. juandc34@example.com" required>
+                                      </div>
+                                      <div class="form-group">
+                                          <label for="newPassword">Password:</label>
+                                          <input type="password" class="form-control form-control-user"
+                                              id="newPassword" name="newPassword" placeholder="*******" required>
+                                      </div>
+                                      <div class="form-group">
+                                          <label for="confPassword">Confirm Password:</label>
+                                          <input type="password" class="form-control form-control-user"
+                                              id="confPassword" name="confPassword" placeholder="*******" required>
+                                      </div>
+
+                                      <hr>
+                                        <div class="form-group">
+                                          <label for="newSecQuestion">For security reasons, please set your security question:</label>
+                                          <select class="form-control" id="newSecQuestion" name="newSecQuestion" required>
+                                            <option value="" selected hidden>Select a security question</option>
+                                            <option value="What is your mother's maiden name?">What is your mother's maiden name?</option>
+                                            <option value="What is the name of your first pet?">What is the name of your first pet?</option>
+                                            <option value="What was your first car?">What was your first car?</option>
+                                            <option value="What elementary school did you attend?">What elementary school did you attend?</option>
+                                            <option value="What is the name of the town where you were born?">What is the name of the town where you were born?</option>
+                                          </select>
+
+                                          <input type="text" class="form-control form-control-user" id="newSecAnswer" name="newSecAnswer"
+                                          placeholder="Enter your answer here" style="margin: 15px 0 20px 0;">
+
+                                      </div>
+                                    </div>
+
+
+                                    <!--PAGE 2-->
+                                    <div id="registerPage2" style="display:none">
+                                      <div class="form-group">
+                                            <label for="newFname">First Name:</label>
+                                            <input type="text" class="form-control form-control-user"
+                                                id="newFname" name="newFname" placeholder="Vien" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="newLname">Last Name:</label>
+                                            <input type="text" class="form-control form-control-user"
+                                                id="newLname" name="newLname" placeholder="ex. de la Serna" required>
+                                        </div>
+
+                                        <div class="form-group">
+                                          <label for="newBday">Birthdate:</label>
+                                          <input type="date"  class="form-control form-control-user"
+                                              id="newBday" name="newBday" placeholder="mm/dd/yyyy" required>
+                                              <!-- <div class="input-group input-daterange">
+                                                <input id="newBday" name="newBday" type="text" class="form-control" placeholder="Birthdate"
+                                                style="background-color: white;" readonly required>
+                                              </div> -->
+                                        </div>
+
+                                        <div class="form-group">
+                                          <label for="newSex">Sex:</label>
+                                          <select class="form-control" id="newSex" name="newSex" required>
+                                            <option value="" selected hidden>Select a category</option>
+                                            <option value="0">Male</option>
+                                            <option value="1">Female</option>
+                                            <option value="2">Other</option>
+                                          </select>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="newCnum">Contact Number:</label>
+                                            <input type="text" class="form-control form-control-user"
+                                                id="newCnum" name="newCnum" placeholder="Contact Number" required>
+                                        </div>
+
+                                        <!-- <input type="checkbox" id="minorCheck" class="minorCheck">
+                                        <label for="minorCheck">I am under 18</label> -->
+                                        <div class="form-group" id="guardianEmailForm">
+                                          <!-- <div id="guardianEmail" class="form-group" style="display:none">
+                                              <label for="guardianEmail">Guardian E-mail Address:</label>
+                                              <input type="text" class="form-control form-control-user"
+                                                  id="guardianEmail" name="guardianEmail" placeholder="ex. guardian@example.com">
+                                          </div> -->
+                                        </div>
+
+                                        <button id="prevRegister" class="btn-light2 btn-circle2 btn-xl2 prevRegister"><i class="fa fa-arrow-left"></i></button>
+
+                                        <button type="submit" class="btn-info btn-user btn-block">Register</button>
+
+                                        </div>
+
+                                        <button id="nextRegister" class="btn-light2 btn-circle2 btn-xl2 nextRegister"><i class="fa fa-arrow-right"></i></button>
+
+                                        <br>
+                                        <p align="center"><a href="login">Login instead?</a></p>
+
+                                    </div>
+                                  </form>
+
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+    </div>
+
+
+      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+      <script src="{% static 'js/register.js' %}"></script>
+      <!---->
+      <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+      <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+      
+    </body>
+</html>

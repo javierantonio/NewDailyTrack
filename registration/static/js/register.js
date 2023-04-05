@@ -72,17 +72,7 @@ $(".nextRegister").click(function(){
     document.getElementById("sregisterPage2").style.display = "block";
 
     document.getElementById("snextRegister2").style.display = "block";
-    // document.getElementById("snextRegister").style.display = "block";
     document.getElementById("sprevRegister").style.display = "block";
 
   });
 
-// $(".prevSRegister2").click(function(){
-//     document.getElementById("sregisterPage2").style.display = "block";
-//     document.getElementById("sregisterPage3").style.display = "none";
-//
-//     document.getElementById("snextRegister2").style.display = "block";
-//     document.getElementById("sprevRegister2").style.display = "none";
-// });
-
-  

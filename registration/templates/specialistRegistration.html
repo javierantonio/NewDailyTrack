@@ -6,6 +6,8 @@ User Registration
 
 <html>
   <head>
+
+
       <!-- Required meta tags -->
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,6 +18,9 @@ User Registration
       <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
       <link rel="stylesheet" href='{% static 'css/registration.css' %}' >
       <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.min.css" integrity="sha384-Nlo8b0yiGl7Dn+8l4eJ5Kzp1KzgAP2gkadQm3kpXWWyde50Mq5p3ty3J+uNlL0Vd" crossorigin="anonymous" />
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js" integrity="sha384-KyZXEAg3QhqLMpG8r+Knujsl7/0g6ycJ4QwQ4hswclxQf4F23lU6b+vOF6LREZ6T" crossorigin="anonymous"></script>
 
   <style>
 
@@ -83,19 +88,6 @@ User Registration
                                           <hr>
                                         </div>
 
-                                        <!-- <div class="form-group">
-                                          <label>Clinic Address</label>
-                                            <input type="text" class="form-control form-control-user"
-                                                id="building" name="building" placeholder="Building" required>
-                                            <input type="text" class="form-control form-control-user"
-                                                id="street" name="street" placeholder="Street" required>
-                                            <input type="text" class="form-control form-control-user"
-                                                id="city" name="city" placeholder="City" required>
-                                            <input type="text" class="form-control form-control-user"
-                                                id="province" name="province" placeholder="Province" required>
-
-                                            <input type="text" id="address" name="address" value=>
-                                        </div> -->
                                       </div>
 
                                       <!--PAGE 2-->
@@ -122,19 +114,21 @@ User Registration
                                           </select>
                                         </div>
 
-                                        <div class="form-group">
-                                          <label for="birthday">Birthdate:</label>
-                                          <div class="input-group">
-                                            <input id="birthday" name="birthday" type="text" class="form-control spec-daterange" placeholder="Birthdate"
-                                            style="background-color: white;" readonly required>
-                                          </div>
-                                      </div>
+                                        <div class="input-group date" id="datepicker">
+                                          <input type="text" class="form-control" name="birthday" placeholder="Birthday">
+                                          <span class="input-group-append">
+                                            <span class="input-group-text bg-white">
+                                              <i class="fa fa-calendar"></i>
+                                            </span>
+                                          </span>
+                                        </div>
 
                                       <div class="form-group">
                                             <label for="newCnum">Contact Number:</label>
                                             <input type="text" class="form-control form-control-user"
                                                 id="contactNumber" name="contactNumber" placeholder="Contact Number" required>
                                         </div>
+
 
                                         <div style="display:flex;flex-direction:row;">
 
@@ -148,10 +142,14 @@ User Registration
                                     <div id="sregisterPage3" style="display:none">
 
                                       <div class="form-group">
-                                        <label for="profile-pic">Please upload your PRC ID:</label>
-                                        <input type="file" id="profile-pic" name="profile-pic" accept="image/png, image/jpeg">
+                                        <label for="prcID">Please upload your PRC ID:</label>
+                                        <input type="file" id="prcID" name="prcID" accept="image/png, image/jpeg">
                                       </div>
-
+                                        <div class="form-group">
+                                            <label for="clinicAddress">Clinic Address:</label>
+                                            <input type="text" class="form-control form-control-user"
+                                            id="address" name="address" placeholder="Type in Clinic Address" required>
+                                        </div>
 
                                         <div class="form-group">
                                             <label for="licenseNumber">License Number:</label>
@@ -159,9 +157,9 @@ User Registration
                                                 id="licenseNumber" name="licenseNumber" placeholder="License Number" required>
                                         </div>
                                         <div class="form-group">
-                                            <label for="licenseExpiration">License Expiry:</label>
+                                            <label for="licenseExpiry">License Expiry:</label>
                                             <div class="input-group">
-                                              <input type="date" id="licenseExpiration" name="licenseExpiration" class="form-control spec-lnumrange"
+                                              <input type="date" id="licenseExpiry" name="licenseExpiry" class="form-control spec-lnumrange"
                                               placeholder="mm/dd/yyyy" readonly required>
                                             </div>
                                         </div>
@@ -198,6 +196,17 @@ User Registration
       <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
       <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
       <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-      
+
+        <script type="text/javascript">
+            $(document).ready(function() {
+              $("#datepicker input").datepicker({
+                dateFormat: "mm/dd/yy",
+                changeMonth: true,
+                changeYear: true,
+                yearRange: "1900:2100"
+              });
+            });
+        </script>
+
     </body>
 </html>

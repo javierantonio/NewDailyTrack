@@ -34,8 +34,9 @@ class Patient(models.Model):
 
 class Specialist(models.Model):
     profile = models.OneToOneField(Profile, on_delete=models.CASCADE)
-    experience = models.IntegerField(null=True)
     licenseNumber = models.CharField(max_length=20, null=True)
+    licenseExpiry = models.DateField(null=True)
+    prcID = models.ImageField(default='default.jpg', upload_to='prc_pics', null=True)
 
     def __str__(self):
         return self.profile.user.username

@@ -5,6 +5,6 @@ import landingPage.views
 from . import views
 
 urlpatterns = [
-    path('', views.login, name='loginPage'),
-
+    path('', views.login, name='login'),
+    # path('loginUser/', views.loginUser, name='loginUser'),
 ]

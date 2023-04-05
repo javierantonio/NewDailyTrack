@@ -9,13 +9,18 @@ def processSpecialistRegistration(request):
         # Get the form data from the request
         email = request.POST['email']
         password = request.POST['password']
-        first_name = request.POST['firstName']
-        last_name = request.POST['lastName']
         security_question = request.POST['securityQuestion']
         security_answer = request.POST['securityAnswer']
+
+        first_name = request.POST['firstName']
+        last_name = request.POST['lastName']
         sex = request.POST['sex']
+        # birthday = request.POST['birthday']
         contact_number = request.POST['contactNumber']
-        address = ""
+        prc_id = request.POST['prcID']
+        address = request.POST['address']
+        license_number = request.POST['licenseNumber']
+        license_expiry = request.POST['licenseExpiry']
         usertype = 'Specialist'
 
         # Create a new user
@@ -24,14 +29,13 @@ def processSpecialistRegistration(request):
         user.save()
 
         # Create a new profile
-        profile = Profile.objects.create(user=user, email=email, type=usertype, securityQuestion=security_question,
-                                         securityAnswer=security_answer, sex=sex,
-                                         phone=contact_number, address=address)
+        profile = Profile.objects.create(user=user, email=email, type=usertype, securityQuestion=security_question, securityAnswer=security_answer, sex=sex,  phone=contact_number, address=address)
         profile.save()
 
-        # Create a new patient
-        if usertype == 'Specialist':
-            specialist, _ = Specialist.objects.get_or_create(profile=profile)
-            specialist.save()
+        #Create a new specialist
+        specialist = Specialist.objects.create(profile=profile)
+        specialist.save()
+
+        print ("Specialist Profile created")
 
         return True
