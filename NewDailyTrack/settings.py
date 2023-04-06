@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    'landingPage.apps.LandingpageConfig',
+    'home.apps.LandingpageConfig',
     'registration.apps.RegistrationConfig',
     'login.apps.LoginConfig',
 
