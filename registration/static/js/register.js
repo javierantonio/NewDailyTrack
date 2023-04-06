@@ -105,7 +105,7 @@ function changedDate(){
         {
           id: 'guardianEmail',
           name: 'guardianEmail',
-          type: 'text',
+          type: 'email',
           placeholder: 'guardian@email.com'
         });
     // divElement.classList.add("form-group");
