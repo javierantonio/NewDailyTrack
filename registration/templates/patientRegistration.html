@@ -1,6 +1,32 @@
 {% extends "base.html" %}
-
 {% load static %}
+
+//add form validations on email and confirm password?
+
+
+<html>
+  <head>
+      <!-- Required meta tags -->
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <!--Bootstrap CSS-->
+      <link href='fontawesome/css/fontawesome.css' rel="stylesheet" type="text/css">
+      <link href='fontawesome/css/brands.css' rel="stylesheet" type="text/css">
+      <link href='fontawesome/css/solid.css' rel="stylesheet" type="text/css">
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+      <!-- <link rel="stylesheet" href="{% static 'css/aeza.css' %}"> -->
+      <!-- Delete after django -->
+      <link rel="stylesheet" href="fontawesome/css/all.min.css">
+      <link rel="stylesheet" href='css/registration.css'>
+      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+  <style>
+
+  </style>
+  </head>
+  <body>
+
 
 {% block title %}
 User Registration
@@ -36,24 +62,24 @@ User Registration
                                   <div id="registerPage1">
                                       <div class="form-group">
                                           <label for="email">E-mail Address:</label>
-                                          <input type="text" class="form-control form-control-user"
+                                          <input type="email" class="form-control form-control-user"
                                               id="email" name="email" placeholder="ex. juandelacruz34@example.com" required>
                                       </div>
-                                            <div class="form-group">
-                                                <label for="password">Password:</label>
-                                                <input type="password" class="form-control form-control-user" id="password" name="password" placeholder="*******" required>
-
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="confirmPassword">Confirm Password:</label>
-                                                <input type="password" class="form-control form-control-user"
-                                                    id="confirmPassword" name="confirmPassword" placeholder="*******" required>
-                                                <span id="passwordMatchError" style="display:none; color:red;">Passwords do not match</span>
-                                            </div>
+                                      <div class="form-group">
+                                          <label for="password">Password:</label>
+                                          <input type="password" class="form-control form-control-user"
+                                              id="password" name="password" placeholder="*******" required>
+                                      </div>
+                                      <div class="form-group">
+                                          <label for="confirmPassword">Confirm Password:</label>
+                                          <input type="password" class="form-control form-control-user"
+                                              id="confirmPassword" name="confirmPassword" placeholder="*******" required>
+                                            <span id="passwordMatchError" style="display:none; color:red;">Passwords do not match</span>
+                                      </div>
 
                                       <hr>
                                         <div class="form-group">
-                                          <label for="securityQuestion">For security reasons, please set your security question:</label>
+                                          <label for="newSecQuestion">For security reasons, please set your security question:</label>
                                           <select class="form-control" id="securityQuestion" name="securityQuestion" required>
                                             <option value="" selected hidden>Select a security question</option>
                                             <option value="What is your mother's maiden name?">What is your mother's maiden name?</option>
@@ -85,7 +111,7 @@ User Registration
 
                                         <div class="form-group">
                                           <label for="birthday">Birthdate:</label>
-                                          <input type="date"  class="form-control form-control-user"
+                                          <input type="date" class="form-control form-control-user input-daterange"
                                               id="birthday" name="birthday" placeholder="mm/dd/yyyy" required>
                                               <!-- <div class="input-group input-daterange">
                                                 <input id="newBday" name="newBday" type="text" class="form-control" placeholder="Birthdate"
@@ -109,14 +135,11 @@ User Registration
                                                 id="contactNumber" name="contactNumber" placeholder="Contact Number" required>
                                         </div>
 
-                                        <!-- <input type="checkbox" id="minorCheck" class="minorCheck">
-                                        <label for="minorCheck">I am under 18</label> -->
                                         <div class="form-group" id="guardianEmailForm">
-                                          <div id="guardianEmail" class="form-group" style="display:none">
-                                              <label for="guardianEmail">Guardian E-mail Address:</label>
-                                              <input type="text" class="form-control form-control-user"
-                                                  id="guardianEmail" name="guardianEmail" placeholder="ex. guardian@example.com">
-                                          </div>
+<!--                                              <label for="guardianEmail">Guardian E-mail Address:</label>-->
+<!--                                              <input type="text" class="form-control form-control-user"-->
+<!--                                                  id="guardianEmail" name="guardianEmail" placeholder="ex. guardian@example.com">-->
+<!--                                          </div>-->
                                         </div>
 
                                         <div class="form-group">
@@ -124,8 +147,8 @@ User Registration
                                           <input type="text" class="form-control form-control-user"
                                               id="address" name="address" placeholder="Type in your address..." required>
                                         </div>
-                    
-                                        <button id="prevRegister" type = "button" class="btn-light2 btn-circle2 btn-xl2 prevRegister">
+
+                                        <button id="prevRegister" class="btn-light2 btn-circle2 btn-xl2 prevRegister">
                                           <i class="fa-solid fa-arrow-left"></i>
                                         </button>
 
@@ -133,7 +156,7 @@ User Registration
 
                                         </div>
 
-                                        <button type = "button" id="nextRegister" class="btn-light2 btn-circle2 btn-xl2 nextRegister" disabled>
+                                        <button id="nextRegister" class="btn-light2 btn-circle2 btn-xl2 nextRegister">
                                           <i class="fa-solid fa-arrow-right"></i>
                                         </button>
 
@@ -154,60 +177,33 @@ User Registration
 
       <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
       <script src="{% static 'js/register.js' %}"></script>
+<!--      <script src="{% static 'js/auth.js' %}"></script>-->
       <!---->
       <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
       <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
       <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 
-<script>
-  // Helper function to check if an email is valid
-  function isValidEmail(email) {
-    var emailRegex = /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/;
-    return emailRegex.test(email);
-  }
+        <script>
 
-  // Helper function to enable or disable the nextRegister button
-  function updateNextRegisterButton() {
-    var email = document.getElementById("email").value;
-    var password = document.getElementById("password").value;
-    var confirmPassword = document.getElementById("confirmPassword").value;
-    var securityQuestion = document.getElementById("securityQuestion").value;
-    var securityAnswer = document.getElementById("securityAnswer").value;
+            document.getElementById("submit").disabled = true;
+            document.getElementById("nextRegister").disabled = true;
+            function validatePassword() {
+                var password = document.getElementById("password").value;
+                var confirmPassword = document.getElementById("confirmPassword").value;
+                if (password != confirmPassword) {
+                    document.getElementById("passwordMatchError").style.display = "block";
+                    //get the submit button and disable it
+                    document.getElementById("submit").disabled = true;
+                    document.getElementById("nextRegister").disabled = true;
+                }
+                else {
+                    document.getElementById("passwordMatchError").style.display = "none";
+                    document.getElementById("submit").disabled = false;
+                    document.getElementById("nextRegister").disabled = false;
+                }
+            }
+            confirmPassword.onkeyup = validatePassword;
 
-    // Disable the nextRegister button if any of the fields are empty or invalid
-    if (!isValidEmail(email) || password !== confirmPassword || !password || !confirmPassword || !securityQuestion || !securityAnswer) {
-      document.getElementById("nextRegister").disabled = true;
-    } else {
-      document.getElementById("nextRegister").disabled = false;
-    }
-  }
+        </script>
 
-  document.getElementById("email").addEventListener("input", updateNextRegisterButton);
-  document.getElementById("password").addEventListener("input", updateNextRegisterButton);
-  document.getElementById("confirmPassword").addEventListener("input", updateNextRegisterButton);
-  document.getElementById("securityQuestion").addEventListener("change", updateNextRegisterButton);
-  document.getElementById("securityAnswer").addEventListener("input", updateNextRegisterButton);
-
-  // Call the function once to update the button on page load
-  updateNextRegisterButton();
-
-  // Add form validation to prevent submitting the form if there are invalid fields
-  document.querySelector("form").addEventListener("submit", function(event) {
-    event.preventDefault(); // prevent form submission
-    updateNextRegisterButton(); // update the button one last time before submission
-    if (!document.getElementById("nextRegister").disabled) {
-      event.target.submit(); // submit the form if all fields are valid
-    }
-  });
-
-    // Helper function to check if a date is valid
-    function isValidDate(date) {
-      var dateRegex = /^(0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])[- /.](19|20)\d\d$/;
-      return dateRegex.test(date);
-    }
-
-
-
-
-</script>
 {% endblock content %}

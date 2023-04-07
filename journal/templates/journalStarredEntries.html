@@ -15,6 +15,7 @@
     <link rel="stylesheet" href='{% static 'css/animate.css' %}'>
     <link rel="stylesheet" href='{% static 'css/navbar.css' %}'>
     <link rel="stylesheet" href='{% static 'css/journal.css' %}'>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 
 <style>
@@ -28,29 +29,54 @@
                 window.location.href = url;
             }
         }
-        function toggleStar(event, entry_id) {
-            event.preventDefault();
-            $.ajax({
-                url: '{% url 'starJournalEntry' %}',
-                data: {
-                    'entry_id': entry_id,
-                    'csrfmiddlewaretoken': '{{ csrf_token }}',
-                },
-                type: 'POST',
-                dataType: 'json',
-                success: function (data) {
-                    if (data.is_starred) {
-                        event.target.classList.remove('fa-star-o');
-                        event.target.classList.add('fa-star');
-                        event.target.style.color = 'orange';
-                    } else {
-                        event.target.classList.remove('fa-star');
-                        event.target.classList.add('fa-star-o');
-                        event.target.style.color = '';
-                    }
+    // Add updateTable function
+    function updateTable() {
+        $.ajax({
+            url: '{% url 'starredJournalEntry' %}', // Replace this with the URL to your endpoint that returns the updated data
+            type: 'GET',
+            dataType: 'json',
+            success: function(data) {
+                // Clear the table data
+                app.table.clear().draw();
+
+                // Add the new data to the table
+                for (let entry of data) {
+                    app.table.row.add([
+                        // Replace 'entry.xxx' with the appropriate keys for your data structure
+                        entry.star,
+                        entry.title,
+                        entry.created_at,
+                        entry.specialist_access,
+                        entry.delete,
+                    ]).draw();
                 }
-            });
-        }
+            },
+            error: function(xhr, status, error) {
+                console.error('Error fetching updated data:', error);
+            }
+        });
+    }
+
+    // Modify toggleStar function
+    function toggleStar(event, entry_id) {
+        event.preventDefault();
+        $.ajax({
+            url: '{% url 'starJournalEntry' %}',
+            data: {
+                'entry_id': entry_id,
+                'csrfmiddlewaretoken': '{{ csrf_token }}',
+            },
+            type: 'POST',
+            dataType: 'json',
+            success: function (data) {
+                // Update the table data after the action is performed
+                updateTable();
+            },
+            error: function(xhr, status, error) {
+                console.error('Error toggling star:', error);
+            }
+        });
+    }
 
     </script>
 
@@ -217,7 +243,7 @@
         </tbody>
     </table>
 </div>
-  
+
 
                 <script>
                   $(function() {
@@ -227,32 +253,32 @@
                       // var jnid=$('#jnid'+id).text();
                       var specname = $('#specname' + id).text();
                       var notes = $('#notes' + id).text();
-  
+
                       $('#journalRequestModal').modal('show');
                       $('#specname').val(specname);
                       $('#notes').val(notes);
                       $('#journalid').val(id);
                     })
-  
+
                     var app = (function() {
                       var checkboxInput = ' input[type="checkbox"]',
                         filters = {},
                         rowData = [],
                         values = [],
                         key, value, show, length, divId;
-  
+
                       var init = function() {
                         app.table = $('#journalEntries').DataTable({
                           "dom": "lrtip" // hide default DataTable search box
                         });
-  
+
                         $("#textSearch").on('keyup change', function() {
                           console.log('text search for: ' + $(this).val());
                           app.table.search($(this).val()).draw();
                         });
-  
+
                         $(checkboxInput).prop('checked', false);
-  
+
                         $(checkboxInput).change(function() {
                           var that = $(this);
                           if (that.hasClass('all')) {
@@ -266,22 +292,21 @@
                           poulateAndApplyFilters();
                         });
                       };
-  
+
                       return {
                         init: init
                       };
                     })();
-  
+
                     app.init();
-  
+
                   });
                 </script>
-  
-  
+
+
             </div>
 
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap4.min.js"></script>
 

@@ -1,4 +1,5 @@
 from django.forms import forms
+from django.http import HttpResponse
 from django.shortcuts import redirect, render
 
 from journal.models import Journal
@@ -17,3 +18,16 @@ def processJournalEntry(request):
 
     else:
         return render(request, 'journalHome.html')
+
+
+def viewJournalEntry(request):
+    if request.method == 'POST':
+        return HttpResponse("bleh")
+    else:
+        userProfile = request.user.profile
+        entries = Journal.objects.get()
+        context = {'entries': entries}
+        for entry in entries:
+            print(entry.title)
+            print(entry.created_at)
+        return render(request, 'journalEntries.html', context)
