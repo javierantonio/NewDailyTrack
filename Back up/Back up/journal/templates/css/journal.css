@@ -1,0 +1,254 @@
+body {
+    overflow-x: hidden;
+    font: 20px 'Ubuntu', sans-serif;
+    background-image: url('../img/bg/journal_bg.png');
+    background-size: cover;
+  }
+
+  .jjournal{
+    scroll-behavior: smooth;
+    display: flex;
+    flex-direction: row;
+  }
+
+  @font-face {
+    font-family: 'batman';
+    src: url('../fonts/batmfa.ttf');
+  }
+  
+  .logo {
+    border-bottom: 1px solid;
+    border-color: #323232;
+  }
+  .logo h1 {
+    margin-left: 20px;
+    font-size: 45px;
+    font-family: 'Segoe Script';
+  }
+  .panel {
+    border-color: #eee;
+    margin: 40px;
+    padding: 20px;
+  }
+  .log {
+    margin: 20px;
+    margin-left: 30px;
+    color: orange;
+    text-decoration: none;
+    font-size: 20px;
+    font-size: 15px;
+  }
+  .log:hover {
+    color: #cd3249;
+    border-top: 2px solid;
+    border-color: #cd3249;
+    text-decoration: none;
+  }
+  
+  .log1 {
+    font: 15px 'Ubuntu', sans-serif;
+    color: orange;
+    margin: 0px;
+  }
+  .top {
+    margin-top: 20px;
+  }
+  .submit {
+    color: #fff;
+  }
+  .submit:hover {
+    border-color: #00d4cf;
+    color: #00d4cf;
+  }
+  .title1 {
+    font: 25px 'Century Gothic', 'Times Roman', sans-serif;
+    color: #428bca;
+  }
+  .title2 {
+    font: 15px 'Century Gothic', 'Times Roman', sans-serif;
+  }
+  .bg {
+    background: url(../img/book_read_leaf_page_abstract_photography_hd-wallpaper-1480336.jpg);
+    margin-top: 3px;
+    border-bottom: 3px solid;
+    border-color: #eee;
+  }
+  @font-face {
+    font-family: 'love';
+    src: url('../fonts/love2.ttf');
+  }
+  .sub {
+    width: 100%;
+    background-color: #e4415a;
+    font-size: 20px;
+    padding: 8px 5px 20px 5px;
+  }
+
+  .sub:hover {
+    color: #fff;
+  }
+  
+  .sub1 {
+    width: 90px;
+    color: white;
+    font-size: 15px;
+    height: 40px;
+    border-radius: 50px;
+    transition: all 0.1s ease-in-out;
+  }
+  
+  .sub1:hover {
+    transform: scale(1.1);
+    background: #e4415a;
+    font-weight: bolder;
+  }
+  
+  .footer {
+    font-size: 15px;
+    text-align: center;
+    border-top: 1px solid;
+    border-color: #323232;
+  }
+  .footer a {
+    margin: 25px;
+    color: orange;
+  }
+  .footer a:hover {
+    text-decoration: none;
+    color: #9acd32;
+    border-top: 2px solid;
+    border-color: orange;
+  }
+  .small {
+    margin-top: 40px;
+    color: #fff;
+  }
+
+  .title{
+    color:white;
+    margin: 25px 0 30px 18px;
+  }
+  
+  .bich {
+    min-height: 80vh;
+    border-top: 2px solid transparent;
+    border-bottom: 2px solid;
+    border-color: #eee;
+    background: transparent;
+    font: 17px 'Century Gothic', 'Times Roman', sans-serif;
+    margin: 3rem -10rem 5rem 10rem;
+  }
+
+  .journal-menu {
+    background-color: #202020;
+    margin: 70px 0 0 -50px;
+    padding: 10px;
+    border-right: 5px solid rgb(255, 75, 75);
+    border-top-right-radius: 25px;
+    border-bottom-right-radius: 25px;
+    height: 50%;
+  }
+
+  .journal-menu ul {
+    list-style: none;
+  }
+  
+  .journal-menu li {
+    height: 35px;
+    width: 100%;
+  }
+
+  .journal-menu li a {
+    text-decoration: none;
+    transition: all 0.1s ease-in-out;
+  }
+  
+  .journal-menu li a:hover {
+    text-decoration: none;
+    color: #ff6a80;
+    font-size: 22px;
+    border-left: 3px solid;
+    border-color: #ff6a80;
+    color: #ff6a80;
+    transform: scale(1.1);
+  }
+  
+  .menu ul {
+    list-style: none;
+  }
+
+  .camenu {
+    height: 30px;
+    font-family: 'Ubuntu', sans-serif;
+    margin-bottom: 10px;
+    margin-top: 15px;
+    margin-left: 10px;
+    margin-right: 20px;
+  }
+  .camenu a {
+    color: rgb(225, 225, 225);
+    font-size: 20px;
+  }
+  .camenu.active a {
+    text-decoration: none !important;
+    color: #e03b54 !important;
+    font-size: 22px !important;
+    border-left: 3px solid !important;
+    border-color: #f53f5a !important;
+  }
+  
+  .menu li {
+    height: 35px;
+    width: 100%;
+    margin-left: -30px;
+  }
+  .menu li a {
+    text-decoration: none;
+    transition: all 0.1s ease-in-out;
+  }
+  .menu li a:hover {
+    text-decoration: none;
+    color: #ff6a80;
+    font-size: 22px;
+    border-left: 3px solid;
+    border-color: #ff6a80;
+    color: #ff6a80;
+    transform: scale(1.1);
+  }
+  .active a {
+    text-decoration: none !important; 
+    color: #e03b54 !important;
+    font-size: 22px !important;
+    border-left: 3px solid !important;
+    border-color: #f53f5a !important;
+  }
+  .caf {
+    margin: 5px -5px 5px 5px;
+  }
+  .cas {
+    margin: 5px 0px 5px 8px;
+    font-size: smaller;
+  }
+  .box {
+    padding: 9px;
+  }
+  .area {
+    margin-left: 0px;
+  }
+  .area a {
+    text-decoration: none;
+    color: #000000;
+  }
+  .area a:hover {
+    color: #428bcd;
+  }
+  .area1 {
+    margin: 5px;
+  }
+  .invalid {
+    color: red;
+    font-size: 30px;
+    margin-top: 200px;
+    margin-left: 35%;
+  }
+  

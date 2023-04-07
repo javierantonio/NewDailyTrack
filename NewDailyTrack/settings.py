@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'home.apps.LandingpageConfig',
     'registration.apps.RegistrationConfig',
     'login.apps.LoginConfig',
+    'journal.apps.JournalConfig',
 
 
 ]

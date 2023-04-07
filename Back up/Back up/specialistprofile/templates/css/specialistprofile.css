@@ -1,0 +1,28 @@
+.smol{
+    font-weight: lighter;
+    color: rgb(100, 100, 100);
+}
+
+#accordionSidebar{
+    padding: 20px;
+    box-shadow: 3px 2px 6px rgba(56, 56, 56, 0.279);
+    background-color: aliceblue;
+    z-index: -2;
+  }
+  
+  
+  #accordionSidebar li{
+    margin: 5px 0;
+    font-weight: lighter;
+    font-size: 13px;
+  }
+  
+  #accordionSidebar i{
+    margin: 0 5px;
+  }
+  
+  .profile-photo {
+    max-width: 150px;
+    max-height: 150px;
+    margin: 20px 5px -15px 5px;
+  }
