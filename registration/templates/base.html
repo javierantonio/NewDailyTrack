@@ -1,16 +1,30 @@
 {% load static %}
-
-<html>
+<!DOCTYPE html>
+<html lang="en">
   <head>
       <!-- Required meta tags -->
+{#      <meta charset="utf-8">#}
+{#      <meta name="viewport" content="width=device-width, initial-scale=1.0">#}
+{#      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">#}
+{#      <!-- Delete after django -->#}
+{#      <link rel="stylesheet" href="{% static 'css/registration.css' %}" >#}
+{#      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>#}
+{#      <link rel="stylesheet" href="{% static 'fontawesome/css/all.min.css' %}">#}
+{#      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>#}
+
+         <!-- Required meta tags -->
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <!--Bootstrap CSS-->
+      <link href='{% static 'fontawesome/css/fontawesome.css' %}'  rel="stylesheet" type="text/css">
+      <link href='{% static 'fontawesome/css/brands.css' %}'  rel="stylesheet" type="text/css">
+      <link href='{% static 'fontawesome/css/solid.css' %}'  rel="stylesheet" type="text/css">
       <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-      <!-- Delete after django -->
-      <link rel="stylesheet" href="{% static 'css/registration.css' %}" >
+      <link rel="stylesheet" href='{% static 'css/registration.css' %}' >
+
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.min.css" integrity="sha384-Nlo8b0yiGl7Dn+8l4eJ5Kzp1KzgAP2gkadQm3kpXWWyde50Mq5p3ty3J+uNlL0Vd" crossorigin="anonymous" />
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js" integrity="sha384-KyZXEAg3QhqLMpG8r+Knujsl7/0g6ycJ4QwQ4hswclxQf4F23lU6b+vOF6LREZ6T" crossorigin="anonymous"></script>
       <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-      <link rel="stylesheet" href="{% static 'fontawesome/css/all.min.css' %}">
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
       <title>{% block title %}{% endblock %}</title>
   </head>
@@ -29,5 +43,43 @@
 
       {% block content %}
       {% endblock %}
+
+  <script src=" {% static 'js/register.js' %}"></script>
+
+      <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+        <script type="text/javascript">
+            $(document).ready(function() {
+              $("#datepicker input").datepicker({
+                dateFormat: "mm/dd/yy",
+                changeMonth: true,
+                changeYear: true,
+                yearRange: "1900:2100"
+              });
+            });
+        </script>
+        <script>
+
+        document.getElementById("submit").disabled = true;
+        document.getElementById("nextRegister").disabled = true;
+        function validatePassword() {
+            var password = document.getElementById("password").value;
+            var confirmPassword = document.getElementById("confirmPassword").value;
+            if (password != confirmPassword) {
+                document.getElementById("passwordMatchError").style.display = "block";
+                //get the submit button and disable it
+                document.getElementById("submit").disabled = true;
+                document.getElementById("nextRegister").disabled = true;
+            }
+            else {
+                document.getElementById("passwordMatchError").style.display = "none";
+                document.getElementById("submit").disabled = false;
+                document.getElementById("nextRegister").disabled = false;
+            }
+        }
+        confirmPassword.onkeyup = validatePassword;
+
+    </script>
+
   </body>
 </html>
