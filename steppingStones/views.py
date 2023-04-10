@@ -28,7 +28,8 @@ def steppingStoneStart(request):
                     request.session['personal'] = request.POST.get('personal')
                     return render(request, 'social.html')
                 elif request.session['keywords'] is None and request.session['mood'] is not None:
-                    request.session['keywords'] = request.POST.get('keywords')
+                    request.session['keywords'] = request.POST.getlist('keywords')
+                    print(request.session['keywords'])
                     return render(request, 'personal.html')
                 elif request.session['mood'] is None and request.session['stressLevel'] is not None:
                     request.session['mood'] = request.POST.get('mood')
