@@ -1,4 +1,5 @@
 import django
+from django.contrib.sessions import serializers
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.shortcuts import render, redirect
@@ -7,8 +8,11 @@ from django.contrib.auth.forms import PasswordResetForm
 from django.urls import reverse
 from django.contrib.auth.models import User
 from django.contrib import messages
-
 from registration.models import Profile
+from django.views.generic import UpdateView
+
+
+from django.template import RequestContext
 
 
 # Create your views here.
@@ -68,25 +72,53 @@ def passwordRecovery(request):
         form = PasswordResetForm(request.POST)
         if form.is_valid():
             form.save(request=request)
-            return redirect('changePassword')
+
     else:
         form = PasswordResetForm()
+
+    # return render(request, 'passwordRecovery.html', {'form': form})
     return render(request, 'passwordRecovery.html', {'form': form})
 
 def changePassword(request):
     if request.method == "POST":
-        return render(request, 'changePassword.html')
-        # useremail = request.POST.get('useremail')
-        # user = User.objects.get(username = useremail)
-        # if user is not None:
-        #     return render(request, 'changePassword.html')
-        # else:
-        #     return HttpResponse("User is not authenticated")
+        userEmail = request.session['email']
+        inputAnswer = request.POST.get('answer')
+        user = User.objects.get(username=userEmail)
+        userAnswer = Profile.objects.get(user=user).securityAnswer
+        if userAnswer==inputAnswer:
+            return render(request, 'changePassword.html')
+        else:
+            return HttpResponse("Wrong answer")
     else:
         return HttpResponse("Invalid request")
 
 def securityQuestions(request):
-    return render(request, 'securityQuestions.html')
+    if request.method == 'POST':
+        try:
+            useremail = request.POST.get('useremail')
+            user = User.objects.get(username=useremail)
+
+            if user is not None:
+                question = Profile.objects.get(user=user).securityQuestion
+                request.session['email'] = useremail
+                context = {
+                    'email': useremail,
+                    'question': question
+                }
+                return render(request, 'securityQuestions.html', context)
+            else:
+                return HttpResponse("User is not authenticated")
+        except User.DoesNotExist:
+            messages.error(request, 'Document deleted.')
+        return redirect(reverse('passwordRecovery'))
+    elif request.method == 'GET':
+        context = {
+            'email': request.POST.get('useremail')
+        }
+        return render(request, 'securityQuestions.html', context)
+
+
+
     # if request.method == 'POST':
     #     form = PasswordResetForm(request.POST)
     #     if form.is_valid():
@@ -96,5 +128,19 @@ def securityQuestions(request):
     #     form = PasswordResetForm()
     # return render(request, 'passwordRecovery.html', {'form': form})
 
-def newPassword(request):
-    return render(request, 'login.html')
+# def newPassword(request):
+#     if request.method == "POST":
+#         userEmail = request.session['email']
+#         newPassword = request.POST.get('editPassword')
+#         user = User.objects.get(username=userEmail)
+#         return render(request, 'login.html')
+#     else:
+#         return HttpResponse("Invalid request")
+
+# class ProfileUpdateView(UpdateView):
+#     model = User
+#     fields = ['password']
+#
+#     def form_valid(self, form):
+#         form.instance.password = self.request.user
+#         return super().form_valid(form)

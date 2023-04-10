@@ -1,7 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.urls import reverse
-
+from django.contrib.auth import logout
 from registration.models import Profile
 
 
@@ -27,6 +27,8 @@ def landing(request):
     else:
         return render(request, 'index.html')
 
-
+def logoutView(request):
+    logout(request)
+    return render(request, 'login.html')
 
 
