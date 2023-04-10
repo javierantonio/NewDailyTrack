@@ -1,18 +1,18 @@
 $('#newAddress').val( $('#building,#street,#city,#province').map(function(){
     return $(this).val();
 }).get().join(' ') );
-$(".minorCheck").click(function(){
-  var checkBox = document.getElementById("minorCheck");
-  var text = document.getElementById("guardianEmail");
-  if (checkBox.checked == true){
-    text.required = true;
-    $("#guardianEmail").attr('required', '');
-    text.style.display = "block";
-
-  } else {
-     text.style.display = "none";
-  }
-});
+// $(".minorCheck").click(function(){
+//   var checkBox = document.getElementById("minorCheck");
+//   var text = document.getElementById("guardianEmail");
+//   if (checkBox.checked == true){
+//     text.required = true;
+//     $("#guardianEmail").attr('required', '');
+//     text.style.display = "block";
+//
+//   } else {
+//      text.style.display = "none";
+//   }
+// });
 $(".nextRegister").click(function(){
   document.getElementById("registerPage1").style.display = "none";
   document.getElementById("registerPage2").style.display = "block";
