@@ -1,0 +1,107 @@
+/* latin */
+@font-face {
+    font-family: 'Raleway';
+    font-style: normal;
+    font-weight: 400;
+    src: url(https://fonts.gstatic.com/s/raleway/v22/1Ptxg8zYS_SKggPN4iEgvnHyvveLxVvaorCIPrE.woff2) format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  }
+  @font-face {
+    font-family: 'Lato';
+    font-style: normal;
+    font-weight: 400;
+    src: url(https://fonts.gstatic.com/s/lato/v20/S6uyw4BMUTPHjx4wXg.woff2) format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  }
+  
+  body{
+    background-color:#00ccbe;
+    overflow-x: hidden;
+    padding: 0;
+    font-family: 'Lato' !important;
+    color: rgba(61, 61, 61, 0);
+  }
+    
+  label{
+    color: rgb(86, 86, 86);
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Raleway' !important;
+  }
+  
+  .profileName{
+    margin: 0 10px;
+  }
+  
+  .pams-login {
+    background-image: url('../img/landingpage.png');
+    background-size: cover;
+    background-color: #00ccbe;
+  }
+  
+  .reg_title{
+    margin:25px 0;
+    color:#00ccbe;
+    font-weight:bold;
+  }
+
+  .logo{
+    height:50px;
+    width:180px;
+  }
+  
+  #auth{
+    margin: 0 auto;
+  }
+  
+  /*Boxes*/
+  
+  #main_boxes{
+      padding: 10px;
+      margin: 0 auto;
+  }
+  
+  .home-selection{
+    margin-top: 80px;
+  }
+  
+  .btn-light2 {
+    display: block;
+    padding: 0.6rem 2rem;
+    margin: 1rem;
+    transition: all 0.1s;
+    border: 2px solid rgb(17, 187, 210);
+    cursor: pointer;
+  }
+  
+  .btn-circle2,.btn-xl2 {
+    padding: 20px;
+    background-color: white;
+    border-radius: 55px;
+    font-size: 10px;
+    text-align: center;
+    box-shadow: 5px 5px 5px #cfcfcf;
+    margin: 0 auto;
+    width: 60px;
+    height:60px;
+  
+  }
+
+  .btn-user{
+    border-radius: 50px;
+    margin: 20px 0 0 0;
+    padding: 10px 0;
+  }
+
+  .fa-arrow-left, .fa-arrow-right {
+    font-size: 20px;
+    color: grey;
+    margin: none;
+  }
+  
+  
+  
+  
+  
+  

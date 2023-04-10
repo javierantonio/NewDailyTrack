@@ -27,6 +27,7 @@ class Profile(models.Model):
 
 class Patient(models.Model):
     profile = models.OneToOneField(Profile, on_delete=models.CASCADE)
+    patientType = models.CharField(max_length=20, null=True)
 
     def __str__(self):
         return self.profile.user.username

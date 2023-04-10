@@ -1,0 +1,322 @@
+
+@font-face {
+    font-family: 'Raleway';
+    font-style: normal;
+    font-weight: 400;
+    src: url(https://fonts.gstatic.com/s/raleway/v22/1Ptxg8zYS_SKggPN4iEgvnHyvveLxVvaorCIPrE.woff2) format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  }
+  @font-face {
+    font-family: 'Lato';
+    font-style: normal;
+    font-weight: 400;
+    src: url(https://fonts.gstatic.com/s/lato/v20/S6uyw4BMUTPHjx4wXg.woff2) format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  }
+
+.body{
+    height: 100%;
+    margin: 20px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+font-family: 'Raleway' !important;
+}
+
+.title{
+    margin: 70px 0;
+}
+
+.progress-bar{
+    padding: 0 !important;
+}
+
+.button {
+    float: left;
+    margin: 0 10px;
+    width: 50px;
+    height: 50px;
+    position: relative;
+    border-radius: 50px;
+    cursor: pointer;
+  }
+  
+  .button label,
+  .button input {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding-top: 10px;
+  transition: all .2s ease-out;
+  color: rgb(58, 58, 58);
+  background-color: transparent;
+  }
+  
+  .button label {
+    cursor: pointer;
+    z-index: 100;
+  }
+
+  .button input[type="radio"]:checked + label {
+    background: #20b8be;
+    width: 50px;
+    height: 50px;
+    border-radius: 50px;
+    color: white;
+    font-weight: bolder;
+  }
+
+  .fa-arrow-left, .fa-arrow-right {
+    font-size: 20px;
+    color: grey;
+    margin: none;
+  }
+  
+  .btn-circle,.btn-xl {
+    padding: 20px;
+    background-color: white;
+    border-radius: 55px;
+    border: 1px solid #d6d6d6;
+    font-size: 10px;
+    text-align: center;
+    box-shadow: 5px 5px 5px #cfcfcf;
+    margin: -10px 50px 100px 50px;
+  }
+
+  
+  .btn-light {
+    background-color: #ffffff;
+    box-shadow: 3px 3px 4px #cfcfcf;
+    outline: none;
+  }
+  
+  .btn-light:hover{
+    background-color: #f0f0f0;
+    box-shadow: 3px 3px 4px #cfcfcf;
+    outline: none;
+  }
+  
+  .btn-light:focus, .btn:focus, .btn-circle:focus, .btn-xl:focus{
+    background-color: white;
+    box-shadow: inset 3px 4px 5px #cfcfcf;
+    color: white;
+    border: none;
+    outline: 2px solid rgb(49, 49, 49);
+  }
+  
+  #prevBbtn, #nextBtn {
+    width: 60px;
+    height: 60px;
+  }
+    
+
+    /* .distress_container{
+    margin: 80px 0 100px 330px;
+} */
+
+.progress{
+    height: 8px; 
+    background-color:white;
+    border-radius:20px;
+    border:2px solid #a6b1bf;
+    margin-top: 20px;
+}
+
+.bottom_btn_set {
+    margin-top: 40px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    vertical-align: bottom;
+    font-size: 15px;
+}
+
+.stress_btn_set {
+    margin-top: 150px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    vertical-align: bottom;
+    font-size: 15px;
+}
+
+/* Mood Getter buttons positions */
+.moodgetter {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-right: 300px;
+  }
+  
+  .moodgetter img { /* SIZE */
+    width: 160px;
+    height: 200px;
+    -webkit-transition: all .1s ease-in-out;
+    -moz-transition: all .1s ease-in-out;
+    transition: all .1s ease-in-out;
+    margin: 35px 10px;
+    cursor: pointer;
+  }
+  
+  .moodgetter img:hover {
+    transform: scale(1.1);
+  }
+  
+  .keywords_container{
+    margin: 55px 0 0 325px;
+  }
+
+  .categories {
+    width: 250px;
+    margin: 0px -10px 0 -10px;
+    display: block;
+  }
+  
+  div label input {
+    margin-right: 100px;
+  }
+  
+  .cat {
+    margin: 4px;
+    background-color: white;
+    overflow: hidden;
+    float: left;
+    border-radius: 50px;
+    border: 1px solid white;
+    display: block;
+    cursor: pointer;
+    box-shadow: 3px 3px 4px #cfcfcf;
+    -webkit-transition: all .1s ease-in-out;
+    -moz-transition: all .1s ease-in-out;
+    transition: all .1s ease-in-out;
+    cursor: pointer; /* Pointer/hand icon */
+    width: 150px; /* Set a width if needed */
+  }
+  
+  .cat label {
+    float: left; line-height: 3.0em;
+    width: 150px; height: 2.5em;
+    color: #494949;
+  }
+  
+  .cat label span {
+    text-align: center;
+    display: block;
+    color: #494949;
+    margin-top: 5px 5px 0 0 ;
+  }
+  
+  .cat label input {
+    position: absolute;
+    display: none;
+    color: #494949 !important;
+  }
+  /* selects all of the text within the input element and changes the color of the text */
+  .cat label input + span{color: rgb(85, 85, 85);font-weight: bold;}
+  
+  
+  /* This will declare how a selected input will look giving generic properties */
+  .cat input:checked + span {
+      color: white;
+  }
+
+  .buttonhug{
+    display:flex;
+    margin-left: -100px;
+    margin-right: 100px;
+    margin-top: -20px;
+  }
+
+  .buttonhug2 {
+    display:flex;
+  }
+
+  .sadness{
+    border: 3px solid #5186f0;
+    cursor: pointer;
+  }
+  
+  .sadness input:checked + span{
+    border-radius: 50px;
+    width: 150px;
+    color: white;
+    background-color: #2968e6;
+    box-shadow: inset 3px 3px 4px #0a3894;
+  }
+
+  .bg{
+    background-color: #ffffff;
+    background-size: cover;
+    width:100%;
+    height:100%;
+    top:0px;
+    left:0px;
+    position:fixed;
+  }
+  
+  .bg2{
+    background-color: #ffffff;
+    background-size: cover;
+    width:100%;
+    height:100%;
+    top:0px;
+    left:0px;
+    position:fixed;
+    z-index: -1;
+  }
+  
+  .cp-personal{
+    background-image: url("../img/bg/personal_bg.png");
+  }
+  .cp-social{
+    background-image: url("../img/bg/social_bg.png");
+  }
+  .cp-sleep{
+    background-image: url("../img/bg/sleep_bg.png");
+  }
+  .cp-actions{
+    background-image: url("../img/bg/actions_bg.png");
+  }
+  .cp-foods{
+    background-image: url("../img/bg/food_bg.png");
+  }
+
+  /* Coping Strategies buttons */
+.copingstrategies {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.copingstrategies img {
+  width: 180px;
+  height: 195px;
+  -webkit-transition: all .1s ease-in-out;
+  -moz-transition: all .1s ease-in-out;
+  transition: all .1s ease-in-out;
+  cursor: pointer;
+}
+
+.copingstrategies img:hover{
+  transform: scale(1.1);
+}
+
+.input-hidden {
+  /* For Hiding Radio Button Circles */
+  position: absolute;
+  left: -9999px;
+}
+input[type="radio"]:checked + label > img {
+  border: 1px solid rgb(33, 237, 189);
+  border-radius: 20%;
+  box-shadow: 0 0 3px 3px #22bdff;
+  transform: scale(1.1);
+}

@@ -25,9 +25,8 @@ urlpatterns = [
     path('', include('home.urls')),
     path('registration/', include('registration.urls')),
     path('login/', include('login.urls')),
+    path('logout/', include('logout.urls')),
     path('journal/', include('journal.urls')),
-
-    # path('login/', auth_views.LoginView.as_view(template_name='login.html'), name='login'),
-    # path('logout/', auth_views.LogoutView.as_view(template_name='login.html'), name='login'),
+    path('steppingstones/', include('steppingStones.urls')),
 
 ]

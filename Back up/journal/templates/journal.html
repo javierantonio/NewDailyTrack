@@ -1,0 +1,545 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title></title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <link rel="stylesheet" href='css/animate.css'>
+    <link rel="stylesheet" href='css/navbar.css'>
+    <link rel="stylesheet" href='css/journal.css'>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>
+
+<style>
+
+</style>
+
+</head>
+<body>
+
+  <script>
+    function validateForm() {
+      var y = document.forms["form"]["title"].value;
+      if (y == null || y == "") {
+        alert("Title must be filled out.");
+        return false;
+      }
+    }
+  </script>
+
+  <!--Start of Navbar-->
+
+  <nav class="navbar navbar-custom navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="header.html"><img src="img/logo.png" alt="DailyTrack logo" class="logo"></a>
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse navbar-right" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto">
+
+            <li class="nav-item">
+                <a class="nav-link" href="journal.html">
+                <span class="mr-2 d-none d-lg-inline" >
+                    <i class="fa fa-book fa-fw mr-1"></i> Journal</span></a>
+            </li>
+
+            <li class="nav-item ">
+                <a class="nav-link" href="doodle.html">
+                <span class="mr-2 d-none d-lg-inline">
+                    <i class="fa fa-palette fa-fw mr-1"></i> Doodle</span></a>
+            </li>
+
+            <li class="nav-item ">
+                <a class="nav-link" href="appointment.html">
+                <span class="mr-2 d-none d-lg-inline">
+                    <i class="fa fa-notes-medical fa-fw mr-1"></i> Appointment</span></a>
+            </li>
+
+            <li class="nav-item ">
+                <a class="nav-link" href="emoticards.html"><i class="fa fa-chart-pie fa-fw mr-1"></i> Emoticards</a>
+            </li>
+
+            <li class="nav-item  ">
+              <a class="nav-link" href="timelyreports.html"><i class="fa-solid fa-chart-area fa-fw mr-1"></i> Timely Reports</a>
+            </li>
+
+            <li class="nav-item dropdown no-arrow">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    *Person's Name*
+                </a>
+
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="profile.html">
+                        <i class="fa fa-user fa-sm fa-fw mr-2"></i>Profile</a>
+                    <a class="dropdown-item" href="timelyreports.html">
+                        <i class="fas fa-chart-line fa-sm fa-fw mr-2"></i>Timely Reports</a>
+                    <a class="dropdown-item" href="logout">
+                        <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2"></i>Log Out</a>
+                </div>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<!--End of NAVBAR-->
+
+  <div class="jjournal bg">
+  
+    <!--menu start-->
+    <div class="journal-menu col-sm-2">
+
+      <ul>  
+        <li>
+          <div>
+            <h3 class="title">📕 Journal</h3>
+          </div>
+        </li>
+
+        <hr>
+    
+        <li>
+          <div class="camenu <?= @$_GET['q1'] == 1 ? " " : "" ?>">
+            <a href="index.php?route=journal&q1=1"><i class="fa fa-pencil caf" aria-hidden="true"></i>
+              <span class="cas">Compose</span>
+            </a>
+          </div>
+        </li>
+  
+        <li>
+          <div class="camenu <?= @$_GET['q1'] == 2 ? " " : "" ?>">
+            <a href="index.php?route=journal&q1=2"><i class="fa fa-archive caf" aria-hidden="true"></i>
+              <span class="cas">Entries</span></a>
+          </div>
+        </li>
+  
+        <li>
+          <div class="camenu <?= @$_GET['q1'] == 3 ? " " : "" ?>">
+            <a href="index.php?route=journal&q1=3"><i class="fa fa-star caf"></i>
+              <span class="cas">Starred</span></a>
+          </div>
+        </li>
+  
+        <!-- <li>
+  <div class="camenu <?php if ((@$_GET['q1'] == 5))
+                        echo ' '; ?>">
+  <a href="index.php?route=journal&q1=5"><i class="fa fa-share caf"></i>
+  <span class="cas">Shared</span></a>
+  </div>
+  </li> -->
+        <br>
+      </ul>
+    </div>
+    <!--menu end-->
+  
+    <div class="col-md-8 mr-auto" style="background-color:transparent;">
+      <div class="bich">
+        <!--content area start-->
+  
+        <!--compose-->
+        <!-- <?php if (@$_GET['q1'] == 1) { ?> -->
+          <form style="margin:25px" name="form" onSubmit="return validateForm()" method="POST">
+  
+            <div class="form-group">
+              <label for="entryTitle" style="color:#e03b54;">Enter Title:</label>
+              <input type="text" name="entryTitle" class="form-control" id="entryTitle" placeholder="Enter title">
+            </div>
+  
+            <div class="form-group">
+  
+              <label for="patient-entry" style="color:#e03b54;">
+                💭 Write your Entry:
+              </label>
+              
+              <textarea class="form-control" id="patient-entry" name="editor" placeholder="Write anything you want here..."></textarea>
+              
+              <script>
+                // Initialize CKEditor on the textarea element
+                CKEDITOR.replace('patient-entry');
+              </script>            
+  
+            </div>
+  
+            <div class="form group">
+              <button type="submit" value="save" class="btn-danger sub sub1" style="width:8rem;">
+                <i class="fa-solid fa-check"></i> Save Entry</button>
+            </div>
+  
+          </form>
+        <!-- <?php
+          (new ControllerJournal)->ctrAddEntry();
+        }
+  
+  
+        // 📍📍📍 ENTRIES AREA ENTRIES AREA WITH THE BIG TABLLLLEEEEEEEE 📍📍📍
+  
+        if (@$_GET['q1'] == 2) {
+          $archives = (new ControllerJournal)->ctrShowArchive();
+        ?> -->
+          <div style="margin-left:10px;margin-right:10px;margin-top:20px; max-height:480px; line-height:35px;padding:5px;">
+            <div class="col-md-6" style="margin: 0 auto;display:flex;flex-direction:row;">
+              <input class="form-control" id="textSearch" placeholder="Search entries..." />
+            </div>
+  
+            <table class="table" id="journalEntries">
+              <thead class="thead-dark">
+                <tr style="text-align: center;">
+                  <th></th>
+                  <th><b>Title</b></th>
+                  <th><b>Date</b></th>
+                  <th><b>Time</b></th>
+                  <th>Specialist Access</th>
+                  <th><b>Delete</b></th>
+                </tr>
+              </thead>
+              <tbody style="text-align: center;">
+                <!-- <?php foreach ($archives as $key => $value) {
+                  $id = $value['id'];
+                  $date = $value['entrydate'];
+                  $date = date("M j, Y", strtotime($date));
+                  $time = $value['entrytime'];
+                  $time = date("h:i A", strtotime($time));
+                  $title = $value['entrytitle'];
+                  $star = $value['star'];
+                  $share = $value['share'];
+                  $status = $value["status"];
+                ?> -->
+                  <tr>
+                    <td>
+                      <a title="<?= $star == 1 ? "starred" : "not starred" ?>" href="index.php?route=journal&sid=<?= $id ?>">
+                        <b>
+                          <i class="fa <?= $star == 1 ? "fa-star" : "fa-star-o" ?>" <?= $star == 1 ? "style=\"color:orange\"" : "" ?> aria-hidden="true">
+                          </i>
+                        </b>
+                      </a>
+                    </td>
+                    <td>
+                      <a title="Click to open article" href="index.php?route=journal&aid=<?= $id ?>"><?= $title ?></a>
+                    </td>
+                    <td>
+                      <?= $date ?>
+                    </td>
+                    <td>
+                      <?= $time ?>
+                    </td>
+                    <span hidden id="jnid<?= $id ?>">!<?= $id ?></span>
+                    <span hidden id="specname<?= $id ?>"><?= $value['specname'] ?></span>
+                    <span hidden id="notes<?= $id ?>"><?= $value['notes'] ?></span>
+  
+                    <?php
+                    // if($share==0)
+                    //   echo '<td>
+                    //           <a title="share for public" href="index.php?route=journal&shid='.$id.'" >
+                    //           <b><i class="fa fa-share-square-o" aria-hidden="true"></i></b>
+                    //           </a>
+                    //         </td>';
+                    // else
+                    //   echo '<td>
+                    //           <a title="shared for public" href="update.php?shid='.$id.'" >
+                    //           <b><i class="fa fa-share-square-o" style="color:orange" aria-hidden="true"></i></b>
+                    //           </a>
+                    //         </td>';
+                    // $check = (new ControllerJournal)->ctrCheckRequests();
+  
+                    // IF THERE'S NO ACCESS REQUEST 
+                    if (is_null($status)) { ?>
+                      <td>
+                        <a href="#" style="margin: 0 auto;">
+                          <b><a href="#" class="badge badge-secondary">No Request</a></b></a>
+                      </td>
+                      <!-- //IF THERE'S AN ACCESS REQUEST  -->
+                    <?php } else if ($status == 0) { ?>
+                      <td>
+                        <button class="journalRequest" value="' . $id . '" style="background-color:white;border-radius: 10px; margin: 0 auto;">
+                          <b><a href="#" class="badge badge-info">Access Request</a></b></button>
+                      </td>
+                      <!-- IF ENTRY IS ALREADY SHARED; Consider adding unshared entry module  -->
+                    <?php } else if ($status == 1) {  ?>
+                      <td>
+                        <a href="#" style="border-radius: 10px; margin: 0 auto;">
+                          <b><a href="#" class="badge badge-success">Shared</a></b></a>
+                      </td>
+                    <?php } ?>
+  
+                    <td>
+                      <a title="Delete Article" href="index.php?route=journal&did=<?= $id ?>">
+                        <b><i class="fa fa-trash" aria-hidden="true"></i></b>
+                      </a>
+                    </td>
+                  </tr>
+                <?php } ?>
+              </tbody>
+            </table>
+          <?php }
+  
+  
+        if (@$_GET['q1'] == 3) {
+          $starredEntries = (new ControllerJournal)->ctrShowStarEntry();
+          ?>
+            <div style="margin-left:10px;margin-right:10px;margin-top:20px; max-height:480px; line-height:35px;padding:5px;">
+              <table class="table" id="journalEntries" style="border-radius:20px;">
+                <thead class="thead-dark">
+                  <tr style="text-align: center;">
+                    <th></th>
+                    <th><b>Title</b></th>
+                    <th><b>Date</b></th>
+                    <th><b>Time</b></th>
+                  </tr>
+                </thead>
+                <tbody style="text-align: center;">
+                  <!-- <?php foreach ($starredEntries as $key => $value) {
+                    $id = $value['id'];
+                    $date = $value['entrydate'];
+                    $date = date("M j, Y", strtotime($date));
+                    $time = $value['entrytime'];
+                    $time = date("h:i A", strtotime($time));
+                    $title = $value['entrytitle'];
+                    $star = $value['star'];
+                    $share = $value['share'];
+                  ?> -->
+                    <tr>
+                      <td>
+                        <a title="starred" href="index.php?route=journal&sid=<?= $id ?>">
+                          <b><i class="fa fa-star" style="color:orange" aria-hidden="true"></i></b>
+                        </a>
+                      </td>
+                      <td>
+                        <a title="Click to open article" href="index.php?route=journal&aid=<?= $id ?>"><?= $title ?></a>
+                      </td>
+                      <td><?= $date ?></td>
+                      <td><?= $time ?></td>
+                    </tr>
+                  <?php } ?>
+                </tbody>
+              </table>
+            <?php }
+  
+  
+          //
+          // if(@$_GET['q1']==5) {
+          //   $controller = (new ControllerJournal)->ctrShowSharedEntry();
+          //   echo  '<div class="mCustomScrollbar area" style="margin-left:10px;margin-right:10px;margin-top:20px; max-height:480px; line-height:35px;padding:5px;">
+          //
+          //   <table class="table table-striped">
+          //   <tr style="text-align: center;">
+          //
+          //     <td></td>
+          //     <td><b>Title</b></td>
+          //     <td><b>Date</b></td>
+          //     <td><b>Time</b></td>
+          //     <td>
+          //       <td>
+          //       </td>
+          //     </td>
+          //     <td></td>
+          //     <td></td>
+          //     <td></td>
+          //
+          //     </tr>';
+          //
+          //   foreach ($controller as $key => $value) {
+          //     $id = $value['id'];
+          //     $date = $value['entrydate'];
+          //   	$date= date("d-m-Y",strtotime($date));
+          //   	$time = $value['entrytime'];
+          //   	$title = $value['entrytitle'];
+          //   	$star = $value['star'];
+          //   	$share = $value['share'];
+          //     echo '<tr>
+          //           <td>
+          //             <a title="starred" href="index.php?route=journal&sid='.$id.'">
+          //             <b><i class="fa fa-star" style="color:orange" aria-hidden="true"></i></b>
+          //             </a>
+          //           </td>
+          //           </tr>';
+          //
+          //     echo '<td>
+          //           <a title="Click to open article" href="index.php?route=journal&aid='.$id.'">'.$title.'</a>
+          //           </td>
+          //
+          //           <td>'.$date.'</td>
+          //           <td>'.$time.'</td>
+          //
+          //           <td>
+          //             <a title="Open Article" href="index.php?route=journal&aid='.$id.'">
+          //             <b><i class="fa fa-folder-open" aria-hidden="true"></i></b>
+          //             </a>
+          //           </td>';
+          //
+          //   echo '</table>
+          //
+          //   </div>';
+          // }
+          // }
+  
+  
+            ?>
+  
+            <div class="container" style="background-color:white;">
+  
+              <!-- <?php
+  
+              if (@$_GET['aid']) {
+                $id = @$_GET['aid'];
+                $journalEntry = (new ControllerJournal)->ctrGetEntry($id);
+  
+                foreach ($journalEntry as $key => $value) {
+                  $date = $value['entrydate'];
+                  $date = date("d-m-Y", strtotime($date));
+                  $time = $value['entrytime'];
+                  $title = $value['entrytitle'];
+                  $entry = $value['entrytext'];
+                }
+              ?> -->
+
+                <!-- // while($row = mysqli_fetch_array($result)) {
+                // 	$title = $row['title'];
+                // 	$article = $row['article'];
+                // 	$date = $row['entrydate'];
+                // 	$date= date("d-m-Y",strtotime($date));
+                // 	$time = $row['entrytime'];
+                // 	$mail = $row['email'];
+                // 	$result1 = mysqli_query($con,"SELECT name FROM user WHERE email='$mail' ") or die('Error');
+                // 	while($row = mysqli_fetch_array($result1)) {
+                // 	$by = $row['name'];
+                // } -->
+
+                <a title="Back to Archive" href="update.php?q1=2">
+                  <b><i class="fa fa-arrow" aria-hidden="true"></i></b>
+                </a>
+                <h2 style="text-align:center; margin:20px 0 15px 0;color:#e03b54;">
+                  <b><?= $title ?></b></h1>
+                  <div class="bich3" style="margin: 0 auto;">
+                    <span style="line-height:35px;padding:5px;">-&nbsp;<b>DATE:</b>
+                      &nbsp;<?= $date ?></span>
+  
+                    <span style="line-height:35px;padding:5px;">&nbsp;<b>Time:</b>&nbsp;<?= $time ?></span><span style="line-height:35px;padding:5px;">&nbsp;<b>By:</b>&nbsp;<?= $patName ?></span><br />
+  
+                    <hr>
+                    <br>
+  
+                    <?= $entry ?>
+                  </div>
+                <!-- <?php }
+  
+              if (@$_GET['did']) {
+                $id = @$_GET['did'];
+                (new ControllerJournal)->ctrDeleteEntry($id);
+              }
+  
+              if (@$_GET['sid']) {
+                $id = @$_GET['sid'];
+                $result = $con->query("SELECT star FROM journal WHERE id='$id' ") or die('Error');
+                foreach ($result as $row) {
+                  $star = $row['star'];
+                  if ($star == 0) {
+                    $controller = (new ControllerJournal)->ctrStarEntry($id);
+                  } else {
+                    $controller = (new ControllerJournal)->ctrUnstarEntry($id);
+                  }
+                }
+                header("location:index.php?route=journal&q1=2");
+              }
+              // if(@$_GET['shid']) {
+              //   $id=@$_GET['shid'];
+              //   $result = mysqli_query($con,"SELECT share FROM journal WHERE id='$id' ") or die('Error');
+              //   while($row = mysqli_fetch_array($result)) {
+              //      $star = $row['share'];
+              //      if($star==0){
+              //       $controller = (new ControllerJournal)->ctrShareEntry($id);
+              //     }
+              //      else{
+              //        $controller = (new ControllerJournal)->ctrUnshareEntry($id);
+              //      }
+              //    }
+              //   header("location:index.php?route=journal&q1=3");
+              // }
+                ?> -->
+  
+                <script>
+                  $(function() {
+                    //MODAL EVENTS
+                    $(".journalRequest").click(function() {
+                      var id = $(this).val();
+                      // var jnid=$('#jnid'+id).text();
+                      var specname = $('#specname' + id).text();
+                      var notes = $('#notes' + id).text();
+  
+                      $('#journalRequestModal').modal('show');
+                      $('#specname').val(specname);
+                      $('#notes').val(notes);
+                      $('#journalid').val(id);
+                    })
+  
+                    var app = (function() {
+                      var checkboxInput = ' input[type="checkbox"]',
+                        filters = {},
+                        rowData = [],
+                        values = [],
+                        key, value, show, length, divId;
+  
+                      var init = function() {
+                        app.table = $('#journalEntries').DataTable({
+                          "dom": "lrtip" // hide default DataTable search box
+                        });
+  
+                        $("#textSearch").on('keyup change', function() {
+                          console.log('text search for: ' + $(this).val());
+                          app.table.search($(this).val()).draw();
+                        });
+  
+                        $(checkboxInput).prop('checked', false);
+  
+                        $(checkboxInput).change(function() {
+                          var that = $(this);
+                          if (that.hasClass('all')) {
+                            $('#' + getFilterCategoryId(that) + checkboxInput).prop('checked', that.prop('checked'));
+                          } else {
+                            var allInput = $('#' + getFilterCategoryId(that) + checkboxInput + ':first');
+                            if (allInput.is(':checked')) {
+                              allInput.prop('checked', false);
+                            }
+                          }
+                          poulateAndApplyFilters();
+                        });
+                      };
+  
+                      return {
+                        init: init
+                      };
+                    })();
+  
+                    app.init();
+  
+                  });
+                </script>
+  
+  
+            </div>
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+
+</body>
+</html>

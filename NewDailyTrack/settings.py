@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'registration.apps.RegistrationConfig',
     'login.apps.LoginConfig',
     'journal.apps.JournalConfig',
+    'steppingStones.apps.SteppingstonesConfig',
 
 
 ]

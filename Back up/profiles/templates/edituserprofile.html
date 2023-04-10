@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title></title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Add the evo-calendar.css for styling -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/evo-calendar@1.1.2/evo-calendar/css/evo-calendar.min.css"/>
+
+    <link rel="stylesheet" href='css/animate.css'>
+    <link rel="stylesheet" href='css/navbar.css'>
+    <link rel="stylesheet" href='css/userprofile.css'>
+    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<style>
+
+</style>
+
+</head>
+<body>
+
+    <!--Start of Navbar-->
+
+    <nav class="navbar navbar-custom navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="header.html"><img src="img/logo.png" alt="DailyTrack logo" class="logo"></a>
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse navbar-right" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto">
+
+            <li class="nav-item  ">
+                <a class="nav-link" href="journal.html">
+                <span class="mr-2 d-none d-lg-inline">
+                    <i class="fa fa-book fa-fw mr-1"></i> Journal</span></a>
+            </li>
+
+            <li class="nav-item  ">
+                <a class="nav-link" href="doodle.html">
+                <span class="mr-2 d-none d-lg-inline">
+                    <i class="fa fa-palette fa-fw mr-1"></i> Doodle</span></a>
+            </li>
+
+            <li class="nav-item  ">
+                <a class="nav-link" href="appointment.html">
+                <span class="mr-2 d-none d-lg-inline">
+                    <i class="fa fa-notes-medical fa-fw mr-1"></i> Appointment</span></a>
+            </li>
+
+            <li class="nav-item  ">
+                <a class="nav-link" href="emoticards.html"><i class="fa fa-chart-pie fa-fw mr-1"></i> Emoticards</a>
+            </li>
+
+            <li class="nav-item  ">
+                <a class="nav-link" href="timelyreports.html"><i class="fa-solid fa-chart-area fa-fw mr-1"></i> Timely Reports</a>
+            </li>
+
+            <li class="nav-item dropdown no-arrow">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    *Person's Name*
+                </a>
+
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="profile.html">
+                        <i class="fa fa-user fa-sm fa-fw mr-2"></i>Profile</a>
+                    <a class="dropdown-item" href="timelyreports.html">
+                        <i class="fas fa-chart-line fa-sm fa-fw mr-2"></i>Timely Reports</a>
+                    <a class="dropdown-item" href="logout">
+                        <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2"></i>Log Out</a>
+                </div>
+            </li>
+        </ul>
+    </div>
+    </nav>
+    <!--End of NAVBAR-->
+
+    <div class="d-flex editbox">
+
+    <button type="button" onclick="history.go(-1)"
+    class="btn btn-light btn-circle btn-xl"><i class="fa fa-arrow-left"></i>
+    </button>
+
+    <div class="col-lg-10 p-5 bg-white rounded shadow mb-5 align-items-center justify-content-center">
+
+  <!-- Rounded tabs -->
+  <ul id="myTab" role="tablist" class="col-lg-10 nav nav-tabs nav-pills flex-column flex-sm-row justify-content-center bg-light border-0 rounded-nav"> <!-- Add justify-content-center class for center alignment -->
+
+    <li class="nav-item flex-sm-fill">
+      <a id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="true" class="nav-link border-0 text-uppercase font-weight-bold active">
+      <i class="fa fa-user" style="margin-right:15px;" aria-hidden="true"></i>Profile</a>
+    </li>
+    <li class="nav-item flex-sm-fill">
+      <a id="home-tab" data-toggle="tab" href="#auth" role="tab" aria-controls="authentication" aria-selected="false" class="nav-link border-0 text-uppercase font-weight-bold">
+      <i class="fa fa-lock" style="margin-right:15px;" aria-hidden="true"></i>Authentication</a>
+    </li>
+    <li class="nav-item flex-sm-fill">
+      <a id="contact-tab" data-toggle="tab" href="#patientcode" role="tab" aria-controls="patientcode" aria-selected="false" class="nav-link border-0 text-uppercase font-weight-bold">
+      <i class="fa fa-ticket" style="margin-right:15px;" aria-hidden="true"></i>Patient Code</a>
+    </li>
+  
+  </ul>
+  
+  <!-- Rounded tabs -->
+
+
+  <!-- Tab contents -->
+    <div id="myTabContent" class="tab-content">
+
+    <div id="profile" role="tabpanel" aria-labelledby="profile-tab" class="tab-pane fade px-3 py-5 show active form-group">
+    <form action="euprofi" method="post" style="display:block;">
+
+    <div class="form-row">
+      <div class="form-group col-md-6">
+      <label for="editFname"><b>First Name:</b></label>
+        <input type="text" class="form-control" name="editFname" value=<?php echo $userdetails["userfname"]?>>
+      </div>
+      <div class="form-group col-md-6">
+        <label for="editLname"><b>Last Name:</b></label>
+        <input type="text" class="form-control" name="editSpecLname" value=<?php echo $userdetails['userlname']?>>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group col-md-4">
+      <label for="editCnum"><b>Contact Number:</b></label>
+        <input type="text" class="form-control" name="editCnum" value=<?php echo $userdetails['usercnum']?>>
+      </div>
+      <div class="form-group col-md-4">
+        <label for="editBday"><b>Birth date:</b></label>
+        <input type="date" name="editBday" class="form-control" value=<?php echo $userdetails['userbday']?>>
+      </div>
+      <div class="form-group col-md-4">
+        <label for="editSex">Sex:</label>
+        <select class="form-control" name="editSex" name="editSex" value=<?php echo $userdetails['usersex']?>>
+          <option value="" selected hidden>Sex</option>
+          <option value="0">Male</option>
+          <option value="1">Female</option>
+          <option value="2">Other</option>
+        </select>
+      </div>
+
+      <button class="btn btn-info btn-submit mx-auto" type="submit" name="submitEdit">Update Profile</button>
+    </div>
+
+    <div class="card-body" style="align-items:center;margin:0 auto;display:flex;flex-direction:row;">
+      <img src="img/psych2.jpg" style="width:250px;height:250px; margin-left:30px; margin-right:150px;" alt="no-access">
+
+      <img src="img/psych.jpg" style="width:250px;height:250px; margin-left:400px;" alt="no-access">
+    </div>
+
+    </form>
+    </div>
+
+    <div id="auth" role="tabpanel" aria-labelledby="home-tab" class="tab-pane fade px-4 py-5 form-group">
+        <form action="authedit" method="post" class="justify-content-center">
+          <div class="form-row">
+            <div class="form-group col-md-12 text-center"> <!-- Add "text-center" class here -->
+              <label for="editEmail" class="text-left"><b>Email: </b></label>
+              <input type="email" name="editEmail" class="form-control col-lg-4 mx-auto" id="exampleInputEmail1" aria-describedby="emailHelp" value="<?php echo $userdetails['useremail']?>"> <!-- Add "mx-auto" class here to center the input field -->
+              <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+              
+              <br>
+              <label for="editPassword" class="text-left"><b>Password: </b></label>
+              <input type="password" name="editPassword" class="form-control col-lg-4 mx-auto" id="editPassword" placeholder="******"> <!-- Add "mx-auto" class here to center the input field -->
+            </div>
+          </div>
+      
+          <div class="text-center">
+            <button class="btn btn-info btn-submit" type="submit" name="submitEdit">Update Authentication</button>
+          </div>
+      
+          <div class="card-body d-flex justify-content-center">
+            <img src="img/security.jpg" style="width:250px;height:250px; margin-left:30px; margin-right:150px;" alt="no-access">
+      
+            <img src="img/security2.jpg" style="width:250px;height:250px; margin-left:400px;" alt="no-access">
+          </div>
+        </form>
+      </div>
+      
+      
+
+    <div id="patientcode" role="tabpanel" aria-labelledby="contact-tab" class="tab-pane fade px-4 py-5 ">
+      <form action="newpatient" method="post" class="d-flex flex-column align-items-center">
+
+      <div class="form-row">
+        <div class="form-group col-md-12">
+          <label for="newPCode"><b>Patient Code:</b></label>
+          <input type="text" name="newPCode" class="form-control" placeholder="Paste code here">
+        </div>
+      </div>
+
+      <br>
+
+      <button class="btn btn-info btn-submit mx-auto justify-content-center" type="submit" name="submitPCode">Connect with Psychiatrist</button>
+    
+      <div class="card-body" style="align-items:center;margin:0 auto;display:flex;flex-direction:row;">
+      <img src="img/license0.jpg" style="width:250px;height:250px; margin-left:30px; margin-right:150px;" alt="no-access">
+
+      <img src="img/license.jpg" style="width:250px;height:250px; margin-left:400px;" alt="no-access">
+      </div>
+
+    </form>
+    </div>
+
+      <!-- License Number:
+      <input type="text" name="editSpeclnum" style="margin-left: 10px;" placeholder="Edit License Number here">
+
+      <label for="editSpecLexp">License Expiry:</label>
+      <input type="date" name="editSpecLexp" style="margin-left: 67px;" value=>
+
+      <button class="btn-info" style="border-radius:20px; margin: 20px 0;" type="submit" name="submitSpeclnum">Update License Information</button>
+    </form>
+    </div> -->
+
+<!-- Tab contents-->
+
+
+    </div>
+    <!-- End -->
+  </div>
+  </div>
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+
+</body>
+</html>
