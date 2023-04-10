@@ -34,10 +34,6 @@ def loginUser(request):
 
 
 def login(request):
-<<<<<<< HEAD
-=======
-    # print("Hello")
->>>>>>> a0f0bb8be59ebb7563fcbd2bbb83856e37a2ee09
     if request.method == "POST":
         username = request.POST.get('useremail')
         password = request.POST.get('password')
