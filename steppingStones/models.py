@@ -9,6 +9,7 @@ from registration.models import Patient
 
 class SteppingStone(models.Model):
     patient = models.ForeignKey(Patient, on_delete=models.CASCADE)
+    uuid = models.CharField(max_length=60, default=uuid.uuid4, editable=False)
     stress_level = models.IntegerField(null=True)
     mood_level = models.IntegerField(null=True)
     # Coping Strategies
@@ -31,15 +32,15 @@ class SteppingStone(models.Model):
     created_at = models.DateTimeField(default=timezone.now, blank=True)
 
     def __str__(self):
-        return f"{self.patient.profile.user.username} - {self.keyword_id}"
+        return f"{self.patient} {self.uuid}"
 
 
 class Keyword(models.Model):
-    steppingStones = models.ForeignKey(SteppingStone, on_delete=models.CASCADE)
+    uuid = models.CharField(max_length=60, default=uuid.uuid4, editable=False)
     wordValue = models.IntegerField(null=True)
     word = models.CharField(max_length=100, null = True)
     wordCategory = models.CharField(max_length=100, null = True)
     created_at = models.DateTimeField(default=timezone.now, blank=True)
 
     def __str__(self):
-        return f"{self.keyword_id} - {self.keyword}"
+        return f"{self.word} {self.uuid}"

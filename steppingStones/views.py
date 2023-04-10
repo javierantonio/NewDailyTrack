@@ -2,7 +2,7 @@ from django.core.exceptions import ValidationError
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from registration.models import Profile, Patient
-from steppingStones.models import SteppingStone
+from steppingStones.models import SteppingStone, Keyword
 
 # Create your views here.
 
@@ -29,31 +29,32 @@ def steppingStoneStart(request):
                     surprise = 0
                     sadness = 0
                     disgust = 0
-                    for i in len(word):
+                    for i in range(len(word)):
                         if wordCategory[i] == 'Anger':
-                            anger += wordValue[i]
+                            anger += int(wordValue[i])
                         elif wordCategory[i] == 'Anticipation':
-                            anticipation += wordValue[i]
+                            anticipation += int(wordValue[i])
                         elif wordCategory[i] == 'Joy':
-                            joy += wordValue[i]
+                            joy += int(wordValue[i])
                         elif wordCategory[i] == 'Trust':
-                            trust += wordValue[i]
+                            trust += int(wordValue[i])
                         elif wordCategory[i] == 'Fear':
-                            fear += wordValue[i]
+                            fear += int(wordValue[i])
                         elif wordCategory[i] == 'Surprise':
-                            surprise += wordValue[i]
+                            surprise += int(wordValue[i])
                         elif wordCategory[i] == 'Sadness':
-                            sadness += wordValue[i]
+                            sadness += int(wordValue[i])
                         elif wordCategory[i] == 'Disgust':
-                            disgust += wordValue[i]
-                        #
-                        # keywordObject = Keyword(
+                            disgust += int(wordValue[i])
                     # Create and save the SteppingStone instance
-                    stepping_stone = SteppingStone(
+                    import uuid
+                    uuid = uuid.uuid4()
+                    steppingStone = SteppingStone(
                         patient=patient,
                         # mood and stress level
                         stress_level=request.session['stressLevel'],
                         mood_level=request.session['mood'],
+                        uuid=uuid,
                         # coping strategies
                         personal=request.session['personal'],
                         social=request.session['social'],
@@ -71,9 +72,36 @@ def steppingStoneStart(request):
                         disgust=disgust,
                         keywords=word,
                     )
-                    stepping_stone.save()
+                    steppingStone.save()
+                    keywordArray = []
+                    for i in range(len(word)):
+                        keyword = Keyword(
+                            uuid=uuid,
+                            wordValue=wordValue[i],
+                            word=word[i],
+                            wordCategory=wordCategory[i]
+                        )
+                        keywordArray.append(keyword)
+                    Keyword.objects.bulk_create(keywordArray)
 
-                    return HttpResponse("saves the data and shows emoticard")
+                    # get all keywords
+                    keywords = Keyword.objects.filter(uuid=uuid)
+                    # get all stepping stones
+                    steppingStones = SteppingStone.objects.filter(uuid=uuid)
+
+                    context = {
+                        'keywords': keywords,
+                        'steppingStones': steppingStones,
+                    }
+                    request.session['stressLevel'] = None
+                    request.session['mood'] = None
+                    request.session['keywords'] = None
+                    request.session['personal'] = None
+                    request.session['social'] = None
+                    request.session['sleep'] = None
+                    request.session['actions'] = None
+                    request.session['food'] = None
+                    return render(request, 'emoticard.html', context)
                 elif request.session['actions'] is None and request.session['sleep'] is not None:
                     request.session['actions'] = request.POST.get('actions')
                     return render(request, 'food.html')
@@ -94,40 +122,12 @@ def steppingStoneStart(request):
                         wordCategory.append(request.session['keywords'][i].split('-')[2])
                     return render(request, 'personal.html')
                 elif request.session['mood'] is None and request.session['stressLevel'] is not None:
-                    request.session['mood'] = request.POST.get('mood')
+                    request.session['mood'] = int(request.POST.get('mood').split('-')[0])
                     return render(request, 'keywords.html')
                 elif request.session['stressLevel'] is None:
                     request.session['stressLevel'] = request.POST.get('stressLevel')
                     return render(request, 'mood_getter.html')
                 else:
-                    # Create and save the SteppingStone instance
-                    stepping_stone = SteppingStone(
-                        patient=patient,
-                        stress_level=request.session['stressLevel'],
-                        mood_level=request.session['mood'],
-                        personal=request.session['personal'],
-                        social=request.session['social'],
-                        sleep=request.session['sleep'],
-                        actions=request.session['actions'],
-                        food=request.session['food'],
-                        # Add other fields as needed (score, keywords, emotions)
-                    )
-                    try:
-                        stepping_stone.full_clean()
-                        stepping_stone.save()
-                        # Clear the session data after saving
-                        del request.session['stressLevel']
-                        del request.session['mood']
-                        del request.session['copingStrategies']
-                        del request.session['keywords']
-                        del request.session['personal']
-                        del request.session['social']
-                        del request.session['sleep']
-                        del request.session['actions']
-                        del request.session['food']
-                    except ValidationError as e:
-                        # Handle validation errors if needed
-                        print(e)
                     return render(request, 'stressLevel.html')
             elif request.method == "GET":
                 if request.session.get('food') is not None:

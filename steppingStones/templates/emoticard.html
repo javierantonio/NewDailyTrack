@@ -114,14 +114,14 @@
         <div id="results" role="tabpanel" aria-labelledby="results-tab" class="tab-pane fade px-4 py-5 show active">
         <section id="mainEmotions">
 
-        <?php echo "<h3>You are Feeling:</h3>"; ?>
+        <h3>You are Feeling:</h3>
         <?php echo $emotion;?>
 
         </section>
 
         <section id="sensations">
 
-        <?php echo "<h3>Sensations:</h3>"; ?>
+        <h3>Sensations:</h3>
 
         <?php echo $message;
         ?>
@@ -131,13 +131,12 @@
 
         <section id="tendencies" style="margin-top:25px;margin-bottom:0;">
 
-        <?php
-        echo "<h3>Psychological Flexibility in the Context of Current Emotions:</h3>";
-        ?>
+        <h3>Psychological Flexibility in the Context of Current Emotions:</h3>
+        </section>
 
             <div>
                 <p class="aaq" style="margin-left: 30px;margin-top:10px;">
-                  <?php echo $tendency_classification; ?>
+                    $tendency_classification
                 </p>
 
                 <div class="progress">
