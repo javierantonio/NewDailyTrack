@@ -1,5 +1,4 @@
-<!doctype html>
-<html lang="en">
+{% load static %}
 
 <head>
     <!-- Required meta tags -->
@@ -12,8 +11,8 @@
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    <link rel="stylesheet" href='css/animate.css'>
-    <link rel="stylesheet" href='css/steppingstones.css'>
+    <link rel="stylesheet" href='{% static 'css/animate.css' %}>
+    <link rel="stylesheet" href='{% static 'css/steppingstones.css' %}>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <style>
@@ -33,23 +32,24 @@
     <div class="container keywords_container mx-auto">
 
   <!-- <div class="wow fadeInUp" data-wow-delay="0.2s"> -->
-  <form method="POST" class="container" action="keywords">
+  <form method="POST" class="container">
+      {% csrf_token %}
 
   <div class="buttonhug col-lg-10 mx-auto">
     <section class="categories">
       <div class="cat sadness">
         <label>
-            <input type="checkbox" id="amazement" name="surprise[]" value="3"><span>Amazement</span>
+            <input type="checkbox" id="amazement" name="keywords" value="Amazement"><span>Amazement</span>
         </label>
       </div>
       <div class="cat sadness">
         <label>
-            <input type="checkbox" id="boredom" name="disgust[]" value="1"><span>Boredom</span>
+            <input type="checkbox" id="boredom" name="keywords" value="Boredom"><span>Boredom</span>
         </label>
       </div>
       <div class="cat sadness">
         <label>
-            <input type="checkbox" id="annoyance" name="anger[]" value="3"><span >Rage</span>
+            <input type="checkbox" id="annoyance" name="keywords" value="Rage"><span >Rage</span>
         </label>
       </div>
 
@@ -58,17 +58,17 @@
     <section class="categories">
       <div class="cat sadness">
         <label>
-            <input type="checkbox" id="pensiveness" name="sadness[]" value="1"><span>Pensiveness</span>
+            <input type="checkbox" id="pensiveness" name="keywords" value="Pensiveness"><span>Pensiveness</span>
         </label>
       </div>
       <div class="cat sadness">
         <label>
-          <input type="checkbox" id="anticipation" name="anticipation[]" value="2"><span>Anticipation</span>
+          <input type="checkbox" id="anticipation" name="keywords" value="Anticipation"><span>Anticipation</span>
         </label>
       </div>
       <div class="cat sadness">
         <label>
-            <input type="checkbox" id="annoyance" name="anger[]" value="1"><span>Annoyance</span>
+            <input type="checkbox" id="annoyance" name="keywords" value="Annoyance"><span>Annoyance</span>
         </label>
       </div>
     </section>
@@ -76,17 +76,17 @@
     <section class="categories">
         <div class="cat sadness">
         <label>
-            <input type="checkbox" id="serenity" name="joy[]" value="1"><span>Serenity</span>
+            <input type="checkbox" id="serenity" name="keywords" value="Serenity"><span>Serenity</span>
         </label>
       </div>
       <div class="cat sadness">
         <label>
-            <input type="checkbox" id="loathing" name="disgust[]" value="3"><span>Loathing</span>
+            <input type="checkbox" id="loathing" name="keywords" value="Loathing"><span>Loathing</span>
         </label>
       </div>
       <div class="cat sadness">
         <label>
-            <input type="checkbox" id="ecstacy" name="joy[]" value="3"><span>Ecstacy</span>
+            <input type="checkbox" id="ecstacy" name="keywords" value="Ecstacy"><span>Ecstacy</span>
         </label>
       </div>
     </section>
@@ -95,17 +95,17 @@
 
     <div class="cat sadness">
         <label>
-          <input type="checkbox" id="anger" name="anger[]" value="2"><span >Anger</span>
+          <input type="checkbox" id="anger" name="keywords" value="Anger"><span >Anger</span>
         </label>
         </div>
       <div class="cat sadness">
         <label>
-          <input type="checkbox" id="trust" name="trust[]" value="2"><span>Trust</span>
+          <input type="checkbox" id="trust" name="keywords" value="Trust"><span>Trust</span>
         </label>
       </div>
       <div class="cat sadness">
         <label>
-          <input type="checkbox" id="sadness" name="sadness[]" value="2"><span>Sadness</span>
+          <input type="checkbox" id="sadness" name="keywords" value="Sadness"><span>Sadness</span>
         </label>
       </div>
     </section>
@@ -114,17 +114,17 @@
 
         <div class="cat sadness">
         <label>
-            <input type="checkbox" id="apprehension" name="fear[]" value="1"><span>Apprehension</span>
+            <input type="checkbox" id="apprehension" name="keywords" value="Apprehension"><span>Apprehension</span>
         </label>
         </div>
         <div class="cat sadness">
         <label>
-            <input type="checkbox" id="acceptance" name="trust[]" value="1"><span>Acceptance</span>
+            <input type="checkbox" id="acceptance" name="keywords" value="Acceptance"><span>Acceptance</span>
         </label>
         </div>
         <div class="cat sadness">
           <label>
-              <input type="checkbox" id="terror" name="fear[]" value="3"><span>Terror</span>
+              <input type="checkbox" id="terror" name="keywords" value="Terror"><span>Terror</span>
           </label>
         </div>
     </section>
@@ -138,17 +138,17 @@
     <section class="categories">
       <div class="cat sadness">
         <label>
-          <input type="checkbox" id="joy" name="joy[]" value="2"><span>Joy</span>
+          <input type="checkbox" id="joy" name="keywords" value="Joy"><span>Joy</span>
         </label>
       </div>
       <div class="cat sadness">
         <label>
-            <input type="checkbox" id="distraction" name="surprise[]" value="1"><span>Distraction</span>
+            <input type="checkbox" id="distraction" name="keywords" value="Distraction"><span>Distraction</span>
         </label>
       </div>
       <div class="cat sadness">
         <label>
-          <input type="checkbox" id="surprise" name="surprise[]" value="2"><span>Surprise</span>
+          <input type="checkbox" id="surprise" name="keywords" value="Surprise"><span>Surprise</span>
         </label>
       </div>
     </section>
@@ -157,17 +157,17 @@
 
     <div class="cat sadness">
         <label>
-            <input type="checkbox" id="admiration" name="trust[]" value="3"><span>Admiration</span>
+            <input type="checkbox" id="admiration" name="keywords" value="Admiration"><span>Admiration</span>
         </label>
       </div>
       <div class="cat sadness">
         <label>
-            <input type="checkbox" id="grief" name="sadness[]" value="3"><span>Grief</span>
+            <input type="checkbox" id="grief" name="keywords" value="Grief"><span>Grief</span>
         </label>
       </div>
       <div class="cat sadness">
           <label>
-            <input type="checkbox" id="fear" name="fear[]" value="2"><span>Fear</span>
+            <input type="checkbox" id="fear" name="keywords" value="Fear"><span>Fear</span>
           </label>
         </div>
     </section>
@@ -176,17 +176,17 @@
 
       <div class="cat sadness">
         <label>
-            <input type="checkbox" id="vigilance" name="anticipation[]" value="3"><span>Vigilance</span>
+            <input type="checkbox" id="vigilance" name="keywords" value="Vigilance"><span>Vigilance</span>
         </label>
       </div>
       <div class="cat sadness">
         <label>
-          <input type="checkbox" id="disgust" name="disgust[]" value="2"><span>Disgust</span>
+          <input type="checkbox" id="disgust" name="keywords" value="Disgust"><span>Disgust</span>
         </label>
       </div>
       <div class="cat sadness">
         <label>
-            <input type="checkbox" id="interest" name="anticipation[]" value="1"><span>Interest</span>
+            <input type="checkbox" id="interest" name="keywords" value="Interest"><span>Interest</span>
         </label>
       </div>
     </section>
@@ -202,7 +202,7 @@
     </div>
 
       <button id="nextbtn" class="btn btn-light btn-circle btn-xl"><i class="fa-solid fa-arrow-right"></i></button>
-    <section>
+    </section>
 
 </form>
 </div>
@@ -228,9 +228,9 @@
     }
     </script> -->
 
-    <script src="js/steppingstones.js"></script>
+    <script src="{%  static 'js/steppingstones.js' %}"></script>
 
-    </script>
+    </div>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
