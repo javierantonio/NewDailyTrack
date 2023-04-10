@@ -1,0 +1,77 @@
+{% load static %}
+
+{% block title %}
+Log In to DailyTrack
+{% endblock title %}
+
+
+<html>
+  <head>
+      <!-- Required meta tags -->
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <!--CSS-->
+      <link href='{% static 'fontawesome/css/fontawesome.css' %}' rel="stylesheet" type="text/css">
+      <link href='{% static 'fontawesome/css/brands.css' %}' rel="stylesheet" type="text/css">
+      <link href='{% static 'fontawesome/css/solid.css' %}' rel="stylesheet" type="text/css">
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+      <link rel="stylesheet" href="{% static 'css/login.css' %}">
+      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<style>
+
+</style>
+</head>
+<body>
+
+
+<div class="row justify-content-center">
+
+<div class="col-xl-5 col-lg-6 col-md-5">
+
+    <div class="card o-hidden border-0 shadow-lg my-5">
+        <div class="card-body p-0">
+            <!-- Nested Row within Card Body -->
+            <div class="row">
+                    <div class="col-lg-12" style="align-items: center;">
+                    <div class="p-5">
+                      <button id="prevLogin" class="btn btn-light btn-circle btn-xl prevLogin" style="width:30px;height:auto;margin:0 auto;"><i class="fa fa-arrow-left"></i></button>
+
+                        <div class="text-center">
+                            <img src="{% static 'img/logo.png' %}" alt="logo" class="logo">
+                                    <h4 style="margin:25px 0;color:#00ccbe;font-weight:bold;">Security Question</h4>
+                        </div>
+
+
+                            <form role="form" method="post" action="{% url 'changePassword' %}">
+                                {% csrf_token %}
+{#                              <?php#}
+{#                                $ctrl = new ControllerForgotPass();#}
+{#                                $questions = $ctrl->ctrCheckAnswers();#}
+{#                              ?>#}
+                                <div class="form-group">
+                                <label>Security Question for User</label>
+                                <label>#Insert question here#</label>
+                                    <input type="text" class="form-control form-control-user"
+                                        id="secanswer" name="secanswer" placeholder="Enter your answer here" required>
+                                </div>
+
+                                <br>
+                                <button type="submit" class="btn-info btn-user btn-block" style="border-radius:20px;width:50%;margin:0 auto;">Confirm Answer</button>
+                            </form>
+                            <br>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+  </body>
+</html>

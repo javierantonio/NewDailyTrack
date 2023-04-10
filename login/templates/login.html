@@ -24,23 +24,29 @@ Log In to DailyTrack
 </head>
 <body>
 
-    <div class="row justify-content-center">
 
-        <div class="col-md-4">
+<div class="row justify-content-center">
 
-            <div class="card o-hidden border-0 shadow-lg my-5">
-                <div class="card-body p-0">
+<div class="col-xl-5 col-lg-6 col-md-5">
 
-                    <!-- Nested Row within Card Body -->
-                    <div class="row">
-                            <div class="col-lg-12" style="align-items: center;">
-                            <div class="p-5">
-                                <div class="text-center">
-                                    <img src="{% static 'img/logo.png' %}" alt="logo" class="logo">
-                                    <h4 class="reg_title">Log In</h4>
-                                </div>
+    <div class="card o-hidden border-0 shadow-lg my-5">
+        <div class="card-body p-0">
+            <!-- Nested Row within Card Body -->
+            <div class="row">
+                    <div class="col-lg-12" style="align-items: center;">
+                    <div class="p-5">
+                        <div class="text-center">
+                            <img src="{% static 'img/logo.png' %}" alt="logo" class="logo">
+                                    <h4 style="margin:25px 0;color:#00ccbe;font-weight:bold;">Patient Sign In</h4>
+                        </div>
 
+{#                            <?php#}
+{#                                $ctrl = new ControllerForgotPass();#}
+{#                                $questions = $ctrl->ctrRetrieveUserQuestions();#}
+{#                            ?>#}
+                            <form role="form" method="post" action = "{% url 'login' %}">
 
+<<<<<<< HEAD
                                         <form role="form" method="post" action = "{% url 'login' %}">
                                             {% csrf_token %}
                                           <div class="form-group">
@@ -62,14 +68,41 @@ Log In to DailyTrack
 
                                 </div>
                             </div>
+=======
+                                    <div class="form-group">
+                                        <input type="email" class="form-control form-control-user"
+                                            id="useremail" name="useremail" placeholder="Email" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="password" class="form-control form-control-user"
+                                            id="password" name="password" placeholder="Password" required>
+                                    </div>
+                                    <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit"
+                                        async defer>
+                                    </script>
+                                    <div class="g-recaptcha" data-sitekey="6Le5RZEeAAAAAKEusa174wCpLJxOChTkd22_L48F" style="margin-left:20px;">
+                                    </div>
+                                    <br>
+                                    <button type="submit" class="btn-info btn-user btn-block" style="border-radius:20px;width:50%;margin:0 auto;">Login</button>
+                                </form>
+                                <br>
+                                <p align="center"><a href="{% url 'passwordRecovery' %}">Forgot Password?</a></p>
+                                <p align="center"><a href="{% url 'patientRegistration' %}">Register for a Dailytrack account</a></p>
+
+{#                                <p align="center"><a href="slogin">Login as a Specialist</a></p>#}
+                            </form>
+                            <br>
+
+>>>>>>> a0f0bb8be59ebb7563fcbd2bbb83856e37a2ee09
                         </div>
                     </div>
+
                 </div>
             </div>
         </div>
+    </div>
+</div>
 
-
-    <!-- Optional Javascript -->
 
 
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
