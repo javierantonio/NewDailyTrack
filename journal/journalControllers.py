@@ -14,7 +14,7 @@ def processJournalEntry(request):
         entry = Journal(user=userProfile, title=title, content=content)
         entry.save()
         print("Journal Entry Saved")
-        return redirect('journalHome')
+        return redirect('journalEntries')
 
     else:
         return render(request, 'journalHome.html')
@@ -25,7 +25,7 @@ def viewJournalEntry(request):
         return HttpResponse("bleh")
     else:
         userProfile = request.user.profile
-        entries = Journal.objects.get()
+        entries = Journal.objects.get(user=userProfile)
         context = {'entries': entries}
         for entry in entries:
             print(entry.title)

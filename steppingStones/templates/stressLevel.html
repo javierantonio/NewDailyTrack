@@ -2,6 +2,9 @@
 
 <head>
     <!-- Required meta tags -->
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title></title>
@@ -14,9 +17,14 @@
     <link rel="stylesheet" href='{% static 'css/animate.css' %}'>
     <link rel="stylesheet" href='{% static 'css/navbar.css' %}'>
     <link rel="stylesheet" href='{% static 'css/steppingstones.css' %}'>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js' %}"></script>
-
 <style>
+
+    input[type=radio] {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
 
 </style>
 
@@ -36,54 +44,54 @@
             <div class="row d-flex align-items-center col-lg-10 mx-auto">
 
               <div class="button">
-                <input name="stressLevel" type="radio" id="0" value="0" data-toggle="tooltip"
+                <input name="stressLevel" type="radio" id="0" value="00" data-toggle="tooltip"
                 data-placement="bottom" title="I am not stressed as of now.    😌😊" />
                 <label class="btn btn-default" for="0">0</label>
               </div>
 
               <div class="button">
-                <input name="stressLevel" type="radio" id="1" value="1" required />
+                <input name="stressLevel" type="radio" id="1" value="01" required />
                 <label class="btn btn-default" for="1">1</label>
               </div>
 
               <div class="button" style="background-color: #a9fc90;">
-                <input name="stressLevel" type="radio" id="2" value="2"/>
+                <input name="stressLevel" type="radio" id="2" value="02"/>
                 <label class="btn btn-default" for="2">2</label>
               </div>
 
               <div class="button" style="background-color: #c6fc90;">
-                <input name="stressLevel" type="radio" id="3" value="3"/>
+                <input name="stressLevel" type="radio" id="3" value="03"/>
                 <label class="btn btn-default" for="3">3</label>
               </div>
 
               <div class="button" style="background-color: #e9fc90;">
-                <input name="stressLevel" type="radio" id="4" value="4"/>
+                <input name="stressLevel" type="radio" id="4" value="04"/>
                 <label class="btn btn-default" for="4">4</label>
               </div>
 
               <div class="button" style="background-color: #f2fc90;">
-                <input name="stressLevel" type="radio" id="5" value="5" data-toggle="tooltip"
+                <input name="stressLevel" type="radio" id="5" value="05" data-toggle="tooltip"
                 data-placement="bottom" title="Could be worse, could be better."/>
                 <label class="btn btn-default" for="5">5</label>
               </div>
 
               <div class="button" style="background-color: #fcf790;">
-                <input name="stressLevel" type="radio" id="6" value="6"/>
+                <input name="stressLevel" type="radio" id="06" value="06"/>
                 <label class="btn btn-default" for="6">6</label>
               </div>
 
               <div class="button" style="background-color: #fcea90;">
-                <input name="stressLevel" type="radio" id="7" value="7"/>
+                <input name="stressLevel" type="radio" id="07" value="07"/>
                 <label class="btn btn-default" for="7">7</label>
               </div>
 
               <div class="button" style="background-color: #fcd190;">
-                <input name="stressLevel" type="radio" id="8" value="8"/>
+                <input name="stressLevel" type="radio" id="08" value="08"/>
                 <label class="btn btn-default" for="8">8</label>
               </div>
 
               <div class="button" style="background-color: #fc9e79;">
-                <input name="stressLevel" type="radio" id="9" value="9"/>
+                <input name="stressLevel" type="radio" id="09" value="09"/>
                 <label class="btn btn-default" for="9">9</label>
               </div>
 
@@ -114,13 +122,10 @@
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js' %}"
-        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js' %}"
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
         integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
         crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js' %}"
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
 

@@ -8,7 +8,7 @@ import login.views
 urlpatterns = [
     path('patient/', views.patientRegistration, name='patientRegistration'),
     path('specialist/', views.specialistRegistration, name='specialistRegistration'),
-    path('', views.home, name='userSelection'),
+    path('', views.home, name='registrationSelection'),
     path('login/', login.views.login, name='loginPage')
 
 

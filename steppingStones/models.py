@@ -1,5 +1,3 @@
-
-
 from django.db import models
 from django.contrib.auth.models import User
 import uuid
@@ -31,7 +29,17 @@ class SteppingStone(models.Model):
     sadness = models.IntegerField(null=True)
     disgust = models.IntegerField(null=True)
     created_at = models.DateTimeField(default=timezone.now, blank=True)
+
     def __str__(self):
         return f"{self.patient.profile.user.username} - {self.keyword_id}"
 
 
+class Keyword(models.Model):
+    steppingStones = models.ForeignKey(SteppingStone, on_delete=models.CASCADE)
+    wordValue = models.IntegerField(null=True)
+    word = models.CharField(max_length=100, null = True)
+    wordCategory = models.CharField(max_length=100, null = True)
+    created_at = models.DateTimeField(default=timezone.now, blank=True)
+
+    def __str__(self):
+        return f"{self.keyword_id} - {self.keyword}"

@@ -4,8 +4,14 @@ from django.shortcuts import render, redirect
 from registration.models import Profile, Patient
 from steppingStones.models import SteppingStone
 
-
 # Create your views here.
+
+wordValue = []
+word = []
+wordCategory = []
+keywordsToPush = []
+
+
 def steppingStoneStart(request):
     if request.user.is_authenticated:
         userProfile = Profile.objects.get(user=request.user)
@@ -14,7 +20,60 @@ def steppingStoneStart(request):
             if request.method == "POST":
                 if request.session['food'] is None and request.session['actions'] is not None:
                     request.session['food'] = request.POST.get('food')
-                    return HttpResponse('this is where your score is calculated and emoticard shown.')
+                    # Processing of keywords
+                    anger = 0
+                    anticipation = 0
+                    joy = 0
+                    trust = 0
+                    fear = 0
+                    surprise = 0
+                    sadness = 0
+                    disgust = 0
+                    for i in len(word):
+                        if wordCategory[i] == 'Anger':
+                            anger += wordValue[i]
+                        elif wordCategory[i] == 'Anticipation':
+                            anticipation += wordValue[i]
+                        elif wordCategory[i] == 'Joy':
+                            joy += wordValue[i]
+                        elif wordCategory[i] == 'Trust':
+                            trust += wordValue[i]
+                        elif wordCategory[i] == 'Fear':
+                            fear += wordValue[i]
+                        elif wordCategory[i] == 'Surprise':
+                            surprise += wordValue[i]
+                        elif wordCategory[i] == 'Sadness':
+                            sadness += wordValue[i]
+                        elif wordCategory[i] == 'Disgust':
+                            disgust += wordValue[i]
+                        #
+                        # keywordObject = Keyword(
+                    # Create and save the SteppingStone instance
+                    stepping_stone = SteppingStone(
+                        patient=patient,
+                        # mood and stress level
+                        stress_level=request.session['stressLevel'],
+                        mood_level=request.session['mood'],
+                        # coping strategies
+                        personal=request.session['personal'],
+                        social=request.session['social'],
+                        sleep=request.session['sleep'],
+                        actions=request.session['actions'],
+                        food=request.session['food'],
+                        # keywords
+                        anger=anger,
+                        anticipation=anticipation,
+                        joy=joy,
+                        trust=trust,
+                        fear=fear,
+                        surprise=surprise,
+                        sadness=sadness,
+                        disgust=disgust,
+                        keywords=word,
+                    )
+                    stepping_stone.save()
+
+                    return HttpResponse("saves the data and shows emoticard")
                 elif request.session['actions'] is None and request.session['sleep'] is not None:
                     request.session['actions'] = request.POST.get('actions')
                     return render(request, 'food.html')
@@ -29,7 +88,10 @@ def steppingStoneStart(request):
                     return render(request, 'social.html')
                 elif request.session['keywords'] is None and request.session['mood'] is not None:
                     request.session['keywords'] = request.POST.getlist('keywords')
-                    print(request.session['keywords'])
+                    for i in range(len(request.session['keywords'])):
+                        wordValue.append(request.session['keywords'][i].split('-')[0])
+                        word.append(request.session['keywords'][i].split('-')[1])
+                        wordCategory.append(request.session['keywords'][i].split('-')[2])
                     return render(request, 'personal.html')
                 elif request.session['mood'] is None and request.session['stressLevel'] is not None:
                     request.session['mood'] = request.POST.get('mood')

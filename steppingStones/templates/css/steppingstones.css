@@ -77,7 +77,7 @@ font-family: 'Raleway' !important;
   .fa-arrow-left, .fa-arrow-right {
     font-size: 20px;
     color: grey;
-    margin: none;
+    margin: 0 0px;
   }
   
   .btn-circle,.btn-xl {
@@ -117,10 +117,6 @@ font-family: 'Raleway' !important;
     height: 60px;
   }
     
-
-    /* .distress_container{
-    margin: 80px 0 100px 330px;
-} */
 
 .progress{
     height: 8px; 
@@ -211,7 +207,7 @@ font-family: 'Raleway' !important;
     text-align: center;
     display: block;
     color: #494949;
-    margin-top: 5px 5px 0 0 ;
+    margin: 5px 5px 0 0 ;
   }
   
   .cat label input {
