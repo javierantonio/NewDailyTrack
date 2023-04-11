@@ -48,7 +48,8 @@ def processPatientRegistration(request):
                 pronoun = 'their'
             html_content = render_to_string('guardianEmail.html', {'user': user, 'pronoun': pronoun})
             sender_email = 'dailytrack@dailytrack.online'
-            recipient_email = 'javebillones@gmail.com'
+            recipient_email = request.POST['guardianEmail']
+            print(request.POST['guardianEmail'])
             text_content = strip_tags(html_content)
             print("Sending email...")
             msg = EmailMultiAlternatives(subject, text_content, sender_email, [recipient_email])
@@ -58,6 +59,8 @@ def processPatientRegistration(request):
         # Create a new patient
         if usertype == 'Patient':
             patient, _ = Patient.objects.get_or_create(profile=profile)
+            guardian_email = ""
+            patient.guardian_email = guardian_email
             patient.save()
 
         return True

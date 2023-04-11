@@ -123,8 +123,6 @@
 
         <h3>Sensations:</h3>
 
-        <?php echo $message;
-        ?>
         </section>
 
         <hr>
@@ -140,12 +138,12 @@
                 </p>
 
                 <div class="progress">
-                <div class="progress-done" data-done=<?php echo $_SESSION["strats"]?> max="100">
-                    <?php echo $_SESSION["strats"]?>
+                <div class="progress-done" data-done=100>
+                    100
                 </div>
                 </div>
 
-                <p style="font-weight:thinner;">
+                <p style="font-weight:lighter;">
                   <?php echo $tendency_class_definition; ?>
                 </p>
             </div>
@@ -158,8 +156,8 @@
         <section id="patientAnswers">
 
           <ul class="list-group">
-            <li class="list-group-item active">Stress Level: <span style="float:right;"><?php echo $_SESSION['stress'];?></span></li>
-            <li class="list-group-item">Mood: <span style="float:right;"><?php echo $_SESSION['mood'];?></span></li>
+            <li class="list-group-item active">Stress Level: <span style="float:right;">{{ steppingStones.stressLevel }}</span></li>
+            <li class="list-group-item">Mood: <span style="float:right;">{{ steppingStones.moodLevel }}</span></li>
           </ul>
 
           <div id="accordion">
@@ -190,11 +188,11 @@
 
           <hr>
           <ul class="list-group">
-            <li class="list-group-item list-group-item-danger">Personal: <?php echo $_SESSION["p-final"]?></li>
-            <li class="list-group-item list-group-item-primary">Social: <?php echo $_SESSION["so-final"]?></li>
-            <li class="list-group-item list-group-item-success">Sleep: <?php echo $_SESSION["sl-final"]?></li>
-            <li class="list-group-item list-group-item-warning">Actions: <?php echo $_SESSION["a-final"]?></li>
-            <li class="list-group-item list-group-item-dark">Food: <?php echo $_SESSION["f-final"]?></li>
+            <li class="list-group-item list-group-item-danger">Personal: {{ steppingStones.personalDesc }} </li>
+            <li class="list-group-item list-group-item-primary">Social: {{ steppingStones.socialDesc }}</li>
+            <li class="list-group-item list-group-item-success">Sleep: {{ steppingStones.sleepDesc }}</li>
+            <li class="list-group-item list-group-item-warning">Actions: {{ steppingStones.actionsDesc }}</li>
+            <li class="list-group-item list-group-item-dark">Food: {{ steppingStones.foodDesc }}</li>
           </ul>
 
         </section>
@@ -215,22 +213,22 @@ const progress = document.querySelector('.progress-done');
 
 progress.style.width = progress.getAttribute('data-done') + '%';
 
- if data-done = 5- 11 = Healthy, generally more accepting of situations.
- if else data-done = 12-19 = Average, able to cope well in most cases
- else = 20-25 Avoidant, has trouble releasing stressors in a healthy manner
+ {#if data-done = 5- 11 = Healthy, generally more accepting of situations.#}
+ {#if else data-done = 12-19 = Average, able to cope well in most cases#}
+ {#else = 20-25 Avoidant, has trouble releasing stressors in a healthy manner#}
 
 progress.style.opacity = 1;
 
- const anger         = <?php echo json_encode(round((($data['anger']/$total)*100),2)); ?>;
- const anticipation  = <?php echo json_encode(round((($data['anticipation']/$total)*100),2)); ?>;
- const joy           = <?php echo json_encode(round((($data['joy']/$total)*100),2)); ?>;
- const trust         = <?php echo json_encode(round((($data['trust']/$total)*100),2)); ?>;
- const fear          = <?php echo json_encode(round((($data['fear']/$total)*100),2)); ?>;
- const surprise      = <?php echo json_encode(round((($data['surprise']/$total)*100),2)); ?>;
- const sadness       = <?php echo json_encode(round((($data['sadness']/$total)*100),2)); ?>;
- const disgust       = <?php echo json_encode(round((($data['disgust']/$total)*100),2)); ?>;
+ const anger         = {{ steppingStones.anger }};
+ const anticipation  = {{ steppingStones.anticipation }};
+ const joy           = {{ steppingStones.joy }};
+ const trust         = {{ steppingStones.trust }};
+ const fear          = {{ steppingStones.fear }};
+ const surprise      = {{ steppingStones.surprise }};
+ const sadness       = {{ steppingStones.sadness }};
+ const disgust       = {{ steppingStones.disgust }}};
 
- const ctx = document.getElementById('emoChart').getContext('2d');
+ {#const ctx = document.getElementById('emoChart').getContext('2d');#}
 const ctx = document.getElementById('emoChart');
 const barColors = [
                 '#e3050590',
@@ -255,10 +253,10 @@ const data = {
 
 options: {
 
-     Boolean - whether or not the chart should be responsive and resize when the browser does.
+     {#Boolean - whether or not the chart should be responsive and resize when the browser does.#}
     responsive: true,
 
-     Boolean - whether to maintain the starting aspect ratio or not when responsive, if set to false, will take up entire container
+     {#Boolean - whether to maintain the starting aspect ratio or not when responsive, if set to false, will take up entire container#}
     scales: {
         y: {
             beginAtZero: true,
@@ -279,100 +277,31 @@ options: {
     }
 }
 }
-const emoChart = new Chart(ctx,data)
+
  const emoChart = new Chart(ctx, {
-     type: 'polarArea',
-     data: {
-         labels: ['Anger', 'Anticipation', 'Joy', 'Trust', 'Fear', 'Surprise','Sadness','Disgust'],
-         datasets: [{
-             label: 'anger',
-             data: [anger,anticipation,joy,trust,fear,surprise,sadness,disgust],
-             backgroundColor: barColors,
-              borderColor: 'white',
-             borderWidth: 1
-         }],
-
-          ,{
-              label: 'anticpation',
-              data: anticipation,
-              backgroundColor: '#e3610590',
-              borderColor: 'white',
-              borderWidth: 1
-          },
-
-          {
-              label: 'joy',
-              data: joy,
-              backgroundColor:'#faf20590',
-              borderColor: 'white',
-              borderWidth: 1
-          },
-          {
-              label: 'trust',
-              data: trust,
-              backgroundColor: '#46fa0590',
-              borderColor: 'white',
-              borderWidth: 1
-          },
-          {
-              label: 'fear',
-              data: fear,
-              backgroundColor: '#00730890',
-              borderColor: 'white',
-              borderWidth: 1
-          },
-          {
-              label: 'surprise',
-              data: surprise,
-              backgroundColor: '#00cad190',
-              borderColor: 'white',
-              borderWidth: 1
-          },
-          {
-              label: 'sadness',
-              data: sadness,
-              backgroundColor: '#001cd190',
-              borderColor: 'white',
-              borderWidth: 1
-          },
-          {
-              label: 'disgust',
-              data: disgust,
-              backgroundColor: '#6e00a190',
-              borderColor: 'white',
-              borderWidth: 1
-          }
-     },
-
-     options: {
-
-          Boolean - whether or not the chart should be responsive and resize when the browser does.
-
-         responsive: true,
-
-          Boolean - whether to maintain the starting aspect ratio or not when responsive, if set to false, will take up entire container
-
-
-         scales: {
-             y: {
-                 beginAtZero: true,
-                 display: false,
-
-             }
-         },
-
-         plugins: {
-             legend: {
-                 display: true,
-                 position: 'left',
-                 align: 'start',
-                 labels: {
-                     usePointStyle: true
-                 }
-             }
-         }
-     }
- });
+    type: 'polarArea',
+    data: {
+        labels: ['Anger', 'Anticipation', 'Joy', 'Trust', 'Fear', 'Surprise', 'Sadness', 'Disgust'],
+        datasets: [
+            {
+                label: 'Emotions',
+                data: [anger, anticipation, joy, trust, fear, surprise, sadness, disgust],
+                backgroundColor: [
+                    '#e3610590',
+                    '#f38b4a90',
+                    '#faf20590',
+                    '#46fa0590',
+                    '#00730890',
+                    '#00cad190',
+                    '#001cd190',
+                    '#6e00a190',
+                ],
+                borderColor: 'white',
+                borderWidth: 1,
+            },
+        ],
+    },
+});
 
 </script>
 

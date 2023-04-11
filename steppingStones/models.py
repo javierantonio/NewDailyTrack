@@ -10,14 +10,19 @@ from registration.models import Patient
 class SteppingStone(models.Model):
     patient = models.ForeignKey(Patient, on_delete=models.CASCADE)
     uuid = models.CharField(max_length=60, default=uuid.uuid4, editable=False)
-    stress_level = models.IntegerField(null=True)
-    mood_level = models.IntegerField(null=True)
+    stresslevel = models.IntegerField(null=True)
+    moodLevel = models.IntegerField(null=True)
     # Coping Strategies
     personal = models.IntegerField(null=True)
+    personalDesc = models.TextField(null=True)
     social = models.IntegerField(null=True)
+    socialDesc = models.TextField(null=True)
     sleep = models.IntegerField(null=True)
+    sleepDesc = models.TextField(null=True)
     actions = models.IntegerField(null=True)
+    actionsDesc = models.TextField(null=True)
     food = models.IntegerField(null=True)
+    foodDesc = models.TextField(null=True)
     score = models.IntegerField(null=True)
     # Keywords
     keywords = models.TextField(null=True)

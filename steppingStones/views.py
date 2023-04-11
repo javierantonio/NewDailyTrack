@@ -19,7 +19,8 @@ def steppingStoneStart(request):
             patient = Patient.objects.get(profile=userProfile)
             if request.method == "POST":
                 if request.session['food'] is None and request.session['actions'] is not None:
-                    request.session['food'] = request.POST.get('food')
+                    request.session['food'] = int(request.POST.get('food').split('-')[0])
+                    request.session['foodDesc'] = request.POST.get('food').split('-')[1]
                     # Processing of keywords
                     anger = 0
                     anticipation = 0
@@ -29,6 +30,7 @@ def steppingStoneStart(request):
                     surprise = 0
                     sadness = 0
                     disgust = 0
+                    score = 0
                     for i in range(len(word)):
                         if wordCategory[i] == 'Anger':
                             anger += int(wordValue[i])
@@ -46,21 +48,37 @@ def steppingStoneStart(request):
                             sadness += int(wordValue[i])
                         elif wordCategory[i] == 'Disgust':
                             disgust += int(wordValue[i])
+                        score += int(wordValue[i])
+
+                    anger = (anger/score)*100
+                    anticipation = (anticipation/score)*100
+                    joy = (joy/score)*100
+                    trust = (trust/score)*100
+                    fear = (fear/score)*100
+                    surprise = (surprise/score)*100
+                    sadness = (sadness/score)*100
+                    disgust = (disgust/score)*100
+
                     # Create and save the SteppingStone instance
                     import uuid
                     uuid = uuid.uuid4()
                     steppingStone = SteppingStone(
                         patient=patient,
                         # mood and stress level
-                        stress_level=request.session['stressLevel'],
-                        mood_level=request.session['mood'],
+                        stresslevel=request.session['stressLevel'],
+                        moodLevel=request.session['mood'],
                         uuid=uuid,
                         # coping strategies
                         personal=request.session['personal'],
+                        personalDesc=request.session['personalDesc'],
                         social=request.session['social'],
+                        socialDesc=request.session['socialDesc'],
                         sleep=request.session['sleep'],
+                        sleepDesc=request.session['sleepDesc'],
                         actions=request.session['actions'],
+                        actionsDesc=request.session['actionsDesc'],
                         food=request.session['food'],
+                        foodDesc=request.session['foodDesc'],
                         # keywords
                         anger=anger,
                         anticipation=anticipation,
@@ -87,7 +105,8 @@ def steppingStoneStart(request):
                     # get all keywords
                     keywords = Keyword.objects.filter(uuid=uuid)
                     # get all stepping stones
-                    steppingStones = SteppingStone.objects.filter(uuid=uuid)
+                    steppingStones = SteppingStone.objects.get(uuid=uuid)
+
 
                     context = {
                         'keywords': keywords,
@@ -101,18 +120,24 @@ def steppingStoneStart(request):
                     request.session['sleep'] = None
                     request.session['actions'] = None
                     request.session['food'] = None
+
+                    print (steppingStones.personalDesc)
                     return render(request, 'emoticard.html', context)
                 elif request.session['actions'] is None and request.session['sleep'] is not None:
-                    request.session['actions'] = request.POST.get('actions')
+                    request.session['actions'] = int(request.POST.get('actions').split('-')[0])
+                    request.session['actionsDesc'] = request.POST.get('actions').split('-')[1]
                     return render(request, 'food.html')
                 elif request.session['sleep'] is None and request.session['social'] is not None:
-                    request.session['sleep'] = request.POST.get('sleep')
+                    request.session['sleep'] = int(request.POST.get('sleep').split('-')[0])
+                    request.session['sleepDesc'] = request.POST.get('sleep').split('-')[1]
                     return render(request, 'actions.html')
                 elif request.session['social'] is None and request.session['personal'] is not None:
-                    request.session['social'] = request.POST.get('social')
+                    request.session['social'] = int(request.POST.get('social').split('-')[0])
+                    request.session['socialDesc'] = request.POST.get('social').split('-')[1]
                     return render(request, 'sleep.html')
                 elif request.session['personal'] is None and request.session['keywords'] is not None:
-                    request.session['personal'] = request.POST.get('personal')
+                    request.session['personal'] = int(request.POST.get('personal').split('-')[0])
+                    request.session['personalDesc'] = request.POST.get('personal').split('-')[1]
                     return render(request, 'social.html')
                 elif request.session['keywords'] is None and request.session['mood'] is not None:
                     request.session['keywords'] = request.POST.getlist('keywords')
@@ -141,7 +166,6 @@ def steppingStoneStart(request):
                 elif request.session.get('personal') is not None:
                     return render(request, 'social.html')
                 elif request.session.get('keywords') is not None:
-                    print(request.session.get('personal'))
                     return render(request, 'personal.html')
                 elif request.session.get('mood') is not None:
                     return render(request, 'keywords.html')
