@@ -1,9 +1,15 @@
+from datetime import datetime, date
+
+from dateutil.relativedelta import relativedelta
 from django.contrib.auth.models import User
+from django.core.mail import send_mail, EmailMultiAlternatives
+from django.template.loader import render_to_string
+from django.utils.html import strip_tags
+
 from .models import Profile, Patient
 
 
 def processPatientRegistration(request):
-
     if request.method == 'POST':
 
         # Get the form data from the request
@@ -30,9 +36,31 @@ def processPatientRegistration(request):
                                          phone=contact_number, address=address)
         profile.save()
 
+        current_date = datetime.now().date()
+
+        if (relativedelta(current_date, datetime.strptime(birthday, '%Y-%m-%d').date())).years < 18:
+            subject = 'Guardian Email Confirmation'
+            if profile.sex == 'male':
+                pronoun = 'his'
+            elif profile.sex == 'female':
+                pronoun = 'her'
+            else:
+                pronoun = 'their'
+            html_content = render_to_string('guardianEmail.html', {'user': user, 'pronoun': pronoun})
+            sender_email = 'dailytrack@dailytrack.online'
+            recipient_email = request.POST['guardianEmail']
+            print(request.POST['guardianEmail'])
+            text_content = strip_tags(html_content)
+            print("Sending email...")
+            msg = EmailMultiAlternatives(subject, text_content, sender_email, [recipient_email])
+            msg.attach_alternative(html_content, "text/html")
+            msg.send()
+
         # Create a new patient
         if usertype == 'Patient':
             patient, _ = Patient.objects.get_or_create(profile=profile)
+            guardian_email = ""
+            patient.guardian_email = guardian_email
             patient.save()
 
         return True

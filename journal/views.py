@@ -1,4 +1,5 @@
 from django.contrib.auth.decorators import login_required
+from django.core.mail import send_mail
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render, redirect
 from journal import journalControllers
@@ -14,7 +15,12 @@ def journalHome(request):
         userprofile = Profile.objects.get(user=request.user)
         if userprofile.type == "Patient":
             if request.method == "POST":
-                return journalControllers.processJournalEntry(request)
+                userProfile = request.user.profile
+                title = request.POST.get('entryTitle')
+                content = request.POST.get('journalContent')
+                entry = Journal(user=userProfile, title=title, content=content)
+                entry.save()
+                return redirect('journalEntries')
             elif request.method == "GET":
                 return render(request, 'journalHome.html')
         else:
@@ -47,8 +53,6 @@ def starredJournalEntry(request):
         userprofile = Profile.objects.get(user=request.user)
         if userprofile.type == "Patient":
             if request.method == 'POST':
-                # Your logic to toggle the star here
-                # For example:
                 entry_id = request.POST.get('entry_id')
                 entry = Journal.objects.get(id=entry_id)
                 entry.isStarred = not entry.isStarred
@@ -81,6 +85,26 @@ def deleteJournalEntry(request, entry_id):
                     journalEntry.delete()
                     return redirect('journalEntries')
                 return redirect('journalEntries')
+        else:
+            return redirect('landing')
+    else:
+        return redirect('landing')
+
+@login_required
+def viewJournalEntry(request, entry_id):
+    if request.user.is_authenticated:
+        userprofile = Profile.objects.get(user=request.user)
+        if userprofile.type == "Patient":
+            if request.method == 'POST':
+                return HttpResponse("bleh")
+            else:
+                journalEntry = Journal.objects.get(id=entry_id)
+                if userprofile == journalEntry.user:
+                    context = {
+                        'journalEntry': journalEntry
+                    }
+                    return render(request, 'journalViewEntry.html', context)
+                return HttpResponse("You do not have permission to view this entry.")
         else:
             return redirect('landing')
     else:

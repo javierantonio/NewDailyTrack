@@ -1,5 +1,4 @@
-<!doctype html>
-<html lang="en">
+{% load static %}
 
 <head>
     <!-- Required meta tags -->
@@ -7,14 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title></title>
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+    <link rel="stylesheet" href="https:cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    <link rel="stylesheet" href='css/emoticard.css'>
-    <link rel="stylesheet" href='css/navbar.css'
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="https:cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <link rel="stylesheet" href='{% static 'css/emoticard.css' %}'>
+    <link rel="stylesheet" href='{% static 'css/navbar.css' %}'>
+    <script src="https:code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <style>
 
@@ -26,7 +25,7 @@
     <!--Start of Navbar-->
 
   <nav class="navbar navbar-custom navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="header.html"><img src="img/logo.png" alt="DailyTrack logo" class="logo"></a>
+    <a class="navbar-brand" href="header.html"><img src="{% static 'img/logo.png' %}" alt="DailyTrack logo" class="logo"></a>
 
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -35,7 +34,7 @@
 
     <div class="collapse navbar-collapse navbar-right" id="navbarSupportedContent">
         <ul class="navbar-nav ml-auto">
-            
+
             <li class="nav-item">
                 <a class="nav-link" href="\">Home <span class="sr-only">(current)</span></a>
             </li>
@@ -91,7 +90,7 @@
     <div class="container chart col-lg-8">
         <h1>Insert the mf chart here</h1>
         <canvas id="emoChart">
-            
+
         </canvas>
     </div>
 
@@ -115,39 +114,36 @@
         <div id="results" role="tabpanel" aria-labelledby="results-tab" class="tab-pane fade px-4 py-5 show active">
         <section id="mainEmotions">
 
-        <?php echo "<h3>You are Feeling:</h3>"; ?>
+        <h3>You are Feeling:</h3>
         <?php echo $emotion;?>
 
         </section>
 
         <section id="sensations">
 
-        <?php echo "<h3>Sensations:</h3>"; ?>
+        <h3>Sensations:</h3>
 
-        <?php echo $message;
-        ?>
         </section>
 
         <hr>
 
         <section id="tendencies" style="margin-top:25px;margin-bottom:0;">
 
-        <?php
-        echo "<h3>Psychological Flexibility in the Context of Current Emotions:</h3>";
-        ?>
+        <h3>Psychological Flexibility in the Context of Current Emotions:</h3>
+        </section>
 
             <div>
                 <p class="aaq" style="margin-left: 30px;margin-top:10px;">
-                  <?php echo $tendency_classification; ?>
+                    $tendency_classification
                 </p>
 
                 <div class="progress">
-                <div class="progress-done" data-done=<?php echo $_SESSION["strats"]?> max="100">
-                    <?php echo $_SESSION["strats"]?>
+                <div class="progress-done" data-done=100>
+                    100
                 </div>
                 </div>
 
-                <p style="font-weight:thinner;">
+                <p style="font-weight:lighter;">
                   <?php echo $tendency_class_definition; ?>
                 </p>
             </div>
@@ -160,11 +156,11 @@
         <section id="patientAnswers">
 
           <ul class="list-group">
-            <li class="list-group-item active">Stress Level: <span style="float:right;"><?php echo $_SESSION['stress'];?></span></li>
-            <li class="list-group-item">Mood: <span style="float:right;"><?php echo $_SESSION['mood'];?></span></li>
+            <li class="list-group-item active">Stress Level: <span style="float:right;">{{ steppingStones.stressLevel }}</span></li>
+            <li class="list-group-item">Mood: <span style="float:right;">{{ steppingStones.moodLevel }}</span></li>
           </ul>
 
-          <!-- <div id="accordion">
+          <div id="accordion">
             <div class="card">
               <div class="card-header" id="headingOne">
                 <h5 class="mb-0">
@@ -188,15 +184,15 @@
                 </div>
               </div>
             </div>
-          </div> -->
+          </div>
 
           <hr>
           <ul class="list-group">
-            <li class="list-group-item list-group-item-danger">Personal: <?php echo $_SESSION["p-final"]?></li>
-            <li class="list-group-item list-group-item-primary">Social: <?php echo $_SESSION["so-final"]?></li>
-            <li class="list-group-item list-group-item-success">Sleep: <?php echo $_SESSION["sl-final"]?></li>
-            <li class="list-group-item list-group-item-warning">Actions: <?php echo $_SESSION["a-final"]?></li>
-            <li class="list-group-item list-group-item-dark">Food: <?php echo $_SESSION["f-final"]?></li>
+            <li class="list-group-item list-group-item-danger">Personal: {{ steppingStones.personalDesc }} </li>
+            <li class="list-group-item list-group-item-primary">Social: {{ steppingStones.socialDesc }}</li>
+            <li class="list-group-item list-group-item-success">Sleep: {{ steppingStones.sleepDesc }}</li>
+            <li class="list-group-item list-group-item-warning">Actions: {{ steppingStones.actionsDesc }}</li>
+            <li class="list-group-item list-group-item-dark">Food: {{ steppingStones.foodDesc }}</li>
           </ul>
 
         </section>
@@ -206,10 +202,10 @@
 
     </div>
 
-    <!-- <section class="action_btns">
+    <section class="action_btns">
         <button class="btn-info">Confirm</button>
         <button class="btn-info-outline">Download Results</button>
-    </section> -->
+    </section>
 
 <script>
 
@@ -217,22 +213,22 @@ const progress = document.querySelector('.progress-done');
 
 progress.style.width = progress.getAttribute('data-done') + '%';
 
-// if data-done = 5- 11 = Healthy, generally more accepting of situations.
-// if else data-done = 12-19 = Average, able to cope well in most cases
-// else = 20-25 Avoidant, has trouble releasing stressors in a healthy manner
+ {#if data-done = 5- 11 = Healthy, generally more accepting of situations.#}
+ {#if else data-done = 12-19 = Average, able to cope well in most cases#}
+ {#else = 20-25 Avoidant, has trouble releasing stressors in a healthy manner#}
 
 progress.style.opacity = 1;
 
-// const anger         = <?php echo json_encode(round((($data['anger']/$total)*100),2)); ?>;
-// const anticipation  = <?php echo json_encode(round((($data['anticipation']/$total)*100),2)); ?>;
-// const joy           = <?php echo json_encode(round((($data['joy']/$total)*100),2)); ?>;
-// const trust         = <?php echo json_encode(round((($data['trust']/$total)*100),2)); ?>;
-// const fear          = <?php echo json_encode(round((($data['fear']/$total)*100),2)); ?>;
-// const surprise      = <?php echo json_encode(round((($data['surprise']/$total)*100),2)); ?>;
-// const sadness       = <?php echo json_encode(round((($data['sadness']/$total)*100),2)); ?>;
-// const disgust       = <?php echo json_encode(round((($data['disgust']/$total)*100),2)); ?>;
+ const anger         = {{ steppingStones.anger }};
+ const anticipation  = {{ steppingStones.anticipation }};
+ const joy           = {{ steppingStones.joy }};
+ const trust         = {{ steppingStones.trust }};
+ const fear          = {{ steppingStones.fear }};
+ const surprise      = {{ steppingStones.surprise }};
+ const sadness       = {{ steppingStones.sadness }};
+ const disgust       = {{ steppingStones.disgust }}};
 
-// const ctx = document.getElementById('emoChart').getContext('2d');
+ {#const ctx = document.getElementById('emoChart').getContext('2d');#}
 const ctx = document.getElementById('emoChart');
 const barColors = [
                 '#e3050590',
@@ -257,10 +253,10 @@ const data = {
 
 options: {
 
-    // Boolean - whether or not the chart should be responsive and resize when the browser does.
+     {#Boolean - whether or not the chart should be responsive and resize when the browser does.#}
     responsive: true,
 
-    // Boolean - whether to maintain the starting aspect ratio or not when responsive, if set to false, will take up entire container
+     {#Boolean - whether to maintain the starting aspect ratio or not when responsive, if set to false, will take up entire container#}
     scales: {
         y: {
             beginAtZero: true,
@@ -281,115 +277,46 @@ options: {
     }
 }
 }
-const emoChart = new Chart(ctx,data)
-// const emoChart = new Chart(ctx, {
-//     type: 'polarArea',
-//     data: {
-//         labels: ['Anger', 'Anticipation', 'Joy', 'Trust', 'Fear', 'Surprise','Sadness','Disgust'],
-//         datasets: [{
-//             label: 'anger',
-//             data: [anger,anticipation,joy,trust,fear,surprise,sadness,disgust],
-//             backgroundColor: barColors,
-//             // borderColor: 'white',
-//             borderWidth: 1
-//         }],
 
-//         // ,{
-//         //     label: 'anticpation',
-//         //     data: anticipation,
-//         //     backgroundColor: '#e3610590',
-//         //     borderColor: 'white',
-//         //     borderWidth: 1
-//         // },
-
-//         // {
-//         //     label: 'joy',
-//         //     data: joy,
-//         //     backgroundColor:'#faf20590',
-//         //     borderColor: 'white',
-//         //     borderWidth: 1
-//         // },
-//         // {
-//         //     label: 'trust',
-//         //     data: trust,
-//         //     backgroundColor: '#46fa0590',
-//         //     borderColor: 'white',
-//         //     borderWidth: 1
-//         // },
-//         // {
-//         //     label: 'fear',
-//         //     data: fear,
-//         //     backgroundColor: '#00730890',
-//         //     borderColor: 'white',
-//         //     borderWidth: 1
-//         // },
-//         // {
-//         //     label: 'surprise',
-//         //     data: surprise,
-//         //     backgroundColor: '#00cad190',
-//         //     borderColor: 'white',
-//         //     borderWidth: 1
-//         // },
-//         // {
-//         //     label: 'sadness',
-//         //     data: sadness,
-//         //     backgroundColor: '#001cd190',
-//         //     borderColor: 'white',
-//         //     borderWidth: 1
-//         // },
-//         // {
-//         //     label: 'disgust',
-//         //     data: disgust,
-//         //     backgroundColor: '#6e00a190',
-//         //     borderColor: 'white',
-//         //     borderWidth: 1
-//         // }
-//     },
-
-//     options: {
-
-//         // Boolean - whether or not the chart should be responsive and resize when the browser does.
-
-//         responsive: true,
-
-//         // Boolean - whether to maintain the starting aspect ratio or not when responsive, if set to false, will take up entire container
-
-
-//         scales: {
-//             y: {
-//                 beginAtZero: true,
-//                 display: false,
-
-//             }
-//         },
-
-//         plugins: {
-//             legend: {
-//                 display: true,
-//                 position: 'left',
-//                 align: 'start',
-//                 labels: {
-//                     usePointStyle: true
-//                 }
-//             }
-//         }
-//     }
-// });
+ const emoChart = new Chart(ctx, {
+    type: 'polarArea',
+    data: {
+        labels: ['Anger', 'Anticipation', 'Joy', 'Trust', 'Fear', 'Surprise', 'Sadness', 'Disgust'],
+        datasets: [
+            {
+                label: 'Emotions',
+                data: [anger, anticipation, joy, trust, fear, surprise, sadness, disgust],
+                backgroundColor: [
+                    '#e3610590',
+                    '#f38b4a90',
+                    '#faf20590',
+                    '#46fa0590',
+                    '#00730890',
+                    '#00cad190',
+                    '#001cd190',
+                    '#6e00a190',
+                ],
+                borderColor: 'white',
+                borderWidth: 1,
+            },
+        ],
+    },
+});
 
 </script>
 
-    <script src="emoticard.js"></script>
+    <script src="{% static 'js/emoticard.js' %}"></script>
 
     </script>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    <script src="https:code.jquery.com/jquery-3.2.1.slim.min.js"
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
         crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+    <script src="https:cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
         integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
         crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+    <script src="https:cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
 

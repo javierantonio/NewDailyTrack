@@ -69,7 +69,7 @@
   .navbar-custom ul.nav li a {
       font-size: 13px;
       letter-spacing: 1px;
-      color: #666;
+      color: #383838;
       text-transform: uppercase;
       font-weight: 550;
       background: transparent;
@@ -120,6 +120,8 @@
       font-size: 13px;
       text-transform: uppercase;
   }
+
+  
   
   .navbar-custom ul.nav ul.dropdown-menu li a:hover {
       background: #fefefe;
@@ -135,7 +137,6 @@
       -moz-transition: background .3s ease-in-out;
       transition: background .3s ease-in-out;
   }
-  
   
   
   .navbar-custom.navbar-fixed-top .nav li a:hover,
@@ -163,4 +164,7 @@
   .navbar-toggle:active {
       outline: 0;
   }
-  
+
+  .dropdown-menu a{
+    font-size: small;
+  }

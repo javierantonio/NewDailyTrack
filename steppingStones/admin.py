@@ -5,3 +5,4 @@ from steppingStones.models import *
 # Register your models here.
 
 admin.site.register(SteppingStone)
+admin.site.register(Keyword)

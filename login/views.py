@@ -1,4 +1,5 @@
 import django
+from django.core.mail import send_mail
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.shortcuts import render, redirect
@@ -14,7 +15,6 @@ from registration.models import Profile
 # Create your views here.
 
 def home(request):
-
     if not request.user.is_authenticated:
         return render(request, 'landing')
 
@@ -34,7 +34,6 @@ def loginUser(request):
 
 
 def login(request):
-    # print("Hello")
     if request.method == "POST":
         username = request.POST.get('useremail')
         password = request.POST.get('password')

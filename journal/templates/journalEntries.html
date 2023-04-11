@@ -193,7 +193,7 @@
                     </td>
                     <td>
 {#                        <a title="Click to open article" href="{% url 'journal_detail' entries.id %}">{{ entries.title }}</a>#}
-                        <a title="Click to open article" href="#">{{ entry.title }}</a>
+                        <a title="Click to open article" href="{% url 'viewJournalEntry' entry_id=entry.id %}">{{ entry.title }}</a>
                     </td>
                     <td>
                         <span hidden id="jnid{{ entry.id }}">!{{ entry.id }}</span>
