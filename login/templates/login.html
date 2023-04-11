@@ -27,7 +27,7 @@ Log In to DailyTrack
 
 <div class="row justify-content-center">
 
-<div class="col-xl-5 col-lg-6 col-md-5">
+<div class="col-xl-4 col-lg-4 col-md-4">
 
     <div class="card o-hidden border-0 shadow-lg my-5">
         <div class="card-body p-0">
@@ -45,30 +45,7 @@ Log In to DailyTrack
 {#                                $questions = $ctrl->ctrRetrieveUserQuestions();#}
 {#                            ?>#}
                             <form role="form" method="post" action = "{% url 'login' %}">
-
-<<<<<<< HEAD
-                                        <form role="form" method="post" action = "{% url 'login' %}">
-                                            {% csrf_token %}
-                                          <div class="form-group">
-                                              <input type="email" class="form-control form-control-user"
-                                                  id="useremail" name="useremail" placeholder="Email">
-                                          </div>
-                                          <div class="form-group">
-                                              <input type="password" class="form-control form-control-user"
-                                                  id="password" name="password" placeholder="Password">
-                                          </div>
-{#                                          <button type="submit" class="btn-info btn-user btn-block" style="border-radius:20px;width:50%;margin:0 auto;">Log in</button>#}
-                                          <button type="submit">Log in</button>
-                                        </form>
-                                          <br>
-                                          <p align="center"><a href="{% url 'registrationSelection' %}">Are you a new user? Sign up Now!</a></p>
-
-                                        <p align="center"><a href="forget_password">Forgot Password?</a></p>
-
-
-                                </div>
-                            </div>
-=======
+{% csrf_token %}
                                     <div class="form-group">
                                         <input type="email" class="form-control form-control-user"
                                             id="useremail" name="useremail" placeholder="Email" required>
@@ -83,7 +60,7 @@ Log In to DailyTrack
                                     <div class="g-recaptcha" data-sitekey="6Le5RZEeAAAAAKEusa174wCpLJxOChTkd22_L48F" style="margin-left:20px;">
                                     </div>
                                     <br>
-                                    <button type="submit" class="btn-info btn-user btn-block" style="border-radius:20px;width:50%;margin:0 auto;">Login</button>
+                                    <button type="submit" class="btn btn-info btn-user btn-block" style="border-radius:20px;width:50%;margin:0 auto;">Login</button>
                                 </form>
                                 <br>
                                 <p align="center"><a href="{% url 'passwordRecovery' %}">Forgot Password?</a></p>
@@ -93,7 +70,6 @@ Log In to DailyTrack
                             </form>
                             <br>
 
->>>>>>> a0f0bb8be59ebb7563fcbd2bbb83856e37a2ee09
                         </div>
                     </div>
 
