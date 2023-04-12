@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'login.apps.LoginConfig',
     'journal.apps.JournalConfig',
     'steppingStones.apps.SteppingstonesConfig',
+    'calendarFunctionalities.apps.CalendarfunctionalitiesConfig'
 
 
 ]
