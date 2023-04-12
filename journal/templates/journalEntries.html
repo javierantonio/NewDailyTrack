@@ -185,10 +185,12 @@
             {% for entry in entries %}
                 <tr>
                     <td>
-                        <a title="{% if entry.isStarred == 1 %}isStarred{% else %}not isStarred{% endif %}" href="#" onclick="toggleStar(event, '{{ entry.id }}')">
-                            <i class="fa {% if entry.isStarred == 1 %} fa-star {% else %} fa-star-o {% endif %}" {% if entry.isStarred == 1 %}style=" color:orange" {% endif %} aria-hidden="true"></i>
-                            This is Star
-                        </a>
+
+                      <a title="{% if entry.isStarred == 1 %}isStarred{% else %}not isStarred{% endif %}" href="#" onclick="toggleStar(event, '{{ entry.id }}')">
+                        <i class="fa fa-star {% if entry.isStarred != 1 %}fa-star-o{% endif %}" {% if entry.isStarred == 1 %}style="color:orange"{% endif %} aria-hidden="true"></i>
+                        <!-- This is Star --> Star
+                      </a>
+                    
                     </td>
                     <td>
 {#                        <a title="Click to open article" href="{% url 'journal_detail' entries.id %}">{{ entries.title }}</a>#}
