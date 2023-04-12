@@ -16,7 +16,6 @@
     <link rel="stylesheet" href='{% static 'css/navbar.css' %}'>
     <link rel="stylesheet" href='{% static 'css/journal.css' %}'>
 
-
 <style>
 
 </style>
@@ -72,39 +71,39 @@
         <div class="collapse navbar-collapse navbar-right" id="navbarSupportedContent">
             <ul class="navbar-nav ml-auto">
 
-                <li class="nav-item  ">
+                <li class="nav-item" style="font-size: smaller;">
                     <a class="nav-link" href="{% url 'journal' %}">
                     <span class="mr-2 d-none d-lg-inline">
                         <i class="fa fa-book fa-fw mr-1"></i> Journal</span></a>
                 </li>
 
-                <li class="nav-item  ">
+                <li class="nav-item" style="font-size: smaller;">
                     <a class="nav-link" href="#">
                     <span class="mr-2 d-none d-lg-inline">
                         <i class="fa fa-palette fa-fw mr-1"></i> Doodle</span></a>
                 </li>
 
-                <li class="nav-item  ">
+                <li class="nav-item" style="font-size: smaller;">
                     <a class="nav-link" href="#">
                     <span class="mr-2 d-none d-lg-inline">
                         <i class="fa fa-notes-medical fa-fw mr-1"></i> Appointment</span></a>
                 </li>
 
-                <li class="nav-item  ">
+                <li class="nav-item" style="font-size: smaller;">
                     <a class="nav-link" href="#"><i class="fa fa-chart-pie fa-fw mr-1"></i> Emoticards</a>
                 </li>
 
-                <li class="nav-item  ">
+                <li class="nav-item" style="font-size: smaller;">
                     <a class="nav-link" href="#"><i class="fa-solid fa-chart-area fa-fw mr-1"></i> Timely Reports</a>
                 </li>
 
-                <li class="nav-item dropdown no-arrow">
+                <li class="nav-item dropdown no-arrow" style="font-size: smaller;">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         {{ user.first_name }}
                     </a>
 
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="font-size: smaller;">
                         <a class="dropdown-item" href="profile.html">
                             <i class="fa fa-user fa-sm fa-fw mr-2"></i>Profile</a>
                         <a class="dropdown-item" href="timelyreports.html">
