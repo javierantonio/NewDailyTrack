@@ -14,6 +14,7 @@
     <link rel="stylesheet" href='{% static 'css/emoticard.css' %}'>
     <link rel="stylesheet" href='{% static 'css/navbar.css' %}'>
     <script src="https:code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https:cdnjs.cloudflare.com/ajax/libs/Chart.js/3.5.1/chart.min.js"></script>
 
 <style>
 
@@ -226,9 +227,8 @@ progress.style.opacity = 1;
  const fear          = {{ steppingStones.fear }};
  const surprise      = {{ steppingStones.surprise }};
  const sadness       = {{ steppingStones.sadness }};
- const disgust       = {{ steppingStones.disgust }}};
+ const disgust       = {{ steppingStones.disgust }};
 
- {#const ctx = document.getElementById('emoChart').getContext('2d');#}
 const ctx = document.getElementById('emoChart');
 const barColors = [
                 '#e3050590',
@@ -253,10 +253,8 @@ const data = {
 
 options: {
 
-     {#Boolean - whether or not the chart should be responsive and resize when the browser does.#}
     responsive: true,
 
-     {#Boolean - whether to maintain the starting aspect ratio or not when responsive, if set to false, will take up entire container#}
     scales: {
         y: {
             beginAtZero: true,
@@ -305,7 +303,7 @@ options: {
 
 </script>
 
-    <script src="{% static 'js/emoticard.js' %}"></script>
+    <script src="{% static 'js/steppingstones.js' %}"></script>
 
     </script>
     <!-- Optional JavaScript -->
@@ -322,3 +320,5 @@ options: {
 
 </body>
 </html>
+
+

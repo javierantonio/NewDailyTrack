@@ -44,5 +44,17 @@ $(document).ready(function () {
     });
   });
 
+$(".btnEmoticardList").click(function(){
+  var idEmote = $(this).attr("idEmote");
+  window.location = "index.php?route=emoticardlist&idEmote="+idEmote;
+})
+
+$(".btnPatEmote").click(function(){
+  var patEmote = $(this).attr("patEmote");
+  var patId = $(this).attr("patId");
+  window.location = "index.php?route=patemotelist&idUser="+patId+"&patEmote="+patEmote;
+})
+
+
   //<div id="loading" style="color:rgb(157, 255, 0)"> 
   //put this for indication of Moodgetter

@@ -10,7 +10,7 @@ from registration.models import Patient
 class SteppingStone(models.Model):
     patient = models.ForeignKey(Patient, on_delete=models.CASCADE)
     uuid = models.CharField(max_length=60, default=uuid.uuid4, editable=False)
-    stresslevel = models.IntegerField(null=True)
+    stressLevel = models.IntegerField(null=True)
     moodLevel = models.IntegerField(null=True)
     # Coping Strategies
     personal = models.IntegerField(null=True)

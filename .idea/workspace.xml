@@ -5,27 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="104b91ad-3fa9-4c25-a787-7c462a2906e4" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.name" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/NewDailyTrack.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/NewDailyTrack.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/aws.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/login/templates/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/login/templates/login.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/registration/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/registration/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/registration/patientRegistrationForm.py" beforeDir="false" afterPath="$PROJECT_DIR$/registration/patientRegistrationForm.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/registration/templates/guardianEmail.html" beforeDir="false" afterPath="$PROJECT_DIR$/registration/templates/guardianEmail.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/registration/templates/patientRegistration.html" beforeDir="false" afterPath="$PROJECT_DIR$/registration/templates/patientRegistration.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/steppingStones/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/steppingStones/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/steppingStones/templates/actions.html" beforeDir="false" afterPath="$PROJECT_DIR$/steppingStones/templates/actions.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/steppingStones/templates/emoticard.html" beforeDir="false" afterPath="$PROJECT_DIR$/steppingStones/templates/emoticard.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/steppingStones/templates/food.html" beforeDir="false" afterPath="$PROJECT_DIR$/steppingStones/templates/food.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/steppingStones/templates/personal.html" beforeDir="false" afterPath="$PROJECT_DIR$/steppingStones/templates/personal.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/steppingStones/templates/sleep.html" beforeDir="false" afterPath="$PROJECT_DIR$/steppingStones/templates/sleep.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/steppingStones/templates/social.html" beforeDir="false" afterPath="$PROJECT_DIR$/steppingStones/templates/social.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/steppingStones/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/steppingStones/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/steppingStones/templates/js/steppingstones.js" beforeDir="false" afterPath="$PROJECT_DIR$/steppingStones/templates/js/steppingstones.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -95,7 +78,7 @@
       <updated>1681170945889</updated>
       <workItem from="1681170947638" duration="206000" />
       <workItem from="1681171168687" duration="103000" />
-      <workItem from="1681171288574" duration="8536000" />
+      <workItem from="1681171288574" duration="11697000" />
     </task>
     <servers />
   </component>
