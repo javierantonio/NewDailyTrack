@@ -27,46 +27,57 @@ Log In to DailyTrack
 
 <div class="row justify-content-center">
 
-<div class="col-xl-5 col-lg-6 col-md-5">
+<div class="col-xl-4 col-lg-4 col-md-4">
 
     <div class="card o-hidden border-0 shadow-lg my-5">
         <div class="card-body p-0">
             <!-- Nested Row within Card Body -->
             <div class="row">
-                    <form class="col-lg-12" method="post" action = "{% url 'login' %}" style="align-items: center;">
+                    <div class="col-lg-12" style="align-items: center;">
                     <div class="p-5">
                         <div class="text-center">
                             <img src="{% static 'img/logo.png' %}" alt="logo" class="logo">
                                     <h4 style="margin:25px 0;color:#00ccbe;font-weight:bold;">Patient Sign In</h4>
                         </div>
 
-{#                            <form role="form" method="post" action = "{% url 'login' %}">#}
-                                    {% csrf_token %}
-                                          <div class="form-group">
-                                              <input type="email" class="form-control form-control-user"
-                                                  id="useremail" name="useremail" placeholder="Email">
-                                          </div>
-                                          <div class="form-group">
-                                              <input type="password" class="form-control form-control-user"
-                                                  id="password" name="password" placeholder="Password">
-                                          </div>
-                                          <button type="submit" class="btn-info btn-user btn-block" style="border-radius:20px;width:50%;margin:0 auto;">Log in</button>
-{#                                          <button type="submit">Log in</button>#}
-{#                            </form>#}
-                                          <br>
-                                          <p align="center"><a href="{% url 'registrationSelection' %}">Are you a new user? Sign up Now!</a></p>
+{#                            <?php#}
+{#                                $ctrl = new ControllerForgotPass();#}
+{#                                $questions = $ctrl->ctrRetrieveUserQuestions();#}
+{#                            ?>#}
+                            <form role="form" method="post" action = "{% url 'login' %}">
+{% csrf_token %}
+                                    <div class="form-group">
+                                        <input type="email" class="form-control form-control-user"
+                                            id="useremail" name="useremail" placeholder="Email" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="password" class="form-control form-control-user"
+                                            id="password" name="password" placeholder="Password" required>
+                                    </div>
+                                    <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit"
+                                        async defer>
+                                    </script>
+                                    <div class="g-recaptcha" data-sitekey="6Le5RZEeAAAAAKEusa174wCpLJxOChTkd22_L48F" style="margin-left:20px;">
+                                    </div>
+                                    <br>
+                                    <button type="submit" class="btn btn-info btn-user btn-block" style="border-radius:20px;width:50%;margin:0 auto;">Login</button>
+                                </form>
+                                <br>
+                                <p align="center"><a href="{% url 'passwordRecovery' %}">Forgot Password?</a></p>
+                                <p align="center"><a href="{% url 'patientRegistration' %}">Register for a Dailytrack account</a></p>
 
-                                        <p align="center"><a href="forget_password">Forgot Password?</a></p>
-
-
-                                </div>
+{#                                <p align="center"><a href="slogin">Login as a Specialist</a></p>#}
                             </form>
+                            <br>
 
+                        </div>
+                    </div>
 
-
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-</div>
-
 
 
 
