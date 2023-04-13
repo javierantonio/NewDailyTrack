@@ -17,6 +17,145 @@
 
 <style>
 
+.title{
+    margin: 70px 0;
+  }
+
+  .categories {
+    width: 250px;
+    margin: 0px -10px 0 -10px;
+    display: block;
+  }
+
+  .keywords_container{
+    margin: 55px 0 0 325px;
+  }
+
+  .buttonhug{
+    display:flex;
+    margin-left: -100px;
+    margin-right: 100px;
+    margin-top: -20px;
+  }
+
+  .buttonhug2 {
+    display:flex;
+  }
+
+  .cat {
+    margin: 4px;
+    background-color: white;
+    overflow: hidden;
+    float: left;
+    border-radius: 50px;
+    border: 1px solid white;
+    display: block;
+    cursor: pointer;
+    box-shadow: 3px 3px 4px #cfcfcf;
+    -webkit-transition: all .1s ease-in-out;
+    -moz-transition: all .1s ease-in-out;
+    transition: all .1s ease-in-out;
+    cursor: pointer; /* Pointer/hand icon */
+    width: 150px; /* Set a width if needed */
+  }
+  
+  .cat label {
+    float: left; line-height: 3.0em;
+    width: 150px; height: 2.5em;
+    color: #494949;
+  }
+  
+  .cat label span {
+    text-align: center;
+    display: block;
+    color: #494949;
+    margin-top: 5px 5px 0 0 ;
+  }
+  
+  .cat label input {
+    position: absolute;
+    display: none;
+    color: #494949 !important;
+  }
+  /* selects all of the text within the input element and changes the color of the text */
+  .cat label input + span{color: rgb(85, 85, 85);font-weight: bold;}
+  
+  
+  /* This will declare how a selected input will look giving generic properties */
+  .cat input:checked + span {
+      color: white;
+  }
+
+  .sadness{
+    border: 3px solid #5186f0;
+    cursor: pointer;
+  }
+  
+  .sadness input:checked + span{
+    border-radius: 50px;
+    width: 150px;
+    color: white;
+    background-color: #2968e6;
+    box-shadow: inset 3px 3px 4px #0a3894;
+  }
+
+  .bottom_btn_set {
+    margin-top: 70px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    vertical-align: bottom;
+    font-size: 15px;
+}
+
+.fa-arrow-left, .fa-arrow-right {
+    font-size: 20px;
+    color: grey;
+    margin: none;
+  }
+  
+  .btn-circle,.btn-xl {
+    padding: 20px;
+    background-color: white;
+    border-radius: 55px;
+    border: 1px solid #d6d6d6;
+    font-size: 10px;
+    text-align: center;
+    box-shadow: 5px 5px 5px #cfcfcf;
+    margin: -25px 50px 100px 50px;
+  }
+
+  
+  .btn-light {
+    background-color: #ffffff;
+    box-shadow: 3px 3px 4px #cfcfcf;
+    outline: none;
+  }
+  
+  .btn-light:hover{
+    background-color: #f0f0f0;
+    box-shadow: 3px 3px 4px #cfcfcf;
+    outline: none;
+  }
+  
+  .btn-light:focus, .btn:focus, .btn-circle:focus, .btn-xl:focus{
+    background-color: white;
+    box-shadow: inset 3px 4px 5px #cfcfcf;
+    color: white;
+    border: none;
+    outline: 2px solid rgb(37, 220, 240);
+  }
+  
+  #prevBbtn, #nextBtn {
+    width: 60px;
+    height: 60px;
+  }
+  .progress-bar{
+    padding: 0 !important;
+}
+
+
+
 </style>
 
 </head>
