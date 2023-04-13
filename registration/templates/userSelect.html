@@ -1,29 +1,75 @@
-<!DOCTYPE html>
+{% load static %}
 <html>
 <head>
-<style>
-.button {
-  background-color: #4CAF50;
-  border: none;
-  color: white;
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
-  cursor: pointer;
-}
-</style>
+  <title>Gradient Background with Bootstrap Card</title>
+  <!-- Add Bootstrap CSS link here -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <style>
+    /* Custom CSS for gradient background */
+    body {
+      background-image: linear-gradient(to bottom right, #2997fd, #8b10c0);
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    /* Custom CSS for card */
+    .card {
+      width: 65%; /* Update width to make it wider */
+      margin: auto; /* Center the card horizontally */
+      padding: 20px 10px;
+      border-radius: 10px;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.355);
+    }
+
+    .logo{
+      width:200px;
+      height:55px;
+      margin-top: -20px;
+      margin-bottom: 20px;
+      /* Center the logo image */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .cover{
+      margin-top: -50px;
+    }
+
+    .button{
+      padding: 10px 15px;
+      margin: 10px;
+      box-shadow: 1px 3px 4px rgba(0, 0, 0, 0.355);
+    }
+  </style>
 </head>
 <body>
 
-<h2>Select User Type</h2>
+  <div class="container justify-content-center cover">
+    <img src="{% static 'img/logow.png' %}" class="logo mx-auto">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card text-center"> <!-- Add text-center class for centering contents -->
+          <div class="card-body">
+            <h2 class="card-title">Welcome! Select User Type</h2>
+            <br>
+            <a href="patient/"><button class="btn btn-primary button"><i class="fa fa-user fa-fw mr-2"></i> I am a Patient</button></a>
+            <a href="specialist/"><button class="btn btn-secondary button"><i class="fa fa-stethoscope fa-fw mr-2"></i> I am a Specialist</button></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
-<a href="patient/"><button class="button">I am a Patient</button></a>
-<a href="specialist/"><button class="button">I am a Specialist</button></a>
 
+  <!-- Add Bootstrap JS and jQuery link here -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
-
-
