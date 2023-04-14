@@ -28,5 +28,6 @@ urlpatterns = [
     path('logout/', include('logout.urls')),
     path('journal/', include('journal.urls')),
     path('steppingstones/', include('steppingStones.urls')),
+    # path('profile/', include('profile.urls')),
 
 ]

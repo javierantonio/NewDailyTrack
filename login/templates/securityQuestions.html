@@ -45,13 +45,9 @@ Log In to DailyTrack
 
                             <form role="form" method="post" action="{% url 'changePassword' %}">
                                 {% csrf_token %}
-{#                              <?php#}
-{#                                $ctrl = new ControllerForgotPass();#}
-{#                                $questions = $ctrl->ctrCheckAnswers();#}
-{#                              ?>#}
                                 <div class="form-group">
                                 <label>Security Question for User</label>
-                                <label>#Insert question here#</label>
+                                <label>Secret Question Here</label>
                                     <input type="text" class="form-control form-control-user"
                                         id="secanswer" name="secanswer" placeholder="Enter your answer here" required>
                                 </div>
