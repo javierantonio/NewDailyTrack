@@ -89,10 +89,10 @@
 
 
     <div class="container chart col-lg-8">
-        <h1>Insert the mf chart here</h1>
-        <canvas id="emoChart">
 
+        <canvas id="emoChart">
         </canvas>
+
     </div>
 
     <div id="myTabContent" class="tab-content translation col-lg-4">
@@ -113,17 +113,14 @@
 
         <!-- RESULTS TAB -->
         <div id="results" role="tabpanel" aria-labelledby="results-tab" class="tab-pane fade px-4 py-5 show active">
+
         <section id="mainEmotions">
-
-        <h3>You are Feeling:</h3>
-            {{steppingStones.feelingName}}
-
+            <h3>You are Feeling:</h3>
+                {{steppingStones.feelingName}}
         </section>
 
         <section id="sensations">
-
             {{steppingStones.feelingDesc}}
-
         </section>
 
         <hr>
@@ -163,13 +160,13 @@
 
           <div id="accordion">
             <div class="card">
-              <div class="card-header" id="headingOne">
+              <!-- <div class="card-header" id="headingOne">
                 <h5 class="mb-0">
                   <button class="btn-link" style="background-color:white;" data-toggle="collapse" data-target="#collapseOne" aria-controls="collapseOne">
                     Keywords:
                   </button>
                 </h5>
-              </div>
+              </div> -->
 
               <div id="collapseOne" class="collapse hide" aria-labelledby="headingOne" data-parent="#accordion">
                 <div class="card-body">
@@ -200,13 +197,14 @@
         </div>
 
         <button class="btn btn-info mx-auto">Confirm</button>
+        <button class="btn btn-outline-info">Download Results</button>
 
     </div>
 
-    <section class="action_btns">
+    <!-- <section class="action_btns">
         <button class="btn-info">Confirm</button>
         <button class="btn-info-outline">Download Results</button>
-    </section>
+    </section> -->
 
 <script>
 
@@ -230,82 +228,57 @@ progress.style.opacity = 1;
  const disgust       = {{ steppingStones.disgust }};
 
 const ctx = document.getElementById('emoChart');
-const barColors = [
-                '#e3050590',
-                '#e3610590',
-                '#faf20590',
-                '#46fa0590',
-                '#00730890',
-                '#00cad190',
-                '#001cd190',
-                '#6e00a190'
-            ];
-const data = {
-    type: 'polarArea',
-    data: {
-            labels: ['Anger', 'Anticipation', 'Joy', 'Trust', 'Fear', 'Surprise','Sadness','Disgust'],
-            datasets: [{
-                          label: 'Level',
-                          data : [anger,anticipation, joy, trust, fear, surprise, sadness, disgust],
-                          backgroundColor: barColors
-                      }]
-          },
 
-options: {
-
-    responsive: true,
-
-    scales: {
-        y: {
-            beginAtZero: true,
-            display: false,
-
-        }
-    },
-
-    plugins: {
-        legend: {
-            display: true,
-            position: 'left',
-            align: 'start',
-            labels: {
-                usePointStyle: true
-            }
-        }
-    }
-}
-}
-
- const emoChart = new Chart(ctx, {
-    type: 'polarArea',
-    data: {
-        labels: ['Anger', 'Anticipation', 'Joy', 'Trust', 'Fear', 'Surprise', 'Sadness', 'Disgust'],
-        datasets: [
-            {
-                label: 'Emotions',
-                data: [anger, anticipation, joy, trust, fear, surprise, sadness, disgust],
-                backgroundColor: [
-                    '#e3610590',
-                    '#f38b4a90',
-                    '#faf20590',
-                    '#46fa0590',
-                    '#00730890',
-                    '#00cad190',
-                    '#001cd190',
-                    '#6e00a190',
-                ],
-                borderColor: 'white',
-                borderWidth: 1,
-            },
+const emoChart = new Chart(ctx, {
+  type: 'polarArea',
+  data: {
+    labels: ['Anger', 'Anticipation', 'Joy', 'Trust', 'Fear', 'Surprise', 'Sadness', 'Disgust'],
+    datasets: [
+      {
+        label: 'Emotions',
+        data: [anger, anticipation, joy, trust, fear, surprise, sadness, disgust],
+        backgroundColor: [
+          '#fa5252',
+          '#e3610590',
+          '#faf20590',
+          '#46fa0590',
+          '#00730890',
+          '#00cad190',
+          '#001cd190',
+          '#6e00a190',
         ],
+        borderColor: 'white',
+        borderWidth: 1,
+      },
+    ],
+  },
+  options: {
+    maintainAspectRatio: false,
+    responsive: true,
+    scales: {
+      y: {
+        beginAtZero: true,
+        display: false,
+      },
     },
+    plugins: {
+      legend: {
+        display: true,
+        padding: 10,
+        boxWidth: 5,
+        position: 'left',
+        align: 'left',
+        labels: {
+          usePointStyle: true,
+        },
+      },
+    },
+  },
 });
 
 </script>
 
     <script src="{% static 'js/steppingstones.js' %}"></script>
-
-    </script>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https:code.jquery.com/jquery-3.2.1.slim.min.js"
