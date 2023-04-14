@@ -116,13 +116,13 @@
         <section id="mainEmotions">
 
         <h3>You are Feeling:</h3>
-        <?php echo $emotion;?>
+            {{steppingStones.feelingName}}
 
         </section>
 
         <section id="sensations">
 
-        <h3>Sensations:</h3>
+            {{steppingStones.feelingDesc}}
 
         </section>
 
@@ -135,7 +135,7 @@
 
             <div>
                 <p class="aaq" style="margin-left: 30px;margin-top:10px;">
-                    $tendency_classification
+                    {{steppingStones.copingStrategyName}}
                 </p>
 
                 <div class="progress">
@@ -145,7 +145,7 @@
                 </div>
 
                 <p style="font-weight:lighter;">
-                  <?php echo $tendency_class_definition; ?>
+                    {{steppingStones.copingStrategyDesc}}
                 </p>
             </div>
         </section>

@@ -34,6 +34,12 @@ class SteppingStone(models.Model):
     surprise = models.IntegerField(null=True)
     sadness = models.IntegerField(null=True)
     disgust = models.IntegerField(null=True)
+    feelingDesc = models.TextField(null=True)
+    feelingValue = models.IntegerField(null=True)
+    feelingName = models.CharField(max_length=100, null=True)
+    copingStrategyScore = models.IntegerField(null=True)
+    copingStrategyName = models.CharField(max_length=100, null = True)
+    copingStrategyDesc = models.TextField(null=True)
     created_at = models.DateTimeField(default=timezone.now, blank=True)
 
     def __str__(self):
