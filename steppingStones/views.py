@@ -50,14 +50,64 @@ def steppingStoneStart(request):
                             disgust += int(wordValue[i])
                         score += int(wordValue[i])
 
-                    anger = (anger/score)*100
-                    anticipation = (anticipation/score)*100
-                    joy = (joy/score)*100
-                    trust = (trust/score)*100
-                    fear = (fear/score)*100
-                    surprise = (surprise/score)*100
-                    sadness = (sadness/score)*100
-                    disgust = (disgust/score)*100
+                    anger = (anger / score) * 100
+                    anticipation = (anticipation / score) * 100
+                    joy = (joy / score) * 100
+                    trust = (trust / score) * 100
+                    fear = (fear / score) * 100
+                    surprise = (surprise / score) * 100
+                    sadness = (sadness / score) * 100
+                    disgust = (disgust / score) * 100
+
+                    copingStrategyScore = request.session['personal'] + request.session['social'] + request.session[
+                        'sleep'] + request.session['actions'] + request.session['food']
+                    copingStrategyName = None
+                    copingStrategyDesc = None
+
+                    emotions = {
+                        'Anger': anger,
+                        'Anticipation': anticipation,
+                        'Joy': joy,
+                        'Trust': trust,
+                        'Fear': fear,
+                        'Surprise': surprise,
+                        'Sadness': sadness,
+                        'Disgust': disgust
+                    }
+                    feelingDesc = None
+                    feelingValue = max(emotions.values())
+                    feelingName = max(emotions, key=emotions.get)
+                    if feelingName == "Anger":
+                        feelingDesc = "You want to attack an obstacle that is getting in the way of your peace."
+                    elif feelingName == "Anticipation":
+                        feelingDesc = "You are highly focused and alert; on the lookout for something."
+                    elif feelingName == "Joy":
+                        feelingDesc = "You are delighted! Things are better going good for you and you feel an abundance of energy."
+                    elif feelingName == "Trust":
+                        feelingDesc = "You feel a deep connection and pride for a person or idea that makes you want to strengthen your commitment to it."
+                    elif feelingName == "Fear":
+                        feelingDesc = "You sense a big danger, making you alarmed or petrified."
+                    elif feelingName == "Surprise":
+                        feelingDesc = "You feel inspired by something that caught you off guard. You want to remember that moment."
+                    elif feelingName == "Sadness":
+                        feelingDesc = "You are in a state of heartbreak and distraught after losing something dear. It feels hard to get up and go on."
+                    elif feelingName == "Disgust":
+                        feelingDesc = "You feel disturbed, horrified, and violated. You want to block it all out."
+                    if copingStrategyScore <= 1:
+                        copingStrategyName = "Functional Acceptant"
+                        copingStrategyDesc = "You let things come and go appropriately, letting yourself feel emotions but not letting them sit in for too long in your head to the point of it being unhealthy. You actively embrace the subjective experience, particularly your distressing experiences. You understand that the idea is not merely to grudgingly tolerate negative experiences but to embrace them fully and without defense."
+                    elif copingStrategyScore <= 20:
+                        copingStrategyName = "Mostly Acceptant"
+                        copingStrategyDesc = "You recognize that there will be times wherein your mental and emotional fortitude are challenged, but you also recognize that trying to escape from emotional pain will never work. Instead, you let go of attempts to avoid or control your thoughts and feelings to focus more on living a meaningful life."
+                    elif copingStrategyScore <= 40:
+                        copingStrategyName = "Well-Adjusted"
+                        copingStrategyDesc = "While you acknowledge the need to avoid negative stimuli for your own well-being, you cope well enough and continue to function without being self-destructive or self-sabotaging."
+                    elif copingStrategyScore <= 60:
+                        copingStrategyName = "Mostly Avoidant"
+                        copingStrategyDesc = "You try to steer clear of troubling stimuli so that you do not have to confront any negative emotions. You might also be turning to risky behavior to cope and may even withdraw from social experiences to prevent feelings of anxiety."
+                    elif copingStrategyScore <= 80:
+                        copingStrategyName = "Experiential Avoidant"
+                        copingStrategyDesc = "You do everything you can to not come into contact with anything that can trigger unwanted internal experiences, such as emotions, thoughts, memories, and bodily sensations. This may also include damaging forms of coping such as substance abuse, risky sexual behavior, and deliberate self-harm."
 
                     # Create and save the SteppingStone instance
                     import uuid
@@ -65,7 +115,7 @@ def steppingStoneStart(request):
                     steppingStone = SteppingStone(
                         patient=patient,
                         # mood and stress level
-                        stresslevel=request.session['stressLevel'],
+                        stressLevel=request.session['stressLevel'],
                         moodLevel=request.session['mood'],
                         uuid=uuid,
                         # coping strategies
@@ -89,6 +139,12 @@ def steppingStoneStart(request):
                         sadness=sadness,
                         disgust=disgust,
                         keywords=word,
+                        # coping strategy score
+                        copingStrategyScore=copingStrategyScore,
+                        copingStrategyName=copingStrategyName,
+                        copingStrategyDesc=copingStrategyDesc,
+                        feelingDesc=feelingDesc,
+                        feelingValue=feelingValue,
                     )
                     steppingStone.save()
                     keywordArray = []
@@ -107,7 +163,6 @@ def steppingStoneStart(request):
                     # get all stepping stones
                     steppingStones = SteppingStone.objects.get(uuid=uuid)
 
-
                     context = {
                         'keywords': keywords,
                         'steppingStones': steppingStones,
@@ -121,7 +176,7 @@ def steppingStoneStart(request):
                     request.session['actions'] = None
                     request.session['food'] = None
 
-                    print (steppingStones.personalDesc)
+                    print(steppingStones.personalDesc)
                     return render(request, 'emoticard.html', context)
                 elif request.session['actions'] is None and request.session['sleep'] is not None:
                     request.session['actions'] = int(request.POST.get('actions').split('-')[0])
