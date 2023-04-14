@@ -4,11 +4,38 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="104b91ad-3fa9-4c25-a787-7c462a2906e4" name="Changes" comment="" />
+    <list default="true" id="104b91ad-3fa9-4c25-a787-7c462a2906e4" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/PatientList/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PatientList/admin.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PatientList/apps.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PatientList/migrations/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PatientList/models.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PatientList/tests.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PatientList/urls.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PatientList/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NewDailyTrack/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/NewDailyTrack/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/login/templates/changePassword.html" beforeDir="false" afterPath="$PROJECT_DIR$/login/templates/changePassword.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/login/templates/passwordRecovery.html" beforeDir="false" afterPath="$PROJECT_DIR$/login/templates/passwordRecovery.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/login/templates/securityQuestions.html" beforeDir="false" afterPath="$PROJECT_DIR$/login/templates/securityQuestions.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/login/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/login/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/login/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/login/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/registration/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/registration/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/registration/patientRegistrationForm.py" beforeDir="false" afterPath="$PROJECT_DIR$/registration/patientRegistrationForm.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/steppingStones/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/steppingStones/views.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -24,21 +51,20 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/Users/javeb/Desktop/Django/NewDailyTrack",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/javeb/Desktop/Django/NewDailyTrack&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="NewDailyTrack" type="Python.DjangoServer" factoryName="Django server">
       <module name="NewDailyTrack" />
@@ -74,8 +100,8 @@
       <updated>1681170945889</updated>
       <workItem from="1681170947638" duration="206000" />
       <workItem from="1681171168687" duration="103000" />
-      <workItem from="1681171288574" duration="11697000" />
-      <workItem from="1681483244061" duration="3786000" />
+      <workItem from="1681171288574" duration="17057000" />
+      <workItem from="1681507137441" duration="4576000" />
     </task>
     <servers />
   </component>

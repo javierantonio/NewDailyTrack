@@ -145,6 +145,7 @@ def steppingStoneStart(request):
                         copingStrategyDesc=copingStrategyDesc,
                         feelingDesc=feelingDesc,
                         feelingValue=feelingValue,
+                        feelingName=feelingName,
                     )
                     steppingStone.save()
                     keywordArray = []
@@ -175,8 +176,6 @@ def steppingStoneStart(request):
                     request.session['sleep'] = None
                     request.session['actions'] = None
                     request.session['food'] = None
-
-                    print(steppingStones.personalDesc)
                     return render(request, 'emoticard.html', context)
                 elif request.session['actions'] is None and request.session['sleep'] is not None:
                     request.session['actions'] = int(request.POST.get('actions').split('-')[0])

@@ -56,10 +56,8 @@ def processPatientRegistration(request):
             msg.attach_alternative(html_content, "text/html")
             msg.send()
 
-        # Create a new patient
-        if usertype == 'Patient':
-            patient, _ = Patient.objects.get_or_create(profile=profile)
-            guardian_email = ""
+            patient = Patient.objects.get_or_create(profile=profile)
+            guardian_email = request.POST['guardianEmail']
             patient.guardian_email = guardian_email
             patient.save()
 

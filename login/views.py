@@ -1,4 +1,5 @@
 import django
+from django.core.exceptions import ObjectDoesNotExist
 from django.core.mail import send_mail
 from django.http import HttpResponse
 from django.shortcuts import render
@@ -64,36 +65,50 @@ def login(request):
 
 def passwordRecovery(request):
     if request.method == 'POST':
-        form = PasswordResetForm(request.POST)
-        if form.is_valid():
-            form.save(request=request)
-            return redirect('changePassword')
-    else:
-        form = PasswordResetForm()
-    return render(request, 'passwordRecovery.html', {'form': form})
+        email = request.POST['useremail']
+        try:
+            user = User.objects.get(email=email)
+            request.session['reset_email'] = email
+            return redirect('securityQuestions')
+        except ObjectDoesNotExist:
+            messages.error(request, 'Email not found')
+    return render(request, 'passwordRecovery.html')
+
 
 def changePassword(request):
     if request.method == "POST":
         return render(request, 'changePassword.html')
-        # useremail = request.POST.get('useremail')
-        # user = User.objects.get(username = useremail)
-        # if user is not None:
-        #     return render(request, 'changePassword.html')
-        # else:
-        #     return HttpResponse("User is not authenticated")
+        useremail = request.POST.get('useremail')
+        user = User.objects.get(username=useremail)
+        if user is not None:
+            return render(request, 'changePassword.html')
+        else:
+            return HttpResponse("User is not authenticated")
     else:
         return HttpResponse("Invalid request")
 
+
 def securityQuestions(request):
+    if request.method == 'POST':
+        email = request.session.get('reset_email')
+        securityAnswer = request.POST['secanswer']
+        try:
+            user = User.objects.get(email=email)
+            profile = Profile.objects.get(user=user)
+            if securityAnswer == profile.securityAnswer:
+                form = PasswordResetForm({'email': email})
+                if form.is_valid():
+                    form.save(request=request)
+                    messages.success(request, 'Password reset email sent.')
+                    return redirect('login')
+                else:
+                    messages.error(request, 'Something went wrong. Please try again.')
+            else:
+                messages.error(request, 'Incorrect answer')
+        except ObjectDoesNotExist:
+            messages.error(request, 'Something went wrong. Please try again.')
     return render(request, 'securityQuestions.html')
-    # if request.method == 'POST':
-    #     form = PasswordResetForm(request.POST)
-    #     if form.is_valid():
-    #         form.save(request=request)
-    #         return redirect('changePassword')
-    # else:
-    #     form = PasswordResetForm()
-    # return render(request, 'passwordRecovery.html', {'form': form})
+
 
 def newPassword(request):
     return render(request, 'login.html')
