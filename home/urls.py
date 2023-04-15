@@ -2,8 +2,9 @@ from django.contrib import admin
 from django.urls import include, path
 
 from . import views
-
+# Journal, Appointments, Specialist, Emoticards, Timely Reports, Profile
 urlpatterns = [
-    path('', views.landing, name='landing')
-
+    path('', views.landing, name='landing'),
+    path('', include('journal.urls')),
+    path('', include('steppingStones.urls')),
 ]

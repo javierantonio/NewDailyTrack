@@ -11,26 +11,6 @@ $(document).ready(function(){
     }
   });
 });
-//
-// $(document).ready(function(){
-//   $("#newBday").change(function(){
-//     var birthdate = new Date($("#newBday").val());
-//     var today = new Date();
-//     var age = Math.floor((today - birthdate) / (365.25 * 24 * 60 * 60 * 1000));
-//     if (age < 18){
-//       $("#guardianEmailField").show();
-//       $("input[name='guardianEmail']").prop("required", true);
-//     }else{
-//       $("#guardianEmailField").hide();
-//       $("input[name='guardianEmail']").prop("required", false);
-//     }
-//   });
-// });
-
-
-
-
-
 
 $(".nextRegister").click(function(){
     document.getElementById("registerPage1").style.display = "none";
@@ -73,8 +53,8 @@ $(".nextRegister").click(function(){
   
   });
   $(".prevSRegister2").click(function(){
-    document.getElementById("sregisterPage3").style.display = "block";
-    document.getElementById("sregisterPage2").style.display = "none";
+    document.getElementById("sregisterPage3").style.display = "none";
+    document.getElementById("sregisterPage2").style.display = "block";
   
     document.getElementById("snextRegister2").style.display = "block";
     document.getElementById("sprevRegister3").style.display = "none";
@@ -85,12 +65,52 @@ $(".nextRegister").click(function(){
   
   });
 
-$(function(){
+function specMinDate() {
+  const datelimit = new Date();
+  datelimit.setFullYear(datelimit.getFullYear() - 20);
+  $('[type="date"]').attr('id', 'specBirthday').prop('max', function () {
+    return new Date(datelimit).toJSON().split('T')[0];
+  });
+};
+
+function patMinDate() {
   const datelimit = new Date();
   datelimit.setFullYear(datelimit.getFullYear() - 10);
-    $('[type="date"]').prop('max', function(){
-        return new Date(datelimit).toJSON().split('T')[0];
-    });
+  $('[type="date"]').prop('max', function () {
+    return new Date(datelimit).toJSON().split('T')[0];
+  });
+};
+
+function lNumMinDate() {
+  const datelimit = new Date();
+  const dateMin = new Date();
+  const dateMax = new Date();
+  datelimit.setFullYear(datelimit.getFullYear() - 20);
+  dateMin.setFullYear(dateMin.getFullYear() +1);
+  dateMax.setFullYear(dateMax.getFullYear() +4);
+  $('#licenseExpiry').prop('max', function () {
+    return new Date(dateMax).toJSON().split('T')[0];
+  }).prop('min', function () {
+    return new Date(dateMin).toJSON().split('T')[0];
+  });
+  // $('[type="date"]').attr('id', 'specBirthday').prop('max', function () {
+  //   return new Date(datelimit).toJSON().split('T')[0];
+  // });
+  $('#specBirthday').prop('max', function () {
+    return new Date(datelimit).toJSON().split('T')[0];
+  });
+};
+
+$(function(){
+  const licNum = document.getElementById("licenseNumber");
+  if(!!licNum){
+    lNumMinDate();
+    // specMinDate();
+  }else{
+    patMinDate();
+  }
+
+
 });
 
 function changedDate(){
@@ -130,9 +150,24 @@ function changedDate(){
     }
 }
 
+function specDate(){
+  const minBday = new Date();
+  minBday.setFullYear(minBday.getFullYear() - 20);
+  const birthDate = document.getElementById("specBirthday").value;
+  let date = new Date(birthDate);
+
+    if (date > minBday) {
+      alert("Invalid birthday!");
+    }
+}
 
 $('input[type=date]').change(function () {
-  changedDate();
+  if (document.getElementById("specBirthday")){
+  specDate();
+  }else{
+    changedDate();
+  }
+
 });
 
 $('input[type=date]').keypress(function (e) {

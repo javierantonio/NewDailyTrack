@@ -37,7 +37,7 @@ Log In to DailyTrack
                     <div class="p-5">
                         <div class="text-center">
                             <img src="{% static 'img/logo.png' %}" alt="logo" class="logo">
-                                    <h4 style="margin:25px 0;color:#00ccbe;font-weight:bold;">Patient Sign In</h4>
+                                    <h4 style="margin:25px 0;color:#00ccbe;font-weight:bold;">Sign In</h4>
                         </div>
 
 {#                            <?php#}
@@ -63,7 +63,7 @@ Log In to DailyTrack
                                     <button type="submit" class="btn btn-info btn-user btn-block" style="border-radius:20px;width:50%;margin:0 auto;">Login</button>
                                 </form>
                                 <br>
-                                <p align="center"><a href="{% url 'passwordRecovery' %}">Forgot Password?</a></p>
+                                <p align="center"><a href="{% url 'password_reset' %}">Forgot Password?</a></p>
                                 <p align="center"><a href="{% url 'patientRegistration' %}">Register for a Dailytrack account</a></p>
 
 {#                                <p align="center"><a href="slogin">Login as a Specialist</a></p>#}
