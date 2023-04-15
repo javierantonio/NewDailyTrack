@@ -1,20 +1,20 @@
 {% extends 'patientTemplate.html' %}
-{% block content %}
-{% load static %}
+{% block title %}
+    Coping Strategies - Sleep
+{% endblock title %}
 
-<head>
-    <link rel="stylesheet" href='{% static 'css/animate.css' %}'>
+{% block link %}
     <link rel="stylesheet" href='{% static 'css/steppingstones.css' %}'>
-<style>
+{% endblock link %}
 
+{% block style %}
     .full-height{
         height: 100vh;
     }
+{% endblock style %}
 
-</style>
-
-</head>
-<body>
+{% block content %}
+{% load static %}
 
 <div class="cp-sleep bg full-height">
 

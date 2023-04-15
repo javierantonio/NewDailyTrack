@@ -1,22 +1,20 @@
 {% extends 'patientTemplate.html' %}
-{% block content %}
-{% load static %}
+{% block title %}
+    Coping Strategies - Personal
+{% endblock title %}
 
-<head>
-    <link rel="stylesheet" href='{% static 'css/animate.css' %}'>
-    <link rel="stylesheet" href='{% static 'css/navbar.css' %}'>
+{% block link %}
     <link rel="stylesheet" href='{% static 'css/steppingstones.css' %}'>
+{% endblock link %}
 
-<style>
-
+{% block style %}
     .full-height{
         height: 100vh;
     }
+{% endblock style %}
 
-</style>
-
-</head>
-<body>
+{% block content %}
+{% load static %}
 
 <div class="cp-personal bg full-height">
 

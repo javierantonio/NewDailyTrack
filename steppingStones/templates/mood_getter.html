@@ -1,17 +1,9 @@
 {% extends 'patientTemplate.html' %}
+{% block title %}Mood{% endblock title %}
+{% block link %}<link rel="stylesheet" href='{% static 'css/steppingstones.css' %}'>{% endblock link %}
 {% block content %}
 {% load static %}
 
-<head>
-    <link rel="stylesheet" href='{% static 'css/animate.css' %}'>
-    <link rel="stylesheet" href='{% static 'css/steppingstones.css' %}'>
-
-<style>
-
-</style>
-
-</head>
-<body>
 
     <div style="text-align:right;overflow-y: disabled;">
         <span id="date"> </span><br>
