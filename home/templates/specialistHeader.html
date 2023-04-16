@@ -24,10 +24,10 @@
                     <i class="fa-solid fa-people-group fa-fw mr-1 "></i>Patients</span></a>
 
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownPat">
-                        <a class="dropdown-item" href="uncomfirmedpatients.html">
+                        <a class="dropdown-item" href="{% url 'unconfirmed-list' %}">
                             <i class="fa fa-user fa-sm fa-fw mr-2"></i>Uncomfirmed Patients</a>
  
-                        <a class="dropdown-item" href="comfirmedpatients.html">
+                        <a class="dropdown-item" href="{% url 'confirmed-list' %}">
                             <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2"></i>Confirmed Patients</a>
                         </div>
                 </li>

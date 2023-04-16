@@ -7,4 +7,5 @@ urlpatterns = [
     path('', views.landing, name='landing'),
     path('', include('journal.urls')),
     path('', include('steppingStones.urls')),
+    path('', include('patientDirectory.urls')),
 ]
