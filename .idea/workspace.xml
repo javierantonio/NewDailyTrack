@@ -5,25 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="104b91ad-3fa9-4c25-a787-7c462a2906e4" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/patientDirectory/migrations/0001_related_name_patientdirectory.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/patientDirectory/templates/confirmedPatients.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/patientDirectory/templates/unconfirmedPatients.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/registration/migrations/0010_auto_20230416_2032.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/home/templates/patientHeader.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/journal/templates/journalMenu.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NewDailyTrack/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/NewDailyTrack/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PatientList/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/patientDirectory/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PatientList/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/patientDirectory/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PatientList/apps.py" beforeDir="false" afterPath="$PROJECT_DIR$/patientDirectory/apps.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PatientList/migrations/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/patientDirectory/migrations/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PatientList/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/patientDirectory/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PatientList/tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/patientDirectory/tests.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PatientList/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/patientDirectory/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PatientList/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/patientDirectory/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/home/templates/specialistHeader.html" beforeDir="false" afterPath="$PROJECT_DIR$/home/templates/specialistHeader.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/home/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/home/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/home/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/home/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/registration/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/registration/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/journal/templates/journalBase.html" beforeDir="false" afterPath="$PROJECT_DIR$/journal/templates/journalBase.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/journal/templates/journalEntries.html" beforeDir="false" afterPath="$PROJECT_DIR$/journal/templates/journalEntries.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/journal/templates/journalHome.html" beforeDir="false" afterPath="$PROJECT_DIR$/journal/templates/journalHome.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/journal/templates/journalStarredEntries.html" beforeDir="false" afterPath="$PROJECT_DIR$/journal/templates/journalStarredEntries.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/journal/templates/journalViewEntry.html" beforeDir="false" afterPath="$PROJECT_DIR$/journal/templates/journalViewEntry.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

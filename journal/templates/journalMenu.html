@@ -1,0 +1,40 @@
+
+<!--menu start-->
+    <div class="journal-menu col-sm-2">
+
+      <ul>
+        <li>
+          <div>
+            <h3 class="title">📕 Journal</h3>
+          </div>
+        </li>
+
+        <hr>
+
+        <li>
+          <div class="camenu">
+            <a href="{% url 'journal' %}"><i class="fa fa-pencil caf" aria-hidden="true"></i>
+              <span class="cas">Compose</span>
+            </a>
+          </div>
+        </li>
+
+        <li>
+          <div class="camenu">
+            <a href="{% url 'journalEntries' %}"><i class="fa fa-archive caf" aria-hidden="true"></i>
+              <span class="cas">Entries</span></a>
+          </div>
+        </li>
+
+        <li>
+          <div class="camenu">
+            <a href="{% url 'starredJournalEntry' %}"><i class="fa fa-star caf"></i>
+              <span class="cas">Starred</span></a>
+          </div>
+        </li>
+
+        <br>
+      </ul>
+    </div>
+    <!--menu end-->
+
