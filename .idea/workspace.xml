@@ -4,7 +4,27 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="104b91ad-3fa9-4c25-a787-7c462a2906e4" name="Changes" comment="" />
+    <list default="true" id="104b91ad-3fa9-4c25-a787-7c462a2906e4" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/patientDirectory/migrations/0001_related_name_patientdirectory.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/patientDirectory/templates/confirmedPatients.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/patientDirectory/templates/unconfirmedPatients.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/registration/migrations/0010_auto_20230416_2032.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NewDailyTrack/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/NewDailyTrack/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PatientList/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/patientDirectory/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PatientList/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/patientDirectory/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PatientList/apps.py" beforeDir="false" afterPath="$PROJECT_DIR$/patientDirectory/apps.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PatientList/migrations/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/patientDirectory/migrations/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PatientList/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/patientDirectory/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PatientList/tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/patientDirectory/tests.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PatientList/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/patientDirectory/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PatientList/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/patientDirectory/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/home/templates/specialistHeader.html" beforeDir="false" afterPath="$PROJECT_DIR$/home/templates/specialistHeader.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/home/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/home/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/home/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/home/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/registration/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/registration/models.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -14,6 +34,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Python Script" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -34,17 +55,25 @@
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
     &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;last_opened_file_path&quot;: &quot;C:/Users/javeb/Desktop/Django/NewDailyTrack&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\asus\Desktop\NewDailyTrack\home\static\css" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration name="NewDailyTrack" type="Python.DjangoServer" factoryName="Django server">
       <module name="NewDailyTrack" />
@@ -90,16 +119,5 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/login/views.py</url>
-          <line>82</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>

@@ -55,7 +55,7 @@ class Specialist(models.Model):
         return self.profile.user.username
 
 
-class Moderator (models.Model):
+class AdminModerator (models.Model):
     profile = models.OneToOneField(Profile, on_delete=models.CASCADE)
     # Moderators can only access admin view and approve/reject specialist application requests. They decide to verify or not verify the specialist.
 

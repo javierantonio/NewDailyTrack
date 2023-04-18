@@ -1,0 +1,125 @@
+{% extends 'specialistTemplate.html' %}
+
+{% block content %}
+{#<?php $idSpec=$_SESSION['id'];#}
+{#$bytes    = random_bytes(4);#}
+{#$newPatCode =  bin2hex($bytes);#}
+{##}
+{#?>#}
+
+<div class="row pt-2 pb-2">
+   <div class="col-lg-12">
+
+     <div style="justify-content: space-between">
+
+        <h4 class="page-title" style="display:inline-block;" style="color:#00c4c0;">Unconfirmed Patients</h4>
+       <!-- <form action="newpatcode" method="post" style="float:right;"> -->
+
+         <button class="btn-info" style="border-radius:10px;float:right;" data-toggle="modal" data-target="#generatePatcodeModal">
+
+         <i class="fa fa-user-plus" aria-hidden="true" style="margin-right 5px;"></i>
+          Generate New Patient Code</button>
+
+       <!-- </form> -->
+     </div>
+
+     <table class="display table table-bordered table-hover table-striped patcodeList" width="70%" cellspacing="0">
+              <thead>
+                  <tr>
+                    <th class="thead-dark">Unused Patient Codes</th>
+                    <th>Designated E-mail</th>
+                    <th>Patient Name</th>
+                  </tr>
+              </thead>
+              <tbody>
+                <?php
+
+{#                  $patlist = (new ControllerList)->ctrShowPatCodeData($idSpec);#}
+{#                  foreach ($patlist as $key => $value) {#}
+{#                    echo '#}
+                <tr>
+                    <td>
+                      <div class="btn-group group-round m-1">
+                        <button class="disabledButton btnList"
+                        style="border-color:gray;">
+                        '.$value["patcode"].'</button>
+                        </div>
+                    </td>
+                    <td>
+                        <p>'.$value["patemail"].'</p>
+                    </td>
+                    <td>
+                        <p>'.$value["patname"].'</p>
+                    </td>
+                  </tr>
+{#                ';#}
+{#                    }#}
+{#                ?>#}
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th></th>
+                </tr>
+              </tfoot>
+            </table>
+
+</div>
+</div>
+
+<!-- Generate Patient Code Modal-->
+<div class="modal fade" id="generatePatcodeModal" tabindex="-1" role="dialog" aria-labelledby="generatePatcodeModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color:#03a3a0;color:white;">
+                <h5 class="modal-title" id="generatePatcodeModalLabel"><i class="fa fa-check" style="margin-right: 10px;"></i>Patient Code Generated!</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+<form method="POST" action="newpatcode">
+            <div class="modal-body">
+
+            <h2 style="margin:0 -100px 20px 170px;color:#00c4c0;"><?php echo $newPatCode?></h2>
+
+            <div class="form-group">
+              <label for="patEmail-input"><b>Patient's E-mail address</b></label>
+              <input type="email" class="form-control" id="patEmail-input" name="patemail" placeholder="patient@example.com">
+              <br>
+              <label for="patName-input"><b>Patient's Full Name</b></label>
+              <input type="text" class="form-control" id="patName-input" name="patname" placeholder="Juan Dela Cruz">
+
+              <input type="text" hidden class="form-control"  name="patcodedata" value="<?php echo $newPatCode?>">
+            </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn-info" style="border-radius:20px;">Save Code</button>
+                <button class="btn-secondary" type="button" data-dismiss="modal" style="border-radius:20px;">Cancel</button>
+            </div>
+          </form>
+        </div>
+
+    </div>
+</div>
+
+<script>
+$(function() {
+//MODAL EVENTS
+$(".apptDeets").click(function(){
+    var id=$(this).val();
+    // var jnid=$('#jnid'+id).text();
+    var specname=$('#specname'+id).text();
+    var apptsched=$('#apptsched'+id).text();
+    var reason=$('#reason'+id).text();
+
+  $('#appointmentDetailsModal').modal('show');
+   $('#specname').val(specname);
+   $('#apptsched').val(apptsched);
+   $('#reason').val(reason);
+   $('#idspec').val(id);
+})
+})
+</script>
+
+{% endblock content %}

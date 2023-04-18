@@ -19,9 +19,9 @@ def landing(request):
         }
 
         if userprofile.type == "Patient":
-            return render(request, 'patientHome.html.', context=context)
+            return render(request, 'patientHome.html', context=context)
         elif userprofile.type == "Specialist":
-            return render(request, 'specialistHome.html.', context=context)
+            return render(request, 'specialistHome.html', context=context)
 
         # return redirect(reverse('home'))
     else:

@@ -1,12 +1,13 @@
 from django.db import models
+import uuid
 
 # Create your models here.
 class Enrollment(models.Model):
-    specialist = models.ForeignKey('registration.Specialist', on_delete=models.CASCADE, related_name='specialist')
+    specialist = models.ForeignKey('registration.Specialist', on_delete=models.CASCADE, related_name='enrollments')
     patientEmail = models.EmailField(max_length=254, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    enrollmentCode = models.CharField(max_length=10, null=True)
+    enrollmentCode = str(models.UUIDField(default=uuid.uuid4, editable=False, unique=True))[:8]
         #   Auto generates a 8 digit code for the patient to enter in the app to verify the enrollment
     enrollmentStatus = models.CharField(max_length=2, null=True)
         #   Different Enrollment Status and functions
@@ -15,7 +16,7 @@ class Enrollment(models.Model):
         #   3. T - Terminated. A code that has been terminated by the specialist.
 
 class PatientList(models.Model):
-    specialist = models.ForeignKey('registration.Specialist', on_delete=models.CASCADE, related_name='specialist')
+    specialist = models.ForeignKey('registration.Specialist', on_delete=models.CASCADE, related_name='patientlist')
     patient = models.ForeignKey('registration.Patient', on_delete=models.CASCADE, related_name='patient')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

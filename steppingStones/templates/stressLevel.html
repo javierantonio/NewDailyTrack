@@ -1,25 +1,24 @@
 {% extends 'patientTemplate.html' %}
-{% block content %}
-{% load static %}
 
-<head>
-<title>Stress Level</title>
-    <link rel="stylesheet" href='{% static 'css/animate.css' %}'>
-    <link rel="stylesheet" href='{% static 'css/navbar.css' %}'>
+{% block title %}
+    Coping Strategies
+{% endblock title %}
+
+{% block link %}
     <link rel="stylesheet" href='{% static 'css/steppingstones.css' %}'>
-<style>
+{% endblock link %}
 
+{% block style %}
     input[type=radio] {
     position: absolute;
     opacity: 0;
     width: 0;
     height: 0;
 }
+{% endblock style %}
 
-</style>
-
-</head>
-<body>
+{% block content %}
+{% load static %}
 
     <div class="container col-lg-8 mx-auto ">
 

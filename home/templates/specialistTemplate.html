@@ -5,54 +5,18 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>{% block title %}{% endblock title %}</title>
-
-    <!-- Bootstrap CSS -->
+ <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <link rel="stylesheet" href='{% static 'css/animate.css' %}'>
-    <link rel="stylesheet" href='{% static 'css/home.css' %}'>
+    <link rel="stylesheet" href='{% static 'css/specialisthome.css' %}'>
     <link rel="stylesheet" href='{% static 'css/navbar.css' %}'>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    {% block link %}{% endblock link %}
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>{% block link %}{% endblock link %}
 <style>
 
-    .profile{
-        color: #4281f5;
-    }
-
-    .steppingstones{
-        color: #32b66b;
-    }
-
-    .journal{
-        color: #f57d81;
-    }
-
-    .bigger{
-        font-size: 80px;
-        cursor: pointer;
-        -webkit-transition: all .1s ease-in-out;
-        -moz-transition: all .1s ease-in-out;
-        transition: all .1s ease-in-out;
-    }
-
-    .profile:hover, .profile:focus{
-        font-size: 85px;
-        color: #1a5cd7;
-    }
-
-    .steppingstones:hover, .steppingstones:focus{
-        font-size: 85px;
-        color: #128f48;
-    }
-
-    .journal:hover, .journal:focus{
-        font-size: 85px;
-        color: #e2373d;
-    }
 {% block style %}{% endblock style %}
 
 </style>
@@ -60,9 +24,7 @@
 </head>
 
 <body>
-{#{% navbar %}#}
-{#{% endnavbar %}#}
-{% include 'patientHeader.html' %}
+{% include 'specialistHeader.html' %}
 {% block content %}
 {% endblock content %}
 

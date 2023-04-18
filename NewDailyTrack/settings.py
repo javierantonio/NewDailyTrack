@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     'login.apps.LoginConfig',
     'journal.apps.JournalConfig',
     'steppingStones.apps.SteppingstonesConfig',
-
+    'patientDirectory.apps.PatientdirectoryConfig',
 
 ]
 
