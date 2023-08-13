@@ -2,7 +2,9 @@
 {% block title %}Emoticard{% endblock title %}
 {% block link %}<link rel="stylesheet" href='{% static 'css/emoticard.css' %}'>
     {% endblock link %}
-{% block content %}
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <div class="container chart col-lg-8">
 
@@ -128,9 +130,9 @@ const progress = document.querySelector('.progress-done');
 
 progress.style.width = progress.getAttribute('data-done') + '%';
 
- {#if data-done = 5- 11 = Healthy, generally more accepting of situations.#}
- {#if else data-done = 12-19 = Average, able to cope well in most cases#}
- {#else = 20-25 Avoidant, has trouble releasing stressors in a healthy manner#}
+ // {#if data-done = 5- 11 = Healthy, generally more accepting of situations.#}
+ // {#if else data-done = 12-19 = Average, able to cope well in most cases#}
+ // {#else = 20-25 Avoidant, has trouble releasing stressors in a healthy manner#}
 
 progress.style.opacity = 1;
 

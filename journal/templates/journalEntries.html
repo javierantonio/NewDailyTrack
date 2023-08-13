@@ -1,8 +1,60 @@
 {% extends 'journalBase.html' %}
 {% load static %}
 {% block link %}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- DataTables CSS -->
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
+<!-- DataTables JS -->
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
     <link rel="stylesheet" href='{% static 'css/journal.css' %}'>
     <script>
+        // Define the app variable outside the $(document).ready() function
+        var app = (function() {
+    function init() {
+        // Initialize DataTables
+        app.table = $('#journalEntries').DataTable({
+            "dom": "lrtip" // hide default DataTable search box
+        });
+
+        // Event handler for text search
+        $("#textSearch").on('keyup change', function() {
+            console.log('text search for: ' + $(this).val());
+            app.table.search($(this).val()).draw();
+        });
+
+        // Initialize modal events
+        $(".journalRequest").click(function() {
+            var id = $(this).val();
+            var specname = $('#specname' + id).text();
+            var notes = $('#notes' + id).text();
+
+            $('#journalRequestModal').modal('show');
+            $('#specname').val(specname);
+            $('#notes').val(notes);
+            $('#journalid').val(id);
+        });
+
+        // Other initialization code here
+    }
+
+    // You can also add other functions and properties related to your app here
+    // function someOtherFunction() { ... }
+
+    // Expose public functions and properties
+    return {
+        init: init,
+        // someOtherFunction: someOtherFunction
+    };
+})();
+
+$(document).ready(function() {
+    app.init();
+});
+
+        $(document).ready(function() {
+            app.init();
+        });
+
         function confirmDelete(event, url) {
             event.preventDefault();
             if (confirm('Are you sure you want to delete this entry?')) {
@@ -34,10 +86,8 @@
         }
 
     </script>
-
-    </script>
 {% endblock link %}
-    {% block journalcontent %}
+{% block journalcontent %}
 <div class="col-md-8 mr-auto" style="background-color:transparent;">
       <div class="bich">
         <!--content area start-->
@@ -87,7 +137,8 @@
                             </td>
                             <td>{{ entry.created_at}}</td>
                             <td>
-                                <a title="Delete Article" href="{% url 'delete_journalEntry' entry_id=entry.id %}" onclick="confirmDelete(event, '{% url 'delete_journalEntry' entry_id=entry.id %}')">
+                                <a title="Delete Article" href="{% url 'delete_journalEntry' entry_id=entry.id %}" onclick='confirmDelete(event, "{% url "delete_journalEntry" entry_id=entry.id %}")'>
+
                                     <i class="fa fa-trash" aria-hidden="true"></i>
                                 </a>
                             </td>
@@ -103,61 +154,7 @@
 
 
         <script>
-                      $(function() {
-                        //MODAL EVENTS
-                        $(".journalRequest").click(function() {
-                          var id = $(this).val();
-                          // var jnid=$('#jnid'+id).text();
-                          var specname = $('#specname' + id).text();
-                          var notes = $('#notes' + id).text();
 
-                          $('#journalRequestModal').modal('show');
-                          $('#specname').val(specname);
-                          $('#notes').val(notes);
-                          $('#journalid').val(id);
-                        })
-
-                        var app = (function() {
-                          var checkboxInput = ' input[type="checkbox"]',
-                            filters = {},
-                            rowData = [],
-                            values = [],
-                            key, value, show, length, divId;
-
-                          var init = function() {
-                            app.table = $('#journalEntries').DataTable({
-                              "dom": "lrtip" // hide default DataTable search box
-                            });
-
-                            $("#textSearch").on('keyup change', function() {
-                              console.log('text search for: ' + $(this).val());
-                              app.table.search($(this).val()).draw();
-                            });
-
-                            $(checkboxInput).prop('checked', false);
-
-                            $(checkboxInput).change(function() {
-                              var that = $(this);
-                              if (that.hasClass('all')) {
-                                $('#' + getFilterCategoryId(that) + checkboxInput).prop('checked', that.prop('checked'));
-                              } else {
-                                var allInput = $('#' + getFilterCategoryId(that) + checkboxInput + ':first');
-                                if (allInput.is(':checked')) {
-                                  allInput.prop('checked', false);
-                                }
-                              }
-                              poulateAndApplyFilters();
-                            });
-                          };
-
-                          return {
-                            init: init
-                          };
-                        })();
-
-                        app.init();
-
-                      });
                     </script>
       </div>
 </div>

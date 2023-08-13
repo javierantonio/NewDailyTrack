@@ -1,6 +1,11 @@
 {% extends 'journalBase.html' %}
 {% load static %}
 {% block link %}
+<!-- DataTables CSS -->
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
+<!-- DataTables JS -->
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
+
     <link rel="stylesheet" href='{% static 'css/journal.css' %}'>
     <script>
         function confirmDelete(event, url) {
