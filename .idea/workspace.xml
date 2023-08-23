@@ -5,15 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="104b91ad-3fa9-4c25-a787-7c462a2906e4" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/home/templates/patientHeader.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/journal/templates/journalMenu.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/journal/templates/journalBase.html" beforeDir="false" afterPath="$PROJECT_DIR$/journal/templates/journalBase.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/journal/templates/journalEntries.html" beforeDir="false" afterPath="$PROJECT_DIR$/journal/templates/journalEntries.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/journal/templates/journalHome.html" beforeDir="false" afterPath="$PROJECT_DIR$/journal/templates/journalHome.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/journal/templates/journalStarredEntries.html" beforeDir="false" afterPath="$PROJECT_DIR$/journal/templates/journalStarredEntries.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/journal/templates/journalViewEntry.html" beforeDir="false" afterPath="$PROJECT_DIR$/journal/templates/journalViewEntry.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NewDailyTrack/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/NewDailyTrack/settings.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
