@@ -33,6 +33,9 @@ def home(request):
 def loginUser(request):
     return render(request, 'loginTest.html')
 
+def patLogin():
+    HttpResponse("User is not authenticated")
+    return redirect('patientHome')
 
 def login(request):
     if request.method == "POST":

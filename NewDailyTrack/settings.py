@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+# from registration.models import Profile
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -37,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
 
     'home.apps.LandingpageConfig',
     'registration.apps.RegistrationConfig',
@@ -75,6 +77,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.request',
             ],
         },
     },
@@ -161,7 +164,12 @@ SOCIALACCOUNT_PROVIDERS = {
     }
 }
 
-SITE_ID = 1
+SITE_ID = 2
 
-LOGIN_REDIRECT_URL = '/'
+# profile = Profile.objects.get(user=request.user)
+# if (profile.type)=="Specialist":
+#     LOGIN_REDIRECT_URL = '/specialistHome'
+# elif (profile.type)=="Patient":
+#     LOGIN_REDIRECT_URL = '/patientHome'
+LOGIN_REDIRECT_URL = 'google'
 LOGOUT_REDIRECT_URL = '/'
