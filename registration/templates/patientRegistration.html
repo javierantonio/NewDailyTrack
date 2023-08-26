@@ -151,9 +151,11 @@ User Registration
                                         <button id="nextRegister" class="btn-light2 btn-circle2 btn-xl2 nextRegister">
                                           <i class="fa-solid fa-arrow-right"></i>
                                         </button>
-
                                         <br>
                                         <p align="center"><a href="{% url 'loginPage' %}">Login instead?</a></p>
+                                        
+                                        {% load socialaccount %}
+                                        <a href="{% provider_login_url 'google' %}">Login With Google</a>
 
                                     </div>
                                   </form>
