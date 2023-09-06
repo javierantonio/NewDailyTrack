@@ -47,10 +47,12 @@ INSTALLED_APPS = [
     'steppingStones.apps.SteppingstonesConfig',
     'patientDirectory.apps.PatientdirectoryConfig',
 
-    'allauth', # new
-    'allauth.account', # new
-    'allauth.socialaccount', # new
-    'allauth.socialaccount.providers.google', # new
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
+
+    'rest_framework', # new
 ]
 
 MIDDLEWARE = [
@@ -164,7 +166,7 @@ SOCIALACCOUNT_PROVIDERS = {
     }
 }
 
-SITE_ID = 2
+SITE_ID = 3
 
 # profile = Profile.objects.get(user=request.user)
 # if (profile.type)=="Specialist":

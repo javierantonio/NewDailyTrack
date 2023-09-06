@@ -7,7 +7,7 @@ from django.template.loader import render_to_string
 from django.utils.html import strip_tags
 
 from .models import Profile, Patient
-
+from .serializers import GoogleAuthSerializer
 
 def processPatientRegistration(request):
     if request.method == 'POST':
