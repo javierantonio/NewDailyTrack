@@ -2,7 +2,7 @@ from google.auth.transport import requests
 from google.oauth2 import id_token
 
 class Google:
-    #Fetches and returns user info
+    #Fetches and returns user info from Google
 
     @staticmethod
     def validate(auth_token):
