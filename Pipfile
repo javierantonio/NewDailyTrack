@@ -89,6 +89,6 @@ python_full_version = "3.11.2"
 
 [scripts]
 dev = "py manage.py runserver"
-i = "pipenv install -r requirements"
+i = "pipenv install -r requirements.txt"
 makemigrate = "py manage.py makemigrations && py manage.py migrate"
 migrate = "py manage.py migrate"
