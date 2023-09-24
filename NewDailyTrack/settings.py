@@ -46,13 +46,14 @@ INSTALLED_APPS = [
     'journal.apps.JournalConfig',
     'steppingStones.apps.SteppingstonesConfig',
     'patientDirectory.apps.PatientdirectoryConfig',
+    'profileHub.apps.ProfilehubConfig', # new
 
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
 
-    'rest_framework', # new
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
