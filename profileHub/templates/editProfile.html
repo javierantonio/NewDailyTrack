@@ -34,6 +34,7 @@
               <label for="fullName">First Name</label>
               <input
                 type="text"
+                name="firstName"
                 class="form-control"
                 id="firstName"
                 placeholder="First Name"
@@ -46,6 +47,7 @@
               <label for="fullName">Last Name</label>
               <input
                 type="text"
+                name="lastName"
                 class="form-control"
                 id="lastName"
                 placeholder="Last Name"
@@ -58,6 +60,7 @@
               <label for="eMail">E-mail</label>
               <input
                 type="email"
+                name="email"
                 class="form-control"
                 id="eMail"
                 placeholder="Update e-mail address"
@@ -69,7 +72,7 @@
             <div class="form-group">
               <label for="eMail">Birth Date</label>
               <div class="input-group date" data-provide="datepicker">
-                <input type="date" class="form-control" id="birthday" name="birthday" value="{{birthday|date:"m/d/Y"}}"/>
+                <input type="date" class="form-control" id="birthday" name="birthday" value="{{birthday|date:"Y-m-d"}}"/>
                 <!-- <div class="input-group-addon"></div> -->
               </div>
             </div>
@@ -79,6 +82,7 @@
               <label for="phone">Contact Number</label>
               <input
                 type="text"
+                name="contactNumber"
                 class="form-control"
                 id="patientPhone"
                 placeholder="Enter phone number"
@@ -102,6 +106,7 @@
               <label for="Address">Address</label>
               <input
                 type="name"
+                name="address"
                 class="form-control"
                 id="Address"
                 placeholder="Enter Address"
@@ -110,56 +115,35 @@
             </div>
           </div>
         </div>
-
-        <!-- <div class="row gutters">
+        {% if licenseNumber %}
+        <div class="row gutters">
           <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-            <h6 class="mt-3 mb-2 text-primary">Address</h6>
+            <h6 class="mt-3 mb-2 text-primary">Professional Details</h6>
           </div>
           <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
             <div class="form-group">
-              <label for="Street">Street</label>
-              <input
-                type="name"
-                class="form-control"
-                id="Street"
-                placeholder="Enter Street"
-              />
-            </div>
-          </div>
-          <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-            <div class="form-group">
-              <label for="ciTy">City</label>
-              <input
-                type="name"
-                class="form-control"
-                id="ciTy"
-                placeholder="Enter City"
-              />
-            </div>
-          </div>
-          <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-            <div class="form-group">
-              <label for="sTate">State</label>
+              <label for="licenseNumber">License Number</label>
               <input
                 type="text"
+                name="licenseNumber"
                 class="form-control"
-                id="sTate"
-                placeholder="Enter State"
+                id="licenseNumber"
+                placeholder="Enter License Number"
+                value="{{licenseNumber}}"
               />
             </div>
           </div>
           <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
             <div class="form-group">
-              <label for="zIp">Zip Code</label>
-              <input
-                type="text"
-                class="form-control"
-                id="zIp"
-                placeholder="Zip Code"
-              />
+              <label for="licenseExpiry">License Expiry</label>
+              <div class="input-group date" data-provide="datepicker">
+                <input type="date" class="form-control" id="licenseExpiry" name="licenseExpiry" value="{{licenseExpiry|date:"Y-m-d"}}"/>
+                <!-- <div class="input-group-addon"></div> -->
+              </div>
             </div>
           </div>
-        </div> -->
+        </div>
+        {% endif %}
 
         <div class="row gutters">
           <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
@@ -170,6 +154,7 @@
               <label for="email">Email</label>
               <input
                 type="text"
+                name="email"
                 class="form-control"
                 id="email"
                 placeholder="Email"
@@ -186,22 +171,23 @@
             </div>
           </div>
         </div>
-      </form>
-      <!-- BUTTONS -->
-      <div class="row gutters">
-        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-          <div class="text-right">
-            <button
-              type="submit"
-              id="submit"
-              name="submit"
-              class="btn btn-primary"
-            >
-              Update
-            </button>
+        <div class="row gutters">
+          <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            <div class="text-right">
+              <button
+                type="submit"
+                id="submit"
+                name="submit"
+                class="btn btn-primary"
+              >
+                Update
+              </button>
+            </div>
           </div>
         </div>
-      </div>
+      </form>
+      <!-- BUTTONS -->
+      
     </div>
   </div>
 

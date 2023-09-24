@@ -6,9 +6,9 @@ from . import views
 #Main Profile, Appointments List, Reports Summary, Edit Profile
 urlpatterns = [
     path('patient-hub/', views.getPatient, name='patientHub'),
-    path('specialist-hub/', views.getPatient, name='specialistHub'),
-    path('patient-hub/edit/', views.patientEdit, name='patientEdit'),
-    path('specialist-hub/edit/', views.patientEdit, name='specialistEdit'),
+    path('specialist-hub/', views.getSpecialist, name='specialistHub'),
+    path('patient-hub/edit/', views.editPatient, name='patientEdit'),
+    path('specialist-hub/edit/', views.editSpecialist, name='specialistEdit'),
     # path('appointments/', views.patientAppointments, name='patientAppointments'),
     # path('appointments/', views.specialistAppointments, name='specialistAppointments'),
     # path('reports/', views.patientReports, name='patientReports'),

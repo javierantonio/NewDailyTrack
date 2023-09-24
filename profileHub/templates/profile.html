@@ -51,6 +51,14 @@
 
     <div class="card mt-3">
       <ul class="list-group list-group-flush">
+        {% if licenseNumber %}
+        <li
+          class="list-group-item d-flex justify-content-between align-items-center flex-wrap"
+        >
+          <h6 class="mb-0">License Number</h6>
+          <span class="text-secondary">{{licenseNumber}}</span>
+        </li>
+        {% endif %}
         <li
           class="list-group-item d-flex justify-content-between align-items-center flex-wrap"
         >
@@ -79,9 +87,10 @@
           class="list-group-item d-flex justify-content-between align-items-center flex-wrap"
         >
           <h6 class="mb-0">Guardian E-mail</h6>
-          <span class="text-secondary">mamamo@gmail.com</span>
+          <span class="text-secondary">{{guardianEmail}}</span>
         </li>
         {% endif %}
+        
       </ul>
     </div>
   </div>
