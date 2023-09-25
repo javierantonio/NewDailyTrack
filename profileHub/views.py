@@ -55,7 +55,7 @@ def editPatient(request):
 
     if request.method == 'POST':
         if profileForms.patientUpdate(request):
-            return reverse('')
+            show_alert = True
         else:
             print('failed')
     else:
@@ -89,7 +89,7 @@ def editPatient(request):
         # return HttpResponse(userData.type)
         return render(request, 'editProfile.html', context=context)
     
-    
+    return redirect(reverse('patientHub'))
     return HttpResponse("You do not have permission to view this entrsy.")
 
 #SPECIALIST

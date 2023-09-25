@@ -22,7 +22,7 @@
       <button onclick="history.go(-1)" class="btn btn-outline-secondary mb-3">
         Back
       </button>
-      <form role="form" method="post">
+      <form role="form" method="post" name="editProfileForm">
         {% csrf_token %}
 
         <div class="row gutters">
@@ -191,8 +191,12 @@
     </div>
   </div>
 
-<script>
-</script>
+  {% if show_alert %}
+  <script>
+      // JavaScript code to display an alert
+      alert('Form submitted successfully!');
+  </script>
+  {% endif %}
 
   <!-- <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.bundle.min.js"></script>

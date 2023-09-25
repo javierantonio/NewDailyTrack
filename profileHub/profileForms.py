@@ -31,7 +31,6 @@ def specialistUpdate(request):
         userData.last_name = last_name 
         # userData.password = password  
         userData.email = email    
-        userData.save()   
 
         # Update Profile
         profileData.sex = sex
@@ -40,13 +39,22 @@ def specialistUpdate(request):
         profileData.address = address            
         # profileData.securityAnswer = security_answer
         # profileData.securityQuestion = security_question
-              
-        profileData.save()
 
         #Update Specialist
         specialistData.licenseExpiry = license_expiry
         specialistData.licenseNumber = license_number
         # specialistData.prcID = prc_id
+
+        editProfileForm = request.POST
+        print(editProfileForm)
+
+        if (request.POST['password']):
+            if 'password' in editProfileForm:
+                password = request.POST['password']
+                userData.password = password
+
+        userData.save() 
+        profileData.save()
         specialistData.save()
 
         print ("Specialist Profile updated")
