@@ -1,4 +1,5 @@
 from datetime import datetime, date
+import os
 
 from dateutil.relativedelta import relativedelta
 from django.contrib.auth.models import User
@@ -6,8 +7,10 @@ from django.core.mail import send_mail, EmailMultiAlternatives
 from django.template.loader import render_to_string
 from django.utils.html import strip_tags
 
-from .models import Profile, Patient
+import login
 
+from .models import Profile, Patient
+# from .serializers import GoogleAuthSerializer
 
 def processPatientRegistration(request):
     if request.method == 'POST':
@@ -60,5 +63,45 @@ def processPatientRegistration(request):
             guardian_email = request.POST['guardianEmail']
             patient.guardian_email = guardian_email
             patient.save()
+
+        return True
+    
+def registerSocialPatientUser(provider, user_id, email, family_name, given_name):
+    filter_user_by_email = User.objects.filter(email=email)
+
+    if filter_user_by_email.exists():
+        if provider == filter_user_by_email[0].auth_provider:
+            #If user already exists, login the user in the system
+            registered_user = login.views(email=email,password=os.environ.get('SOCIAL_SECRET'))
+        
+        return {
+            'username': registered_user.email,
+            'email': registered_user.email,
+            # 'tokens': registered_user.tokens()
+        }
+
+    else:
+        email = email
+        password = os.environ.get('SOCIAL_SECRET')
+        first_name = given_name
+        last_name = family_name
+        security_question = ''
+        security_answer = ''
+        sex = ''
+        birthday = ''
+        contact_number = ''
+        address = ''
+        usertype = 'Patient'
+
+        # Create a new user
+        user = User.objects.create_user(username=email, email=email, password=password, first_name=first_name,
+                                        last_name=last_name)
+        user.save()
+
+        # Create a new profile
+        profile = Profile.objects.create(user=user, email=email, type=usertype, securityQuestion=security_question,
+                                            securityAnswer=security_answer, sex=sex, birthday=birthday,
+                                            phone=contact_number, address=address)
+        profile.save()
 
         return True

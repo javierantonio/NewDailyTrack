@@ -1,0 +1,29 @@
+{% if type == 'Patient' %}
+    {% include "patientTemplate.html" %}
+{% elif type == 'Specialist' %}
+    {% include "specialistTemplate.html" %}
+{% else %}
+    {% include "specialistTemplate.html" %}
+{% endif %}
+
+{% load static %} 
+{% block link %}
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="{% static 'css/profile.css' %}" />
+
+{% endblock link %}
+
+{% block content %}
+
+<div class="container">
+  <div class="main-body">
+    {% block profilecontent %} {% endblock profilecontent %}
+  </div>
+</div>
+<script src="{% static 'js/editProfile.js' %}" ></script>
+{% endblock content %}

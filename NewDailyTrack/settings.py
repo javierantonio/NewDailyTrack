@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+# from registration.models import Profile
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -37,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
 
     'home.apps.LandingpageConfig',
     'registration.apps.RegistrationConfig',
@@ -44,7 +46,14 @@ INSTALLED_APPS = [
     'journal.apps.JournalConfig',
     'steppingStones.apps.SteppingstonesConfig',
     'patientDirectory.apps.PatientdirectoryConfig',
+    'profileHub.apps.ProfilehubConfig', # new
 
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
+
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -71,6 +80,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.request',
             ],
         },
     },
@@ -139,3 +149,30 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'dailytrack@dailytrack.online'
 EMAIL_HOST_PASSWORD = 'Archons@DailyTrack1'
+
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend'
+]
+
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+        'SCOPE': [
+            'profile',
+            'email',
+        ],
+        'AUTH_PARAMS': {
+            'access_type': 'online',
+        }
+    }
+}
+
+SITE_ID = 3
+
+# profile = Profile.objects.get(user=request.user)
+# if (profile.type)=="Specialist":
+#     LOGIN_REDIRECT_URL = '/specialistHome'
+# elif (profile.type)=="Patient":
+#     LOGIN_REDIRECT_URL = '/patientHome'
+LOGIN_REDIRECT_URL = 'google'
+LOGOUT_REDIRECT_URL = '/'

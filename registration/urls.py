@@ -9,7 +9,9 @@ urlpatterns = [
     path('patient/', views.patientRegistration, name='patientRegistration'),
     path('specialist/', views.specialistRegistration, name='specialistRegistration'),
     path('', views.home, name='registrationSelection'),
-    path('login/', login.views.login, name='loginPage')
-
+    path('accounts/', include('allauth.urls')),
+    path('login/', login.views.login, name='loginPage'),
+    # path('', login.views.home, name='google')
+    
 
 ]

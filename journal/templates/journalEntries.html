@@ -6,7 +6,7 @@
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
 <!-- DataTables JS -->
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
-    <link rel="stylesheet" href='{% static 'css/journal.css' %}'>
+    <link rel="stylesheet" href='{% static "css/journal.css" %}'>
     <script>
         // Define the app variable outside the $(document).ready() function
         var app = (function() {
@@ -64,7 +64,7 @@ $(document).ready(function() {
         function toggleStar(event, entry_id) {
             event.preventDefault();
             $.ajax({
-                url: '{% url 'starJournalEntry' %}',
+                url: '{% url "starJournalEntry" %}',
                 data: {
                     'entry_id': entry_id,
                     'csrfmiddlewaretoken': '{{ csrf_token }}',
@@ -137,10 +137,10 @@ $(document).ready(function() {
                             </td>
                             <td>{{ entry.created_at}}</td>
                             <td>
-                                <a title="Delete Article" href="{% url 'delete_journalEntry' entry_id=entry.id %}" onclick='confirmDelete(event, "{% url "delete_journalEntry" entry_id=entry.id %}")'>
+                                <!-- <a title="Delete Article" href="{% url 'delete_journalEntry' entry_id=entry.id %}" onclick="confirmDelete(event, '{% url "delete_journalEntry" entry_id=entry.id %}')">
 
                                     <i class="fa fa-trash" aria-hidden="true"></i>
-                                </a>
+                                </a> -->
                             </td>
                         </tr>
                     {% empty %}
