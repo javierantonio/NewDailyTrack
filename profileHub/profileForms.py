@@ -10,7 +10,6 @@ def specialistUpdate(request):
     if request.method == 'POST':
         # Auth Details
         email = request.POST['email']
-        # password = request.POST['password']
         # security_question = request.POST['securityQuestion']
         # security_answer = request.POST['securityAnswer']
         # Personal Details
@@ -21,24 +20,26 @@ def specialistUpdate(request):
         birthday = request.POST['birthday']
         contact_number = request.POST['contactNumber']
         address = request.POST['contactNumber']
+        
         # Professional Details
         # prc_id = request.POST['prcID']
         license_number = request.POST['licenseNumber']
         license_expiry = request.POST['licenseExpiry']
 
         # Update User
+        userData.username = email
         userData.first_name = first_name
         userData.last_name = last_name 
-        # userData.password = password  
-        userData.email = email    
+        userData.email = email   
+        # profileData.securityAnswer = security_answer
+        # profileData.securityQuestion = security_question 
 
         # Update Profile
+        profileData.email = email
         profileData.sex = sex
         profileData.birthday = birthday
         profileData.phone = contact_number
-        profileData.address = address            
-        # profileData.securityAnswer = security_answer
-        # profileData.securityQuestion = security_question
+        profileData.address = address        
 
         #Update Specialist
         specialistData.licenseExpiry = license_expiry
@@ -46,12 +47,9 @@ def specialistUpdate(request):
         # specialistData.prcID = prc_id
 
         editProfileForm = request.POST
-        print(editProfileForm)
 
-        if (request.POST['password']):
-            if 'password' in editProfileForm:
-                password = request.POST['password']
-                userData.password = password
+        if 'password' in editProfileForm:
+            userData.set_password(editProfileForm['password']) 
 
         userData.save() 
         profileData.save()
@@ -69,9 +67,9 @@ def patientUpdate(request):
     if request.method == 'POST':
         # Auth Details
         email = request.POST['email']
-        # password = request.POST['password']
         # security_question = request.POST['securityQuestion']
         # security_answer = request.POST['securityAnswer']
+
         # Personal Details
         first_name = request.POST['firstName']
         last_name = request.POST['lastName']
@@ -79,29 +77,33 @@ def patientUpdate(request):
         birthday = request.POST['birthday']
         contact_number = request.POST['contactNumber']
         address = request.POST['address']
-        # Patient Details
-        # guardian_email = request.POST['guardianEmail']
-
 
         # Update User
+        userData.username = email
         userData.first_name = first_name
         userData.last_name = last_name 
-        # userData.password = password   
         userData.email = email
-        userData.save()
 
         # Update Profile
+        profileData.email = email
         profileData.sex = sex
         profileData.birthday = birthday
         profileData.phone = contact_number
         profileData.address = address            
         # profileData.securityAnswer = security_answer
-        # profileData.securityQuestion = security_question               
-        profileData.save()
+        # profileData.securityQuestion = security_question 
 
-        #Update Patient
-        # patientData.guardianEmail = guardian_email
-        patientData.save()
+        editProfileForm = request.POST
+
+        if 'password' in editProfileForm:
+            userData.set_password(editProfileForm['password']) 
+
+        if 'guardianEmail' in editProfileForm:
+            patientData.guardianEmail = editProfileForm['guardianEmail']
+            patientData.save()
+
+        userData.save() 
+        profileData.save()
 
         print ("Patient Profile updated")
 
