@@ -29,16 +29,28 @@ def processPatientRegistration(request):
         usertype = 'Patient'
 
         # Create a new user
-        user = User.objects.create_user(username=email, email=email, password=password, first_name=first_name,
+        user = User.objects.create_user(username=email, 
+                                        email=email, 
+                                        password=password, 
+                                        first_name=first_name,
                                         last_name=last_name)
         user.save()
 
         # Create a new profile
-        profile = Profile.objects.create(user=user, email=email, type=usertype, securityQuestion=security_question,
-                                         securityAnswer=security_answer, sex=sex, birthday=birthday,
-                                         phone=contact_number, address=address)
+        profile = Profile.objects.create(user=user, 
+                                         email=email, 
+                                         type=usertype, 
+                                         securityQuestion=security_question,
+                                         securityAnswer=security_answer, 
+                                         sex=sex, 
+                                         birthday=birthday,
+                                         phone=contact_number, 
+                                         address=address)
         profile.save()
 
+        # patient = Patient.objects.get_or_create(profile=profile)
+        patient = Patient.objects.create(profile=profile)
+        
         current_date = datetime.now().date()
 
         if (relativedelta(current_date, datetime.strptime(birthday, '%Y-%m-%d').date())).years < 18:
@@ -59,7 +71,7 @@ def processPatientRegistration(request):
             msg.attach_alternative(html_content, "text/html")
             msg.send()
 
-            patient = Patient.objects.get_or_create(profile=profile)
+            
             guardian_email = request.POST['guardianEmail']
             patient.guardian_email = guardian_email
             patient.save()
@@ -94,14 +106,23 @@ def registerSocialPatientUser(provider, user_id, email, family_name, given_name)
         usertype = 'Patient'
 
         # Create a new user
-        user = User.objects.create_user(username=email, email=email, password=password, first_name=first_name,
+        user = User.objects.create_user(username=email, 
+                                        email=email, 
+                                        password=password, 
+                                        first_name=first_name,
                                         last_name=last_name)
         user.save()
 
         # Create a new profile
-        profile = Profile.objects.create(user=user, email=email, type=usertype, securityQuestion=security_question,
-                                            securityAnswer=security_answer, sex=sex, birthday=birthday,
-                                            phone=contact_number, address=address)
+        profile = Profile.objects.create(user=user, 
+                                         email=email, 
+                                         type=usertype, 
+                                         securityQuestion=security_question,
+                                         securityAnswer=security_answer, 
+                                         sex=sex, 
+                                         birthday=birthday,
+                                         phone=contact_number, 
+                                         address=address)
         profile.save()
 
         return True

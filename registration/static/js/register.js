@@ -68,7 +68,7 @@ $(".nextRegister").click(function(){
 function specMinDate() {
   const datelimit = new Date();
   datelimit.setFullYear(datelimit.getFullYear() - 20);
-  $('[type="date"]').attr('id', 'specBirthday').prop('max', function () {
+  $('[type="date"]').attr('id', 'birthday').prop('max', function () {
     return new Date(datelimit).toJSON().split('T')[0];
   });
 };
@@ -93,10 +93,10 @@ function lNumMinDate() {
   }).prop('min', function () {
     return new Date(dateMin).toJSON().split('T')[0];
   });
-  // $('[type="date"]').attr('id', 'specBirthday').prop('max', function () {
+  // $('[type="date"]').attr('id', 'birthday').prop('max', function () {
   //   return new Date(datelimit).toJSON().split('T')[0];
   // });
-  $('#specBirthday').prop('max', function () {
+  $('#birthday').prop('max', function () {
     return new Date(datelimit).toJSON().split('T')[0];
   });
 };
@@ -153,16 +153,16 @@ function changedDate(){
 function specDate(){
   const minBday = new Date();
   minBday.setFullYear(minBday.getFullYear() - 20);
-  const birthDate = document.getElementById("specBirthday").value;
-  let date = new Date(birthDate);
+  const birthDate = document.getElementById("birthday").value;
+  // let date = new Date(birthDate);
 
-    if (date > minBday) {
-      alert("Invalid birthday!");
-    }
+  //   if (date > minBday) {
+  //     alert("Invalid birthday!");
+  //   }
 }
 
 $('input[type=date]').change(function () {
-  if (document.getElementById("specBirthday")){
+  if (document.getElementById("birthday")){
   specDate();
   }else{
     changedDate();
