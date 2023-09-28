@@ -46,7 +46,8 @@ INSTALLED_APPS = [
     'journal.apps.JournalConfig',
     'steppingStones.apps.SteppingstonesConfig',
     'patientDirectory.apps.PatientdirectoryConfig',
-    'profileHub.apps.ProfilehubConfig', # new
+    'profileHub.apps.ProfilehubConfig',
+    'consultationNotes.apps.ConsultationnotesConfig', # new
 
     'allauth',
     'allauth.account',

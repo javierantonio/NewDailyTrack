@@ -1,0 +1,18 @@
+{% extends "specialistTemplate.html" %}
+{% load static %} 
+
+{% block link %}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<link rel="stylesheet" href="{% static 'consultation.css' %}">
+<script src="https://cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>
+{% endblock link %} 
+
+{% block content %}
+<div class="specjournal bg2">
+  {% include 'sidebar.html' %}
+  {% block notesContent %} 
+  {% endblock notesContent %}
+</div>
+
+{% endblock content %}

@@ -1,0 +1,30 @@
+<div class="specjournal-menu col-md-2">
+  <ul>
+    <br />
+
+    <li>
+      <h4 style="color: white; margin: 0px 0 20px 30px">📋 Notes</h4>
+    </li>
+
+    <br />
+
+    <li>
+      <!-- <?php if(@$_GET['q1']==1) echo 'active';?> -->
+      <div class="speccamenu">
+        <a href="{% url 'notes' %}"
+          ><i class="fa fa-pencil caf" aria-hidden="true"></i>
+          <span class="cas">Compose</span></a
+        >
+      </div>
+    </li>
+
+    <li>
+      <div class="speccamenu">
+        <a href="{% url 'notesEntries' %}"
+          ><i class="fa fa-archive caf" aria-hidden="true"></i>
+          <span class="cas">Patient Notes</span></a
+        >
+      </div>
+    </li>
+  </ul>
+</div>
