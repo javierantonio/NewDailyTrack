@@ -23,7 +23,7 @@
       <div class="card-body">
         <div class="d-flex flex-column align-items-center text-center">
           <img
-            src="https://bootdey.com/img/Content/avatar/avatar7.png"
+            src="https://static.vecteezy.com/system/resources/previews/009/292/244/original/default-avatar-icon-of-social-media-user-vector.jpg"
             alt="Admin"
             class="rounded-circle"
             width="150"
@@ -114,6 +114,7 @@
                 Appointments
               </button>
             </li>
+            {% if type == 'Patient'  %}
             <li class="nav-item" role="presentation">
               <button
                 class="nav-link"
@@ -128,6 +129,7 @@
                 Input Specialist Code
               </button>
             </li>
+            {% endif %}
             <li class="nav-item" role="presentation">
               <button
                 class="nav-link"
