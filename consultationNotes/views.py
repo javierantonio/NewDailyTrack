@@ -26,6 +26,7 @@ def notesHome(request):
         return redirect('landing')
     
 @login_required
+
 def viewEntries(request):
     if request.user.is_authenticated:
         userprofile = Profile.objects.get(user=request.user)
