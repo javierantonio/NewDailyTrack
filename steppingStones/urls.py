@@ -7,5 +7,6 @@ import login.views
 
 urlpatterns = [
     path('', views.steppingStoneStart, name='steppingStones'),
+    path('emoticard', views.emoticard, name='emoticard'),#for debugging purpose only
 
 ]

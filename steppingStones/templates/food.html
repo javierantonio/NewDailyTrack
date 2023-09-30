@@ -1,23 +1,25 @@
 {% extends 'patientTemplate.html' %}
 {% block title %}Coping Strategies{% endblock title %}
-{% block content %}
+
 {% load static %}
 
-<head>
-    <link rel="stylesheet" href='{% static 'css/animate.css' %}'>
-    <link rel="stylesheet" href='{% static 'css/steppingstones.css' %}'>
-<style>
+{% block link %}
+<!-- <head> -->
+    <link rel="stylesheet" href="{% static 'css/animate.css' %}">
+    <link rel="stylesheet" href="{% static 'css/steppingstones.css' %}">
+<!-- <style>
 
     .full-height{
         height: 100vh;
     }
 
-</style>
+</style> -->
+{% endblock link %}
 
-</head>
-<body>
-
-<div class="cp-foods bg full-height">
+<!-- </head>
+<body> -->
+    {% block content %}
+<div class="cp-foods bg">
 
     <div class="col-lg-12 align-items-center title" style="margin-bottom: 20px;">
         <h2 class="h-bold text-center" style="color:#deb500;">Category: Food</h2>

@@ -1,19 +1,24 @@
+{% extends 'patientTemplate.html' %}
 {% load static %}
 {% block title %}Emoticard{% endblock title %}
-{% block link %}<link rel="stylesheet" href='{% static 'css/emoticard.css' %}'>
+{% block link %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<link rel="stylesheet" href="{% static 'css/emoticard.css' %}">
     {% endblock link %}
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-    <div class="container chart col-lg-8">
+{% block content %}
+<div class="container">
+
+
+    <div class="chart">
 
         <canvas id="emoChart">
         </canvas>
 
     </div>
 
-    <div id="myTabContent" class="tab-content translation col-lg-4">
+    <div id="myTabContent" class="tab-content translation">
 
         <!-- Rounded tabs -->
         <ul id="emoTabs" role="tablist"
@@ -30,7 +35,7 @@
         <!-- Rounded tabs -->
 
         <!-- RESULTS TAB -->
-        <div id="results" role="tabpanel" aria-labelledby="results-tab" class="tab-pane fade px-4 py-5 show active">
+        <div id="results" role="tabpanel" aria-labelledby="results-tab" class="tab-pane fade show active results">
 
         <section id="mainEmotions">
             <h3>You are Feeling:</h3>
@@ -49,7 +54,7 @@
         </section>
 
             <div>
-                <p class="aaq" style="margin-left: 30px;margin-top:10px;">
+                <p class="aaq">
                     {{steppingStones.copingStrategyName}}
                 </p>
 
@@ -59,7 +64,7 @@
                 </div>
                 </div>
 
-                <p style="font-weight:lighter;">
+                <p id="description">
                     {{steppingStones.copingStrategyDesc}}
                 </p>
             </div>
@@ -73,7 +78,7 @@
 
           <ul class="list-group">
             <li class="list-group-item active">Stress Level: <span style="float:right;">{{ steppingStones.stressLevel }}</span></li>
-            <li class="list-group-item">Mood: <span style="float:right;">{{ steppingStones.moodLevel }}</span></li>
+            <li class="list-group-item">Mood: <span style="float:right;">{{ mood }}</span></li>
           </ul>
 
           <div id="accordion">
@@ -114,11 +119,13 @@
         </section>
         </div>
 
-        <button class="btn btn-info mx-auto">Confirm</button>
-        <button class="btn btn-outline-info">Download Results</button>
+        <a  href="{% url 'landing' %}">
+          <button class="btn btn-info mx-auto">Confirm</button>
+        </a>
+        <!-- <button class="btn btn-outline-info">Download Results</button> -->
 
     </div>
-
+  </div>
     <!-- <section class="action_btns">
         <button class="btn-info">Confirm</button>
         <button class="btn-info-outline">Download Results</button>
@@ -197,3 +204,4 @@ const emoChart = new Chart(ctx, {
 </script>
 
     <script src="{% static 'js/steppingstones.js' %}"></script>
+{% endblock content %}

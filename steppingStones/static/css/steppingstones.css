@@ -128,6 +128,7 @@ font-family: 'Raleway' !important;
     border-radius:20px;
     border:2px solid #a6b1bf;
     margin-top: 20px;
+    padding: 0;
 }
 
 .bottom_btn_set {
@@ -257,7 +258,6 @@ font-family: 'Raleway' !important;
     background-size: cover;
     width:100%;
     height:100%;
-    top:0px;
     left:0px;
     position:fixed;
   }

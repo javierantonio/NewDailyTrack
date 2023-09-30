@@ -11,6 +11,8 @@ word = []
 wordCategory = []
 keywordsToPush = []
 
+def emoticard(request):
+    return render(request, 'emoticard.html')
 
 def steppingStoneStart(request):
     if request.user.is_authenticated:
@@ -22,14 +24,14 @@ def steppingStoneStart(request):
                     request.session['food'] = int(request.POST.get('food').split('-')[0])
                     request.session['foodDesc'] = request.POST.get('food').split('-')[1]
                     # Processing of keywords
-                    anger = 0
-                    anticipation = 0
-                    joy = 0
-                    trust = 0
-                    fear = 0
-                    surprise = 0
-                    sadness = 0
-                    disgust = 0
+                    anger = 1
+                    anticipation = 1
+                    joy = 1
+                    trust = 1
+                    fear = 1
+                    surprise = 1
+                    sadness = 1
+                    disgust = 1
                     score = 0
                     for i in range(len(word)):
                         if wordCategory[i] == 'Anger':
@@ -167,6 +169,7 @@ def steppingStoneStart(request):
                     context = {
                         'keywords': keywords,
                         'steppingStones': steppingStones,
+                        'mood' : request.session['moodText']
                     }
                     request.session['stressLevel'] = None
                     request.session['mood'] = None
@@ -202,6 +205,7 @@ def steppingStoneStart(request):
                     return render(request, 'personal.html')
                 elif request.session['mood'] is None and request.session['stressLevel'] is not None:
                     request.session['mood'] = int(request.POST.get('mood').split('-')[0])
+                    request.session['moodText'] = request.POST.get('mood').split('-')[1]
                     return render(request, 'keywords.html')
                 elif request.session['stressLevel'] is None:
                     request.session['stressLevel'] = request.POST.get('stressLevel')
