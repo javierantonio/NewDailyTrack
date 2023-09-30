@@ -1,12 +1,6 @@
 {% extends 'journalBase.html' %}
 {% load static %}
-{% block link %}
-<!-- DataTables CSS -->
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
-<!-- DataTables JS -->
-<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
 
-    <link rel="stylesheet" href='{% static 'css/journal.css' %}'>
     <script>
         function confirmDelete(event, url) {
             event.preventDefault();
@@ -16,7 +10,7 @@
         }
     // Add updateTable function
     function updateTable() {
-        $.ajax({
+        jQuery.ajax({
             url: '{% url 'starredJournalEntry' %}', // Replace this with the URL to your endpoint that returns the updated data
             type: 'GET',
             dataType: 'json',
@@ -46,7 +40,7 @@
     function toggleStar(event, entry_id) {
         event.preventDefault();
         $.ajax({
-            url: '{% url 'starJournalEntry' %}',
+            url: '{% url "starJournalEntry" %}',
             data: {
                 'entry_id': entry_id,
                 'csrfmiddlewaretoken': '{{ csrf_token }}',
@@ -66,14 +60,13 @@
     </script>
 
     </script>
-{% endblock link %}
 {% block journalcontent %}
-<div class="col-md-8 mr-auto" style="background-color:transparent;">
+<div style="width:100%;background-color:transparent;">
       <div class="bich">
 <!-- ENTRIES AREA ENTRIES AREA WITH THE BIG TABLLLLEEEEEEEE -->
-            <div class="container my-4">
+            <div class="container">
                 <div class="row">
-                    <div class="col-md-6 mx-auto d-flex">
+                    <div class="col-md-12 mx-auto d-flex">
                         <input class="form-control" id="textSearch" placeholder="Search entries..." />
                     </div>
                 </div>
@@ -81,7 +74,7 @@
                 <table class="table mt-4" id="journalEntries">
                     <thead class="thead-dark text-center">
                         <tr>
-                            <th>Star</th>
+                            <!-- <th>Star</th> -->
                             <th>Title</th>
                             <th>Specialist Access</th>
                             <th>Created At</th>
@@ -91,11 +84,11 @@
                     <tbody class="text-center">
                         {% for entry in entries %}
                             <tr>
-                                <td>
+                                <!-- <td>
                                     <a title="{% if entry.isStarred == 1 %}isStarred{% else %}not isStarred{% endif %}" href="#" onclick="toggleStar(event, '{{ entry.id }}')">
                                         <i class="fa {% if entry.isStarred == 1 %} fa-star {% else %} fa-star-o {% endif %}" {% if entry.isStarred == 1 %}style=" color:orange" {% endif %} aria-hidden="true"></i>
                                     </a>
-                                </td>
+                                </td> -->
                                 <td>
             {#                      <a title="Click to open article" href="{% url 'journal_detail' entries.id %}">{{ entries.title }}</a>#}
                                     <a title="Click to open article" href="#">{{ entry.title }}</a>
@@ -113,7 +106,7 @@
                                 </td>
                                 <td>{{ entry.created_at}}</td>
                                 <td>
-                                    <a title="Delete Article" href="{% url 'delete_journalEntry' entry_id=entry.id %}" onclick="confirmDelete(event, '{% url 'delete_journalEntry' entry_id=entry.id %}')">
+                                    <a title="Delete Article" href="{% url 'delete_journalEntry' entry_id=entry.id %}" onclick="confirmDelete(event, '{% url 'delete_journalEntry' entry_id=entry.id|escapejs %}')">
                                         <i class="fa fa-trash" aria-hidden="true"></i>
                                     </a>
                                 </td>

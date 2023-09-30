@@ -1,89 +1,56 @@
-{% extends 'journalBase.html' %}
+{% extends 'journalBase.html' %} {% block journalcontent %}
 
-{% block content %}
-    {% block journalcontent %}
+<!--compose-->
+<form
+  style="width: 100%;"
+  name="form"
+  onSubmit="return validateForm()"
+  method="POST"
+>
+  {% csrf_token %}
 
-            <!--compose-->
-              <form style="margin:25px" name="form" onSubmit="return validateForm()" method="POST">
-                  {% csrf_token %}
+  <div class="form-group">
+    <label for="entryTitle" style="color: #e03b54">Title:</label>
+    <input
+      type="text"
+      name="entryTitle"
+      class="form-control"
+      id="entryTitle"
+      value="{{ journalEntry.title }}"
+      disabled="True"
+    />
+  </div>
 
-                <div class="form-group">
-                  <label for="entryTitle" style="color:#e03b54;">Enter Title:</label>
-                  <input type="text" name="entryTitle" class="form-control" id="entryTitle" value = "{{ journalEntry.title }}" disabled="True">
-                </div>
+  <div class="form-group">
+    <label for="journalContent" style="color: #e03b54"> Content: </label>
 
-                <div class="form-group">
+    <textarea
+      class="form-control"
+      id="journalContent"
+      name="journalContent"
+      disabled="True"
+    >
+{{ journalEntry.content|striptags }}</textarea
+    >
+  </div>
+</form>
 
-                  <label for="journalContent" style="color:#e03b54;">
-                    💭 Write your Entry:
-                  </label>
+<script>
+  $(function () {
+    //MODAL EVENTS
+    $(".journalRequest").click(function () {
+      var id = $(this).val();
+      // var jnid=$('#jnid'+id).text();
+      var specname = $("#specname" + id).text();
+      var notes = $("#notes" + id).text();
 
-                  <textarea class="form-control" id="journalContent" name="journalContent" disabled="True">{{ journalEntry.content|striptags }}</textarea>
+      $("#journalRequestModal").modal("show");
+      $("#specname").val(specname);
+      $("#notes").val(notes);
+      $("#journalid").val(id);
+    });
+    app.init();
+  });
+</script>
 
-                </div>
-
-              </form>
-
-                    <script>
-                      $(function() {
-                        //MODAL EVENTS
-                        $(".journalRequest").click(function() {
-                          var id = $(this).val();
-                          // var jnid=$('#jnid'+id).text();
-                          var specname = $('#specname' + id).text();
-                          var notes = $('#notes' + id).text();
-
-                          $('#journalRequestModal').modal('show');
-                          $('#specname').val(specname);
-                          $('#notes').val(notes);
-                          $('#journalid').val(id);
-                        })
-
-                        var app = (function() {
-                          var checkboxInput = ' input[type="checkbox"]',
-                            filters = {},
-                            rowData = [],
-                            values = [],
-                            key, value, show, length, divId;
-
-                          var init = function() {
-                            app.table = $('#journalEntries').DataTable({
-                              "dom": "lrtip" // hide default DataTable search box
-                            });
-
-                            $("#textSearch").on('keyup change', function() {
-                              console.log('text search for: ' + $(this).val());
-                              app.table.search($(this).val()).draw();
-                            });
-
-                            $(checkboxInput).prop('checked', false);
-
-                            $(checkboxInput).change(function() {
-                              var that = $(this);
-                              if (that.hasClass('all')) {
-                                $('#' + getFilterCategoryId(that) + checkboxInput).prop('checked', that.prop('checked'));
-                              } else {
-                                var allInput = $('#' + getFilterCategoryId(that) + checkboxInput + ':first');
-                                if (allInput.is(':checked')) {
-                                  allInput.prop('checked', false);
-                                }
-                              }
-                              poulateAndApplyFilters();
-                            });
-                          };
-
-                          return {
-                            init: init
-                          };
-                        })();
-
-                        app.init();
-
-                      });
-                    </script>
-
-    {% endblock journalcontent %}
-    {{ block.super }}
-{% endblock %}
-
-
+{% endblock journalcontent %} {{ block.super }}

@@ -9,4 +9,5 @@ urlpatterns = [
     path('', include('steppingStones.urls')),
     path('', include('patientDirectory.urls')),
     path('', include('profileHub.urls')),
+    path('', include('consultationNotes.urls')),
 ]
