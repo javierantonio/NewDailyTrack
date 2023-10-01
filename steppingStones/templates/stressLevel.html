@@ -1,0 +1,111 @@
+{% extends 'patientTemplate.html' %}
+{% load static %}
+{% block title %}
+    Coping Strategies
+{% endblock title %}
+
+{% block link %}
+    <link rel="stylesheet" href="{% static 'css/steppingstones.css' %}">
+{% endblock link %}
+
+{% block style %}
+    input[type=radio] {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+{% endblock style %}
+
+{% block content %}
+
+    <div class="container col-lg-8 mx-auto ">
+
+        <div class="col-lg-12 align-items-center title">
+            <h3 class="h-bold text-center" style="color:#36d3d9;">Rate your current stress level</h3>
+        </div>
+
+        <form method="POST" id="stress" class="ml-10">
+
+            {% csrf_token %}
+
+            <div class="row d-flex align-items-center col-lg-10 mx-auto">
+
+              <div class="button" style="background-color: #8cff69;">
+                <input name="stressLevel" type="radio" id="0" value="00" data-toggle="tooltip"
+                data-placement="bottom" title="I am not stressed as of now.    😌😊" />
+                <label class="btn btn-default" for="0">0</label>
+              </div>
+
+              <div class="button" style="background-color: #95f977;">
+                <input name="stressLevel" type="radio" id="1" value="01" required />
+                <label class="btn btn-default" for="1">1</label>
+              </div>
+
+              <div class="button" style="background-color: #a9fc90;">
+                <input name="stressLevel" type="radio" id="2" value="02"/>
+                <label class="btn btn-default" for="2">2</label>
+              </div>
+
+              <div class="button" style="background-color: #c6fc90;">
+                <input name="stressLevel" type="radio" id="3" value="03"/>
+                <label class="btn btn-default" for="3">3</label>
+              </div>
+
+              <div class="button" style="background-color: #e9fc90;">
+                <input name="stressLevel" type="radio" id="4" value="04"/>
+                <label class="btn btn-default" for="4">4</label>
+              </div>
+
+              <div class="button" style="background-color: #f2fc90;">
+                <input name="stressLevel" type="radio" id="5" value="05" data-toggle="tooltip"
+                data-placement="bottom" title="Could be worse, could be better."/>
+                <label class="btn btn-default" for="5">5</label>
+              </div>
+
+              <div class="button" style="background-color: #fcf790;">
+                <input name="stressLevel" type="radio" id="6" value="06"/>
+                <label class="btn btn-default" for="6">6</label>
+              </div>
+
+              <div class="button" style="background-color: #fcea90;">
+                <input name="stressLevel" type="radio" id="7" value="07"/>
+                <label class="btn btn-default" for="7">7</label>
+              </div>
+
+              <div class="button" style="background-color: #fcd190;">
+                <input name="stressLevel" type="radio" id="8" value="08"/>
+                <label class="btn btn-default" for="8">8</label>
+              </div>
+
+              <div class="button" style="background-color: #fc9e79;">
+                <input name="stressLevel" type="radio" id="9" value="09"/>
+                <label class="btn btn-default" for="9">9</label>
+              </div>
+
+              <div class="button" style="background-color: #fc9179;">
+                <input name="stressLevel" type="radio" id="10" value="10" data-toggle="tooltip"
+                data-placement="bottom" title="I am very stressed right now! 🤬😭"/>
+                <label class="btn btn-default" for="10">10</label>
+              </div>
+
+          </div>
+
+            <div class="row stress_btn_set col-md-12 mx-auto">
+              <button type="button" id="prevBbtn" class="btn-circle btn-xl" style="background-color:#b9bbbd;"><i class="fa-solid fa-arrow-left" style="color:#d7d9db;" disabled></i></button>
+
+              <div class="progress col-4">
+                <div class="progress-bar progress-bar-striped progress-bar-animated p-0" role="progressbar"
+                aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="width: 12.5%"></div>
+              </div>
+
+                <button id="nextbtn" type="submit" class="btn btn-light btn-circle"><i class="fa-solid fa-arrow-right"></i></button>
+            </div>
+
+        </form>
+    </div>
+
+
+    <script src="{% static 'js/steppingstones.js' %}"></script>
+
+{% endblock content %}

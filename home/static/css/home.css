@@ -1,0 +1,130 @@
+
+@font-face {
+    font-family: 'Raleway';
+    font-style: normal;
+    font-weight: 400;
+    src: url(https://fonts.gstatic.com/s/raleway/v22/1Ptxg8zYS_SKggPN4iEgvnHyvveLxVvaorCIPrE.woff2) format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  }
+  @font-face {
+    font-family: 'Lato';
+    font-style: normal;
+    font-weight: 400;
+    src: url(https://fonts.gstatic.com/s/lato/v20/S6uyw4BMUTPHjx4wXg.woff2) format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  }
+  
+  body{
+    background-color: white;
+    font-family: 'Lato' !important;
+    color: rgba(61, 61, 61, 0);
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Raleway' !important;
+  }
+
+.welcomebanner{
+    text-align:center;
+    color:#05e0d2;
+    font-weight: 600;
+    margin-top: 60px;
+}
+
+.title{
+    color:#a3a3a3;
+    margin-top: 15px;
+    text-align:center;
+}
+
+.home-selection{
+    margin-top: 60px; 
+    margin-left: +60px;
+  }
+
+.no{
+    margin-left: -30px;
+    margin-right: -30px;
+}
+
+.btnHome{
+    height: 250px;
+    width: 260px;
+    border-radius: 20px;
+    border:8px solid #0000;
+    font-weight: bolder;
+    box-shadow: 7px 7px 5px #cfcfcf;
+    padding-top: 20px;
+    cursor: pointer;
+   }
+
+   #profile_btn {
+    background:
+     linear-gradient(white,white) padding-box,
+     linear-gradient(#6ecfff,#2c6ee8) border-box;
+   background-color: #cce9ff;
+  
+  }
+   
+   #sstones_btn {
+     background:
+      linear-gradient(white,white) padding-box,
+      linear-gradient(#6fe8ac,#0dbf6f) border-box;
+    background-color: #ccffd0;
+   
+   }
+   
+   #journal_btn {
+     background:
+      linear-gradient(white,white) padding-box,
+      linear-gradient(#ffabae,#ff4760) border-box;
+    background-color: #ffcccc;
+   }
+
+   .btn-titles{
+    margin-top:20px;
+    color:#666666;
+   }
+
+   .big {
+    width: 50px;
+    height: 50px;
+    font-size: 80px;
+    text-align: center;
+    margin: 20px;
+    -webkit-transition: all .1s ease-in-out;
+      -moz-transition: all .1s ease-in-out;
+      transition: all .1s ease-in-out;
+      margin-top: -30px;
+   }
+   
+   #profile_btn .big{
+    color: #4281f5;
+   }
+   
+   #sstones_btn .big{
+    color: #56c787;
+   }
+   
+   #journal_btn .big{
+    color: #f57d81;
+   }
+   
+   #profile_btn .big:hover, .big:focus{
+    font-size: 85px;
+    color: #2d5eba;
+    margin-right: 75px;
+   }
+   
+   #sstones_btn .big:hover, .big:focus{
+    font-size: 85px;
+    color: #36915d;
+    margin-right: 75px;
+   }
+   
+   #journal_btn .big:hover, .big:focus{
+    font-size: 85px;
+    color: #eb4b51;
+    margin-right: 75px;
+   }
+   

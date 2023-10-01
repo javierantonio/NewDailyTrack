@@ -1,0 +1,90 @@
+{% extends 'patientTemplate.html' %}
+{% load static %}
+{% block title %}
+    Coping Strategies - Actions
+{% endblock title %}
+
+{% block link %}
+    <link rel="stylesheet" href="{% static 'css/steppingstones.css' %}">
+{% endblock link %}
+
+{% block content %}
+<div class="cp-actions bg full-height">
+
+    <div class="col-lg-12 align-items-center title" style="margin-bottom: 20px;">
+        <h2 class="h-bold text-center" style="color:#de5823;">Category: Actions</h2>
+        <p class=" text-center" style="color:#6e6e6e;">How did you deal with feeling
+        <span class="latest_mood">terrible</span> today?</p>
+    </div>
+    <br>
+
+    <div class="col-lg-10 mx-auto">
+    <form method="POST" id="actions">
+        {% csrf_token %}
+
+        <div class="copingstrategies tab" style="position: relative;">
+
+            <input type="radio" id="pace" name="actions" class="input-hidden" value="12-Pace Back and Forth" />
+        <label for="pace">
+            <img src="{% static 'img/coping_strats/actions/pace.png' %}" alt="Pace Back and Forth" />
+            <br><br>
+        </label>
+
+        <input type="radio" id="meditate" name="actions" class="input-hidden" value="4-Pray / Meditate" />
+        <label for="meditate">
+            <img src="{% static 'img/coping_strats/actions/meditate.png' %}" alt="Pray / Meditate" />
+            <br><br>
+        </label>
+
+        <input type="radio" id="exercise" name="actions" class="input-hidden" value="8-Exercise" />
+        <label for="exercise">
+            <img src="{% static 'img/coping_strats/actions/exercise.png' %}" alt="Exercise" />
+            <br><br>
+        </label>
+
+        <input type="radio" id="break" name="actions" class="input-hidden" value="20-Break Objects" />
+        <label for="break">
+            <img src="{% static 'img/coping_strats/actions/break.png' %}" alt="Break Objects" />
+            <br><br>
+        </label>
+
+        <input type="radio" id="chores" name="actions" class="input-hidden" value="4-Do Chores / Tasks" />
+        <label for="chores">
+            <img src="{% static 'img/coping_strats/actions/chores.png' %}" alt="Do Chores / Tasks" />
+            <br><br>
+        </label>
+
+        <input type="radio" id="substances" name="actions" class="input-hidden" value="20-Use Substances" />
+        <label for="substances">
+            <img src="{% static 'img/coping_strats/actions/substance.png' %}" alt="Use Substances" />
+            <br><br>
+        </label>
+
+        <input type="radio" id="nothing_as_of_now" name="actions" class="input-hidden" value="0-Nothing" />
+        <label for="nothing_as_of_now">
+            <img src="{% static 'img/coping_strats/actions/none.png' %}" alt="Nothing"/>
+            <br><br>
+        </label>
+        <input type="text" class="form-control" hidden name="a-final" value="" id="a-final">
+        </div>
+
+        <br>
+
+        <section class="bottom_btn_set" style="position: static;">
+            <button type="button" onclick="history.go(-1)" id="prevBbtn" class="btn btn-light btn-circle btn-xl">
+                <i class="fa-solid fa-arrow-left"></i></button>
+
+            <div class="progress col-4">
+                <div class="progress-bar progress-bar-striped progress-bar-animated p-0" role="progressbar"
+                aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="width: 87.5%;"></div>
+            </div>
+
+            <button id="nextbtn" class="btn btn-light btn-circle btn-xl"><i class="fa-solid fa-arrow-right"></i></button>
+        </section>
+    </form>
+</div>
+</div>
+
+    <script src="{% static 'js/steppingstones.js' %}"></script>
+
+{% endblock content %}

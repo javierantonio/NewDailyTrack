@@ -1,0 +1,78 @@
+/* latin */
+@font-face {
+    font-family: 'Raleway';
+    font-style: normal;
+    font-weight: 400;
+    src: url(https://fonts.gstatic.com/s/raleway/v22/1Ptxg8zYS_SKggPN4iEgvnHyvveLxVvaorCIPrE.woff2)
+      format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+      U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215,
+      U+FEFF, U+FFFD;
+  }
+  @font-face {
+    font-family: 'Lato';
+    font-style: normal;
+    font-weight: 400;
+    src: url(https://fonts.gstatic.com/s/lato/v20/S6uyw4BMUTPHjx4wXg.woff2)
+      format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+      U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215,
+      U+FEFF, U+FFFD;
+  }
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Raleway' !important;
+}
+
+body{
+    padding: 0;
+    margin: 0;
+    overflow-x: hidden;
+}
+
+.cont{
+    background-color: white;
+    height: 100vh;
+
+}
+
+.cont2 {
+    background-color: white;
+    height: 100vh;
+    padding: 20px;
+}
+
+#sidebar-patlist {
+    float: left;
+    background-color: white;
+    width: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    height: 80vh;
+  }
+
+.btnPatList{
+    min-width:15rem;
+    padding:10px; 
+    border-radius: 20px; 
+    border: 3px solid #57c4ff;
+    background-color: white;
+}
+
+.modal-header{
+    background-color:#03a3a0;
+    color:white;
+}
+
+.filtersymbol{
+    float:right;
+    border-radius:3px;
+    padding:0;
+    background-color:transparent;
+}
+

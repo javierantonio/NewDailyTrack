@@ -1,0 +1,203 @@
+{% extends "base.html" %}
+{% load static %}
+
+//add form validations on email and confirm password?
+
+
+<html>
+  <head>
+      <!-- Required meta tags -->
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <!--Bootstrap CSS-->
+      <link href='fontawesome/css/fontawesome.css' rel="stylesheet" type="text/css">
+      <link href='fontawesome/css/brands.css' rel="stylesheet" type="text/css">
+      <link href='fontawesome/css/solid.css' rel="stylesheet" type="text/css">
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+      <!-- <link rel="stylesheet" href="{% static 'css/aeza.css' %}"> -->
+      <!-- Delete after django -->
+      <link rel="stylesheet" href="fontawesome/css/all.min.css">
+      <link rel="stylesheet" href='css/registration.css'>
+      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+  <style>
+
+  </style>
+  </head>
+  <body>
+
+
+{% block title %}
+User Registration
+{% endblock title %}
+
+{% block content %}
+
+      <div class="row justify-content-center">
+
+      <div class="col-xl-8 col-lg-8 col-md-8">
+
+          <div class="card o-hidden border-20 shadow-lg my-5" >
+              <div class="card-body p-0">
+                  <!-- Nested Row within Card Body -->
+                  <div class="row">
+                      <div class="col-lg-6 d-none d-lg-block pams-login">
+
+                      </div>
+                      <div class="col-lg-6">
+                          <div class="p-5">
+                              <div class="text-center">
+                                  <img src="{% static 'img/logo.png' %}" alt="logo" class="logo">
+                                  <h4 class="reg_title">User Registration</h4>
+                              </div>
+
+
+                              <!--PAGE 1-->
+                                <form role="form" method="post">
+
+                                    {% csrf_token %}
+
+                                  <!--Email, password, first name, last name, sex, bday, cnum -->
+                                  <div id="registerPage1">
+                                      <div class="form-group">
+                                          <label for="email">E-mail Address:</label>
+                                          <input type="email" class="form-control form-control-user"
+                                              id="email" name="email" placeholder="ex. juandelacruz34@example.com" required>
+                                      </div>
+                                      <div class="form-group">
+                                          <label for="password">Password:</label>
+                                          <input type="password" class="form-control form-control-user"
+                                              id="password" name="password" placeholder="*******" required>
+                                      </div>
+                                      <div class="form-group">
+                                          <label for="confirmPassword">Confirm Password:</label>
+                                          <input type="password" class="form-control form-control-user"
+                                              id="confirmPassword" name="confirmPassword" placeholder="*******" required>
+                                            <span id="passwordMatchError" style="display:none; color:red;">Passwords do not match</span>
+                                      </div>
+
+                                      <hr>
+                                        <div class="form-group">
+                                          <label for="newSecQuestion">For security reasons, please set your security question:</label>
+                                          <select class="form-control" id="securityQuestion" name="securityQuestion" required>
+                                            <option value="" selected hidden>Select a security question</option>
+                                            <option value="What is your mother's maiden name?">What is your mother's maiden name?</option>
+                                            <option value="What is the name of your first pet?">What is the name of your first pet?</option>
+                                            <option value="What was your first car?">What was your first car?</option>
+                                            <option value="What elementary school did you attend?">What elementary school did you attend?</option>
+                                            <option value="What is the name of the town where you were born?">What is the name of the town where you were born?</option>
+                                          </select>
+
+                                          <input type="text" class="form-control form-control-user" id="securityAnswer" name="securityAnswer"
+                                          placeholder="Enter your answer here" style="margin: 15px 0 20px 0;">
+
+                                      </div>
+                                    </div>
+
+
+                                    <!--PAGE 2-->
+                                    <div id="registerPage2" style="display:none">
+                                      <div class="form-group">
+                                            <label for="firstName">First Name:</label>
+                                            <input type="text" class="form-control form-control-user"
+                                                id="firstName" name="firstName" placeholder="Vien" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="lastName">Last Name:</label>
+                                            <input type="text" class="form-control form-control-user"
+                                                id="lastName" name="lastName" placeholder="ex. de la Serna" required>
+                                        </div>
+
+                                        <div class="form-group">
+                                          <label for="birthday">Birthdate:</label>
+                                          <input type="date" class="form-control form-control-user input-daterange"
+                                              id="birthday" name="birthday" placeholder="mm/dd/yyyy" required>
+                                        </div>
+
+                                        <div class="form-group">
+                                          <label for="sex">Sex:</label>
+                                          <select class="form-control" id="sex" name="sex" required>
+                                            <option value="" selected hidden>--</option>
+                                            <option value="male">Male</option>
+                                            <option value="female">Female</option>
+                                            <option value="other">Other</option>
+                                          </select>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="contactNumber">Contact Number:</label>
+                                            <input type="text" class="form-control form-control-user"
+                                                id="contactNumber" name="contactNumber" placeholder="Contact Number" required>
+                                        </div>
+
+                                        <div class="form-group" id="guardianEmailForm">
+                                        </div>
+
+                                        <div class="form-group">
+                                          <label for="address">Address:</label>
+                                          <input type="text" class="form-control form-control-user"
+                                              id="address" name="address" placeholder="Type in your address..." required>
+                                        </div>
+
+                                        <button id="prevRegister" class="btn-light2 btn-circle2 btn-xl2 prevRegister">
+                                          <i class="fa-solid fa-arrow-left"></i>
+                                        </button>
+
+                                        <button type="submit" class="btn btn-info btn-user btn-block">Register</button>
+
+                                        </div>
+
+                                        <button id="nextRegister" class="btn-light2 btn-circle2 btn-xl2 nextRegister">
+                                          <i class="fa-solid fa-arrow-right"></i>
+                                        </button>
+                                        <br>
+                                        <p align="center"><a href="{% url 'loginPage' %}">Login instead?</a></p>
+                                        
+                                        {% load socialaccount %}
+                                        <a href="{% provider_login_url 'google' %}">Login With Google</a>
+
+                                    </div>
+                                  </form>
+
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+    </body>
+
+
+      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+      <script src="{% static 'js/register.js' %}"></script>
+<!--      <script src="{% static 'js/auth.js' %}"></script>-->
+      <!---->
+      <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+      <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+        <script>
+
+            document.getElementById("submit").disabled = true;
+            document.getElementById("nextRegister").disabled = true;
+            function validatePassword() {
+                var password = document.getElementById("password").value;
+                var confirmPassword = document.getElementById("confirmPassword").value;
+                if (password != confirmPassword) {
+                    document.getElementById("passwordMatchError").style.display = "block";
+                    //get the submit button and disable it
+                    document.getElementById("submit").disabled = true;
+                    document.getElementById("nextRegister").disabled = true;
+                }
+                else {
+                    document.getElementById("passwordMatchError").style.display = "none";
+                    document.getElementById("submit").disabled = false;
+                    document.getElementById("nextRegister").disabled = false;
+                }
+            }
+            confirmPassword.onkeyup = validatePassword;
+
+        </script>
+
+{% endblock content %}

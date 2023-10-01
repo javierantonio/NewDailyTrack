@@ -1,0 +1,91 @@
+{% extends 'patientTemplate.html' %}
+{% load static %}
+
+{% block title %}
+    Coping Strategies - Social
+{% endblock title %}
+
+{% block link %}
+    <link rel="stylesheet" href="{% static 'css/steppingstones.css' %}">
+{% endblock link %}
+
+{% block content %}
+<div class="cp-social bg">
+
+    <div class="col-lg-12 align-items-center title" style="margin-bottom: 20px;">
+        <h2 class="h-bold text-center" style="color:#4031e8;">Category: Social</h2>
+        <p class=" text-center" style="color:#6e6e6e;">How did you deal with feeling
+        <span class="latest_mood">terrible</span> today?</p>
+    </div>
+    <br>
+
+    <div class="col-lg-10 mx-auto">
+    <form method="POST" id="social">
+	{% csrf_token %}
+
+        <div class="copingstrategies tab" style="position: relative;">
+
+        <input type="radio" id="avoid" name="social" class="input-hidden" value="20-Avoid People" />
+        <label for="avoid">
+            <img src="{% static 'img/coping_strats/social/avoid.png' %}" alt="Avoid People" />
+            <br><br>
+        </label>
+
+        <input type="radio" id="goout" name="social" class="input-hidden" value="8-Go Out with Friends" />
+        <label for="goout">
+            <img src="{% static 'img/coping_strats/social/goout.png' %}" alt="Go Out with Friends" />
+            <br><br>
+        </label>
+
+        <input type="radio" id="talk" name="social" class="input-hidden" value="4-Talk to Trusted Person" />
+        <label for="talk">
+            <img src="{% static 'img/coping_strats/social/talk.png' %}" alt="Talk to Trusted Person" />
+            <br><br>
+        </label>
+
+        <input type="radio" id="family" name="social" class="input-hidden" value="8-Get Support From Family" />
+        <label for="family">
+            <img src="{% static 'img/coping_strats/social/family.png' %}" alt="Get Support From Family" />
+            <br><br>
+        </label>
+
+        <input type="radio" id="socpost" name="social" class="input-hidden" value="12-Post on Social Media" />
+        <label for="socpost">
+            <img src="{% static 'img/coping_strats/social/poster.png' %}" alt="Post on Social Media" />
+            <br><br>
+        </label>
+
+        <input type="radio" id="rant" name="social" class="input-hidden" value="16-Rant" />
+        <label for="rant">
+            <img src="{% static 'img/coping_strats/social/rant.png' %}" alt="Rant" />
+            <br><br>
+        </label>
+
+        <input type="radio" id="nothing_as_of_now" name="social" class="input-hidden" value="0-None" />
+        <label for="nothing_as_of_now">
+            <img src="{% static 'img/coping_strats/social/none.png' %}" alt="None" />
+            <br><br>
+        </label>
+        <input type="text" class="form-control" hidden name="so-final" value="" id="so-final">
+        </div>
+
+        <br>
+
+        <section class="bottom_btn_set" style="position: static;">
+            <button type="button" onclick="history.go(-1)" id="prevBbtn" class="btn btn-light btn-circle btn-xl">
+                <i class="fa-solid fa-arrow-left"></i></button>
+
+            <div class="progress col-4">
+                <div class="progress-bar progress-bar-striped progress-bar-animated p-0" role="progressbar"
+                aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="width: 62.5%"></div>
+            </div>
+
+            <button id="nextbtn" class="btn btn-light btn-circle btn-xl"><i class="fa-solid fa-arrow-right"></i></button>
+        </section>
+    </form>
+</div>
+</div>
+
+    <script src="{% static 'js/steppingstones.js' %}"></script>
+
+{% endblock content %}

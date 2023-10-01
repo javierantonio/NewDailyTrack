@@ -1,0 +1,91 @@
+{% extends 'patientTemplate.html' %}
+{% load static %}
+{% block title %}
+    Coping Strategies - Sleep
+{% endblock title %}
+
+{% block link %}
+    <link rel="stylesheet" href="{% static 'css/steppingstones.css' %}">
+{% endblock link %}
+
+{% block content %}
+{% load static %}
+
+<div class="cp-sleep bg">
+
+    <div class="col-lg-12 align-items-center title" style="margin-bottom: 20px;">
+        <h2 class="h-bold text-center" style="color:#34c952;">Category: Sleep</h2>
+        <p class=" text-center" style="color:#6e6e6e;">How did you deal with feeling
+        <span class="latest_mood">terrible</span> today?</p>
+    </div>
+    <br>
+
+    <div class="col-lg-10 mx-auto">
+    <form method="POST" id="sleep">
+	{% csrf_token %}
+
+        <div class="copingstrategies tab" style="position: relative;">
+
+            <input type="radio" id="sleepalot" name="sleep" class="input-hidden" value="20-Sleep a Lot" />
+            <label for="sleepalot">
+                <img src="{% static 'img/coping_strats/sleep/sleep.png' %}" alt="Sleep a Lot" />
+                <br><br>
+            </label>
+
+            <input type="radio" id="tired" name="sleep" class="input-hidden" value="16-Feeling Tired After Sleeping" />
+            <label for="tired">
+                <img src="{% static 'img/coping_strats/sleep/tired.png' %}" alt="Feeling Tired After Sleeping" />
+                <br><br>
+            </label>
+
+            <input type="radio" id="toy" name="sleep" class="input-hidden" value="12-Sleeping with a Toy" />
+            <label for="toy">
+                <img src="{% static 'img/coping_strats/sleep/toy.png' %}" alt="Sleeping with a Toy" />
+                <br><br>
+            </label>
+
+            <input type="radio" id="companion" name="sleep" class="input-hidden" value="8-Sleep with a Companion" />
+            <label for="companion">
+                <img src="{% static 'img/coping_strats/sleep/companion.png' %}" alt="Sleep with a Companion" />
+                <br><br>
+            </label>
+
+            <input type="radio" id="nosleep" name="sleep" class="input-hidden" value="20-Sleep with a Companion" />
+            <label for="nosleep">
+                <img src="{% static 'img/coping_strats/sleep/nosleep.png' %}" alt="Sleep with a Companion" />
+                <br><br>
+            </label>
+
+            <input type="radio" id="crysleep" name="sleep" class="input-hidden" value="4-Cry Yourself to Sleep" />
+            <label for="crysleep">
+                <img src="{% static 'img/coping_strats/sleep/cry.png' %}" alt="Cry Yourself to Sleep" />
+                <br><br>
+            </label>
+
+            <input type="radio" id="nothing_as_of_now" name="sleep" class="input-hidden" value="0-None" />
+            <label for="nothing_as_of_now">
+                <img src="{% static 'img/coping_strats/sleep/none.png' %}" alt="None" />
+                <br><br>
+            </label>
+            <input type="text" class="form-control" hidden name="sl-final" value="" id="sl-final">
+        </div>
+
+        <br>
+
+        <section class="bottom_btn_set" style="position: static;">
+            <button type="button" onclick="history.go(-1)" id="prevBbtn" class="btn btn-light btn-circle btn-xl">
+                <i class="fa-solid fa-arrow-left"></i></button>
+
+            <div class="progress col-4">
+                <div class="progress-bar progress-bar-striped progress-bar-animated p-0" role="progressbar"
+                aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="width: 75%"></div>
+            </div>
+
+            <button id="nextbtn" class="btn btn-light btn-circle btn-xl"><i class="fa-solid fa-arrow-right"></i></button>
+        </section>
+    </form>
+</div>
+</div>
+
+    <script src="{% static 'js/steppingstones.js' %}"></script>
+{% endblock content %}

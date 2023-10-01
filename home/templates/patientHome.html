@@ -1,0 +1,41 @@
+{% extends "patientTemplate.html" %}
+{% load static %}
+{% block title %}Home{% endblock title %}
+{% block content %}
+
+    <div class="container">
+        <h3 class="h-bold welcomebanner">Welcome back, <span class="fname">{{ user.first_name }}</span>!</h3>
+        <h4 class="h-xlight title">What would you like to do today?</h4>
+
+    </div>
+
+    <div class="d-flex justify-content-center align-items-center home-selection">
+		<div class="col-sm-3 col-md-3 no">
+            <a href="{% url 'patientHub' %}">
+        <button id="profile_btn" class="btnProfile btnHome box text-center wow fadeInUp " data-wow-delay="0.2s">
+            <i class="fa fa-user-circle fa-fw mr-1 profile bigger"></i>
+  			<p class="btn-titles">User's Profile</p>
+        </button>
+            </a>
+		</div>
+
+		<div class="col-sm-3 col-md-3 no">
+            <a href="{% url 'steppingStones' %}">
+        <button id="sstones_btn" class="btnSteppingStones btnHome box text-center wow fadeInUp" data-wow-delay="0.2s">
+			<i class="fa fa-list-alt fa-fw mr-1 steppingstones bigger"></i>
+			<p class="btn-titles">Stepping Stones</p>
+        </button>
+            </a>
+		</div>
+
+		<div class="col-sm-3 col-md-3 no">
+        <a href = "{% url 'journal' %}">
+            <button id="journal_btn" class="btnJournal btnHome box text-center wow fadeInUp" data-wow-delay="0.2s">
+			<i class="fa fa-book fa-fw mr-1 journal bigger"></i>
+			<p class="btn-titles">Journal</p>
+            </button>
+        </a>
+		</div>
+	</div>
+
+{% endblock content %}

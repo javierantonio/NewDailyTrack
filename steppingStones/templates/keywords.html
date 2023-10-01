@@ -1,0 +1,353 @@
+{% extends 'patientTemplate.html' %}
+{% load static %}
+{% block title %}Keywords{% endblock title %}
+{% block link %}<link rel="stylesheet" href="{% static 'css/steppingstones.css' %}">
+{% endblock link %}
+{% block style %}
+.title{
+    margin: 70px 0;
+  }
+
+  .categories {
+    width: 250px;
+    margin: 0px -10px 0 -10px;
+    display: block;
+  }
+
+  .keywords_container{
+    margin: 55px 0 0 325px;
+  }
+
+  .buttonhug{
+    display:flex;
+    margin-left: -100px;
+    margin-right: 100px;
+    margin-top: -20px;
+  }
+
+  .buttonhug2 {
+    display:flex;
+  }
+
+  .cat {
+    margin: 4px;
+    background-color: white;
+    overflow: hidden;
+    float: left;
+    border-radius: 50px;
+    border: 1px solid white;
+    display: block;
+    cursor: pointer;
+    box-shadow: 3px 3px 4px #cfcfcf;
+    -webkit-transition: all .1s ease-in-out;
+    -moz-transition: all .1s ease-in-out;
+    transition: all .1s ease-in-out;
+    cursor: pointer; /* Pointer/hand icon */
+    width: 150px; /* Set a width if needed */
+  }
+
+  .cat label {
+    float: left; line-height: 3.0em;
+    width: 150px; height: 2.5em;
+    color: #494949;
+  }
+
+  .cat label span {
+    text-align: center;
+    display: block;
+    color: #494949;
+    margin-top: 5px 5px 0 0 ;
+  }
+
+  .cat label input {
+    position: absolute;
+    display: none;
+    color: #494949 !important;
+  }
+{#  /* selects all of the text within the input element and changes the color of the text */#}
+{#  .cat label input + span{color: rgb(85, 85, 85);font-weight: bold;}#}
+
+
+{#  /* This will declare how a selected input will look giving generic properties */#}
+  .cat input:checked + span {
+      color: white;
+  }
+
+  .sadness{
+    border: 3px solid #5186f0;
+    cursor: pointer;
+  }
+
+  .sadness input:checked + span{
+    border-radius: 50px;
+    width: 150px;
+    color: white;
+    background-color: #2968e6;
+    box-shadow: inset 3px 3px 4px #0a3894;
+  }
+
+  .bottom_btn_set {
+    margin-top: 70px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    vertical-align: bottom;
+    font-size: 15px;
+}
+
+.fa-arrow-left, .fa-arrow-right {
+    font-size: 20px;
+    color: grey;
+    margin: none;
+  }
+
+  .btn-circle,.btn-xl {
+    padding: 20px;
+    background-color: white;
+    border-radius: 55px;
+    border: 1px solid #d6d6d6;
+    font-size: 10px;
+    text-align: center;
+    box-shadow: 5px 5px 5px #cfcfcf;
+    margin: -25px 50px 100px 50px;
+  }
+
+
+  .btn-light {
+    background-color: #ffffff;
+    box-shadow: 3px 3px 4px #cfcfcf;
+    outline: none;
+  }
+
+  .btn-light:hover{
+    background-color: #f0f0f0;
+    box-shadow: 3px 3px 4px #cfcfcf;
+    outline: none;
+  }
+
+  .btn-light:focus, .btn:focus, .btn-circle:focus, .btn-xl:focus{
+    background-color: white;
+    box-shadow: inset 3px 4px 5px #cfcfcf;
+    color: white;
+    border: none;
+    outline: 2px solid rgb(37, 220, 240);
+  }
+
+  #prevBbtn, #nextBtn {
+    width: 60px;
+    height: 60px;
+  }
+  .progress-bar{
+    padding: 0 !important;
+}{% endblock style %}
+{% block content %}
+    <div class="container col-lg-12 mx-auto">
+
+        <div class="col-lg-12 align-items-center title">
+            <h3 class="h-bold text-center" style="color:#36d3d9;">Keywords to your Mood</h3>
+            <p class="h-xlight text-center" style="color:#a3a3a3;">Pick at least 1 item from below (5 words recommended).</p>
+        </div>
+
+    <div class="container keywords_container mx-auto">
+
+  <!-- <div class="wow fadeInUp" data-wow-delay="0.2s"> -->
+  <form method="POST" class="container">
+      {% csrf_token %}
+
+  <div class="buttonhug col-lg-10 mx-auto">
+    <section class="categories">
+      <div class="cat sadness">
+        <label>
+            <input type="checkbox" id="amazement" name="keywords" value="03-Amazement-Surprise"><span>Amazement</span>
+        </label>
+      </div>
+      <div class="cat sadness">
+        <label>
+            <input type="checkbox" id="boredom" name="keywords" value="01-Boredom-Disgust"><span>Boredom</span>
+        </label>
+      </div>
+      <div class="cat sadness">
+        <label>
+            <input type="checkbox" id="annoyance" name="keywords" value="03-Rage-Anger"><span >Rage</span>
+        </label>
+      </div>
+
+    </section>
+
+    <section class="categories">
+      <div class="cat sadness">
+        <label>
+            <input type="checkbox" id="pensiveness" name="keywords" value="01-Pensiveness-Sadness"><span>Pensiveness</span>
+        </label>
+      </div>
+      <div class="cat sadness">
+        <label>
+          <input type="checkbox" id="anticipation" name="keywords" value="02-Anticipation-Anticipation"><span>Anticipation</span>
+        </label>
+      </div>
+      <div class="cat sadness">
+        <label>
+            <input type="checkbox" id="annoyance" name="keywords" value="01-Annoyance-Anger"><span>Annoyance</span>
+        </label>
+      </div>
+    </section>
+
+    <section class="categories">
+        <div class="cat sadness">
+        <label>
+            <input type="checkbox" id="serenity" name="keywords" value="01-Serenity-Joy"><span>Serenity</span>
+        </label>
+      </div>
+      <div class="cat sadness">
+        <label>
+            <input type="checkbox" id="loathing" name="keywords" value="03-Loathing-Disgust"><span>Loathing</span>
+        </label>
+      </div>
+      <div class="cat sadness">
+        <label>
+            <input type="checkbox" id="ecstacy" name="keywords" value="03-Ecstacy-Joy"><span>Ecstacy</span>
+        </label>
+      </div>
+    </section>
+
+    <section class="categories">
+
+    <div class="cat sadness">
+        <label>
+          <input type="checkbox" id="anger" name="keywords" value="02-Anger-Anger"><span >Anger</span>
+        </label>
+        </div>
+      <div class="cat sadness">
+        <label>
+          <input type="checkbox" id="trust" name="keywords" value="02-Trust-Trust"><span>Trust</span>
+        </label>
+      </div>
+      <div class="cat sadness">
+        <label>
+          <input type="checkbox" id="sadness" name="keywords" value="02-Sadness-Sadness"><span>Sadness</span>
+        </label>
+      </div>
+    </section>
+
+    <section class="categories">
+
+        <div class="cat sadness">
+        <label>
+            <input type="checkbox" id="apprehension" name="keywords" value="01-Apprehension-Fear"><span>Apprehension</span>
+        </label>
+        </div>
+        <div class="cat sadness">
+        <label>
+            <input type="checkbox" id="acceptance" name="keywords" value="01-Acceptance-Trust"><span>Acceptance</span>
+        </label>
+        </div>
+        <div class="cat sadness">
+          <label>
+              <input type="checkbox" id="terror" name="keywords" value="03-Terror-Fear"><span>Terror</span>
+          </label>
+        </div>
+    </section>
+
+    </div>
+
+    <br>
+
+    <div class="col-lg-6 mx-auto buttonhug2">
+
+    <section class="categories">
+      <div class="cat sadness">
+        <label>
+          <input type="checkbox" id="joy" name="keywords" value="02-Joy-Joy"><span>Joy</span>
+        </label>
+      </div>
+      <div class="cat sadness">
+        <label>
+            <input type="checkbox" id="distraction" name="keywords" value="01-Distraction-Surprise"><span>Distraction</span>
+        </label>
+      </div>
+      <div class="cat sadness">
+        <label>
+          <input type="checkbox" id="surprise" name="keywords" value="02-Surprise-Surprise"><span>Surprise</span>
+        </label>
+      </div>
+    </section>
+
+    <section class="categories"> <!--Sadness-->
+
+    <div class="cat sadness">
+        <label>
+            <input type="checkbox" id="admiration" name="keywords" value="03-Admiration-Trust"><span>Admiration</span>
+        </label>
+      </div>
+      <div class="cat sadness">
+        <label>
+            <input type="checkbox" id="grief" name="keywords" value="03-Grief-Sadness"><span>Grief</span>
+        </label>
+      </div>
+      <div class="cat sadness">
+          <label>
+            <input type="checkbox" id="fear" name="keywords" value="02-Fear-Fear"><span>Fear</span>
+          </label>
+        </div>
+    </section>
+
+    <section class="categories">
+
+      <div class="cat sadness">
+        <label>
+            <input type="checkbox" id="vigilance" name="keywords" value="03-Vigilance-Anticipation"><span>Vigilance</span>
+        </label>
+      </div>
+      <div class="cat sadness">
+        <label>
+          <input type="checkbox" id="disgust" name="keywords" value="02-Disgust-Disgust"><span>Disgust</span>
+        </label>
+      </div>
+      <div class="cat sadness">
+        <label>
+            <input type="checkbox" id="interest" name="keywords" value="01-Interest-Interest"><span>Interest</span>
+        </label>
+      </div>
+    </section>
+
+    </div>
+
+    <section class="row bottom_btn_set col-md-12 mx-auto">
+    <button type="button" onclick="history.go(-1)" id="prevBbtn" class="btn btn-light btn-circle btn-xl"><i class="fa-solid fa-arrow-left"></i></button>
+
+    <div class="progress col-4">
+        <div class="progress-bar progress-bar-striped progress-bar-animated p-0" role="progressbar"
+        aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="width: 37.5%;"></div>
+    </div>
+
+      <button id="nextbtn" class="btn btn-light btn-circle btn-xl"><i class="fa-solid fa-arrow-right"></i></button>
+    </section>
+
+</form>
+</div>
+
+<!-- <script>
+    document.querySelector("checkbox").addEventListener("click", chkcontrol());
+    someInput.myParam = 1;
+    function chkcontrol(j) {
+    var sum=0;
+    for(var i=0; i < document.keywords.ckb.length; i++){
+
+        if(document.keywords.ckb[i].checked){
+        sum = sum + parseInt(document.keywords.ckb[i].value);
+        }
+
+        if(sum >5){
+        sum = sum - parseInt(document.keywords.ckb[j].value);
+        document.keywords.ckb[j].checked = false ;
+        alert("Sum of the selection can't be more than 10")
+        //return false;
+        }
+    }
+    }
+    </script> -->
+
+    <script src="{%  static 'js/steppingstones.js' %}"></script>
+
+    </div>
+{% endblock content %}

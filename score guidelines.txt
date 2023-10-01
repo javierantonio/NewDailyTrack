@@ -1,0 +1,63 @@
+
+Anger: 
+You want to attack an obstacle that is getting in the way of your peace.
+
+Anticipation: 
+You are highly focused and alert; on the look out for something.
+
+Joy: 
+You are delighted! Things are better going good for you and you feel an abundance of energy.
+
+Trust: 
+You feel a deep connection and pride for a person or idea that makes you want to strengthen your commitment to it.
+
+Fear: 
+You sense  a big danger, making you alarmed or petrified.
+
+Surprise: 
+You feel inspired by something that caught you off guard. You want to remember that moment.
+
+Sadness: 
+You are in a state of heartbreak and distraught after losing something dear. It feels hard to get up and go on.
+
+Disgust: 
+You feel disturbed, horrified, and violated. You want to block it all out.
+
+
+
+Coping Strategy Score: 80
+Experiential Avoidant
+You do everything you can to not come into contact with anything that can trigger unwanted internal experiences, such as emotions, thoughts, memories, and bodily sensations.
+This may also include damaging forms of coping such as substance abuse, risky sexual behavior, and deliberate self-harm.
+
+
+
+Coping Strategy Score: 60
+Mostly Avoidant
+You try to steer clear of troubling stimuli so that you do not have to confront any negative emotions.
+You might also be turning to risky behavior to cope and may even withdraw from social experiences to prevent feelings of anxiety.
+
+
+
+Coping Strategy Score: 40
+Well-Adjusted
+While you acknowledge the need to avoid negative stimuli for your own well-being,
+you cope well enough and continue to function without being self-destructive or self-sabotaging.
+
+
+
+Coping Strategy Score: 20
+Mostly Acceptant
+You recognize that there will be times wherein your mental and emotional fortitude are challenged, but you also recognize that trying to escape from emotional pain will never work.
+Instead, you let go of attempts to avoid or control your thoughts and feelings to focus more on living a meaningful life.
+
+
+
+Coping Strategy Score: 1
+Functional Acceptant
+You let things come and go appropriately, letting yourself feel emotions but not letting them sit in for too long in your head to the point of it being unhealthy. You actively embrace the subjective experience, particularly your distressing experiences. You understand that the idea is not merely to grudgingly tolerate negative experiences but to embrace them fully and without defense.
+
+
+default:
+Insufficient Data
+The answers chosen in the Coping Strategies stage corresponded to doing nothing, and thus the system can't draw enough data for a proper conclusion of your tendencies at the moment. 😔

@@ -1,0 +1,82 @@
+{% extends 'patientTemplate.html' %}
+{% load static %}
+{% block title %}Mood{% endblock title %}
+{% block link %}<link rel="stylesheet" href="{% static 'css/steppingstones.css' %}">
+{% endblock link %}
+{% block content %}
+{% load static %}
+
+
+    <div style="text-align:right;overflow-y: disabled;">
+        <span id="date"> </span><br>
+        <span id="time"> </span>
+    </div>
+
+    <div class="container col-lg-12 mx-auto">
+
+        <div class="col-lg-12 align-items-center title" style="margin-bottom: 20px;">
+            <h3 class="h-bold text-center" style="color:#36d3d9;">How do you feel today, <span class="patientname">Dweorg</span>?</h3>
+            <p class="h-xlight text-center" style="color:#a3a3a3;">Pick one (1) from below</p>
+        </div>
+
+        <form method="POST" id="moodgetter">
+		{% csrf_token %}
+
+            <div class="moodgetter col-lg-12 mx-auto">
+              
+      
+            <input type="radio" id="terrible" name="mood" class="input-hidden" value="05-Terrible." required />
+            <label for="terrible">
+              <img src="{% static 'img/terrible_kids.png' %}" alt="Terrible" />
+              <br><br>
+              <!-- <span>Terrible</span> -->
+            </label>
+      
+            <input type="radio" id="bad" name="mood" class="input-hidden" value="04-Bad" />
+            <label for="bad">
+              <img src="{% static 'img/bad_kids.png' %}" alt="Bad" />
+              <br><br>
+              <!-- <span>Bad</span> -->
+            </label>
+      
+            <input type="radio" id="okay" name="mood" class="input-hidden" value="03-Okay" />
+            <label for="okay">
+              <img src="{% static 'img/okay_kids.png' %}" alt="Okay"/>
+              <br><br>
+              <!-- <span>Okay</span> -->
+            </label>
+      
+            <input type="radio" id="good" name="mood" class="input-hidden" value="02-Good" />
+            <label for="good">
+              <img src="{% static 'img/good_kids.png' %}" alt="Good" />
+              <br><br>
+              <!-- <span>Good</span> -->
+            </label>
+      
+            <input type="radio" id="awesome" name="mood" class="input-hidden" value="01-Awesome" />
+            <label for="awesome">
+              <img src="{% static 'img/awesome.png' %}" alt="Awesome" />
+              <br><br>
+              <!-- <span>Awesome</span> -->
+            </label>
+      
+            </div>
+      
+              <section class="row bottom_btn_set col-md-12 mx-auto">
+                <button type="button" onclick="history.go(-1)" id="prevBbtn" class="btn btn-light btn-circle btn-xl"><i class="fa-solid fa-arrow-left"></i></button>
+      
+                <div class="progress col-4">
+                    <div class="progress-bar progress-bar-striped progress-bar-animated p-0" role="progressbar"
+                    aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="width: 25%"></div>
+                </div>
+      
+                  <button id="nextbtn" class="btn btn-light btn-circle btn-xl"><i class="fa-solid fa-arrow-right"></i></button>
+              </section>
+      
+        </form>
+    </div>
+
+
+    <script src="{% static 'js/steppingstones.js' %}"></script>
+
+{% endblock content %}

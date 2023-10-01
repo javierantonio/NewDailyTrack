@@ -1,0 +1,47 @@
+{% extends 'journalBase.html' %}
+
+{#{% block content %}#}
+    {% block journalcontent %}
+      <script>
+        function validateForm() {
+          var y = document.forms["form"]["entryTitle"].value;
+          if (y == null || y == "") {
+            alert("Title must be filled out.");
+            return false;
+          }
+        }
+      </script>
+            <!--compose-->
+              <form style="width:100%;" name="form" onSubmit="return validateForm()" method="POST">
+                  {% csrf_token %}
+
+                <div class="form-group">
+                  <label for="entryTitle" style="color:#e03b54;">Enter Title:</label>
+                  <input type="text" name="entryTitle" class="form-control" id="entryTitle" placeholder="Enter title">
+                </div>
+
+                <div class="form-group">
+
+                  <label for="journalContent" style="color:#e03b54;">
+                    💭 Write your Entry:
+                  </label>
+
+                  <textarea class="form-control" id="journalContent" name="journalContent" placeholder="Write anything you want here..."></textarea>
+
+                  <script>
+                    // Initialize CKEditor on the textarea element
+                    CKEDITOR.replace('journalContent');
+                  </script>
+
+                </div>
+
+                <div class="form group">
+                  <button type="submit" value="save" class="btn btn-danger sub sub1" style="width:8rem;">
+                    <i class="fa-solid fa-check"></i> Save Entry</button>
+                </div>
+
+              </form>
+sdsdsds
+    {% endblock journalcontent %}
+    {{ block.super }}
+{#{% endblock %}#}

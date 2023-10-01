@@ -1,0 +1,33 @@
+from django.forms import forms
+from django.http import HttpResponse
+from django.shortcuts import redirect, render
+
+from journal.models import Journal
+from registration.models import Profile
+
+
+def processJournalEntry(request):
+    if request.method == 'POST':
+        userProfile = request.user.profile
+        title = request.POST.get('entryTitle')
+        content = request.POST.get('journalContent')
+        entry = Journal(user=userProfile, title=title, content=content)
+        entry.save()
+        print("Journal Entry Saved")
+        return redirect('journalEntries')
+
+    else:
+        return render(request, 'journalHome.html')
+
+
+def viewJournalEntry(request):
+    if request.method == 'POST':
+        return HttpResponse("bleh")
+    else:
+        userProfile = request.user.profile
+        entries = Journal.objects.get(user=userProfile)
+        context = {'entries': entries}
+        for entry in entries:
+            print(entry.title)
+            print(entry.created_at)
+        return render(request, 'journalEntries.html', context)
