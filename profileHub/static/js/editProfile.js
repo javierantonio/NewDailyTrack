@@ -39,7 +39,6 @@ function changedDate() {
   }
 }
 
-
 var passwordCheckbox = document.getElementById("passwordChange");
 
 passwordCheckbox.addEventListener("change", function changePassword() {
@@ -48,7 +47,8 @@ passwordCheckbox.addEventListener("change", function changePassword() {
     id: "password",
   });
   const passwordLabelContent = document.createTextNode("Password");
-  const confirmPasswordLabelContent = document.createTextNode("Confirm Password");
+  const confirmPasswordLabelContent =
+    document.createTextNode("Confirm Password");
   const passwordLabelElement = Object.assign(document.createElement("label"));
   const passwordInputElement = Object.assign(document.createElement("input"), {
     id: "password",
@@ -60,7 +60,7 @@ passwordCheckbox.addEventListener("change", function changePassword() {
   divPassword.classList.add("w-100");
   divPassword.classList.add("d-flex");
   divPassword.classList.add("flex-column");
-  passwordInputElement.classList.add("form-control");  
+  passwordInputElement.classList.add("form-control");
   passwordLabelElement.setAttribute("for", "password");
   passwordLabelElement.appendChild(passwordLabelContent);
   passwordInputElement.required = true;
@@ -91,26 +91,30 @@ passwordCheckbox.addEventListener("change", function changePassword() {
   confirmPasswordLabelElement.appendChild(confirmPasswordLabelContent);
 
   if (passwordCheckbox.checked) {
-    // const existing = document.getElementById("guardianEmail");
-    // if (!!existing) {
-    //   existing.remove();
-    // }
-    const element = document.getElementById("passwordFormGroup");
-    //adds the elements in the guardianEmailForm div
-    element
-      .appendChild(divPassword)
-      .appendChild(passwordLabelElement)
-      .appendChild(passwordInputElement);
+    var userChoice = confirm(
+      "WARNING: Successfully changing your password will log you out of your account. Continue?"
+    );
+
+    if (userChoice) {
+      const element = document.getElementById("passwordFormGroup");
+      //adds the elements in the guardianEmailForm div
+      element
+        .appendChild(divPassword)
+        .appendChild(passwordLabelElement)
+        .appendChild(passwordInputElement);
 
       element
-      .appendChild(divConfirmPassword)
-      .appendChild(confirmPasswordLabelElement)
-      .appendChild(confirmPasswordInputElement);
+        .appendChild(divConfirmPassword)
+        .appendChild(confirmPasswordLabelElement)
+        .appendChild(confirmPasswordInputElement);
+    }else{
+      passwordCheckbox.checked = false;
+    }
   } else {
+    passwordCheckbox.checked = false;
     const passwordInput = document.getElementById("password");
     const confirmPasswordInput = document.getElementById("confirmPassword");
     passwordInput.remove();
     confirmPasswordInput.remove();
   }
 });
-
