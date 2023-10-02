@@ -1,0 +1,342 @@
+{% extends 'specialistTemplate.html' %}
+{% block title %}
+Home
+{% endblock title %}
+{% block content %}
+    {% load static %}
+
+    <!-- <?php
+    $_SESSION['idPat']=7;
+    error_reporting(E_ALL ^ E_NOTICE);
+    $idSpec = $_SESSION['id'];
+    $now = new DateTime();
+    $now->format('Y-m-d H:i:s');
+    $now->getTimestamp();
+    ?> -->
+
+    <div class="container mt-4">
+        
+        <br>
+
+    <div class="row">
+        <div class="col-md-12">
+        <div class="panel panel-default">
+
+        <div class="panel-heading" style="display:flex;flex-direction:row;">
+          <h3 style="color:#00c4c0;">Patient Dashboard Overview</h3>
+
+
+          <div class="col-md-4">
+            <i class="fas fa-search"></i>
+          <input class="form-control" id="textSearch" style="float: right;margin-right:-350px;" placeholder="Search anything..." />
+          </div>
+        </div>
+
+        <br>
+
+        <div class="panel-body">
+          <table id="example" class="table table-striped">
+            <thead class="thead-dark">
+              <tr style="text-align:center;">
+
+                <th>ID</th>
+                <th>Patient Name</th>
+                <th>Latest Mood</th>
+                <th>Go to</th>
+
+              </tr>
+            </thead>
+
+            <tbody>
+                    <tr style="text-align:center;">
+
+                                <td>'.$usertextid.'</span></td>
+                                <td><span id="username'.$value["userid"].'">'.$value["username"].'</span></td>
+                                <td>{{ data.0 }}</td>
+                                <span id="apptdate" hidden>'.$date.'</span>
+                                <span id="appttime" hidden>'.$time.'</span>
+                                <span id="status" hidden>'.$status.'</span>
+                                <span id="venue" hidden>'.$venue.'</span>
+                                <span id="concern" hidden>'.$concern.'</span>
+                                <span id="userid" hidden>'.$value["userid"].'</span>
+                                <span id="datetime" hidden>'.$value["appointment"].'</span>
+
+																</td>
+
+																<td align="center">
+                                <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Select</a>
+
+                              <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in text-gray-600"
+                                          aria-labelledby="userDropdown">
+                                          <a class="dropdown-item text-gray-600" href="index.php?route=journals-pat&idUser='.$value["userid"].'&patJournal='.$maxjournal['journalid'].'">
+                                              <i class="fa fa-book fa-sm fa-fw mr-2"></i> Shared Journal Entries
+                                          </a>
+                                          <a class="dropdown-item text-gray-600" href="index.php?route=patemote&idUser='.$value["userid"].'&patEmote='.$maxemote['keywordid'].'">
+                                              <i class="fa fa-pie-chart fa-sm fa-fw mr-2"></i> Emoticards
+                                          </a>
+                                          <button type="button" class="dropdown-item text-gray-600 dashboardModalAppt" value="'.$value['userid'].'"><i class="fa fa-clock fa-sm fa-fw mr-2"></i> Appointment Details</button>
+
+                                          <a class="dropdown-item text-gray-600" href="index.php?route=consultnotes&idUser='.$value["userid"].'&q1=1">
+                                              <i class="fa fa-clipboard fa-sm fa-fw mr-2"></i> Consultation Notes
+                                          </a>
+
+                  </div>
+
+							</td>
+
+              </tr>
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+        
+	</div>
+  
+    <script>
+
+        $(function () {
+          function removeRow(data){
+            table.row(':eq(0)', { page: 'current' }).select();
+            table.row(data).remove().draw(false);
+          }
+
+          $(".dashboardModalAppt").click(function(){
+              var id=$(this).val();
+              // var userid=$('#userid'+id).text();
+              var name=$('#username'+id).text();
+              // var apptdate=$('#apptdate'+id).text();
+              var apptdatetime = $('#datetime'+id).text();
+              var apptsched=$('#apptdate'+id).text()+' - '+$('#appttime'+id).text();
+              // var appttime=$('#appttime'+id).text();
+              var status=$('#status'+id).text();
+              var venue=$('#venue'+id).text();
+              var concern=$('#concern'+id).text();
+            $('#dashboardModal').modal('show');
+             $('#status').val(status);
+             $('#patname').val(name);
+             $('#idPat').val(id);
+             // $('#apptdate').val(apptdate);
+             $('#apptdatetime').val(apptdatetime);
+             $('#apptsched').val(apptsched);
+             $('#venue').val(venue);
+             $('#concern').val(concern);
+          })
+
+          $(".btnEditAppt").click(function(){
+            var id=document.getElementById('idPat').value;
+            // var userid=$('#userid'+id).text();
+            var name=document.getElementById('patname').value;
+            // var apptdate=document.getElementById('apptdate').value;
+            // var apptsched=document.getElementById('apptdate').value+' - '+document.getElementById('appttime').value;
+            // var appttime=document.getElementById('appttime').value;
+            var apptdatetime=document.getElementById('apptdatetime').value;
+              // var time = appttime.replace('AM', '') ;
+              // var time = appttime.replace('PM', '');
+              // appttime.replace(new RegExp('AM', 'g'),"");
+            var venue=document.getElementById('venue').value;
+            var concern=document.getElementById('concern').value;
+            var status= document.getElementById('status').value;
+            $('#dashboardModal').modal('hide');
+
+            $('#editAppointment').modal('show');
+            $('#editPatname').val(name);
+            // $('#editVenue').val(venue);
+            $('#editApptDateTime').val(apptdatetime);
+            $('#idPatient').val(id);
+
+            $('select #editStatus option[value="'+status+'"]').attr("selected",true);
+            if($('#editStatus').val() == 0) {
+                document.querySelector('#editReason').disabled = false;
+            }
+            else if ($('#editStatus').val() == 1){
+                document.querySelector('#editReason').disabled = true;
+                document.querySelector('#editVenue').disabled = true;
+                document.querySelector('#editApptDateTime').disabled = true;
+            }
+            else if ($('#editStatus').val() == 2){
+                document.querySelector('#editReason').disabled = false;
+                document.querySelector('#editVenue').disabled = true;
+                document.querySelector('#editApptDateTime').disabled = true;
+            }
+            $('#editStatus').on('change', function() {
+                console.log('click');
+                if($(this).val() == 0) {//Pending
+                    document.querySelector('#editReason').disabled = false;
+                    document.querySelectorAll('input[name="editApptDateTime"]').forEach(element => {
+                      element.removeAttribute("disabled");
+                    });
+                    document.querySelectorAll('input[name="editVenue"]').forEach(element => {
+                      element.removeAttribute("disabled");
+                    });
+                }
+                else if ($(this).val() == 1){//Confirmed
+                    document.querySelector('#editReason').disabled = true;
+                    document.querySelectorAll('input[name="editApptDateTime"]').forEach(element => {
+                      element.setAttribute("disabled", "disabled");
+                    });
+                    document.querySelectorAll('input[name="editVenue"]').forEach(element => {
+                      element.setAttribute("disabled", "disabled");
+                    });
+                }
+                else if ($(this).val() == 2){//Cancelled
+                    document.querySelector('#editReason').disabled = false;
+                    document.querySelectorAll('input[name="editApptDateTime"]').forEach(element => {
+                      element.setAttribute("disabled", "disabled");
+                    });
+                    document.querySelectorAll('input[name="editVenue"]').forEach(element => {
+                      element.setAttribute("disabled", "disabled");
+                    });
+                }
+            });
+
+            $('select .editVenue option[value="'+venue+'"]').attr("selected",true);
+
+
+          })
+
+
+
+                // $(document).on('click', '.dashboardModalAppt', function(){
+                //   // var id=$(this).val();
+                //   // var name=$('#userid'+id).text();
+                //   $('#dashboardModal').modal('show');
+                //   // $('#patname').val(name);
+                // }
+
+                // $(".dashboardModalAppt").click(function () {
+                //     var userid = $(this).data('id');
+                //
+                //     $(".modal-body #userid").val(userid);
+                // })
+
+          // Using the module pattern for a jQuery feature
+
+            var app = (function() {
+              var checkboxInput = ' input[type="checkbox"]',
+                  filters = {},rowData = [],values = [],key, value, show, length, divId;
+
+              var init = function() {
+                app.table = $('#example').DataTable({
+                  "dom": "lrtip" // hide default DataTable search box
+                });
+
+                $("#textSearch").on('keyup change', function() {
+                  console.log('text search for: ' + $(this).val());
+                  app.table.search($(this).val()).draw();
+                });
+
+                $(checkboxInput).prop('checked', false);
+
+                $(checkboxInput).change(function() {
+                  var that = $(this);
+                  if(that.hasClass('all')) {
+                    $('#' + getFilterCategoryId(that) + checkboxInput).prop('checked', that.prop('checked'));
+                  } else {
+                    var allInput = $('#' + getFilterCategoryId(that) + checkboxInput + ':first');
+                    if(allInput.is(':checked')) {
+                      allInput.prop('checked', false);
+                    }
+                  }
+                  poulateAndApplyFilters();
+                });
+              };
+
+              var poulateAndApplyFilters = function() {
+                populateFilterValues();
+                applyFiltersToTable();
+              };
+
+              var getFilterCategoryId = function(elem) {
+                divId = elem.parent().parent().parent()[0].id;
+                console.log('divId is: ' + divId);
+                return divId;
+              };
+
+              var trimAndLower = function(elem) {
+                return elem.toLowerCase().trim();
+              };
+
+              var populateFilterValues = function() {
+                console.log('Populating filter values');
+                $(checkboxInput).each(function() {
+                  if ($(this).is(":checked") && $(this).val() !== "all") {
+                    value = trimAndLower($(this).val());
+                    key = getFilterCategoryId($(this));
+                    console.log('key: ' + key + ', value: ' + value);
+                    if (filters[key] === undefined) {
+                      console.log('Filter category is missing from object. Now creating new filter');
+                      values.push(value);
+                      filters[key] = values;
+                    } else {
+                      console.log('Filter category is already existing in object');
+                      filters[key].push(value);
+                    }
+                    values = [];
+                  }
+                });
+                console.log('Filter population complete');
+              };
+
+              var populateRowData = function(row) {
+                row.find('td').each(function() {
+                  console.log('Populating row data with ' + $(this).text());
+                  rowData.push(trimAndLower($(this).text()));
+                });
+              };
+
+              var applyFiltersToTable = function() {
+                console.log('Applying filters to table');
+                if (filters[key] === undefined) {
+                  // show all table rows when no checkboxes are selected
+                  $("table tbody tr").show();
+                } else {
+                  $("table tr").each(function() {
+                    // initialize 'show' variable to false for each table row
+                    show = false;
+                    populateRowData($(this));
+                    // make sure 'rowData' array has elements
+                    if (rowData.length > 0) {
+                      // loop through each key in 'filters' object
+                      for (var k in filters) {
+                        if (filters.hasOwnProperty(k)) {
+                          console.log('filter key: ' + k);
+                          length = filters[k].length;
+                          // loop through each array value at index 'i'
+                          for (var i = 0; i < length; i++) {
+                            value = filters[k][i];
+                            if (rowData.indexOf(value) !== -1) {
+                              show = true;
+                              break;
+                            }
+                          }
+                          if (show) {
+                            $(this).show();
+                          } else {
+                            $(this).hide();
+                            break;
+                          }
+                          show = false;
+                        }
+                      }
+                    }
+                    rowData = [];
+                  });
+                  filters = {};
+                }
+              };
+
+              return {
+                init: init
+              };
+            })();
+
+            app.init();
+        });
+
+
+        </script>
+{% endblock content %}
