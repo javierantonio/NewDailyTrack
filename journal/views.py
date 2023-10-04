@@ -124,3 +124,7 @@ def starJournalEntry(request):
             return JsonResponse({'error': 'You do not have permission to update this entry.'})
 
     return JsonResponse({'error': 'Invalid request'})
+
+@login_required
+def viewEntries(request, userId):
+    return render(request, 'journalList.html', context={'user': userId})

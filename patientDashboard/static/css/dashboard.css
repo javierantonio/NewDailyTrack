@@ -1,0 +1,28 @@
+.description{
+    display: flex;
+    align-items: center;
+    font-size: 1.5rem;
+    font-weight: 500;
+    width: 100%;
+}
+.image{
+    width: 45%;
+    height: 25%;
+}
+.card-header{
+    display: flex;
+    justify-content: space-between;
+}
+.card-body{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+}
+.body-content{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+.content-data{
+    width: 75%;
+}
