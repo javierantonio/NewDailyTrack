@@ -5,6 +5,7 @@ from . import views
 
 urlpatterns = [
 
+    path('notes/', views.notesHome, name='notesDev'),           # for development purposes only
     path('notes/<str:userId>/', views.notesHome, name='notes'),
     path('entries/', views.viewEntries, name='notesEntries'),
     path('entries/<str:userId>/', views.viewEntries, name='noteView'),
