@@ -56,7 +56,7 @@ def editPatient(request):
     if request.method == 'POST':
         if profileForms.patientUpdate(request):
             print('success')
-            return reverse('')
+            return redirect(reverse('login'))
         else:
             print('failed')
     else:
