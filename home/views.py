@@ -23,7 +23,8 @@ def landing(request):
         elif userprofile.type == "Specialist":
             # return redirect(reverse('patientDashboardHome'))
             # return HttpResponseRedirect('patientDashboard:landing')
-            return redirect('patientDashboardHome')
+            # return redirect('patientDashboardHome')
+            return render(request, 'specialistHome.html', context=context)
 
         return render(request, 'index.html')
     else:
