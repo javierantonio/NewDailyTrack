@@ -1,10 +1,11 @@
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 
 from patientDirectory.models import PatientList
 from registration.models import Specialist, Profile, Patient
+from steppingStones.models import SteppingStone
 
 def dashboardLanding(request):
     # return HttpResponse('naur')
@@ -14,6 +15,7 @@ def dashboardLanding(request):
     # # print(patients[0])
     # for element in patients:
     #     print(element.patient)
+    print(request)
     return render(request, 'patientDashboard.html', context={'data': getPatients(request.user)})
 
 def getPatients(userData):
@@ -23,11 +25,28 @@ def getPatients(userData):
     index = 0
     for element in patients:
         patientDetails = Profile.objects.get(email = element.patient)
-        patientArray[index] = patientDetails.profileID
+        patientArray[index] = {
+            'id': patientDetails.profileID,
+            'patientName': patientDetails.user.first_name+' '+patientDetails.user.last_name,
+            'latestMood': getLatestEmoticard(patientDetails.profileID)
+        }
         # patientArray.update({
         #     'patient{index}' : patientDetails.profileID
         # })
         index+=1
 
-    print(patientArray[0])
     return patientArray
+
+def getLatestEmoticard(patientEmail):
+    return ''
+    steppingStonesData = str(SteppingStone.objects.order_by('-created_at').get(patient = patientEmail)).split(' ')
+    print(steppingStonesData)    
+    return steppingStonesData
+
+def getUserProfile(request):
+    patientId = request.GET.get('patientIndex')
+    for user in data:
+        if user['id'] == patientId:
+            user_data = user
+            break
+    return JsonResponse(user_data)

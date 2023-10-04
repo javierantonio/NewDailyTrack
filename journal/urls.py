@@ -27,6 +27,6 @@ urlpatterns = [
     path('viewJournalEntry/<int:entry_id>/', views.viewJournalEntry, name='viewJournalEntry'),
     path('star/', views.starJournalEntry, name='starJournalEntry'),
     path('starred/', views.starredJournalEntry, name='starredJournalEntry'),
-
+    path('entries/<str:userId>/', views.viewEntries, name='viewPatientEntries'),
 
 ]

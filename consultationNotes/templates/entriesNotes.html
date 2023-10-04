@@ -2,71 +2,35 @@
 {% block notesContent %}
   
 <div class="col-md-10" style="background-color:transparent;">
-    <div class="bich2">
-<div class="mCustomScrollbar area" style="margin-left:10px;margin-right:10px;margin-top:20px; max-height:480px; line-height:35px;padding:5px;">
+  <div class="bich2">
+    <div class="mCustomScrollbar area" style="margin-left:10px;margin-right:10px;margin-top:20px; max-height:480px; line-height:35px;padding:5px;">
     
-    <table class="table table-striped">
-    <tr style="text-align: center;">
-      <td></td>
-      <td><b>Title</b></td>
-      <td><b>Date</b></td>
-      <td><b>Time</b></td>
-      <td>
-        <td></td>
-      </td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-<!--   
-    foreach (controller as key => $value) {
-      $id = $value['id'];
-      $date = $value['entrydate'];
-        $date= date("d-m-Y",strtotime($date));
-        $time = $value['entrytime'];
-        $title = $value['entrytitle']; -->
-  
-    <td>
-      <a title="Click to open article" href="index.php?route=consultnotes&idUser='.idPat.'&aid=">'.title.'</a>
-    </td>
-    <td>
-      '.date.'
-    </td>
-    <td>
-      '.time.'
-    </td>
-  
-      <td>
-        <a title="Open Article" href="index.php?route=journal&aid=">
-        <b><i class="fa fa-folder-open" aria-hidden="true"></i></b>
-        </a>
-      </td>
-  
-  
-        <td>
-          <a title="Edit Article" href="account.php?eeid=">
-          <b><i class="fa fa-pencil-square-o" aria-hidden="true"></i></b>
-          </a>
-        </td>
-  
-        <td>
-        <a title="Get printable view" target="_blank" href="update.php?pid=">
-        <b><i class="fa fa-print" aria-hidden="true"></i></b>
-        </a>
-      </td>
-  
-        <td>
-        <a title="Delete Article" href="route=journal&did=">
-        <b><i class="fa fa-trash" aria-hidden="true"></i></b>
-        </a>
-      </td>
-  
-        </tr>
-        </table>
+      <table class="table table-striped">
+        <thead>
+          <tr style="text-align: center;">
+            <td><b>Title</b></td>
+            <td><b>Date Created</b></td>
+            <td><b>Action</b></td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="text-align: center;">
+            <td>
+              <a title="Click to open article" href="index.php?route=consultnotes&idUser='.idPat.'&aid=">'.title.'</a>
+            </td>
+            <td>
+              {{entries.}}
+            </td>
+            <td>
+              <a title="Delete Article" href="route=journal&did=">
+              <b><i class="fa fa-trash" aria-hidden="true"></i></b>
+              </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
   
     </div>
-
-  
-    </div>
-    </div>
+  </div>
+</div>
 {% endblock notesContent %}

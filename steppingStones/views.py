@@ -243,3 +243,6 @@ def steppingStoneStart(request):
                     return render(request, 'stressLevel.html')
     else:
         return redirect('landing')
+
+def emoticardList(request, userId):
+    return render(request, 'emoticardListBase.html')

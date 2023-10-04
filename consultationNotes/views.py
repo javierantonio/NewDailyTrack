@@ -7,7 +7,7 @@ from journal.models import Journal
 from registration.models import Profile
 
 @login_required
-def notesHome(request):
+def notesHome(request, userId):
     if request.user.is_authenticated:
         userprofile = Profile.objects.get(user=request.user)
         if userprofile.type == "Specialist":
@@ -19,7 +19,7 @@ def notesHome(request):
                 entry.save()
                 return redirect('viewEntries')
             elif request.method == "GET":
-                return render(request, 'composeNotes.html')
+                return render(request, 'composeNotes.html', context={'user': userId})
         else:
             return redirect('landing')
     else:
@@ -27,7 +27,7 @@ def notesHome(request):
     
 @login_required
 
-def viewEntries(request):
+def viewEntries(request, userId):
     if request.user.is_authenticated:
         userprofile = Profile.objects.get(user=request.user)
         if "Specialist" in userprofile.type:
@@ -37,8 +37,9 @@ def viewEntries(request):
             else:
                 print('entries')
                 userProfile = request.user.profile
-                entries = Journal.objects.filter(user=userProfile)
+                entries = Journal.objects.filter(user=userId)
                 context = {'entries': entries}
+                print(entries)
                 return render(request, 'entriesNotes.html', context)
         else:
             print(userprofile.type)
