@@ -26,6 +26,24 @@ def notesHome(request, userId):
     else:
         return redirect('landing')
     
+def notesHome(request):
+    if request.user.is_authenticated:
+        userprofile = Profile.objects.get(user=request.user)
+        if userprofile.type == "Specialist":
+            if request.method == "POST":
+                userProfile = request.user.profile
+                title = request.POST.get('entryTitle')
+                content = request.POST.get('entryContent')
+                entry = ConsultationNotes(user=userProfile, notesTitle=title, notesContent=content)
+                entry.save()
+                return redirect(reverse('notesEntries'))
+            elif request.method == "GET":
+                return render(request, 'composeNotes.html')
+        else:
+            return redirect('landing')
+    else:
+        return redirect('landing')
+    
 @login_required
 def viewEntries(request, userId):
     if request.user.is_authenticated:
