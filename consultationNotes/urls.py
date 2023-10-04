@@ -9,8 +9,8 @@ urlpatterns = [
     path('entries/', views.viewEntries, name='notesEntries'),
     path('entries/<str:userId>/', views.viewEntries, name='noteView'),
     path('entries/<str:userId>/<int:entryId>/', views.viewEntries, name='noteView'),
-    # path('delete_JournalEntry/<int:entry_id>/', views.deleteJournalEntry, name='delete_journalEntry'),
-    # path('viewJournalEntry/<int:entry_id>/', views.viewJournalEntry, name='viewJournalEntry'),
+    path('delete/<int:entry_id>/', views.deleteNotes, name='delete'),
+    path('view/<int:entry_id>/', views.viewNotes, name='view'),
     # path('star/', views.starJournalEntry, name='starJournalEntry'),
     # path('starred/', views.starredJournalEntry, name='starredJournalEntry'),
 

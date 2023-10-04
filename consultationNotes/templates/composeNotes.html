@@ -11,9 +11,9 @@
     }
   </script>
 <form style="width:100%;margin-left:25px" name="form" onSubmit="return validateForm()" method="POST">
-
+  {% csrf_token %}
           <div class="form-group">
-            <label for="title" style="color:#0b96ac;"><i class="fa fa-user fa-sm fa-fw mr-2"></i></label>
+            <label for="entryTitle" style="color:#0b96ac;"><i class="fa fa-user fa-sm fa-fw mr-2"></i></label>
             <span>Patient Name</span>
 
             <label>&nbsp; || &nbsp;</label>
@@ -22,7 +22,7 @@
             <span style="color:#0b96ac;">(Date and Time)</span>
           </div>
           <div class="form-group">
-            <input type="text" name="title" class="form-control" id="title" value="Consultation Schedule: (Date and Time)">
+            <input type="text" name="entryTitle" class="form-control" id="title" value="Consultation Schedule: (Date and Time)">
           </div>
 
 
@@ -36,7 +36,7 @@
 
             <script>
 
-                CKEDITOR.replace( "notesContent"
+                CKEDITOR.replace( "entryContent"
                 // {
                 //   removeButtons: "Source,About",
                 //   filebrowserUploadUrl: "ckeditor/ck_upload.php",
