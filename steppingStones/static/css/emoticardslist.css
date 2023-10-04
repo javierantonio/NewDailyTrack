@@ -1,21 +1,20 @@
-body{
-    padding: 0;
-    margin: 0;
-    overflow-x: hidden;
+body {
+  padding: 0;
+  margin: 0;
+  overflow-x: hidden;
 }
 
-.cont{
-    background-color: white;
-    height: 100vh;
-
+.cont {
+  background-color: white;
+  height: 100%;
+  border: 1px solid rgb(13, 203, 203);
 }
 
-.cont2{
-    background-color: white;
-    height: 100vh;
-    padding: 20px;
+.cont2 {
+  background-color: white;
+  height: 100vh;
+  padding: 20px;
 }
-
 
 #sidebar-emoticard {
   float: left;
@@ -23,106 +22,117 @@ body{
   overflow-y: auto;
   height: 100%;
   z-index: -3;
-  width: 90%;
+  width: 20%;
+}
+
+.list-container {
+  height: 90%;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
 }
 
 .card {
-    width: fit-content;
+  width: fit-content;
 }
 
 #main-emoticard {
-    background-color: white;
-    z-index: -3;
-  }
-
-.chart{
-    width: 55%;
-    height: auto;
-    float: left;
-    margin: 60px 25px 0 0px;
-
+  background-color: white;
+  z-index: -3;
 }
 
-.stress-mood{
-    padding: 15px;
-    background-color: white;
-    color: grey;
-    width:20%;
-    text-align: center;
-    border: 2px solid;
+.chart {
+  width: 55%;
+  height: auto;
+  float: left;
+  margin: 60px 25px 0 0px;
 }
 
-.translation{
-    background-color:#ffffff;
-    border: 4px solid #91ceff;
-    border-radius: 20px;
-    width: 40%;
-    height: 75%;
-    float: right;
-    margin: 50px 20px 0 -25px;
-    color: #6b6b6b;
-    padding: 15px;
-    font-family: 'Space Mono', monospace;
-    font-size: 12px;
-    box-shadow: 5px 5px 7px #88888850;
+.stress-mood {
+  padding: 15px;
+  background-color: white;
+  color: grey;
+  width: 20%;
+  text-align: center;
+  border: 2px solid;
 }
 
-h3{
-    font-size: 19px;
+.translation {
+  background-color: #ffffff;
+  border: 4px solid #91ceff;
+  border-radius: 20px;
+  width: 40%;
+  height: 75%;
+  float: right;
+  margin: 50px 20px 0 -25px;
+  color: #6b6b6b;
+  padding: 15px;
+  font-family: "Space Mono", monospace;
+  font-size: 12px;
+  box-shadow: 5px 5px 7px #88888850;
 }
 
-h4{
-    font-size: 16px;
-    font-weight: bolder;
-    margin: 0 0 -10px 10px;
+h3 {
+  font-size: 19px;
 }
 
-.translation p{
-    margin-top: 10px;
-    margin-left: 15px;
+h4 {
+  font-size: 16px;
+  font-weight: bolder;
+  margin: 0 0 -10px 10px;
 }
 
-.translation h3{
-    color: #4598f7;
-    margin: 0;
+.translation p {
+  margin-top: 10px;
+  margin-left: 15px;
 }
 
-.translation h3{
-    color: #4598f7;
-    margin-bottom: 10px;
+.translation h3 {
+  color: #4598f7;
+  margin: 0;
 }
 
-#mainEmotions, #sensations, #emotionDo, #tendencies, #patientAnswers {
-    margin-bottom: 10px;
-    margin-top:0px;
+.translation h3 {
+  color: #4598f7;
+  margin-bottom: 10px;
+}
+
+#mainEmotions,
+#sensations,
+#emotionDo,
+#tendencies,
+#patientAnswers {
+  margin-bottom: 10px;
+  margin-top: 0px;
 }
 
 .progress {
-background-color: #d8d8d8;
-border-radius: 20px;
-position: relative;
-margin: 25px 10px;
-height: 25px;
-width: 300px;
+  background-color: #d8d8d8;
+  border-radius: 20px;
+  position: relative;
+  margin: 25px 10px;
+  height: 25px;
+  width: 300px;
 }
 
 .progress-done {
-    background: #ff61ab;
-    border-radius: 20px;
-    color: #fff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-    width: 0;
-    opacity: 0;
-    transition: 1s ease 0.3s;
+  background: #ff61ab;
+  border-radius: 20px;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 0;
+  opacity: 0;
+  transition: 1s ease 0.3s;
 }
 
-.btnEmoticardList{
-    width:15rem;
-    padding:10px; 
-    border-radius: 20px; 
-    border: 3px solid #57c4ff;
-    background-color: white;
+.btnEmoticardList {
+  width: 100%;
+  padding: 10px;
+  border-radius: 20px;
+  border: 3px solid #57c4ff;
+  background-color: white;
 }
