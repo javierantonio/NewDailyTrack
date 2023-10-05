@@ -46,7 +46,7 @@ def login(request):
             django.contrib.auth.login(request, user)
             return redirect(reverse('landing'))
         else:
-            return HttpResponse("User is not authenticated")
+            return render(request, 'login.html', {'error_message': 'Incorrect Username or Password'})
 
     elif request.method == "GET":
         if request.user.is_authenticated:
@@ -63,7 +63,7 @@ def login(request):
             return render(request, 'login.html')
 
     else:
-        return HttpResponse("Invalid request")
+        return render(request, 'login.html', {'error_message': 'Invalid Request'})
 
 
 def passwordRecovery(request):

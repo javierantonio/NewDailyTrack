@@ -151,29 +151,11 @@ Home
 	</div>
   
     <script>
-
       $(document).ready(function () {
-
         $(".dashboardModalAppt").click(function(){
-            
-          // var userid=$('#userid'+id).text();
-          var patientIndex = $(this).data("value"); // Get the data-value attribute of the clicked button
-          $.ajax({
-            url: "/patient-profile/",  // URL of your Django view
-            method: "GET",
-            data: { index: patientIndex },  // Send userId as a parameter
-            success: function (data) {
-              // 'data' contains the user's data as a JSON object
-              // Update your HTML to display the user data
-              $("#user-details").html(data);
-            }
-          });
           $('#dashboardModal').modal('show');
-            
         })
-
       });
-
-
     </script>
+    
 {% endblock content %}
