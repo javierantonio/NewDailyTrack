@@ -1,0 +1,192 @@
+{% extends 'emoticardListBase.html' %}
+{% block emoticardContent %}
+<div class="title">{{steppingStones.created_at}} </div>
+<div class="container-list">
+
+
+    <div class="chart">
+
+        <canvas id="emoChart">
+        </canvas>
+
+    </div>
+
+    <div id="myTabContent" class="tab-content translation">
+
+        <!-- Rounded tabs -->
+        <ul id="emoTabs" role="tablist"
+        class="nav nav-tabs nav-pills flex-column flex-sm-row text-center bg-light border-0 rounded-nav">
+
+      <li class="nav-item flex-sm">
+        <a id="results-tab" data-toggle="tab" href="#results" role="tab" aria-controls="results" aria-selected="true" class="nav-link border-0 text-uppercase font-weight-bold active">Results</a>
+      </li>
+      <li class="nav-item flex-sm">
+        <a id="answers-tab" data-toggle="tab" href="#answers" role="tab" aria-controls="answers" aria-selected="false" class="nav-link border-0 text-uppercase font-weight-bold">Answers</a>
+      </li>
+
+        </ul>
+        <!-- Rounded tabs -->
+
+        <!-- RESULTS TAB -->
+        <div id="results" role="tabpanel" aria-labelledby="results-tab" class="tab-pane fade show active results">
+
+        <section id="mainEmotions">
+            <h3>You are Feeling:</h3>
+                {{steppingStones.feelingName}}
+        </section>
+
+        <section id="sensations">
+            {{steppingStones.feelingDesc}}
+        </section>
+
+        <hr>
+
+        <section id="tendencies" style="margin-top:25px;margin-bottom:0;">
+
+        <h3>Psychological Flexibility in the Context of Current Emotions:</h3>
+        </section>
+
+            <div>
+                <p class="aaq">
+                    {{steppingStones.copingStrategyName}}
+                </p>
+
+                <div class="progress">
+                <div class="progress-done" data-done=100>
+                    100
+                </div>
+                </div>
+
+                <p id="description">
+                    {{steppingStones.copingStrategyDesc}}
+                </p>
+            </div>
+        </section>
+
+        </div>
+
+        <!-- ANSWERS TAB -->
+        <div id="answers" role="tabpanel" aria-labelledby="answers-tab" class="tab-pane fade px-4 py-5">
+        <section id="patientAnswers">
+
+          <ul class="list-group">
+            <li class="list-group-item active">Stress Level: <span style="float:right;">{{ steppingStones.stressLevel }}</span></li>
+            <li class="list-group-item">Mood: <span style="float:right;">{{ steppingStones.moodLevel }}</span></li>
+          </ul>
+
+          <div id="accordion">
+            <div class="card">
+              <!-- <div class="card-header" id="headingOne">
+                <h5 class="mb-0">
+                  <button class="btn-link" style="background-color:white;" data-toggle="collapse" data-target="#collapseOne" aria-controls="collapseOne">
+                    Keywords:
+                  </button>
+                </h5>
+              </div> -->
+
+              <div id="collapseOne" class="collapse hide" aria-labelledby="headingOne" data-parent="#accordion">
+                <div class="card-body">
+
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item">Anger</li>
+                  <li class="list-group-item">Annoyance</li>
+                  <li class="list-group-item">Distraction</li>
+                  <li class="list-group-item">Grief</li>
+                  <li class="list-group-item">Trust</li>
+                </ul>
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <hr>
+          <ul class="list-group">
+            <li class="list-group-item list-group-item-danger">Personal: {{ steppingStones.personalDesc }} </li>
+            <li class="list-group-item list-group-item-primary">Social: {{ steppingStones.socialDesc }}</li>
+            <li class="list-group-item list-group-item-success">Sleep: {{ steppingStones.sleepDesc }}</li>
+            <li class="list-group-item list-group-item-warning">Actions: {{ steppingStones.actionsDesc }}</li>
+            <li class="list-group-item list-group-item-dark">Food: {{ steppingStones.foodDesc }}</li>
+          </ul>
+
+        </section>
+        </div>
+        <!-- <button class="btn btn-outline-info">Download Results</button> -->
+
+    </div>
+  </div>
+
+<script>
+
+const progress = document.querySelector('.progress-done');
+
+progress.style.width = progress.getAttribute('data-done') + '%';
+
+ // {#if data-done = 5- 11 = Healthy, generally more accepting of situations.#}
+ // {#if else data-done = 12-19 = Average, able to cope well in most cases#}
+ // {#else = 20-25 Avoidant, has trouble releasing stressors in a healthy manner#}
+
+progress.style.opacity = 1;
+
+ const anger         = {{ steppingStones.anger }};
+ const anticipation  = {{ steppingStones.anticipation }};
+ const joy           = {{ steppingStones.joy }};
+ const trust         = {{ steppingStones.trust }};
+ const fear          = {{ steppingStones.fear }};
+ const surprise      = {{ steppingStones.surprise }};
+ const sadness       = {{ steppingStones.sadness }};
+ const disgust       = {{ steppingStones.disgust }};
+
+const ctx = document.getElementById('emoChart');
+
+const emoChart = new Chart(ctx, {
+  type: 'polarArea',
+  data: {
+    labels: ['Anger', 'Anticipation', 'Joy', 'Trust', 'Fear', 'Surprise', 'Sadness', 'Disgust'],
+    datasets: [
+      {
+        label: 'Emotions',
+        data: [anger, anticipation, joy, trust, fear, surprise, sadness, disgust],
+        backgroundColor: [
+          '#fa5252',
+          '#e3610590',
+          '#faf20590',
+          '#46fa0590',
+          '#00730890',
+          '#00cad190',
+          '#001cd190',
+          '#6e00a190',
+        ],
+        borderColor: 'white',
+        borderWidth: 1,
+      },
+    ],
+  },
+  options: {
+    maintainAspectRatio: false,
+    responsive: true,
+    scales: {
+      y: {
+        beginAtZero: true,
+        display: false,
+      },
+    },
+    plugins: {
+      legend: {
+        display: true,
+        padding: 10,
+        boxWidth: 5,
+        position: 'left',
+        align: 'left',
+        labels: {
+          usePointStyle: true,
+        },
+      },
+    },
+  },
+});
+
+</script>
+
+    
+{% endblock emoticardContent %}

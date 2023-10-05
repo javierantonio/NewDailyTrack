@@ -46,6 +46,15 @@ h6 {
   width: 100%;
 }
 
+.container-list {
+  display: flex;
+  /* align-content: center; */
+  justify-content: space-between;
+  /* flex-wrap: wrap; */
+  gap: 5rem;
+  width: 100%;
+}
+
 .chart {
   width: 40rem;
   height: 600px;
