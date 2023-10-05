@@ -1,28 +1,63 @@
-<!-- <?php
-$idPat=$_GET["idUser"];
-$patName = (new ControllerUsers)->ctrGetUserName($idPat);
-?> -->
-<table class="display table table-bordered table-hover table-striped" width="80%" cellspacing="0">
+<div class="sidebar-body">
+  <table
+    class="display emoteTable"
+    width="100%"
+    height="100%"
+    cellspacing="0"
+  >
     <thead>
-        <tr>
-          <th>Journal</th>
-        </tr>
+      <tr>
+        <th>{{user.user.first_name}}'s Journal Entries</th>
+      </tr>
     </thead>
     <tbody>
-          <tr>
-            <td>
-            <div class="btn-group group-round m-1">
-                <button class="btnShowEntries"
-                style="width:15rem;padding:10px; border-radius: 20px; border: 3px solid #57c4ff;
-                background-color: white;" patId="'.$idPat.'" patJournal="'.$value["journalid"].'">
-                '.$date.'<br>'.$time.'</button>
-                </div>
-            </td>
-        </tr>
-    </tbody>
-    <tfoot>
-      <tr>
-        <th></th>
+      <tr class="row-list">
+        {% for element in list %}
+        <td class="cell-list">
+          <a href="{% url 'selectedPatientEntry' userId=user.profileID journalId=element.id %}">
+            
+            {% if element.id == data.id %}
+            <div class="selector-container">
+              <i class="fa fa-circle-chevron-right"></i>        
+            </div>
+            <div class="btn-group group-round m-1 w-100">
+              <button class="btnEmoticardList btnSelected">{{element.title}}</button>
+            </div>
+            {% else %}
+            <div class="btn-group group-round m-1 w-100">
+              <button class="btnEmoticardList">{{element.title}}</button>
+            </div>
+            {% endif %}
+          </a>
+        </td>
+        {% endfor %}
       </tr>
-    </tfoot>
+    </tbody>
   </table>
+</div>
+
+<!-- <table class="display table table-bordered table-hover table-striped" width="80%" cellspacing="0">
+  <thead>
+      <tr>
+        <th>Journal</th>
+      </tr>
+  </thead>
+  <tbody>
+        <tr>
+          <td>
+          <div class="btn-group group-round m-1">
+              <button class="btnShowEntries"
+              style="width:15rem;padding:10px; border-radius: 20px; border: 3px solid #57c4ff;
+              background-color: white;" patId="'.$idPat.'" patJournal="'.$value["journalid"].'">
+              '.$date.'<br>'.$time.'</button>
+              </div>
+          </td>
+      </tr>
+  </tbody>
+  <tfoot>
+    <tr>
+      <th></th>
+    </tr>
+  </tfoot>
+</table> -->
+
