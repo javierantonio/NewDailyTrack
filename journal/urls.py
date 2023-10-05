@@ -27,6 +27,8 @@ urlpatterns = [
     path('viewJournalEntry/<int:entry_id>/', views.viewJournalEntry, name='viewJournalEntry'),
     path('star/', views.starJournalEntry, name='starJournalEntry'),
     path('starred/', views.starredJournalEntry, name='starredJournalEntry'),
-    path('entries/<str:userId>/', views.viewEntries, name='viewPatientEntries'),
+    # specialist view
+    path('entries/<str:userId>/', views.getJournalList, name='viewPatientEntries'),
+    path('entries/<str:userId>/s/<str:journalId>', views.getJournalFromList, name='selectedPatientEntry'),
 
 ]
