@@ -1,9 +1,33 @@
 body {
   padding: 0;
   margin: 0;
-  overflow-x: hidden;
+  overflow-y: hidden;
 }
-
+.btn-back {
+    position: absolute;
+    color: #001a3f;
+    background-color: #daeeff;
+    padding: 0.3rem 1rem;
+    border-radius: 20px;
+    text-align: left;
+    cursor: pointer;
+    text-decoration: none;
+}
+.btn-back:hover{
+    text-decoration: none;
+    color: #001a3f;
+    background-color: #c8def2;
+}
+.row-list {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  z-index: 99;
+}
+.sidebar-body{
+    -webkit-box-flex: 1;
+    padding: 1.25rem 2rem 1.25rem 1.25rem;
+}
 .cont {
   background-color: white;
   height: 100%;
@@ -21,8 +45,7 @@ body {
   background-color: white;
   overflow-y: auto;
   height: 100%;
-  z-index: -3;
-  width: 20%;
+  width: 25%;
 }
 
 .list-container {
@@ -31,8 +54,15 @@ body {
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
+  overflow: hidden;
 }
-
+.title{
+    display: flex;
+    flex-direction: row-reverse;
+    font-weight: 700;
+    font-size: 1.3rem;
+    padding-right: 1.5rem;
+}
 .card {
   width: fit-content;
 }
@@ -41,7 +71,11 @@ body {
   background-color: white;
   z-index: -3;
 }
-
+.main-body{
+    height: 100%;
+    width: 100%;
+    padding: 1rem 1.2rem;
+}
 .chart {
   width: 55%;
   height: auto;
@@ -135,4 +169,47 @@ h4 {
   border-radius: 20px;
   border: 3px solid #57c4ff;
   background-color: white;
+  z-index: 99;
+  color: #001a3f;
+  cursor: pointer;
+}
+.btnEmoticardList:hover{
+    background-color: #ebf5ff;
+}
+.btnSelected{
+    color: #001327;
+    background-color: #ebf5ff;
+}
+.selector-container {
+    display: flex;
+    justify-content: flex-end;
+    height: 100%;
+    position: absolute;
+    width: 100%;
+    padding: 1.1rem 0.4rem;
+    z-index: 999;
+    font-size: 1.2rem;
+    font-weight: 1000;
+    color: #001a3f;
+}
+.cell-list{
+    margin: 0.5rem 0;
+    position: relative;
+}
+.emoteTable{
+    display: table;
+    border-collapse: separate;
+    box-sizing: border-box;
+    text-indent: initial;
+    white-space-collapse: collapse;
+    text-wrap: wrap;
+    line-height: normal;
+    font-weight: normal;
+    font-size: medium;
+    font-style: normal;
+    color: -internal-quirk-inherit;
+    text-align: start;
+    border-spacing: 2px;
+    font-variant: normal;
+    margin-bottom: 1rem;
 }

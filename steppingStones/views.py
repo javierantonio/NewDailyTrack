@@ -1,8 +1,13 @@
 from django.core.exceptions import ValidationError
 from django.http import HttpResponse
-from django.shortcuts import render, redirect
-from registration.models import Profile, Patient
+from django.shortcuts import get_object_or_404, render, redirect
+from django.contrib.auth.decorators import login_required
+
+# models
+from registration.models import Profile, Patient, Specialist
 from steppingStones.models import SteppingStone, Keyword
+from patientDirectory.models import PatientList
+
 
 # Create your views here.
 
@@ -114,6 +119,7 @@ def steppingStoneStart(request):
                     # Create and save the SteppingStone instance
                     import uuid
                     uuid = uuid.uuid4()
+                    print(patient)
                     steppingStone = SteppingStone(
                         patient=patient,
                         # mood and stress level
@@ -244,5 +250,37 @@ def steppingStoneStart(request):
     else:
         return redirect('landing')
 
+@login_required
 def emoticardList(request, userId):
-    return render(request, 'emoticardListBase.html')
+    if request.user.is_authenticated:
+        userprofile = Profile.objects.get(user=request.user)
+        if "Specialist" in userprofile.type:
+            userProfile = Profile.objects.get(profileID = userId)            
+            emoticardList = SteppingStone.objects.filter(patient = get_object_or_404(Patient, profile=userProfile))
+            
+            return render(request, 'emoticardListBase.html', context={'list': emoticardList, 'user': userProfile} )
+
+def emoticardSelected(request, emoticardId, userId):
+    if request.user.is_authenticated:
+        userprofile = Profile.objects.get(user=request.user)
+        if "Specialist" in userprofile.type:
+            userProfile = Profile.objects.get(profileID = userId)            
+            emoticardList = SteppingStone.objects.filter(patient = get_object_or_404(Patient, profile=userProfile))
+            emoticardData = SteppingStone.objects.get(uuid = emoticardId)   
+            emoticardData.moodLevel = moodText(emoticardData.moodLevel)
+                     
+            return render(request, 'emoticardListContent.html', context={'steppingStones': emoticardData, 
+                                                                         'list': emoticardList, 
+                                                                         'user': userProfile} )
+
+def moodText(mood):
+    if mood == 1:
+        return 'Terrible'
+    elif mood == 2:
+        return 'Bad'
+    elif mood == 3:
+        return 'Okay'
+    elif mood == 4:
+        return 'Good'
+    elif mood == 5:
+        return 'Awesome'
