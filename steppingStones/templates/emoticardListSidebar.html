@@ -1,0 +1,37 @@
+<div class="sidebar-body">
+  <table
+    class="display emoteTable"
+    width="100%"
+    height="100%"
+    cellspacing="0"
+  >
+    <thead>
+      <tr>
+        <th>{{user.user.first_name}}'s Emoticard Entries</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="row-list">
+        {% for element in list %}
+        <td class="cell-list">
+          <a href="{% url 'emoticardSelected' userId=user.profileID emoticardId=element.uuid %}">
+            
+            {% if element.uuid == steppingStones.uuid %}
+            <div class="selector-container">
+              <i class="fa fa-circle-chevron-right"></i>        
+            </div>
+            <div class="btn-group group-round m-1 w-100">
+              <button class="btnEmoticardList btnSelected">{{element.created_at}}</button>
+            </div>
+            {% else %}
+            <div class="btn-group group-round m-1 w-100">
+              <button class="btnEmoticardList">{{element.created_at}}</button>
+            </div>
+            {% endif %}
+          </a>
+        </td>
+        {% endfor %}
+      </tr>
+    </tbody>
+  </table>
+</div>

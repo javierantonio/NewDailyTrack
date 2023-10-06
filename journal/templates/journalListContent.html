@@ -1,0 +1,11 @@
+{% extends 'journalListBase.html' %}
+{% block journalContent %}
+<div class="title-container">
+    <div class="title">{{data.created_at}}</div>
+</div>
+
+<div class="journal-title">{{data.title}}</div>
+<div class="container-text">
+    {{data.content|safe}}
+</div>
+{% endblock journalContent %}

@@ -1,7 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.core.mail import send_mail
 from django.http import HttpResponse, JsonResponse
-from django.shortcuts import render, redirect
+from django.shortcuts import get_object_or_404, render, redirect
 from journal import journalControllers
 from journal.models import Journal
 from registration.models import Profile
@@ -124,3 +124,31 @@ def starJournalEntry(request):
             return JsonResponse({'error': 'You do not have permission to update this entry.'})
 
     return JsonResponse({'error': 'Invalid request'})
+
+@login_required
+def viewEntries(request, userId):
+    return render(request, 'journalList.html', context={'user': userId})
+
+@login_required
+def getJournalList(request, userId):
+    if request.user.is_authenticated:
+        userprofile = Profile.objects.get(user=request.user)
+        if "Specialist" in userprofile.type:
+            userProfile = Profile.objects.get(profileID = userId)            
+            journalList = Journal.objects.filter(user = userProfile)
+            
+            return render(request, 'journalListBase.html', context={'list': journalList, 'user': userProfile} )
+
+@login_required
+def getJournalFromList(request, userId, journalId):
+    if request.user.is_authenticated:
+        userprofile = Profile.objects.get(user=request.user)
+        if "Specialist" in userprofile.type:
+            userProfile = Profile.objects.get(profileID = userId)     
+            journalList = Journal.objects.filter(user = userProfile)       
+            journalEntry = Journal.objects.get(id = journalId)
+            
+            return render(request, 'journalListContent.html', context={'list': journalList,
+                                                                    'data': journalEntry,
+                                                                    'user': userProfile} )
+

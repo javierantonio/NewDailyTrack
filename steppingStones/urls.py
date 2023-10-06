@@ -7,6 +7,8 @@ import login.views
 
 urlpatterns = [
     path('', views.steppingStoneStart, name='steppingStones'),
-    path('emoticard', views.emoticard, name='emoticard'),#for debugging purpose only
+    path('', views.emoticard, name='emoticard'),#for debugging purpose only
+    path('emoticards/<str:userId>/', views.emoticardList, name='emoticardList'),
+    path('emoticards/<str:userId>/s/<str:emoticardId>/', views.emoticardSelected, name='emoticardSelected'),
 
 ]

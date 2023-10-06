@@ -48,7 +48,8 @@ INSTALLED_APPS = [
     'steppingStones.apps.SteppingstonesConfig',
     'patientDirectory.apps.PatientdirectoryConfig',
     'profileHub.apps.ProfilehubConfig',
-    'consultationNotes.apps.ConsultationnotesConfig', # new
+    'consultationNotes.apps.ConsultationnotesConfig',
+    'patientDashboard.apps.PatientdashboardConfig', # new
 
     'allauth',
     'allauth.account',
