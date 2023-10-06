@@ -1,28 +1,75 @@
-.description{
-    display: flex;
-    align-items: center;
-    font-size: 1.5rem;
-    font-weight: 500;
-    width: 100%;
+.description {
+  display: flex;
+  align-items: center;
+  font-size: 1.5rem;
+  font-weight: 500;
+  width: 100%;
 }
-.image{
-    width: 45%;
-    height: 25%;
+.image {
+  width: 45%;
+  height: 25%;
 }
-.card-header{
-    display: flex;
-    justify-content: space-between;
+.card-header {
+  display: flex;
+  justify-content: space-between;
 }
-.card-body{
-    display: flex;
-    justify-content: space-between;
-    flex-direction: column;
+.card-body {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
 }
-.body-content{
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
+.body-content {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
 }
-.content-data{
-    width: 75%;
+.content-data {
+  width: 75%;
+}
+
+.mood-img {
+  height: 4rem;
+}
+
+.dashboard-row td {
+  height: 5.5rem;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.mood-container {
+  font-weight: 650;
+  background-color: white;
+  padding: 0.5rem 3rem;
+  border-radius: 40px;
+  border: 5px solid;
+  display: flex;
+  align-items: center;
+  width: 40%;
+  height: 3rem;
+  justify-content: center;
+  box-shadow: 3px 5px 10px rgba(0, 0, 0, 0.3);
+}
+
+.mood-cell {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.Awesome{
+    border-color: rgb(0,177,167);
+}
+.Good{
+    border-color: rgb(77,198,105);
+}
+.Okay{
+    border-color: rgb(255,171,20);
+}
+.Bad{
+    border-color: rgb(255,90,10);
+}
+.Terrible{
+    border-color: rgb(255,89,91);
 }

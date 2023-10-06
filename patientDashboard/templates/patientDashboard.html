@@ -95,7 +95,7 @@ Home
         <br>
 
         <div class="panel-body">
-          <table id="example" class="table table-striped">
+          <table id="example" display="table" class="table table-striped">
             <thead class="thead-dark">
               <tr style="text-align:center;">
 
@@ -106,14 +106,18 @@ Home
 
               </tr>
             </thead>
-
+            
             <tbody>
               {% for userData in data.items %}
-              <tr style="text-align:center;">
-
-                <!-- <td>{{ userData.0 }}</td> -->
-                <td>{{ userData.1.patientName }}</td>
-                <td>{{ userData.1.latestMood }}</td>
+              <tr class="dashboard-row">
+                <td >{{ userData.1.patientName }}</td>
+                {% if userData.1.latestMood == "No Entry" %}
+                  <td>{{ userData.1.latestMood }}</td>
+                {% else %}
+                  <td class="mood-cell">
+                    <span class="mood-container {{ userData.1.latestMood }}">{{userData.1.latestMood}}</span>
+                  </td>
+                {% endif %}               
                 <td align="center">
                   <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Select</a>
@@ -139,9 +143,9 @@ Home
 
               </tr>
               
-
+              {% endfor %}
             </tbody>
-            {% endfor %}
+            
           </table>
         </div>
       </div>

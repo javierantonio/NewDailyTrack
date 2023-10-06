@@ -256,7 +256,7 @@ def emoticardList(request, userId):
         userprofile = Profile.objects.get(user=request.user)
         if "Specialist" in userprofile.type:
             userProfile = Profile.objects.get(profileID = userId)            
-            emoticardList = SteppingStone.objects.filter(patient = get_object_or_404(Patient, profile=userProfile))
+            emoticardList = SteppingStone.objects.filter(patient = get_object_or_404(Patient, profile=userProfile)).order_by('-created_at')
             
             return render(request, 'emoticardListBase.html', context={'list': emoticardList, 'user': userProfile} )
 
@@ -265,7 +265,7 @@ def emoticardSelected(request, emoticardId, userId):
         userprofile = Profile.objects.get(user=request.user)
         if "Specialist" in userprofile.type:
             userProfile = Profile.objects.get(profileID = userId)            
-            emoticardList = SteppingStone.objects.filter(patient = get_object_or_404(Patient, profile=userProfile))
+            emoticardList = SteppingStone.objects.filter(patient = get_object_or_404(Patient, profile=userProfile)).order_by('-created_at')
             emoticardData = SteppingStone.objects.get(uuid = emoticardId)   
             emoticardData.moodLevel = moodText(emoticardData.moodLevel)
                      
@@ -274,13 +274,13 @@ def emoticardSelected(request, emoticardId, userId):
                                                                          'user': userProfile} )
 
 def moodText(mood):
-    if mood == 1:
+    if mood == 5:
         return 'Terrible'
-    elif mood == 2:
+    elif mood == 4:
         return 'Bad'
     elif mood == 3:
         return 'Okay'
-    elif mood == 4:
+    elif mood == 2:
         return 'Good'
-    elif mood == 5:
+    elif mood == 1:
         return 'Awesome'
