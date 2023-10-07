@@ -255,24 +255,35 @@ def emoticardList(request, userId):
     if request.user.is_authenticated:
         userprofile = Profile.objects.get(user=request.user)
         if "Specialist" in userprofile.type:
-            userProfile = Profile.objects.get(profileID = userId)            
-            emoticardList = SteppingStone.objects.filter(patient = get_object_or_404(Patient, profile=userProfile)).order_by('-created_at')
-            
-            return render(request, 'emoticardListBase.html', context={'list': emoticardList, 'user': userProfile} )
+            patientProfile = Profile.objects.get(profileID = userId)            
+            emoticardList = SteppingStone.objects.filter(patient = get_object_or_404(Patient, profile=patientProfile)).order_by('-created_at')
+            return render(request, 'emoticardListBase.html', context={'list': emoticardList, 'user': patientProfile, 'specialist': True} )
+        elif "Patient" in userprofile.type:       
+            emoticardList = SteppingStone.objects.filter(patient = get_object_or_404(Patient, profile=userprofile)).order_by('-created_at')
+            return render(request, 'emoticardListBase.html', context={'list': emoticardList, 'user': userprofile, 'specialist': False} )
 
 def emoticardSelected(request, emoticardId, userId):
     if request.user.is_authenticated:
         userprofile = Profile.objects.get(user=request.user)
         if "Specialist" in userprofile.type:
-            userProfile = Profile.objects.get(profileID = userId)            
-            emoticardList = SteppingStone.objects.filter(patient = get_object_or_404(Patient, profile=userProfile)).order_by('-created_at')
+            patientProfile = Profile.objects.get(profileID = userId)            
+            emoticardList = SteppingStone.objects.filter(patient = get_object_or_404(Patient, profile=patientProfile)).order_by('-created_at')
             emoticardData = SteppingStone.objects.get(uuid = emoticardId)   
             emoticardData.moodLevel = moodText(emoticardData.moodLevel)
                      
             return render(request, 'emoticardListContent.html', context={'steppingStones': emoticardData, 
                                                                          'list': emoticardList, 
-                                                                         'user': userProfile} )
-
+                                                                         'user': patientProfile} )
+        elif "Patient" in userprofile.type: 
+            print('patient')
+            emoticardList = SteppingStone.objects.filter(patient = get_object_or_404(Patient, profile=userprofile)).order_by('-created_at')
+            emoticardData = SteppingStone.objects.get(uuid = emoticardId)   
+            emoticardData.moodLevel = moodText(emoticardData.moodLevel)
+                     
+            return render(request, 'emoticardListContent.html', context={'steppingStones': emoticardData, 
+                                                                         'list': emoticardList, 
+                                                                         'user': userprofile} )
+        
 def moodText(mood):
     if mood == 5:
         return 'Terrible'
