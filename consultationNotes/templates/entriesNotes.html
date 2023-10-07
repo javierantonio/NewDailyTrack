@@ -28,18 +28,20 @@
         $title = $value['entrytitle']; -->
         
     <td>
-      <a title="Click to open article" href="{% url 'view' entry_id=entry.id %}">{{ entry.notesTitle }}</a>
+      <a title="Click to Open Article" href="{% url 'noteOpen' userId=entry.patient.profileID entryId=entry.uuid %}">
+        {{ entry.notesTitle }}
+      </a>
     </td>
     <td style="text-align: center;">
       <span class="created-at"> {{ entry.created_at}} </span>
     </td>
   
     <td  style="text-align: center;">
-      <a title="Delete Article" href="{% url 'delete' entry_id=entry.id %}">
+      <a title="Delete Article" href="{% url 'delete' entryId=entry.uuid %}">
 
           <i class="fa fa-trash" aria-hidden="true"></i>
       </a>
-  </td>
+    </td>
   
   
         <!-- <td>

@@ -11,7 +11,7 @@
     <li>
       <!-- <?php if(@$_GET['q1']==1) echo 'active';?> -->
       <div class="speccamenu">
-        <a href=""
+        <a href="{% url 'notesCreate' userId=patient.profileID %}"
           ><i class="fa fa-pencil caf" aria-hidden="true"></i>
           <span class="cas">Compose</span></a
         >
@@ -20,7 +20,7 @@
 
     <li>
       <div class="speccamenu">
-        <a href="{% url 'notesEntries' %}"
+        <a href="{% url 'noteView' userId=patient.profileID %}"
           ><i class="fa fa-archive caf" aria-hidden="true"></i>
           <span class="cas">Patient Notes</span></a
         >

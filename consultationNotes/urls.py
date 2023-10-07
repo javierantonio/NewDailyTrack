@@ -4,16 +4,10 @@ from django.urls import path, include
 from . import views
 
 urlpatterns = [
-
-    path('notes/', views.notesHome, name='notesDev'),           # for development purposes only
-    path('notes/<str:userId>/', views.notesHome, name='notes'),
-    path('entries/', views.viewEntries, name='notesEntries'),
+    # path('notes/', views.notesHome, name='notesDev'), # for development purposes only
+    path('create/<str:userId>/', views.notesHome, name='notesCreate'),
+    # path('entries/', views.viewEntries, name='notesEntries'),
     path('entries/<str:userId>/', views.viewEntries, name='noteView'),
-    path('entries/<str:userId>/<int:entryId>/', views.viewEntries, name='noteView'),
-    path('delete/<int:entry_id>/', views.deleteNotes, name='delete'),
-    path('view/<int:entry_id>/', views.viewNotes, name='view'),
-    # path('star/', views.starJournalEntry, name='starJournalEntry'),
-    # path('starred/', views.starredJournalEntry, name='starredJournalEntry'),
-
-
+    path('entries/<str:userId>/o/<str:entryId>/', views.openEntry, name='noteOpen'),
+    path('delete/<str:entryId>/', views.deleteNotes, name='delete'),
 ]
