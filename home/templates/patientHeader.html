@@ -34,13 +34,13 @@
                 </li>
 
                 <li class="nav-item active">
-                    <a class="nav-link" href="emoticards.html"><i class="fa fa-chart-pie fa-fw mr-1"></i> Emoticards</a>
+                    <a class="nav-link" href="{% url 'emoticardList' userId=request.session.id %}"><i class="fa fa-chart-pie fa-fw mr-1"></i> Emoticards</a>
                 </li>
 
                 <li class="nav-item dropdown no-arrow">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                       {{ user.email }}
+                       {{ request.user.email }}
                     </a>
 
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">

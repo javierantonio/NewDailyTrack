@@ -23,7 +23,7 @@ def home(request):
         profile = Profile.objects.get(user=request.user)
         if profile.type == "Specialist":
             return redirect(reverse('specialistHome'))
-        elif profile.type == "Patient":
+        elif profile.type == "Patient":            
             return redirect(reverse('patientHome'))
         return HttpResponse("User is logged in as " + request.user.username)
 
@@ -44,6 +44,7 @@ def login(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             django.contrib.auth.login(request, user)
+            request.session['id'] = Profile.objects.get(user=request.user).profileID
             return redirect(reverse('landing'))
         else:
             return render(request, 'login.html', {'error_message': 'Incorrect Username or Password'})
