@@ -41,14 +41,21 @@ def login(request):
     if request.method == "POST":
         username = request.POST.get('useremail')
         password = request.POST.get('password')
-        user = authenticate(request, username=username, password=password)
-        if user is not None:
-            django.contrib.auth.login(request, user)
-            request.session['id'] = Profile.objects.get(user=request.user).profileID
-            return redirect(reverse('landing'))
-        else:
-            return render(request, 'login.html', {'error_message': 'Incorrect Username or Password'})
-
+        try:
+            profile = User.objects.get(username=username)
+            if profile is not None:
+                user = authenticate(request, username=username, password=password)
+                print(user)
+                if user is not None:
+                    django.contrib.auth.login(request, user)
+                    request.session['id'] = Profile.objects.get(user=request.user).profileID
+                    return redirect(reverse('landing'))
+                else:
+                    return render(request, 'login.html', {'error_message': 'Invalid Username or Password.', 'error_header':'❗Oops, Invalid Credentials.'})
+            else:
+                return render(request, 'login.html', {'error_message': 'Account does not exist!', 'error_header':'❗Oops, Invalid Credentials.'})
+        except:
+            return render(request, 'login.html', {'error_message': 'Account does not exist!', 'error_header':'❗Oops, Invalid Credentials.'})
     elif request.method == "GET":
         if request.user.is_authenticated:
             try:

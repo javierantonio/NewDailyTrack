@@ -154,8 +154,8 @@ User Registration
                                         <br>
                                         <p align="center"><a href="{% url 'loginPage' %}">Login instead?</a></p>
                                         
-                                        {% load socialaccount %}
-                                        <a href="{% provider_login_url 'google' %}">Login With Google</a>
+                                        {# load socialaccount #}
+                                        <!-- <a href="{# provider_login_url 'google' #}">Login With Google</a> -->
 
                                     </div>
                                   </form>
@@ -166,6 +166,39 @@ User Registration
               </div>
           </div>
       </div>
+
+      {% if error_message %}
+<div class="modal fade" id="invalidPassword" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="invalidPassword" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="invalidPasswordLabel">{{error_header}}</h5>
+        <button type="button" class="close btn-close" data-bs-dismiss="modal" aria-label="Close">x</button>
+      </div>
+      <div class="modal-body">
+          {{error_message}}
+      </div>
+      <div class="modal-footer">
+        <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
+        <button type="button" class="btn btn-primary btn-close-footer">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+{% endif %}
+<script>
+  $(document).ready(function () {
+    $('#invalidPassword').modal('show');
+  });
+  var closeBtn = document.querySelector('.btn-close');
+  var closeFooterBtn = document.querySelector('.btn-close-footer');
+  closeBtn.addEventListener('click', function() {
+    $('#invalidPassword').modal('hide');
+  });
+  closeFooterBtn.addEventListener('click', function() {
+    $('#invalidPassword').modal('hide');
+  });
+</script>
     </body>
 
 
