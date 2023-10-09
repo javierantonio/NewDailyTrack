@@ -1,6 +1,10 @@
+body{
+  background-color: #20b8be;
+}
+
 .specjournal {
   /* background-image: url("../img/bg/journal_bg.png"); */
-  background-color: #f6f6f6;
+  background-color: #20b8be;
   overflow-y: auto;
   scroll-behavior: smooth;
   display: flex;
@@ -42,12 +46,18 @@
 .specjournal-menu li a:hover {
   text-decoration: none;
   color: #bcf6ff;
-  font-size: 22px;
+  font-size: 18px;
   border-left: 3px solid;
   border-color: #bcf6ff;
   color: #bcf6ff;
   cursor: pointer;
+  transition: transform 5s, filter 3s ease-in-out;
   /* transform: scale(1.1); */
+}
+
+.caf{
+  margin: 5px;
+  font-size: 1rem;
 }
 
 .speccamenu {
@@ -172,12 +182,12 @@
 }
 
 .bich2 {
-  min-height: 80vh;
+  min-height: 100vh;
   border-top: 2px solid;
   border-bottom: 2px solid;
   border-color: #eee;
   background: transparent;
-  margin: 90px 20px 0 30px;
+  margin: 0px 20px 0 30px;
 }
 
 .form-control {

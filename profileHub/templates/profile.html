@@ -94,6 +94,7 @@
       </ul>
     </div>
   </div>
+
   <!-- menu -->
   <div class="col-md-8 right-div">
     <div class="card mb-3">
@@ -130,6 +131,23 @@
               </button>
             </li>
             {% endif %}
+
+            <li class="nav-item" role="presentation">
+              <button
+                class="nav-link"
+                id="specialistsAdded-tab"
+                data-bs-toggle="pill"
+                data-bs-target="#specialistsAdded"
+                type="button"
+                role="tab"
+                aria-controls="specialistsAdded"
+                aria-selected="false"
+              >
+                Your Added Specialists
+              </button>
+            </li>
+
+
             <li class="nav-item" role="presentation">
               <button
                 class="nav-link"
@@ -145,6 +163,8 @@
               </button>
             </li>
           </ul>
+
+
 
           <div class="tab-content" id="pills-tabContent">
             <!-- Appointment Table-->
@@ -196,6 +216,47 @@
                   placeholder="Enter 6-character code"
                 />
               </div>
+              <button class="btn btn-info">Confirm</button>
+            </div>
+
+            <!--Specialist Added Tab-->
+
+            <div
+              class="tab-pane fade specialistsAdded"
+              id="specialistsAdded"
+              role="tabpanel"
+              aria-labelledby="specialistsAdded-tab"
+            >
+              <div class="container">
+                <label for="specialistsAdded" style="font-size: larger; color: rgb(19, 156, 194); font-weight: bold;">
+                  Your Specialists</label>
+              </div>
+              <div class="container">
+                <p>In this dedicated section, you'll discover an organized list of the mental health specialists with whom you've been
+                   paired. Each entry in this list represents a professional who can offer guidance, expertise, and assistance tailored to your 
+                   unique needs.</p>
+              </div>
+              <table class="table table-bordered patientHistory">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Psychologist Name</th>
+                    <th scope="col">Contact Number</th>
+                    <th scope="col">Clinic Address</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  <tr>
+                    <th scope="row">1</th>
+                    <td>Dr. Mark Toronto</td>
+                    <td>434-4467</td>
+                    <td>6209 Aiden Flat Apt. 737</td>
+                  </tr>
+
+                
+                </tbody>
+              </table>
             </div>
 
             <!-- History Table-->
