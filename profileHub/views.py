@@ -5,6 +5,7 @@ from django.urls import reverse
 #Import Models
 from registration.models import Profile, Patient, Specialist
 from . import profileForms
+from patientDirectory.models import Enrollment, PatientList
 # from profileHub.models import EditProfile
 #from appointment.models import Appointment
 #from reports.models import ReportsSummaries
@@ -19,7 +20,6 @@ def getPatient(request):
     if request.user.is_authenticated:
         userData = Profile.objects.get(user=request.user)
         patientData = Patient.objects.get(profile=userData)
-
         if (patientData):
             context = {'type': userData.type,
                     'firstName': userData.user.first_name,
@@ -100,21 +100,24 @@ def getSpecialist(request):
         userData = Profile.objects.get(user=request.user)
         specialistData = Specialist.objects.get(profile=userData)
         # return HttpResponse(specialistData)
-        context = {
-            'type': userData.type,
-            'firstName': userData.user.first_name,
-            'lastName': userData.user.last_name,
-            'email': userData.user,
-            'birthday': userData.birthday,
-            'phone': userData.phone,
-            'address': userData.address,
-            'image': userData.image,
-            'licenseNumber': specialistData.licenseNumber,
-            'licenseExpiry': specialistData.licenseExpiry,
-            'prcID': specialistData.prcID,
-            'specialistType': specialistData.specialistType,                    
-        }
-        return render(request, 'profile.html', context=context)
+        if(request.method == "POST"):
+            addPatient(request, userData)
+        else:
+            context = {
+                'type': userData.type,
+                'firstName': userData.user.first_name,
+                'lastName': userData.user.last_name,
+                'email': userData.user,
+                'birthday': userData.birthday,
+                'phone': userData.phone,
+                'address': userData.address,
+                'image': userData.image,
+                'licenseNumber': specialistData.licenseNumber,
+                'licenseExpiry': specialistData.licenseExpiry,
+                'prcID': specialistData.prcID,
+                'specialistType': specialistData.specialistType,                    
+            }
+            return render(request, 'profile.html', context={'data':context,'patientsData':getPatientDirectory(request.user)})
     return HttpResponse("You do not have permission to view this entrsy.")
 
 @login_required
@@ -149,3 +152,23 @@ def editSpecialist(request):
         return render(request, 'editProfile.html', context=context)
     return redirect(reverse('specialistHub'))
 
+def getPatientDirectory(userData):
+    specialistId = Specialist.objects.get(profile = Profile.objects.get(user=userData))
+    pendingPatients = Enrollment.objects.filter(specialist = specialistId).order_by('created_at')
+    if pendingPatients:
+        print(pendingPatients[0].enrollmentCode)
+    return pendingPatients
+
+#PATIENT MANAGEMENT
+def addPatient(request, userProfile):
+    try:
+        newPatient = Enrollment.objects.create(
+            specialist = Specialist.objects.get(profile = userProfile),
+            patientEmail = request.POST['patientEmail'],
+            enrollmentStatus = "P"
+        )
+        newPatient.save()
+        print('SUCCESS')
+    except Exception as e:
+        print(e)
+        
