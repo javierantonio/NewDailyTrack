@@ -11,6 +11,7 @@ urlpatterns = [
     path('specialist-hub/', views.getSpecialist, name='specialistHub'),
     path('patient-hub/edit/', views.editPatient, name='patientEdit'),
     path('specialist-hub/edit/', views.editSpecialist, name='specialistEdit'),
+    path('', views.removeInvitedPatient, name='disconnectPatient'),
     # path('appointments/', views.patientAppointments, name='patientAppointments'),
     # path('appointments/', views.specialistAppointments, name='specialistAppointments'),
     # path('reports/', views.patientReports, name='patientReports'),

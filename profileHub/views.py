@@ -115,22 +115,21 @@ def getSpecialist(request):
         # return HttpResponse(specialistData)
         if(request.method == "POST"):
             addPatient(request.POST['patientEmail'], userData)
-        else:
-            context = {
-                'type': userData.type,
-                'firstName': userData.user.first_name,
-                'lastName': userData.user.last_name,
-                'email': userData.user,
-                'birthday': userData.birthday,
-                'phone': userData.phone,
-                'address': userData.address,
-                'image': userData.image,
-                'licenseNumber': specialistData.licenseNumber,
-                'licenseExpiry': specialistData.licenseExpiry,
-                'prcID': specialistData.prcID,
-                'specialistType': specialistData.specialistType,                    
-            }
-            return render(request, 'profile.html', context={'data':context,'patientsData':getPatientDirectory(request.user)})
+        context = {
+            'type': userData.type,
+            'firstName': userData.user.first_name,
+            'lastName': userData.user.last_name,
+            'email': userData.user,
+            'birthday': userData.birthday,
+            'phone': userData.phone,
+            'address': userData.address,
+            'image': userData.image,
+            'licenseNumber': specialistData.licenseNumber,
+            'licenseExpiry': specialistData.licenseExpiry,
+            'prcID': specialistData.prcID,
+            'specialistType': specialistData.specialistType,                    
+        }
+        return render(request, 'profile.html', context={'data':context,'patientsData':getPatientDirectory(request.user)})
     return HttpResponse("You do not have permission to view this entrsy.")
 
 @login_required
@@ -222,3 +221,14 @@ def registerSpecialist(enrolledAccount, patientDetails):
             print('code no longer available')
     except Exception as e:
         print(e)
+
+def removeInvitedPatient(request):
+    print('hmmmm ')
+    # terminateCodeModal = True
+    return render(request, 'profile.html')
+
+def confirmRemove(code):
+    patient = PatientList.objects.get(enrollmentCode = code)
+    patient.patientListStatus = 'I'
+    patient.save()
+    
