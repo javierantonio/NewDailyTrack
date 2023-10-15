@@ -37,8 +37,10 @@
             <!-- Add user id in the link -->
             {% if data.type == 'Patient'  %}
             <a href="{% url 'patientEdit' %}">
-            {% else %}
+            {% elif data.type == 'Specialist'  %}
             <a href="{% url 'specialistEdit' %}">
+            {% else %}
+            <a href="">
             {% endif %} 
               <button class="btn btn-outline-info editProfile">
                 ✏️ Edit Profile
@@ -133,15 +135,15 @@
             <li class="nav-item" role="presentation">
               <button
                 class="nav-link"
-                id="pills-profile-tab"
+                id="add-specialist-tab"
                 data-bs-toggle="pill"
-                data-bs-target="#pills-profile"
+                data-bs-target="#add-specialist"
                 type="button"
                 role="tab"
-                aria-controls="pills-profile"
+                aria-controls="add-specialist"
                 aria-selected="false"
               >
-                Input Specialist Code
+                Register a Specialist
               </button>
             </li>
             {% endif %}
@@ -264,42 +266,48 @@
               <table class="table table-bordered patientHistory">
                 <thead>
                   <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Psychologist Name</th>
-                    <th scope="col">Contact Number</th>
-                    <th scope="col">Email Address</th>
+                    <th scope="col">Enrollment Code</th>
+                    <th scope="col">Specialist Name</th>   
+                    <th scope="col">Contact Number</th>                                       
+                    <th scope="col">Date Started</th>   
+                    <th scope="col">Actions</th>                   
                   </tr>
                 </thead>
 
                 <tbody>
+                  {% for specialist in specialistData.items %}
                   <tr>
-                    <th scope="row">1</th>
-                    <td>Dr. Mark Toronto</td>
-                    <td>434-4467</td>
-                    <td>6209 Aiden Flat Apt. 737</td>
+                    <th scope="row">{{ specialist.1.enrollmentCode }}</th>
+                    <td>{{ specialist.1.specialistName }}</td>
+                    <td>{{ specialist.1.contactNumber }}</td>
+                    <td>{{ specialist.1.dateStarted }}</td>
+                    <td><i class="fa-solid fa-eye fa-sm fa-fw mr-1"></i>View</td>
                   </tr>
-
-                
+                  {% endfor %}
                 </tbody>
               </table>
             </div>
 
+            <!-- Generate a Success Pop-Up after submitting -->
             <div
               class="tab-pane fade patientCode"
-              id="pills-profile"
+              id="add-specialist"
               role="tabpanel"
-              aria-labelledby="pills-profile-tab"
+              aria-labelledby="add-specialist-tab"
             >
-              <div class="form-group">
-                <label for="specialistCode">Input Specialist Code:</label>
+              <form class="form-group" role="form" method="post">
+                {% csrf_token %}
+                <label for="specialistCode">Enrollment Code:</label>
                 <input
                   type="text"
                   class="form-control"
-                  id="specialistCode"
-                  placeholder="Enter 6-character code"
+                  id="enrollment-code"
+                  name="enrollmentCode"
+                  placeholder="Enter enrollment code"
                 />
-              </div>
-              <button class="btn btn-info">Confirm</button>
+                <button type="submit" class="btn btn-info">Register Specialist</button>
+              </form>
+              
             </div>
 
             

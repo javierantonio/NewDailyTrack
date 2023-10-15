@@ -8,7 +8,7 @@ class Enrollment(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     enrollmentCode = models.CharField(max_length=6, unique=True, default=uuid.uuid4().hex[:6])
-        #   Auto generates a 8 digit code for the patient to enter in the app to verify the enrollment
+        #   Auto generates a 6 digit code for the patient to enter in the app to verify the enrollment
     enrollmentStatus = models.CharField(max_length=2, null=True)
         #   Different Enrollment Status and functions
         #   1. P - Pending. A patient who has not yet availed the code.
@@ -21,6 +21,7 @@ class PatientList(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     patientListStatus = models.CharField(max_length=2, null=True)
+    enrollmentCode = models.OneToOneField(Enrollment, on_delete=models.CASCADE)
         #   Different Patient List Status and functions
         #   1. A - Active. A patient who is currently being monitored by the specialist.
         #   2. I - Inactive. A patient who is no longer being monitored by the specialist.

@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse, JsonResponse
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse
+from django.core.exceptions import ObjectDoesNotExist
 #Import Models
 from registration.models import Profile, Patient, Specialist
 from . import profileForms
@@ -20,31 +21,43 @@ def getPatient(request):
     if request.user.is_authenticated:
         userData = Profile.objects.get(user=request.user)
         patientData = Patient.objects.get(profile=userData)
-        if (patientData):
-            context = {'type': userData.type,
-                    'firstName': userData.user.first_name,
-                    'lastName': userData.user.last_name,
-                    'email': userData.user,
-                    'birthday': userData.birthday,
-                    'phone': userData.phone,
-                    'address': userData.address,
-                    'image': userData.image,
-                    'patientType': patientData.patientType,
-                    'guardianEmail': patientData.guardianEmail,                    
-                    }
+        if(request.method == "POST"):
+            try:
+                enrolledAccount = Enrollment.objects.get(enrollmentCode = request.POST['enrollmentCode'])
+                try:
+                    if (PatientList.objects.get(specialist = enrolledAccount.specialist, patient = patientData)):
+                        print("account already registered to the specialist")
+                except ObjectDoesNotExist:
+                    registerSpecialist(enrolledAccount, patientData)
+            except:
+                print("code doesn't exist")
         else:
-            context = {'type': userData.type,
-                    'firstName': userData.user.first_name,
-                    'lastName': userData.user.last_name,
-                    'email': userData.user,
-                    'birthday': userData.birthday,
-                    'phone': userData.phone,
-                    'address': userData.address,
-                    'image': userData.image,
-                    # 'patientType': patientData.patientType,
-                    }
-        # return HttpResponse(userData.type)
-        return render(request, 'profile.html', context=context)
+            if (patientData):
+                context = {'type': userData.type,
+                        'firstName': userData.user.first_name,
+                        'lastName': userData.user.last_name,
+                        'email': userData.user,
+                        'birthday': userData.birthday,
+                        'phone': userData.phone,
+                        'address': userData.address,
+                        'image': userData.image,
+                        'patientType': patientData.patientType,
+                        'guardianEmail': patientData.guardianEmail,                    
+                        }
+            else:
+                context = {'type': userData.type,
+                        'firstName': userData.user.first_name,
+                        'lastName': userData.user.last_name,
+                        'email': userData.user,
+                        'birthday': userData.birthday,
+                        'phone': userData.phone,
+                        'address': userData.address,
+                        'image': userData.image,
+                        # 'patientType': patientData.patientType,
+                        }
+            # return HttpResponse(userData.type)
+            print(getRegisteredSpecialists(userData.user))
+            return render(request, 'profile.html', context={'data':context, 'specialistData': getRegisteredSpecialists(userData.user)})
     return redirect('landing')
 
 @login_required
@@ -101,7 +114,7 @@ def getSpecialist(request):
         specialistData = Specialist.objects.get(profile=userData)
         # return HttpResponse(specialistData)
         if(request.method == "POST"):
-            addPatient(request, userData)
+            addPatient(request.POST['patientEmail'], userData)
         else:
             context = {
                 'type': userData.type,
@@ -126,11 +139,11 @@ def editSpecialist(request):
     specialistData = Specialist.objects.get(profile=userData)
 
     if request.method == 'POST':
-            if profileForms.specialistUpdate(request):
-                print('success')
-                return reverse('')
-            else:
-                print('failed')
+        if profileForms.specialistUpdate(request):
+            print('success')
+            return reverse('')
+        else:
+            print('failed')
     else:
         context = {
             'type': userData.type,
@@ -155,16 +168,33 @@ def editSpecialist(request):
 def getPatientDirectory(userData):
     specialistId = Specialist.objects.get(profile = Profile.objects.get(user=userData))
     pendingPatients = Enrollment.objects.filter(specialist = specialistId).order_by('created_at')
-    if pendingPatients:
-        print(pendingPatients[0].enrollmentCode)
     return pendingPatients
 
+def getRegisteredSpecialists(userData):
+    specialistArray = {}
+    index = 0
+    patientId = Patient.objects.get(profile = Profile.objects.get(user=userData))
+    patientList = PatientList.objects.filter(patient = patientId).order_by('created_at')
+    print(patientList)
+    for element in patientList:
+        print(element)
+        specialistDetails = Profile.objects.get(email = element.specialist)
+        specialistArray[index] = {
+            'enrollmentCode': element.enrollmentCode.enrollmentCode,
+            'specialistName': specialistDetails.user.first_name+' '+specialistDetails.user.last_name,
+            'contactNumber': specialistDetails.phone,
+            'email': specialistDetails.email,
+            'dateStarted': element.created_at,
+        }
+        index+=1
+    return specialistArray
+
 #PATIENT MANAGEMENT
-def addPatient(request, userProfile):
+def addPatient(patientEmail, userProfile):
     try:
         newPatient = Enrollment.objects.create(
             specialist = Specialist.objects.get(profile = userProfile),
-            patientEmail = request.POST['patientEmail'],
+            patientEmail = patientEmail,
             enrollmentStatus = "P"
         )
         newPatient.save()
@@ -172,3 +202,23 @@ def addPatient(request, userProfile):
     except Exception as e:
         print(e)
         
+def registerSpecialist(enrolledAccount, patientDetails):
+    try:     
+        # if (PatientList.objects.get(specialist = enrolledAccount.specialist, patient = patientDetails))
+        if (enrolledAccount.enrollmentStatus == "P"):
+            enrolledAccount.enrollmentStatus = "A"
+
+            newPatient = PatientList.objects.create(
+                specialist = enrolledAccount.specialist,
+                patient = patientDetails,
+                patientListStatus = "A",
+                enrollmentCode = enrolledAccount
+            )
+
+            enrolledAccount.save()
+            newPatient.save()
+            print('SUCCESS')
+        else:
+            print('code no longer available')
+    except Exception as e:
+        print(e)
