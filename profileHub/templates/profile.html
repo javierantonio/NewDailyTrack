@@ -30,15 +30,17 @@
           />
 
           <div class="mt-3">
-            <h4 class="patientName">{{ firstName }} {{ lastName }}</h4>
-            <p class="text-secondary mb-1 patientEmail"> {{email}} </p>
+            <h4 class="patientName">{{data.firstName }} {{data.lastName }}</h4>
+            <p class="text-secondary mb-1 patientEmail"> {{data.email}} </p>
             <hr />
 
             <!-- Add user id in the link -->
-            {% if type == 'Patient'  %}
+            {% if data.type == 'Patient'  %}
             <a href="{% url 'patientEdit' %}">
-            {% else %}
+            {% elif data.type == 'Specialist'  %}
             <a href="{% url 'specialistEdit' %}">
+            {% else %}
+            <a href="">
             {% endif %} 
               <button class="btn btn-outline-info editProfile">
                 ✏️ Edit Profile
@@ -56,28 +58,28 @@
           class="list-group-item d-flex justify-content-between align-items-center flex-wrap"
         >
           <h6 class="mb-0">License Number</h6>
-          <span class="text-secondary">{{licenseNumber}}</span>
+          <span class="text-secondary">{{data.licenseNumber}}</span>
         </li>
         {% endif %}
         <li
           class="list-group-item d-flex justify-content-between align-items-center flex-wrap"
         >
           <h6 class="mb-0">Contact Number</h6>
-          <span class="text-secondary">{{phone}}</span>
+          <span class="text-secondary">{{data.phone}}</span>
         </li>
 
         <li
           class="list-group-item d-flex justify-content-between align-items-center flex-wrap"
         >
           <h6 class="mb-0">Birth Date</h6>
-          <span class="text-secondary">{{birthday}}</span>
+          <span class="text-secondary">{{data.birthday}}</span>
         </li>
 
         <li
           class="list-group-item d-flex justify-content-between align-items-center flex-wrap"
         >
           <h6 class="mb-0">Address</h6>
-          <span class="text-secondary">{{address}}</span>
+          <span class="text-secondary">{{data.address}}</span>
         </li>
 
         <!--If patient is above 18, get rid of this section-->
@@ -87,7 +89,7 @@
           class="list-group-item d-flex justify-content-between align-items-center flex-wrap"
         >
           <h6 class="mb-0">Guardian E-mail</h6>
-          <span class="text-secondary">{{guardianEmail}}</span>
+          <span class="text-secondary">{{data.guardianEmail}}</span>
         </li>
         {% endif %}
         
@@ -101,7 +103,7 @@
       <div class="card-body">
         <div class="row">
           <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-            <li class="nav-item" role="presentation">
+            <!-- <li class="nav-item" role="presentation">
               <button
                 class="nav-link active"
                 id="pills-home-tab"
@@ -114,61 +116,103 @@
               >
                 Appointments
               </button>
-            </li>
-            {% if type == 'Patient'  %}
+            </li> -->
+            {% if data.type == 'Patient'  %}
             <li class="nav-item" role="presentation">
               <button
-                class="nav-link"
-                id="pills-profile-tab"
-                data-bs-toggle="pill"
-                data-bs-target="#pills-profile"
-                type="button"
-                role="tab"
-                aria-controls="pills-profile"
-                aria-selected="false"
-              >
-                Input Specialist Code
-              </button>
-            </li>
-            {% endif %}
-
-            <li class="nav-item" role="presentation">
-              <button
-                class="nav-link"
+                class="nav-link active"
                 id="specialistsAdded-tab"
                 data-bs-toggle="pill"
                 data-bs-target="#specialistsAdded"
                 type="button"
                 role="tab"
                 aria-controls="specialistsAdded"
-                aria-selected="false"
+                aria-selected="true"
               >
                 Your Added Specialists
               </button>
             </li>
-
-
             <li class="nav-item" role="presentation">
               <button
                 class="nav-link"
-                id="pills-contact-tab"
+                id="add-specialist-tab"
                 data-bs-toggle="pill"
-                data-bs-target="#pills-contact"
+                data-bs-target="#add-specialist"
                 type="button"
                 role="tab"
-                aria-controls="pills-contact"
+                aria-controls="add-specialist"
                 aria-selected="false"
               >
-                History
+                Register a Specialist
               </button>
             </li>
+            {% endif %}
+
+            {% if data.type == 'Specialist'  %}
+            <li class="nav-item" role="presentation">
+              <button
+                class="nav-link active"
+                id="active-patients-tab"
+                data-bs-toggle="pill"
+                data-bs-target="#active-patients"
+                type="button"
+                role="tab"
+                aria-controls="active-patients"
+                aria-selected="true"
+              >
+                Active Patients
+              </button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button
+                class="nav-link"
+                id="pending-patients-tab"
+                data-bs-toggle="pill"
+                data-bs-target="#pending-patients"
+                type="button"
+                role="tab"
+                aria-controls="pending-patients"
+                aria-selected="false"
+              >
+                Pending Patients
+              </button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button
+                class="nav-link"
+                id="history-patients-tab"
+                data-bs-toggle="pill"
+                data-bs-target="#history-patients"
+                type="button"
+                role="tab"
+                aria-controls="history-patients"
+                aria-selected="false"
+              >
+                Patient History
+              </button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button
+                class="nav-link"
+                id="add-patient-tab"
+                data-bs-toggle="pill"
+                data-bs-target="#add-patient"
+                type="button"
+                role="tab"
+                aria-controls="add-patient"
+                aria-selected="false"
+              >
+                Add New Patient
+              </button>
+            </li>
+            {% endif %}
           </ul>
 
 
 
           <div class="tab-content" id="pills-tabContent">
             <!-- Appointment Table-->
-            <div
+            <!-- <div
               class="tab-pane fade show active patientAppointments"
               id="pills-home"
               role="tabpanel"
@@ -199,37 +243,20 @@
                   </tr>
                 </tbody>
               </table>
-            </div>
+            </div> -->
 
-            <div
-              class="tab-pane fade patientCode"
-              id="pills-profile"
-              role="tabpanel"
-              aria-labelledby="pills-profile-tab"
-            >
-              <div class="form-group">
-                <label for="specialistCode">Input Specialist Code:</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="specialistCode"
-                  placeholder="Enter 6-character code"
-                />
-              </div>
-              <button class="btn btn-info">Confirm</button>
-            </div>
-
+            {% if data.type == 'Patient'  %}
             <!--Specialist Added Tab-->
 
             <div
-              class="tab-pane fade specialistsAdded"
+              class="tab-pane show active specialistsAdded"
               id="specialistsAdded"
               role="tabpanel"
               aria-labelledby="specialistsAdded-tab"
             >
               <div class="container">
                 <label for="specialistsAdded" style="font-size: larger; color: rgb(19, 156, 194); font-weight: bold;">
-                  Your Specialists</label>
+                  Your Specialist/s</label>
               </div>
               <div class="container">
                 <p>In this dedicated section, you'll discover an organized list of the mental health specialists with whom you've been
@@ -239,32 +266,87 @@
               <table class="table table-bordered patientHistory">
                 <thead>
                   <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Psychologist Name</th>
-                    <th scope="col">Contact Number</th>
-                    <th scope="col">Clinic Address</th>
+                    <th scope="col">Enrollment Code</th>
+                    <th scope="col">Specialist Name</th>   
+                    <th scope="col">Contact Number</th>                                       
+                    <th scope="col">Date Started</th>   
+                    <th scope="col">Actions</th>                   
                   </tr>
                 </thead>
 
                 <tbody>
+                  {% for specialist in specialistData.items %}
                   <tr>
-                    <th scope="row">1</th>
-                    <td>Dr. Mark Toronto</td>
-                    <td>434-4467</td>
-                    <td>6209 Aiden Flat Apt. 737</td>
+                    <th scope="row">{{ specialist.1.enrollmentCode }}</th>
+                    <td>{{ specialist.1.specialistName }}</td>
+                    <td>{{ specialist.1.contactNumber }}</td>
+                    <td>{{ specialist.1.dateStarted }}</td>
+                    <td><i class="fa-solid fa-eye fa-sm fa-fw mr-1"></i>View</td>
                   </tr>
-
-                
+                  {% endfor %}
                 </tbody>
               </table>
             </div>
 
+            <!-- Generate a Success Pop-Up after submitting -->
+            <div
+              class="tab-pane fade patientCode"
+              id="add-specialist"
+              role="tabpanel"
+              aria-labelledby="add-specialist-tab"
+            >
+              <form class="form-group" role="form" method="post">
+                {% csrf_token %}
+                <label for="specialistCode">Enrollment Code:</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="enrollment-code"
+                  name="enrollmentCode"
+                  placeholder="Enter enrollment code"
+                />
+                <button type="submit" class="btn btn-info">Register Specialist</button>
+              </form>
+              
+            </div>
+
+            
+            {% endif %}
+
+            {% if data.type == 'Specialist'  %}
             <!-- History Table-->
             <div
               class="tab-pane fade patientHistory"
-              id="pills-contact"
+              id="pending-patients"
               role="tabpanel"
-              aria-labelledby="pills-contact-tab"
+              aria-labelledby="pending-patients-tab"
+            >
+            
+              <table class="table table-bordered patientHistory">
+                <thead>
+                  <tr>
+                    <th scope="col">Patient Code</th>
+                    <th scope="col">Patient Email</th>                    
+                    <th scope="col">Date Invited</th>                    
+                  </tr>
+                </thead>
+
+                <tbody>
+                  {% for patient in patientsData %}
+                  <tr>
+                    <th scope="row">{{ patient.enrollmentCode }}</th>
+                    <td>{{ patient.patientEmail }}</td>
+                    <td>{{ patient.created_at }}</td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+            <div
+              class="tab-pane fade patientHistory"
+              id="active-patients"
+              role="tabpanel"
+              aria-labelledby="active-patients-tab"
             >
               <table class="table table-bordered patientHistory">
                 <thead>
@@ -293,6 +375,64 @@
                 </tbody>
               </table>
             </div>
+            <div
+              class="tab-pane fade patientHistory"
+              id="history-patients"
+              role="tabpanel"
+              aria-labelledby="history-patients-tab"
+            >
+              <table class="table table-bordered patientHistory">
+                <thead>
+                  <tr>
+                    <th scope="col">Appointment</th>
+                    <th scope="col">Psychologist Name</th>
+                    <th scope="col">Time Start</th>
+                    <th scope="col">Status</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  <tr class="table-danger">
+                    <th scope="row">1</th>
+                    <td>Dr. Mark Toronto</td>
+                    <td>5:45 PM</td>
+                    <td>Cancelled</td>
+                  </tr>
+
+                  <tr class="table-success">
+                    <th scope="row">2</th>
+                    <td>Dr. Phil</td>
+                    <td>3:45 PM</td>
+                    <td>Done</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+           
+            <!-- Generate a Pop-Up showing the patient code after submitting -->
+            <div
+              class="tab-pane fade patientCode"
+              id="add-patient"
+              role="tabpanel"
+              aria-labelledby="add-patient-tab"
+            >
+              <form class="form-group" role="form" method="post">
+                {% csrf_token %}
+                <label for="specialistCode">Patient Email:</label>
+                <input
+                  type="email"
+                  class="form-control"
+                  id="patient-email"
+                  name="patientEmail"
+                  placeholder="Enter patient email"
+                />
+                <button type="submit" class="btn btn-info">Add New Patient</button>
+              </form>
+              
+            </div>
+
+            {% endif %}
           </div>
         </div>
       </div>
