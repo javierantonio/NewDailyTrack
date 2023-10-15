@@ -126,22 +126,38 @@ Log In to DailyTrack
     </div>
 </div>
 
-    {% if error_message %}
-      <div class="modal">
-          <div class="modal-content">
-              <span class="close">&times;</span>
-              <div class="fas fa-exclamation-triangle"></div>
-              <p>{{ error_message }}</p>
-          </div>
+{% if error_message %}
+<div class="modal fade" id="invalidPassword" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="invalidPassword" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="invalidPasswordLabel">{{error_header}}</h5>
+        <button type="button" class="close btn-close" data-bs-dismiss="modal" aria-label="Close">x</button>
       </div>
-      <script>
-        var modal = document.querySelector('.modal');
-        var closeBtn = document.querySelector('.close');
-        closeBtn.addEventListener('click', function() {
-          modal.style.display = 'none';
-        });
-      </script>
-    {% endif %}
+      <div class="modal-body">
+          {{error_message}}
+      </div>
+      <div class="modal-footer">
+        <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
+        <button type="button" class="btn btn-primary btn-close-footer">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+{% endif %}
+<script>
+  $(document).ready(function () {
+    $('#invalidPassword').modal('show');
+  });
+  var closeBtn = document.querySelector('.btn-close');
+  var closeFooterBtn = document.querySelector('.btn-close-footer');
+  closeBtn.addEventListener('click', function() {
+    $('#invalidPassword').modal('hide');
+  });
+  closeFooterBtn.addEventListener('click', function() {
+    $('#invalidPassword').modal('hide');
+  });
+</script>
 
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>

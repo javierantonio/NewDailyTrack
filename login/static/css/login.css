@@ -51,9 +51,17 @@ h1, h2, h3, h4, h5, h6 {
   display: flex;
   justify-content: center;
   align-items: center;
+  
+}
+.modal-content{
+  color: black;
+  
+}
+.modal-header{
+  position: relative;
 }
 
-.modal-content {
+/* .modal-content {
   font-family: 'Lato';
   width: 50%;
   max-width: 300px;
@@ -63,12 +71,11 @@ h1, h2, h3, h4, h5, h6 {
   border-radius: 5px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
   text-align: center;
-}
+} */
 
 .close {
   position: absolute;
-  top: 10px;
-  right: 10px;
+  right: 20px;
   font-size: 24px;
   font-weight: bold;
   cursor: pointer;

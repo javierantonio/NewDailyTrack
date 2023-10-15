@@ -140,9 +140,18 @@
     margin: 20px 0 0 0;
     padding: 10px 0;
   }
-  
-  
-  
-  
+  .modal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+  }
+  .modal-content{
+    color: black;
+    
+  }
+  .modal-header{
+    position: relative;
+  }  
   
   
