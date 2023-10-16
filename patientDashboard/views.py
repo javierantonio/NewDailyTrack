@@ -19,7 +19,7 @@ def dashboardLanding(request):
 
 def getPatients(userData):
     specialistId = Specialist.objects.get(profile = Profile.objects.get(user=userData))
-    patients = PatientList.objects.filter(specialist = specialistId).order_by('created_at')
+    patients = PatientList.objects.filter(specialist = specialistId, patientListStatus = 'A').order_by('created_at')
     patientArray = {}
     index = 0
     for element in patients:

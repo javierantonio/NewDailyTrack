@@ -232,15 +232,15 @@
             <li class="nav-item" role="presentation">
               <button
                 class="nav-link active"
-                id="active-patients-tab"
+                id="invited-patients-tab"
                 data-bs-toggle="pill"
-                data-bs-target="#active-patients"
+                data-bs-target="#invited-patients"
                 type="button"
                 role="tab"
-                aria-controls="active-patients"
+                aria-controls="invited-patients"
                 aria-selected="true"
               >
-                Active Patients
+                Invited Patients
               </button>
             </li>
             <li class="nav-item" role="presentation">
@@ -268,7 +268,7 @@
                 aria-controls="history-patients"
                 aria-selected="false"
               >
-                Patient History
+                Registered Patients
               </button>
             </li>
             <li class="nav-item" role="presentation">
@@ -346,22 +346,30 @@
               <table class="table table-bordered patientHistory">
                 <thead>
                   <tr>
-                    <th scope="col">Enrollment Code</th>
+                    <th scope="col">Code</th>
                     <th scope="col">Specialist Name</th>   
                     <th scope="col">Contact Number</th>                                       
                     <th scope="col">Date Started</th>   
+                    <th scope="col">Status</th> 
                     <th scope="col">Actions</th>                   
                   </tr>
                 </thead>
 
                 <tbody>
-                  {% for specialist in specialistData.items %}
+                  {% csrf_token %}
+                  {% for key, specialist in specialistsData.items %}
                   <tr>
-                    <th scope="row">{{ specialist.1.enrollmentCode }}</th>
-                    <td>{{ specialist.1.specialistName }}</td>
-                    <td>{{ specialist.1.contactNumber }}</td>
-                    <td>{{ specialist.1.dateStarted }}</td>
-                    <td><i class="fa-solid fa-eye fa-sm fa-fw mr-1"></i>View</td>
+                    <th scope="row">{{ specialist.enrollmentCode }}</th>
+                    <td>{{ specialist.specialistName }}</td>
+                    <td>{{ specialist.contactNumber }}</td>
+                    <td>{{ specialist.dateStarted }}</td>
+                    <td>{{ specialist.status }}</td>
+                    <td>
+                      
+                      <a id="disconnectSpecialist" class="disconnectSpecialist" data-code="{{specialist.enrollmentCode}}">
+                        Disconnect</a>
+                    </td>
+                    <!-- <td><i class="fa-solid fa-eye fa-sm fa-fw mr-1"></i>View</td> -->
                   </tr>
                   {% endfor %}
                 </tbody>
@@ -413,55 +421,53 @@
                 </thead>
 
                 <tbody>
-                  {% for patient in patientsData %}
+                  {% for patient in patientsData.0 %}
                   <tr>
                     <th scope="row">{{ patient.enrollmentCode }}</th>
                     <td>{{ patient.patientEmail }}</td>
                     <td>{{ patient.created_at }}</td>
                     
                     <td>
-                      <a id="terminateInvite" class="terminateInvite" href="{% url 'disconnectPatient' %}">
-                        Disconnect</a>
-                      </td>
+                      {% csrf_token %}
+                      <a id="terminateInvite" class="terminateInvite" data-code="{{patient.enrollmentCode}}">
+                        Cancel</a>
+                    </td>
                     
                     <!-- <a href="{# url 'removePatient' code=patient.enrollmentCode #}"></a> -->
                   </tr>
-                  {% endfor %}z
+                  {% endfor %}
                 </tbody>
               </table>
             </div>
             <div
-              class="tab-pane fade patientHistory"
-              id="active-patients"
+              class="tab-pane show active patientHistory"
+              id="invited-patients"
               role="tabpanel"
-              aria-labelledby="active-patients-tab"
+              aria-labelledby="invited-patients-tab"
             >
-              <table class="table table-bordered patientHistory">
-                <thead>
-                  <tr>
-                    <th scope="col">Appointment</th>
-                    <th scope="col">Psychologist Name</th>
-                    <th scope="col">Time Start</th>
-                    <th scope="col">Status</th>
-                  </tr>
-                </thead>
+            <table class="table table-bordered patientHistory">
+              <thead>
+                <tr>
+                  <th scope="col">Patient Code</th>
+                  <th scope="col">Patient Email</th>                    
+                  <th scope="col">Date Invited</th> 
+                  <th scope="col">Status</th>                    
+                </tr>
+              </thead>
 
-                <tbody>
-                  <tr class="table-danger">
-                    <th scope="row">1</th>
-                    <td>Dr. Mark Toronto</td>
-                    <td>5:45 PM</td>
-                    <td>Cancelled</td>
-                  </tr>
-
-                  <tr class="table-success">
-                    <th scope="row">2</th>
-                    <td>Dr. Phil</td>
-                    <td>3:45 PM</td>
-                    <td>Done</td>
-                  </tr>
-                </tbody>
-              </table>
+              <tbody>
+                {% for patient in patientsData.1 %}
+                <tr>
+                  <th scope="row">{{ patient.enrollmentCode }}</th>
+                  <td>{{ patient.patientEmail }}</td>
+                  <td>{{ patient.created_at }}</td>                  
+                  <td>{{ patient.enrollmentStatus }}</td>
+                  
+                  <!-- <a href="{# url 'removePatient' code=patient.enrollmentCode #}"></a> -->
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
             </div>
             <div
               class="tab-pane fade patientHistory"
@@ -469,32 +475,34 @@
               role="tabpanel"
               aria-labelledby="history-patients-tab"
             >
-              <table class="table table-bordered patientHistory">
-                <thead>
-                  <tr>
-                    <th scope="col">Appointment</th>
-                    <th scope="col">Psychologist Name</th>
-                    <th scope="col">Time Start</th>
-                    <th scope="col">Status</th>
-                  </tr>
-                </thead>
+            <table class="table table-bordered patientHistory">
+              <thead>
+                <tr>
+                  <th scope="col">Patient Code</th>
+                  <th scope="col">Patient Name</th>                    
+                  <th scope="col">Date Registered</th> 
+                  <th scope="col">Status</th>  
+                  <th scope="col">Actions</th>                   
+                </tr>
+              </thead>
 
-                <tbody>
-                  <tr class="table-danger">
-                    <th scope="row">1</th>
-                    <td>Dr. Mark Toronto</td>
-                    <td>5:45 PM</td>
-                    <td>Cancelled</td>
-                  </tr>
-
-                  <tr class="table-success">
-                    <th scope="row">2</th>
-                    <td>Dr. Phil</td>
-                    <td>3:45 PM</td>
-                    <td>Done</td>
-                  </tr>
-                </tbody>
-              </table>
+              <tbody>
+                {% for key, patient in patientsData.2.items %}
+                <tr>
+                  <th scope="row">{{ patient.enrollmentCode }}</th>
+                  <td>{{ patient.patientName }}</td>
+                  <td>{{ patient.created_at }}</td>
+                  <td>{{ patient.status }}</td>
+                  <td>
+                    {% csrf_token %}
+                    <a id="disconnectPatient" class="disconnectPatient" data-code="{{patient.enrollmentCode}}">
+                      Disconnect</a>
+                  </td>
+                  <!-- <a href="{# url 'removePatient' code=patient.enrollmentCode #}"></a> -->
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
             </div>
 
            
@@ -527,27 +535,93 @@
     </div>
   </div>
 </div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
   $(document).ready(function () {
-    $(".disconnectPatient").click(function(){
-      var name = document.getElementById("disconnectPatient").getAttribute("name");
-      var code = document.getElementById("disconnectPatient").getAttribute("code");
-      $("#name").text(name);
-      $("#code").text(code);
+    // $(".disconnectPatient").click(function(){
+    //   var name = document.getElementById("disconnectPatient").getAttribute("name");
+    //   var code = document.getElementById("disconnectPatient").getAttribute("code");
+    //   $("#name").text(name);
+    //   $("#code").text(code);
 
-      $('#disconnectModal').modal('show');
-    })
-    // $(".terminateInvite").click(function(){
-      var email = document.getElementById("terminateInvite").getAttribute("email");
-      var code = document.getElementById("terminateInvite").getAttribute("code");
-      $("#email").text(email);
-      $("#code").text(code);
-
-      $('#terminateModal').modal('show');
+    //   $('#disconnectModal').modal('show');
     // })
-    $("#btnCancelTerminate").click(function(){
-      $('#terminateModal').modal('hide');
+    $(".terminateInvite").click(function(){
+      // var email = document.getElementById("terminateInvite").getAttribute("email");
+      var code = $(this).data('code');
+      // $("#email").text(email);
+      $("#code").text(code);
+      var csrfToken = document.querySelector('input[name="csrfmiddlewaretoken"]').value;
+
+
+      // $('#terminateModal').modal('show');
+      notif = confirm('Terminate the Patient Invite?')
+      if(notif){
+        $.ajax({
+          type: "POST",
+          url: "/specialist-hub/t/",
+          data: {
+            csrfmiddlewaretoken: csrfToken,
+            code: code
+          },
+          success: function(response) {
+            console.log(response);
+          },
+          error: function(error) {
+            console.error('Error:', error);
+          }
+        });
+      }
     })
+    // $("#btnCancelTerminate").click(function(){
+    //   $('#terminateModal').modal('hide');
+    // })
+    $(".disconnectPatient").click(function(){
+      var code = $(this).data('code');
+      var csrfToken = document.querySelector('input[name="csrfmiddlewaretoken"]').value;
+
+      notif = confirm('Disconnect from the patient?')
+      if(notif){
+        $.ajax({
+          type: "POST", 
+          url: "/specialist-hub/r/",
+          data: {
+            csrfmiddlewaretoken: csrfToken,
+            code: code
+          },
+          success: function(response) {
+            console.log(response);
+          },
+          error: function(error) {
+            console.error('Error:', error);
+          }
+        });
+      }
+    })
+    $(".disconnectSpecialist").click(function(){
+      var code = $(this).data('code');
+      var csrfToken = document.querySelector('input[name="csrfmiddlewaretoken"]').value;
+      
+      notif = confirm('Disconnect from the selected specialist?')
+      if(notif){
+        $.ajax({
+          type: "POST",
+          url: "/patient-hub/r/",
+          data: {
+            csrfmiddlewaretoken: csrfToken,
+            code: code
+
+          },
+          success: function(response) {
+            console.log(response);
+          },
+          error: function(error) {
+            console.error('Error:', error);
+          }
+        });
+      }
+    })
+
   });
 </script>
 {% endblock profilecontent %}
