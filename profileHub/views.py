@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import get_object_or_404, render, redirect
 from django.http import HttpResponse, JsonResponse
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse
@@ -25,7 +25,7 @@ def getPatient(request):
             try:
                 enrolledAccount = Enrollment.objects.get(enrollmentCode = request.POST['enrollmentCode'])
                 try:
-                    if (PatientList.objects.get(specialist = enrolledAccount.specialist, patient = patientData)):
+                    if (PatientList.objects.get(specialist = enrolledAccount.specialist, patient = patientData, patientListStatus = 'A')):
                         print("account already registered to the specialist")
                 except ObjectDoesNotExist:
                     registerSpecialist(enrolledAccount, patientData)
@@ -55,9 +55,7 @@ def getPatient(request):
                         'image': userData.image,
                         # 'patientType': patientData.patientType,
                         }
-            # return HttpResponse(userData.type)
-            print(getRegisteredSpecialists(userData.user))
-            return render(request, 'profile.html', context={'data':context, 'specialistData': getRegisteredSpecialists(userData.user)})
+            return render(request, 'profile.html', context={'data':context, 'specialistsData': getRegisteredSpecialists(userData.user)})
     return redirect('landing')
 
 @login_required
@@ -115,22 +113,21 @@ def getSpecialist(request):
         # return HttpResponse(specialistData)
         if(request.method == "POST"):
             addPatient(request.POST['patientEmail'], userData)
-        else:
-            context = {
-                'type': userData.type,
-                'firstName': userData.user.first_name,
-                'lastName': userData.user.last_name,
-                'email': userData.user,
-                'birthday': userData.birthday,
-                'phone': userData.phone,
-                'address': userData.address,
-                'image': userData.image,
-                'licenseNumber': specialistData.licenseNumber,
-                'licenseExpiry': specialistData.licenseExpiry,
-                'prcID': specialistData.prcID,
-                'specialistType': specialistData.specialistType,                    
-            }
-            return render(request, 'profile.html', context={'data':context,'patientsData':getPatientDirectory(request.user)})
+        context = {
+            'type': userData.type,
+            'firstName': userData.user.first_name,
+            'lastName': userData.user.last_name,
+            'email': userData.user,
+            'birthday': userData.birthday,
+            'phone': userData.phone,
+            'address': userData.address,
+            'image': userData.image,
+            'licenseNumber': specialistData.licenseNumber,
+            'licenseExpiry': specialistData.licenseExpiry,
+            'prcID': specialistData.prcID,
+            'specialistType': specialistData.specialistType,                    
+        }
+        return render(request, 'profile.html', context={'data':context,'patientsData':getPatientDirectory(request.user)})
     return HttpResponse("You do not have permission to view this entrsy.")
 
 @login_required
@@ -167,17 +164,29 @@ def editSpecialist(request):
 
 def getPatientDirectory(userData):
     specialistId = Specialist.objects.get(profile = Profile.objects.get(user=userData))
-    pendingPatients = Enrollment.objects.filter(specialist = specialistId).order_by('created_at')
-    return pendingPatients
+    allInvitedPatients = Enrollment.objects.filter(specialist = specialistId).order_by('created_at')
+    pendingInvitedPatients = Enrollment.objects.filter(specialist = specialistId, enrollmentStatus = 'P').order_by('created_at')
+    patientsList = PatientList.objects.filter(specialist = specialistId).order_by('created_at')
+    registeredPatients = {}
+    index = 0
+    for element in patientsList:
+        patientDetails = Profile.objects.get(email = element.patient)
+        registeredPatients[index] = {
+            'patientName': patientDetails.user.first_name+' '+patientDetails.user.last_name,
+            'created_at': element.created_at,
+            'enrollmentCode': element.enrollmentCode.enrollmentCode,
+            'status': element.patientListStatus
+        }
+        index+=1
+    return [pendingInvitedPatients, allInvitedPatients, registeredPatients]
 
 def getRegisteredSpecialists(userData):
     specialistArray = {}
     index = 0
     patientId = Patient.objects.get(profile = Profile.objects.get(user=userData))
     patientList = PatientList.objects.filter(patient = patientId).order_by('created_at')
-    print(patientList)
+    
     for element in patientList:
-        print(element)
         specialistDetails = Profile.objects.get(email = element.specialist)
         specialistArray[index] = {
             'enrollmentCode': element.enrollmentCode.enrollmentCode,
@@ -185,6 +194,7 @@ def getRegisteredSpecialists(userData):
             'contactNumber': specialistDetails.phone,
             'email': specialistDetails.email,
             'dateStarted': element.created_at,
+            'status': element.patientListStatus,
         }
         index+=1
     return specialistArray
@@ -222,3 +232,16 @@ def registerSpecialist(enrolledAccount, patientDetails):
             print('code no longer available')
     except Exception as e:
         print(e)
+
+def removeInvitedPatient(request):
+    invitedPatient = Enrollment.objects.get(enrollmentCode = request.POST['code'])
+    invitedPatient.enrollmentStatus = 'T'
+    invitedPatient.save()
+    return redirect('specialistHub')
+
+def removeRegisteredPatient(request):
+    patient = PatientList.objects.get(enrollmentCode = get_object_or_404(Enrollment, enrollmentCode=request.POST['code']))
+    patient.patientListStatus = 'I'
+    patient.save()
+    return redirect('landing')
+    
