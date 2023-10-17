@@ -138,7 +138,7 @@ def editSpecialist(request):
     if request.method == 'POST':
         if profileForms.specialistUpdate(request):
             print('success')
-            return reverse('')
+            return redirect(reverse('specialistHub'))
         else:
             print('failed')
     else:

@@ -39,7 +39,8 @@ def specialistUpdate(request):
         profileData.sex = sex
         profileData.birthday = birthday
         profileData.phone = contact_number
-        profileData.address = address        
+        profileData.address = address     
+        profileData.image = profile_image   
 
         #Update Specialist
         specialistData.licenseExpiry = license_expiry

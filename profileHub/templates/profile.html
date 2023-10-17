@@ -106,7 +106,7 @@
       <div class="card-body">
         <div class="d-flex flex-column align-items-center text-center">
           {% if data.image %}
-            <img src="{% static data.image %}" alt="{{ user.username }}" class="rounded-circle" width="150">
+            <img src="{% static data.image %}" alt="{{ user.username }}" class="rounded-circle" style="aspect-ratio:1; border: 2px solid #0e0224bb" width="150">
           {% else %}
             <img src="https://static.vecteezy.com/system/resources/previews/009/292/244/original/default-avatar-icon-of-social-media-user-vector.jpg" alt="{{ user.username }}" class="rounded-circle" width="150">
           {% endif %} 
