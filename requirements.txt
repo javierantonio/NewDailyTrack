@@ -11,11 +11,6 @@ click==8.1.7
 colorama==0.4.6
 colorclass==2.2.2
 cryptography==41.0.3
-dash==2.9.3
-dash-bootstrap-components==1.5.0
-dash-core-components==2.0.0
-dash-html-components==2.0.0
-dash-table==5.0.0
 defusedxml==0.7.1
 distlib==0.3.7
 Django==4.2.6
@@ -23,7 +18,6 @@ django-allauth==0.55.0
 django-classy-tags==4.1.0
 django-cms==3.11.3
 django-formtools==2.4.1
-django-plotly-dash==2.2.2
 django-sekizai==4.1.0
 django-treebeard==4.7
 djangocms-admin-style==3.2.5
@@ -31,7 +25,6 @@ djangorestframework==3.14.0
 docopt==0.6.2
 dpd-components==0.1.0
 filelock==3.12.2
-Flask==2.3.3
 google-api-core==2.11.1
 google-api-python-client==2.98.0
 google-auth==2.22.0
@@ -48,11 +41,11 @@ Jinja2==3.1.2
 kaitaistruct==0.10
 ldap3==2.9.1
 MarkupSafe==2.1.3
-mitmproxy==10.0.0
-mitmproxy_rs==0.2.2
 msgpack==1.0.5
+numpy==1.26.1
 oauthlib==3.2.2
 packaging==23.1
+pandas==2.1.1
 passlib==1.7.4
 Pillow==9.5.0
 pip-upgrader==1.4.15
@@ -71,6 +64,7 @@ pyOpenSSL==23.2.0
 pyparsing==3.1.1
 pyperclip==1.8.2
 python-dateutil==2.8.2
+python-dotenv==1.0.0
 python3-openid==3.2.0
 pytz==2023.3.post1
 requests==2.31.0

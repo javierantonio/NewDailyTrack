@@ -1,6 +1,5 @@
-from django.urls import path
-from summaryReports.dashapp import app
+from django.urls import include, path
 
 urlpatterns = [
-    path('dash-app/', app.server),
+    path('django_plotly_dash/', include('django_plotly_dash.urls')),
 ]
