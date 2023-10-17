@@ -13,5 +13,7 @@ __pycache__/
 # Ignore database files
 db.sqlite3
 
-# Ignore IDE Config
-.vscode/
+venv
+
+__pycache__/
+.vscode/settings.json
