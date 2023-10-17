@@ -58,8 +58,8 @@ Home
                     <div class="modal-body">
                       <div class="card-header">
                         <div class="image">
-                          {% if userData.image || userData.image == default.jpg %}
-                          <img src="{% static userData.image %}" alt="profile image" class="rounded-circle" width="150">
+                          {% if userData.image != 'default.jpg' and userData.image %}
+                            <img src="{% static userData.image %}" alt="profile image" class="rounded-circle" width="150">
                           {% else %}
                             <img src="https://static.vecteezy.com/system/resources/previews/009/292/244/original/default-avatar-icon-of-social-media-user-vector.jpg" alt="{{ user.username }}" class="rounded-circle" width="150">
                           {% endif %} 
