@@ -1,0 +1,9 @@
+{% if data.type == 'Patient' %}
+    {% includes 'patientTemplate.html' %}
+{% else %}
+    {% includes 'specialistTemplate.html' %}
+{% endif %}
+{% load static %}
+
+{% block appointmentContent %}
+{% endblock appointmentContent %}

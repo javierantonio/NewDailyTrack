@@ -48,7 +48,8 @@ INSTALLED_APPS = [
     'patientDirectory.apps.PatientdirectoryConfig',
     'profileHub.apps.ProfilehubConfig',
     'consultationNotes.apps.ConsultationnotesConfig',
-    'patientDashboard.apps.PatientdashboardConfig', # new
+    'patientDashboard.apps.PatientdashboardConfig',
+    'appointments.apps.AppointmentsConfig', # new
 
     'allauth',
     'allauth.account',
