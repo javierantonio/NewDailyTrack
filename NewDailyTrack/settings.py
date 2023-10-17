@@ -49,7 +49,8 @@ INSTALLED_APPS = [
     'patientDirectory.apps.PatientdirectoryConfig',
     'profileHub.apps.ProfilehubConfig',
     'consultationNotes.apps.ConsultationnotesConfig',
-    'patientDashboard.apps.PatientdashboardConfig', # new
+    'patientDashboard.apps.PatientdashboardConfig',
+    'summaryReports.apps.SummaryreportsConfig',
 
     'allauth',
     'allauth.account',
@@ -57,6 +58,8 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.google',
 
     'rest_framework',
+
+    'django_plotly_dash', # new
 ]
 
 MIDDLEWARE = [
