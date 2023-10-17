@@ -9,6 +9,5 @@ urlpatterns = [
     path('', views.steppingStoneStart, name='steppingStones'),
     path('', views.emoticard, name='emoticard'),#for debugging purpose only
     path('emoticards/<str:userId>/', views.emoticardList, name='emoticardList'),
-    path('emoticards/<str:userId>/s/<str:emoticardId>/', views.emoticardSelected, name='emoticardSelected'),
-
+    path('emoticards/<str:userId>/s/<str:emoticardId>/', views.emoticardSelected, name='emoticardSelected')
 ]

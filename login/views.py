@@ -23,7 +23,7 @@ def home(request):
         profile = Profile.objects.get(user=request.user)
         if profile.type == "Specialist":
             return redirect(reverse('specialistHome'))
-        elif profile.type == "Patient":
+        elif profile.type == "Patient":            
             return redirect(reverse('patientHome'))
         return HttpResponse("User is logged in as " + request.user.username)
 
@@ -41,13 +41,21 @@ def login(request):
     if request.method == "POST":
         username = request.POST.get('useremail')
         password = request.POST.get('password')
-        user = authenticate(request, username=username, password=password)
-        if user is not None:
-            django.contrib.auth.login(request, user)
-            return redirect(reverse('landing'))
-        else:
-            return render(request, 'login.html', {'error_message': 'Incorrect Username or Password'})
-
+        try:
+            profile = User.objects.get(username=username)
+            if profile is not None:
+                user = authenticate(request, username=username, password=password)
+                print(user)
+                if user is not None:
+                    django.contrib.auth.login(request, user)
+                    request.session['id'] = Profile.objects.get(user=request.user).profileID
+                    return redirect(reverse('landing'))
+                else:
+                    return render(request, 'login.html', {'error_message': 'Invalid Username or Password.', 'error_header':'❗Oops, Invalid Credentials.'})
+            else:
+                return render(request, 'login.html', {'error_message': 'Account does not exist!', 'error_header':'❗Oops, Invalid Credentials.'})
+        except:
+            return render(request, 'login.html', {'error_message': 'Account does not exist!', 'error_header':'❗Oops, Invalid Credentials.'})
     elif request.method == "GET":
         if request.user.is_authenticated:
             try:

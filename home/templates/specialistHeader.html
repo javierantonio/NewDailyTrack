@@ -12,9 +12,15 @@
             <ul class="navbar-nav ml-auto">
                 
                 <li class="nav-item">
+                    <a class="nav-link" href="\">
+                        <i class="fa-solid fa-home"></i>
+                        Home <span class="sr-only">(current)</span></a>
+                </li>
+
+                <li class="nav-item">
                     <a class="nav-link" href="{% url 'patientDashboardHome' %}">
                       <i class="fa-solid fa-table-list"></i>
-                    Dashboard <span class="sr-only">(current)</span></a>
+                    Patient Wellness Hub <span class="sr-only">(current)</span></a>
                 </li>
 
                 <li class="nav-item nav-item dropdown no-arrow">
@@ -32,7 +38,7 @@
                         </div>
                 </li>
 
-                <li class="nav-item ">
+                <!-- <li class="nav-item ">
                     <a class="nav-link" href="calendar.html">
                     <span class="mr-2 d-none d-lg-inline">
                         <i class="fa-solid fa-calendar-days fa-fw mr-1 "></i>Calendar</span></a>
@@ -42,16 +48,16 @@
                     <a class="nav-link" href="summaries.html">
                     <span class="mr-2 d-none d-lg-inline">
                     <i class="fa-solid fa-chart-column fa-fw mr-1 "></i>Summaries</span></a>
-                </li>
+                </li> -->
 
                 <li class="nav-item dropdown no-arrow">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        {{ user.email}}
+                        {{ request.user.email}}
                     </a>
 
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="profile.html">
+                        <a class="dropdown-item" href="{% url 'specialistHub' %}">
                             <i class="fa fa-user fa-sm fa-fw mr-2"></i>Profile</a>
  
                         <a class="dropdown-item" href="logout">
