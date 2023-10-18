@@ -12,4 +12,5 @@ urlpatterns = [
     path('', include('profileHub.urls')),
     path('', include('consultationNotes.urls')),
     path('specialist/', include('patientDashboard.urls')),
+    path('appointments/', include('appointments.urls')),
 ]

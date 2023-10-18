@@ -1,9 +1,125 @@
-{% if data.type == 'Patient' %}
-    {% includes 'patientTemplate.html' %}
-{% else %}
-    {% includes 'specialistTemplate.html' %}
-{% endif %}
-{% load static %}
+{% extends 'specialistTemplate.html' %} 
+{% load static %} 
+{% block link %}
 
-{% block appointmentContent %}
-{% endblock appointmentContent %}
+<link rel="stylesheet" href="{% static 'appointments.css' %}" />
+{% endblock link %} 
+{% block content %}
+<a href="{% url 'appointmentCalendar' %}">Calendar</a>
+<script src="https://uicdn.toast.com/tui.code-snippet/latest/tui-code-snippet.js"></script>
+<link
+  rel="stylesheet"
+  href="https://uicdn.toast.com/tui-calendar/latest/tui-calendar.css"
+/>
+<script src="https://uicdn.toast.com/tui-calendar/latest/tui-calendar.js"></script>
+
+<div id="calendar-container">
+    {% block appointmentContent %} 
+    {% endblock appointmentContent %}
+</div>
+
+<!-- <script>
+  const events = {{ scheduledAppointments|safe }};
+  console.log(events);
+</script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const calendar = new tui.Calendar(document.getElementById("calendar"), {
+      defaultView: "month", // Initial view (e.g., 'week', 'month', 'day')
+      useCreationPopup: true, // Enable event creation popup// Configuration options go here
+    });
+
+    // Add events to the calendar
+    events.forEach(function (event) {
+      calendar.createSchedules([
+        {
+          id: event.id,
+          calendarId: "1",
+          title: event.specialist,
+          category: "time",
+          start: event.start,
+          end: event.end,
+          body: event.note,
+        },
+      ]);
+    });
+  });
+</script> -->
+
+<!-- <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    fetch("/appointments/calendar")
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data)
+        // Now, the 'data' variable holds the parsed JSON response
+        const events = data;
+
+        const calendar = new tui.Calendar(document.getElementById("calendar"), {
+          defaultView: "month", // Initial view (e.g., 'week', 'month', 'day')
+          useCreationPopup: true, // Enable event creation popup// Configuration options go here
+        });
+
+        // Add events to the calendar
+        events.forEach(function (event) {
+          calendar.createSchedules([
+            {
+              id: event.id,
+              calendarId: "1",
+              title: event.specialist,
+              category: "time",
+              start: event.start,
+              end: event.end,
+              body: event.note,
+            },
+          ]);
+        });
+      })
+      .catch((error) => console.error("Error:", error));
+  });
+</script> -->
+<!-- 
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        fetch('/appointments/calendar/')
+            .then(response => {
+                const contentType = response.headers.get('Content-Type');
+                if (contentType && contentType.indexOf('application/json') !== -1) {
+                    return response.json();  // It's JSON, parse it
+                } else {
+                    return response.text();  // It's HTML, retrieve it as text
+                }
+            })
+            .then(data => {
+                if (typeof data === 'object') {
+                    // JSON data
+                    const events = data;
+                    // Handle JSON data as needed
+                } else if (typeof data === 'string') {
+                    // HTML content
+                    // Insert the HTML content into a specific element
+                    document.getElementById('calendar-container').innerHTML = data;
+                    console.log(data.context);
+                }
+            })
+            .catch(error => console.error('Error:', error));
+    });
+</script> -->
+
+<script type="application/json" id="scheduled-appointments">
+    {{ scheduledAppointments|safe }}
+</script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Access the JSON data from the embedded <script> tag
+        const scheduledAppointmentsData = JSON.parse(document.getElementById('scheduled-appointments').textContent);
+
+        // Now, the 'scheduledAppointmentsData' variable holds the parsed JSON data
+        const events = scheduledAppointmentsData;
+            console.log(events);
+        // Your logic to work with 'events'
+    });
+</script>
+
+{% endblock content %}

@@ -4,5 +4,6 @@ from django.urls import include, path
 from . import views
 
 urlpatterns = [
-    # path('/calendar', views.steppingStoneStart, name='appointmentCalendar'),
+    path('', views.calendarView, name='appointmentPage'),
+    path('calendar/', views.calendarView, name='appointmentCalendar'),
 ]

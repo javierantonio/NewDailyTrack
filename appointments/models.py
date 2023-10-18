@@ -12,7 +12,7 @@ class Appointments(models.Model) :
     appointmentEnd = models.DateTimeField(null=True)    
     note = models.TextField(max_length=1500, blank=True, null=True)
     status = models.CharField(max_length=10, null=True)
-    # Pending, Confirmed, Rescheduled    
+    # Pending, Accepted, Declined, Rescheduled    
 
 class RescheduledAppointments(models.Model):
     oldAppointment = models.ForeignKey(Appointments, on_delete=models.CASCADE, related_name='oldAppointment')
