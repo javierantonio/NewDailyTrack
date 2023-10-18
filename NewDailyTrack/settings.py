@@ -158,6 +158,7 @@ AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
     'allauth.account.auth_backends.AuthenticationBackend'
 ]
+CSRF_TRUSTED_ORIGINS = ["https://newdailytrack-05bb604d8933.herokuapp.com/"]
 
 SOCIALACCOUNT_PROVIDERS = {
     'google': {
