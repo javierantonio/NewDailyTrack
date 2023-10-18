@@ -20,10 +20,10 @@ Home
           <h3 style="color:#00c4c0;">Patient Dashboard Overview</h3>
 
 
-          <div class="col-md-4">
+          <!-- <div class="col-md-4">
             <i class="fas fa-search"></i>
           <input class="form-control" id="textSearch" style="float: right;margin-right:-350px;" placeholder="Search anything..." />
-          </div>
+          </div> -->
         </div>
 
         <br>
@@ -50,7 +50,7 @@ Home
           
                     <div class="modal-header" style="background-color:#03a3a0;color:white;">
                       <h5 class="modal-title" id="exampleModalLongTitle">
-                      <i class="fa fa-calendar" style="margin-right: 5px;"></i>
+                      <i class="fa-solid fa-circle-user" style="margin-right: 5px;"></i>
                         Patient Profile
                       </h5>
           
@@ -59,7 +59,7 @@ Home
                       <div class="card-header">
                         <div class="image">
                           {% if userData.image != 'default.jpg' and userData.image %}
-                            <img src="{% static userData.image %}" alt="profile image" class="rounded-circle" width="150">
+                            <img src="{% static userData.image %}" alt="profile image" class="rounded-circle" style="aspect-ratio: 1;" width="100">
                           {% else %}
                             <img src="https://static.vecteezy.com/system/resources/previews/009/292/244/original/default-avatar-icon-of-social-media-user-vector.jpg" alt="{{ user.username }}" class="rounded-circle" width="150">
                           {% endif %} 
@@ -101,7 +101,7 @@ Home
                       </div>
                     </div>
                     <div class="modal-footer">
-                      <button type="button" class="btn-secondary" data-dismiss="modal" style="border-radius: 20px;">Cancel</button>
+                      <button type="button" class="btn btn-info" data-dismiss="modal" style="border-radius: 20px;">Cancel</button>
                     </div>
                   </div>
                 </div>

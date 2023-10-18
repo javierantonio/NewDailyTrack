@@ -274,6 +274,7 @@
               </button>
             </li>
             <li class="nav-item" role="presentation">
+
               <button
                 class="nav-link"
                 id="add-patient-tab"
@@ -282,8 +283,8 @@
                 type="button"
                 role="tab"
                 aria-controls="add-patient"
-                aria-selected="false"
-              >
+                aria-selected="false"             
+                >
                 Add New Patient
               </button>
             </li>
@@ -395,7 +396,7 @@
                   name="enrollmentCode"
                   placeholder="Enter enrollment code"
                 />
-                <button type="submit" class="btn btn-info">Register Specialist</button>
+                <button type="submit" class="btn btn-info" style="margin-top: 15px;">Register Specialist</button>
               </form>
               
             </div>
@@ -432,7 +433,8 @@
                     <td>
                       {% csrf_token %}
                       <a id="terminateInvite" class="terminateInvite" data-code="{{patient.enrollmentCode}}">
-                        Cancel</a>
+                        <button class="btn btn-primary btn-sm">
+                        Cancel</button></a>
                     </td>
                     
                     <!-- <a href="{# url 'removePatient' code=patient.enrollmentCode #}"></a> -->
@@ -458,6 +460,11 @@
               </thead>
 
               <tbody>
+                <tr>
+                  <td><span class="badge badge-info">Pending</span></td>
+                  <td><span class="badge badge-success">Accepted</span></td>
+                  <td><span class="badge badge-secondary">Cancelled</span></td>
+                </tr>
                 {% for patient in patientsData.1 %}
                 <tr>
                   <th scope="row">{{ patient.enrollmentCode }}</th>
@@ -498,7 +505,8 @@
                   <td>
                     {% csrf_token %}
                     <a id="disconnectPatient" class="disconnectPatient" data-code="{{patient.enrollmentCode}}">
-                      Disconnect</a>
+                      <button class="btn btn-danger btn-sm">
+                      Disconnect</button></a>
                   </td>
                   <!-- <a href="{# url 'removePatient' code=patient.enrollmentCode #}"></a> -->
                 </tr>
@@ -517,7 +525,7 @@
             >
               <form class="form-group" role="form" method="post">
                 {% csrf_token %}
-                <label for="specialistCode">Patient Email:</label>
+                <label for="patientEmail">Patient Email:</label>
                 <input
                   type="email"
                   class="form-control"
@@ -525,7 +533,7 @@
                   name="patientEmail"
                   placeholder="Enter patient email"
                 />
-                <button type="submit" class="btn btn-info">Add New Patient</button>
+                <button type="submit" class="btn btn-info" style="margin-top: 15px;" >Add New Patient</button>
               </form>
               
             </div>

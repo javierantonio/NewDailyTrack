@@ -13,6 +13,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='enrollment',
             name='enrollmentCode',
-            field=models.CharField(default='2a7351', max_length=6, unique=True),
+            field=models.CharField(default='2a7391', max_length=6, unique=True),
         ),
     ]
