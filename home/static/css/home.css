@@ -3,11 +3,15 @@
 }
 
 .PatientWellness {
-  color: #32b66b;
+  color: #ef4877;
 }
 
 .journal {
-  color: #f57d81;
+  color: #ff457a;
+}
+
+.apptTracker {
+  color: #ffdb63;
 }
 
 .bigger {
@@ -21,19 +25,21 @@
 .specProfile:hover,
 .specProfile:focus {
   font-size: 85px;
-  color: #a81ad7;
+  color: rgb(139, 13, 182);
 }
 
 .PatientWellness:hover,
-.PatientWellness:focus {
-  font-size: 85px;
-  color: #128f48;
-}
-
+.PatientWellness:focus,
 .journal:hover,
 .journal:focus {
   font-size: 85px;
-  color: #e2373d;
+  color: #dc275a;
+}
+
+.apptTracker:hover,
+.apptTracker:focus {
+  font-size: 85px;
+  color: #eab712;
 }
 
 @font-face {
@@ -68,7 +74,7 @@ h6 {
 
 .welcomebanner {
   text-align: center;
-  color: #05e0d2;
+  color: #04c3b6;
   font-weight: 600;
   margin-top: 60px;
 }
@@ -112,10 +118,16 @@ h6 {
   background-color: #ccffd0;
 }
 
-#journal_btn {
+#PatientWellness_btn, #journal_btn {
   background: linear-gradient(white, white) padding-box,
-    linear-gradient(#ffabae, #ff4760) border-box;
-  background-color: #ffcccc;
+    linear-gradient(#ff8fc1, #e8256f) border-box;
+  background-color: #fdc4de;
+}
+
+#apptTrackerbtn {
+  background: linear-gradient(white, white) padding-box,
+    linear-gradient(#ffe692, #ffd13b) border-box;
+  background-color: #fffcf2;
 }
 
 .btn-titles {
@@ -143,8 +155,12 @@ h6 {
   color: #56c787;
 }
 
-#journal_btn .big {
-  color: #f57d81;
+#journal_btn .big, #PatientWellness_btn .big {
+  color: #ff4274;
+}
+
+#apptTrackerbtn .big {
+  color: #ffd769;
 }
 
 #specProfile_btn .big:hover,
@@ -154,17 +170,19 @@ h6 {
   margin-right: 75px;
 }
 
-#sstones_btn .big:hover,
-.big:focus {
-  font-size: 85px;
-  color: #36915d;
-  margin-right: 75px;
-}
-
+#PatientWellness_btn .big:hover,
+.big:focus,
 #journal_btn .big:hover,
 .big:focus {
   font-size: 85px;
-  color: #eb4b51;
+  color: #ff4274;
+  margin-right: 75px;
+}
+
+#apptTrackerbtn .big:hover,
+.big:focus {
+  font-size: 85px;
+  color: #ffd447;
   margin-right: 75px;
 }
 

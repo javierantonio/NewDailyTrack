@@ -12,6 +12,7 @@ def landingAppointments(request):
 def calendarView(request):
     userProfile = Profile.objects.get(user=request.user)
     appointments = getSpecialistAppointments(Specialist.objects.get(profile = userProfile))
+    print(appointments)
     return render(request, 'appointmentCalendar.html', context={'scheduledAppointments': appointments})
     return JsonResponse(getSpecialistAppointments(Specialist.objects.get(profile = userProfile)), safe=False)
     # return JsonResponse(getSpecialistAppointments(Specialist.objects.get(profile = userProfile)), safe=False)
@@ -26,7 +27,7 @@ def getSpecialistAppointments(specialistId):
     for element in appointments:        
         data = {
             'id': element.uuid,
-            'specialist': element.specialist.profile.profileID,
+            'specialist': element.specialist.profile.user.first_name,
             'patient': element.patient.profile.profileID,
             'start': serializeDatetime(element.appointmentStart),
             'end': serializeDatetime(element.appointmentEnd),
@@ -35,7 +36,7 @@ def getSpecialistAppointments(specialistId):
         }
         scheduledAppointments.append(data)
 
-    return JsonResponse(json.dumps(scheduledAppointments), safe=False)
+    return json.dumps(scheduledAppointments)
 
 def getPatientAppointments(specialistId):
     appointments = Appointments.objects.filter(specialist = specialistId)

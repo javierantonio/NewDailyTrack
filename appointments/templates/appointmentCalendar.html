@@ -4,5 +4,45 @@
 
 <div id="calendar"></div>
 
+<script type="application/json" id="scheduled-appointments">
+    {{ scheduledAppointments|safe }}
+</script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Access the JSON data from the embedded <script> tag
+        const scheduledAppointmentsData = JSON.parse(document.getElementById('scheduled-appointments').textContent);
+
+        // Now, the 'scheduledAppointmentsData' variable holds the parsed JSON data
+        const events = scheduledAppointmentsData;
+            console.log(events);
+        const calendar = new tui.Calendar(document.getElementById("calendar"), {
+            defaultView: "month", // Initial view (e.g., 'week', 'month', 'day')
+            useDetailPopUp: true,
+            template: {
+                popupDetailBody: function(schedule) {
+                    // Customize the popup content based on the 'schedule' object
+                    return 'Custom detail popup content';
+                }
+            },
+            useCreationPopup: true, // Enable event creation popup
+            // Configuration options go here
+        });
+        events.forEach(function (event) {
+          calendar.createSchedules([
+            {
+              id: event.id,
+              calendarId: "1",
+              title: event.specialist,
+              category: "time",
+              start: event.start,
+              end: event.end,
+              body: event.note,
+            },
+          ]);
+        });
+        calendar.createSchedules()
+    });
+</script>
 
 {% endblock appointmentContent %}

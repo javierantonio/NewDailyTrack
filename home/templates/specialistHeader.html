@@ -23,7 +23,13 @@
                     Patient Wellness Hub <span class="sr-only">(current)</span></a>
                 </li>
 
-                <li class="nav-item nav-item dropdown no-arrow">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'patientDashboardHome' %}">
+                      <i class="far fa-clipboard"></i>
+                    Appointment Tracker <span class="sr-only">(current)</span></a>
+                </li>
+
+                <!-- <li class="nav-item nav-item dropdown no-arrow">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownPat" role="button"
                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <span class="mr-2 d-none d-lg-inline">
@@ -38,17 +44,17 @@
                         </div>
                 </li>
 
-                <!-- <li class="nav-item ">
+                <li class="nav-item ">
                     <a class="nav-link" href="calendar.html">
                     <span class="mr-2 d-none d-lg-inline">
                         <i class="fa-solid fa-calendar-days fa-fw mr-1 "></i>Calendar</span></a>
-                </li>
+                </li> -->
 
                 <li class="nav-item ">
-                    <a class="nav-link" href="summaries.html">
+                    <a class="nav-link" href="{% url 'summaries' %}">
                     <span class="mr-2 d-none d-lg-inline">
                     <i class="fa-solid fa-chart-column fa-fw mr-1 "></i>Summaries</span></a>
-                </li> -->
+                </li>
 
                 <li class="nav-item dropdown no-arrow">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"

@@ -1,24 +1,24 @@
 from django.contrib.auth.models import User
 from .models import Profile, Specialist
+from django.core.files.storage import FileSystemStorage
 from django.shortcuts import render
 
 
 def processSpecialistRegistration(request):
 
     if request.method == 'POST':
-
+        
         # Get the form data from the request
         email = request.POST['email']
         password = request.POST['password']
         security_question = request.POST['securityQuestion']
         security_answer = request.POST['securityAnswer']
-
+        image_file = request.FILES['image_file']
         first_name = request.POST['firstName']
         last_name = request.POST['lastName']
         sex = request.POST['sex']
         birthday = request.POST['birthday']
         contact_number = request.POST['contactNumber']
-        prc_id = request.POST['prcID']
         address = request.POST['address']
         license_number = request.POST['licenseNumber']
         license_expiry = request.POST['licenseExpiry']
@@ -43,9 +43,11 @@ def processSpecialistRegistration(request):
                                             address=address,
                                             birthday=birthday)
             profile.save()
+        
 
             #Create a new specialist
             specialist = Specialist.objects.create(profile=profile, 
+                                                prcID=image_file,
                                                 licenseNumber = license_number, 
                                                 licenseExpiry = license_expiry)
             specialist.save()
