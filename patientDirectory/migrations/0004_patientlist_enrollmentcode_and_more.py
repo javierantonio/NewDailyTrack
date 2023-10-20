@@ -16,9 +16,4 @@ class Migration(migrations.Migration):
             name='enrollmentCode',
             field=models.OneToOneField(null=True, on_delete=django.db.models.deletion.CASCADE, to='patientDirectory.enrollment'),
         ),
-        migrations.AlterField(
-            model_name='enrollment',
-            name='enrollmentCode',
-            field=models.CharField(default='2r704b', max_length=6, unique=True),
-        ),
     ]

@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'consultationNotes.apps.ConsultationnotesConfig',
     'patientDashboard.apps.PatientdashboardConfig',
     'summaryReports.apps.SummaryreportsConfig',
+    'appointments.apps.AppointmentsConfig',
 
     'allauth',
     'allauth.account',
@@ -58,8 +59,6 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.google',
 
     'rest_framework',
-
-    'django_plotly_dash', # new
 ]
 
 MIDDLEWARE = [
