@@ -27,7 +27,9 @@ SECRET_KEY = 'django-insecure-n=k$o9dd!*n-$bky*bq%yj(fo_jv3a$y04u68uxfst&$)sue5)
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+CSRF_TRUSTED_ORIGINS = ["https://newdailytrack-05bb604d8933.herokuapp.com/", 'https://newdailytrack-05bb604d8933.herokuapp.com']
+                        
+ALLOWED_HOSTS = ['*', 'https://newdailytrack-05bb604d8933.herokuapp.com/']
 
 
 # Application definition
