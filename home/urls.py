@@ -12,7 +12,7 @@ urlpatterns = [
     path('', include('patientDirectory.urls')),
     path('', include('profileHub.urls')),
     path('', include('consultationNotes.urls')),
-    path('specialist/', include('patientDashboard.urls')),    
+    path('specialist/', include('patientDashboard.urls')),
     path('summaries/', summary.summaries, name='summaries'),
-    # path('', include('summaries.urls')),
+    path('appointments/', include('appointments.urls')),
 ]

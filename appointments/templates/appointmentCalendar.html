@@ -4,28 +4,61 @@
 
 <div id="calendar"></div>
 
+<div id="dateModal" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalTitle"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="modalBody">
+                <span class="descriptor">Date:</span>
+                <span id="date"></span>
+
+                <span class="descriptor">Time Start:</span>
+                <span id="start"></span>
+
+                <span class="descriptor">Time End:</span>
+                <span id="end"></span>                
+                
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <script type="application/json" id="scheduled-appointments">
     {{ scheduledAppointments|safe }}
 </script>
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {
+        var months = [
+            'January', 'February', 'March', 'April',
+            'May', 'June', 'July', 'August',
+            'September', 'October', 'November', 'December'
+        ];
         // Access the JSON data from the embedded <script> tag
         const scheduledAppointmentsData = JSON.parse(document.getElementById('scheduled-appointments').textContent);
 
         // Now, the 'scheduledAppointmentsData' variable holds the parsed JSON data
         const events = scheduledAppointmentsData;
-            console.log(events);
+
         const calendar = new tui.Calendar(document.getElementById("calendar"), {
             defaultView: "month", // Initial view (e.g., 'week', 'month', 'day')
-            useDetailPopUp: true,
-            template: {
-                popupDetailBody: function(schedule) {
-                    // Customize the popup content based on the 'schedule' object
-                    return 'Custom detail popup content';
-                }
-            },
-            useCreationPopup: true, // Enable event creation popup
+            // useDetailPopUp: true,
+            // template: {
+            //     popupDetailBody: function(schedule) {
+            //         // Customize the popup content based on the 'schedule' object
+            //         return 'Custom detail popup content';
+            //     }
+            // },
+            // useCreationPopup: true, // Enable event creation popup
             // Configuration options go here
         });
         events.forEach(function (event) {
@@ -33,7 +66,7 @@
             {
               id: event.id,
               calendarId: "1",
-              title: event.specialist,
+              title: event.patient,
               category: "time",
               start: event.start,
               end: event.end,
@@ -41,8 +74,26 @@
             },
           ]);
         });
-        calendar.createSchedules()
+        calendar.on('clickSchedule', function(event) {
+            if (event.schedule) {
+                const title = 'Appointment with '+event.schedule.title;
+                const start = new Date (event.schedule.start);//start end status note
+                const end = event.schedule.end;
+                
+                // Populate the modal with data
+                document.getElementById('modalTitle').innerText = title;
+                document.getElementById('date').innerText = months[start.getMonth()]+' '+start.getDate()+', '+start.getFullYear();
+                document.getElementById('start').innerText = start;
+                
+                // document.getElementById('start').innerText = start;
+                document.getElementById('end').innerText = end;
+
+                // Show the modal
+                $('#dateModal').modal('show');
+            }
+        });
     });
+    
 </script>
 
 {% endblock appointmentContent %}

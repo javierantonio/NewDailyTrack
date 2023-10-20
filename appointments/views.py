@@ -3,17 +3,30 @@ import json
 from django.core import serializers
 from django.http import JsonResponse
 from django.shortcuts import render
+from patientDirectory.models import PatientList
 from registration.models import Profile, Specialist
 from .models import Appointments, DeclinedAppointments, AcceptedAppointments, RescheduledAppointments
+from .appointmentForm import SpecialistAppointment
 
 def landingAppointments(request):
     return render(request, 'appointmentsBase.html')
 
-def calendarView(request):
+def specialistCalendarView(request):
     userProfile = Profile.objects.get(user=request.user)
-    appointments = getSpecialistAppointments(Specialist.objects.get(profile = userProfile))
-    print(appointments)
-    return render(request, 'appointmentCalendar.html', context={'scheduledAppointments': appointments})
+    form = SpecialistAppointment()
+    
+    form.fields['patient'].queryset = PatientList.objects.filter(specialist = Specialist.objects.get(profile = userProfile))
+    form.fields['patient'].to_field_name = 'patient'
+
+    if request.method == 'POST':
+        form = SpecialistAppointment(request.POST)
+        if form.is_valid():
+            event = form.save(commit=False) 
+            event.specialist = request.user  # Set the user field
+            event.save()
+    else:    
+        appointments = getSpecialistAppointments(Specialist.objects.get(profile = userProfile))
+    return render(request, 'appointmentCalendar.html', context={'form': form,'scheduledAppointments': appointments})
     return JsonResponse(getSpecialistAppointments(Specialist.objects.get(profile = userProfile)), safe=False)
     # return JsonResponse(getSpecialistAppointments(Specialist.objects.get(profile = userProfile)), safe=False)
     # if (userProfile.type == 'Specialist'):
@@ -27,8 +40,8 @@ def getSpecialistAppointments(specialistId):
     for element in appointments:        
         data = {
             'id': element.uuid,
-            'specialist': element.specialist.profile.user.first_name,
-            'patient': element.patient.profile.profileID,
+            'specialist': element.specialist.profile.user.first_name+' '+element.specialist.profile.user.last_name,
+            'patient': element.patient.profile.user.first_name+' '+element.patient.profile.user.last_name,
             'start': serializeDatetime(element.appointmentStart),
             'end': serializeDatetime(element.appointmentEnd),
             'note': element.note,
@@ -64,4 +77,5 @@ def serializeDatetime(obj):
     else:
         raise TypeError("Object not serializable")
 
-
+def createAppointment(request):
+    return render(request, 'appointmentCreate.html')

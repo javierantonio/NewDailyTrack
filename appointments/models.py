@@ -11,7 +11,7 @@ class Appointments(models.Model) :
     appointmentStart = models.DateTimeField(null=True)
     appointmentEnd = models.DateTimeField(null=True)    
     note = models.TextField(max_length=1500, blank=True, null=True)
-    status = models.CharField(max_length=10, null=True)
+    status = models.CharField(default='P', max_length=10, null=True)
     # Pending, Accepted, Declined, Rescheduled    
 
 class RescheduledAppointments(models.Model):

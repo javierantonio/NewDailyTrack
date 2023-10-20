@@ -4,6 +4,7 @@ from django.urls import include, path
 from . import views
 
 urlpatterns = [
-    path('', views.calendarView, name='appointmentPage'),
-    path('calendar/', views.calendarView, name='appointmentCalendar'),
+    path('', views.specialistCalendarView, name='appointmentPage'),
+    path('calendar/', views.specialistCalendarView, name='appointmentCalendar'),
+    path('create/', views.createAppointment, name='appointmentCreate'),
 ]
