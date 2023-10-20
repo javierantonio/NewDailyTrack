@@ -8,26 +8,33 @@ from registration.models import Specialist, Profile, Patient
 from steppingStones.models import SteppingStone
 
 def dashboardLanding(request):
-    specialistId = Specialist.objects.get(profile = Profile.objects.get(user=request.user))
-    patients = PatientList.objects.filter(specialist = specialistId).order_by('created_at')
-    patientArray = []
+    # return HttpResponse('naur')
+    # specialistId = Specialist.objects.get(profile = Profile.objects.get(user=request.user))
+    # patients = PatientList.objects.filter(specialist = specialistId)
+    
+    # # print(patients[0])
+    # for element in patients:
+    #     print(element.patient)
+    return render(request, 'patientDashboard.html', context={'data': getPatients(request.user)})
+
+def getPatients(userData):
+    specialistId = Specialist.objects.get(profile = Profile.objects.get(user=userData))
+    patients = PatientList.objects.filter(specialist = specialistId, patientListStatus = 'A').order_by('created_at')
+    patientArray = {}
     index = 0
     for element in patients:
         patientDetails = Profile.objects.get(email = element.patient)
-        patientArray.append({
-            'index': index,
+        patientArray[index] = {
             'id': patientDetails.profileID,
             'patientName': patientDetails.user.first_name+' '+patientDetails.user.last_name,
-            'latestMood': getLatestEmoticard(patientDetails.profileID),
-            'phone': patientDetails.phone,
-            'birthDate': patientDetails.birthday,
-            'address': patientDetails.address,
-            'startDate': element.created_at,
-            'image': patientDetails.image,
-        })
+            'latestMood': getLatestEmoticard(patientDetails.profileID)
+        }
+        # patientArray.update({
+        #     'patient{index}' : patientDetails.profileID
+        # })
+        index+=1
 
-    return render(request, 'patientDashboard.html', context={'data': patientArray})
-
+    return patientArray
 
 def getLatestEmoticard(patientID):
     # steppingStonesData = SteppingStone.objects.filter(patient = get_object_or_404(Patient, profile_id=patientID)).order_by('-created_at').first()
@@ -41,6 +48,14 @@ def getLatestEmoticard(patientID):
     else:
         return "No Entry"
 
+def getUserProfile(request):
+    patientId = request.GET.get('patientIndex')
+    for user in data:
+        if user['id'] == patientId:
+            user_data = user
+            break
+    return JsonResponse(user_data)
+
 def moodText(mood):
     if mood == 5:
         return 'Terrible'
@@ -52,15 +67,3 @@ def moodText(mood):
         return 'Good'
     elif mood == 1:
         return 'Awesome'
-    
-def viewProfile(userId):
-    print(userId)
-    patientDetails = Profile.objects.get(profileID = userId)
-    print(patientDetails)
-    patientDict = {
-        'id': patientDetails.profileID,
-        'firstName': patientDetails.user.first_name,
-        'lastName': patientDetails.user.last_name,
-        'email': patientDetails.email,
-    }
-    return JsonResponse(patientDict)

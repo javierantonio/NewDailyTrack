@@ -22,7 +22,7 @@
       <button onclick="history.go(-1)" class="btn btn-outline-secondary mb-3">
         Back
       </button>
-      <form role="form" method="post" name="editProfileForm" enctype="multipart/form-data">
+      <form role="form" method="post" name="editProfileForm">
         {% csrf_token %}
 
         <div class="row gutters">
@@ -88,6 +88,7 @@
               />
             </div>
           </div>
+          
           <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
             <div class="form-group">
               <label for="Address">Address</label>
@@ -117,22 +118,11 @@
           </div>
         {% endif %}
         </div>
-        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-          <div class="form-group">
-            <div>Update Profile Picture:</div>
-              <div class="custom-file">
-                  <input type="file" class="custom-file-input" id="profileID" name="profile_image" accept="image/png, image/jpeg" onchange="previewFile(); updateFileNameLabel(this);">
-                  <label class="custom-file-label" for="profileID">Choose file</label>
-              </div>
-            <img id="profileIDPreview" src="#" alt="Profile Image Preview" style="display:none; max-width: 200px; max-height: 200px;">
-          </div>
-        <div>
         {% if licenseNumber %}
         <div class="row gutters">
           <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
             <h6 class="mt-3 mb-2 text-primary">Professional Details</h6>
           </div>
-
           <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
             <div class="form-group">
               <label for="licenseNumber">License Number</label>

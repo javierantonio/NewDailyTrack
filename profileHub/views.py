@@ -99,7 +99,7 @@ def editPatient(request):
                     'securityAnswer': userData.securityAnswer,                
                     }
         # return HttpResponse(userData.type)
-        return render(request, 'editProfile.html', context)
+        return render(request, 'editProfile.html', context=context)
     
     return redirect(reverse('patientHub'))
     return HttpResponse("You do not have permission to view this entrsy.")
@@ -138,7 +138,7 @@ def editSpecialist(request):
     if request.method == 'POST':
         if profileForms.specialistUpdate(request):
             print('success')
-            return redirect(reverse('specialistHub'))
+            return reverse('')
         else:
             print('failed')
     else:
