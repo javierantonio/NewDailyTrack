@@ -17,9 +17,6 @@
   <div class="main-body"> -->
 {% block profilecontent %}
 
-{% load static %}
-
-
 {% if terminateCodeModal %}
 <div class="modal fade terminateModal" id="terminateModal" tabindex="-1" role="dialog" aria-labelledby="editAvailabilityTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
@@ -105,11 +102,12 @@
     <div class="card">
       <div class="card-body">
         <div class="d-flex flex-column align-items-center text-center">
-          {% if data.image %}
-            <img src="{% static data.image %}" alt="{{ user.username }}" class="rounded-circle" style="aspect-ratio:1; border: 2px solid #0e0224bb" width="150">
-          {% else %}
-            <img src="https://static.vecteezy.com/system/resources/previews/009/292/244/original/default-avatar-icon-of-social-media-user-vector.jpg" alt="{{ user.username }}" class="rounded-circle" width="150">
-          {% endif %} 
+          <img
+            src="https://static.vecteezy.com/system/resources/previews/009/292/244/original/default-avatar-icon-of-social-media-user-vector.jpg"
+            alt="Admin"
+            class="rounded-circle"
+            width="150"
+          />
 
           <div class="mt-3">
             <h4 class="patientName">{{data.firstName }} {{data.lastName }}</h4>
@@ -274,7 +272,6 @@
               </button>
             </li>
             <li class="nav-item" role="presentation">
-
               <button
                 class="nav-link"
                 id="add-patient-tab"
@@ -283,8 +280,8 @@
                 type="button"
                 role="tab"
                 aria-controls="add-patient"
-                aria-selected="false"             
-                >
+                aria-selected="false"
+              >
                 Add New Patient
               </button>
             </li>
@@ -396,7 +393,7 @@
                   name="enrollmentCode"
                   placeholder="Enter enrollment code"
                 />
-                <button type="submit" class="btn btn-info" style="margin-top: 15px;">Register Specialist</button>
+                <button type="submit" class="btn btn-info">Register Specialist</button>
               </form>
               
             </div>
@@ -433,8 +430,7 @@
                     <td>
                       {% csrf_token %}
                       <a id="terminateInvite" class="terminateInvite" data-code="{{patient.enrollmentCode}}">
-                        <button class="btn btn-primary btn-sm">
-                        Cancel</button></a>
+                        Cancel</a>
                     </td>
                     
                     <!-- <a href="{# url 'removePatient' code=patient.enrollmentCode #}"></a> -->
@@ -460,11 +456,6 @@
               </thead>
 
               <tbody>
-                <tr>
-                  <td><span class="badge badge-info">Pending</span></td>
-                  <td><span class="badge badge-success">Accepted</span></td>
-                  <td><span class="badge badge-secondary">Cancelled</span></td>
-                </tr>
                 {% for patient in patientsData.1 %}
                 <tr>
                   <th scope="row">{{ patient.enrollmentCode }}</th>
@@ -505,8 +496,7 @@
                   <td>
                     {% csrf_token %}
                     <a id="disconnectPatient" class="disconnectPatient" data-code="{{patient.enrollmentCode}}">
-                      <button class="btn btn-danger btn-sm">
-                      Disconnect</button></a>
+                      Disconnect</a>
                   </td>
                   <!-- <a href="{# url 'removePatient' code=patient.enrollmentCode #}"></a> -->
                 </tr>
@@ -525,7 +515,7 @@
             >
               <form class="form-group" role="form" method="post">
                 {% csrf_token %}
-                <label for="patientEmail">Patient Email:</label>
+                <label for="specialistCode">Patient Email:</label>
                 <input
                   type="email"
                   class="form-control"
@@ -533,7 +523,7 @@
                   name="patientEmail"
                   placeholder="Enter patient email"
                 />
-                <button type="submit" class="btn btn-info" style="margin-top: 15px;" >Add New Patient</button>
+                <button type="submit" class="btn btn-info">Add New Patient</button>
               </form>
               
             </div>

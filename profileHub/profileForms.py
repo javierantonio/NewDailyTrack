@@ -20,7 +20,7 @@ def specialistUpdate(request):
         birthday = request.POST['birthday']
         contact_number = request.POST['contactNumber']
         address = request.POST['contactNumber']
-        profile_image = request.FILES['profile_image']
+        
         # Professional Details
         # prc_id = request.POST['prcID']
         license_number = request.POST['licenseNumber']
@@ -39,12 +39,12 @@ def specialistUpdate(request):
         profileData.sex = sex
         profileData.birthday = birthday
         profileData.phone = contact_number
-        profileData.address = address     
-        profileData.image = profile_image   
+        profileData.address = address        
 
         #Update Specialist
         specialistData.licenseExpiry = license_expiry
         specialistData.licenseNumber = license_number
+        # specialistData.prcID = prc_id
 
         editProfileForm = request.POST
 
@@ -77,7 +77,6 @@ def patientUpdate(request):
         birthday = request.POST['birthday']
         contact_number = request.POST['contactNumber']
         address = request.POST['address']
-        profile_image = request.FILES['profile_image']
 
         # Update User
         userData.username = email
@@ -90,8 +89,7 @@ def patientUpdate(request):
         profileData.sex = sex
         profileData.birthday = birthday
         profileData.phone = contact_number
-        profileData.address = address    
-        profileData.image = profile_image        
+        profileData.address = address            
         # profileData.securityAnswer = security_answer
         # profileData.securityQuestion = security_question 
 

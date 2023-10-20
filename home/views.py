@@ -1,9 +1,9 @@
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.urls import reverse
 
 from registration.models import Profile
-
+import patientDashboard.urls
 
 # Create your views here.
 
@@ -29,7 +29,3 @@ def landing(request):
         return render(request, 'index.html')
     else:
         return render(request, 'index.html')
-    
-
-    # return HttpResponseRedirect(reverse('dash_app_view'))
-

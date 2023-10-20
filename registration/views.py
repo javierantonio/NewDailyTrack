@@ -1,9 +1,9 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.urls import reverse
-import sqlite3
 
 from . import specialistRegistrationForm, patientRegistrationForm
+
 
 # Create your views here.
 

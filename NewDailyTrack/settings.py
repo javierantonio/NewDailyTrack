@@ -11,7 +11,6 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
-import os
 # from registration.models import Profile
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -50,7 +49,7 @@ INSTALLED_APPS = [
     'profileHub.apps.ProfilehubConfig',
     'consultationNotes.apps.ConsultationnotesConfig',
     'patientDashboard.apps.PatientdashboardConfig',
-    'summaryReports.apps.SummaryreportsConfig',
+    'appointments.apps.AppointmentsConfig', # new
 
     'allauth',
     'allauth.account',
@@ -58,8 +57,6 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.google',
 
     'rest_framework',
-
-    'django_plotly_dash', # new
 ]
 
 MIDDLEWARE = [
@@ -184,5 +181,3 @@ SITE_ID = 3
 #     LOGIN_REDIRECT_URL = '/patientHome'
 LOGIN_REDIRECT_URL = 'google'
 LOGOUT_REDIRECT_URL = '/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'login/static/')
-MEDIA_URL = 'login/static/'
