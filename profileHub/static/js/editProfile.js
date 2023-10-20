@@ -118,3 +118,34 @@ passwordCheckbox.addEventListener("change", function changePassword() {
     confirmPasswordInput.remove();
   }
 });
+
+function previewFile() {
+  var preview = document.getElementById('profileIDPreview');
+  var file = document.getElementById('profileID').files[0];
+  var reader = new FileReader();
+
+  reader.onloadend = function() {
+      preview.src = reader.result;
+      preview.style.display = 'block';
+  }
+
+  if (file) {
+      reader.readAsDataURL(file);
+  } else {
+      preview.src = '';
+      preview.style.display = 'none';
+  }
+}
+
+function updateFileNameLabel(input) {
+  var label = document.querySelector('label[for="' + input.id + '"]');
+  if (input.files.length > 0) {
+    var fileName = input.files[0].name;
+    if (fileName.length > 35) {
+      fileName = fileName.substring(0, 35 - 3) + '...';
+    }
+    label.innerHTML = fileName;
+  } else {
+    label.innerHTML = 'Choose file';
+  }
+}

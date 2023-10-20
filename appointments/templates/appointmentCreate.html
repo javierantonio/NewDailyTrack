@@ -1,0 +1,25 @@
+{% extends 'appointmentsBase.html' %} 
+{% block appointmentContent %} 
+{% load static %}
+
+<div class="main-container">
+    <form role="form" method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="email">E-mail Address:</label>
+            <input type="email" class="form-control form-control-user"
+                id="email" name="email" placeholder="ex. juandelacruz34@example.com" required>
+        </div>
+
+        <button
+            type="submit"
+            id="submit"
+            name="submit"
+            class="btn btn-primary"
+        >
+            Create Appointment
+        </button>
+    </form>
+</div>
+
+{% endblock appointmentContent %}

@@ -8,72 +8,6 @@ Home
     <link rel="stylesheet" href="{% static 'css/dashboard.css' %}" />
     {% endblock link %}
 
-    <div class="modal fade dashboardModal" id="dashboardModal" tabindex="-1" role="dialog" aria-labelledby="editAvailabilityTitle" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered">
-
-        <div class="modal-content">
-
-          <div class="modal-header" style="background-color:#03a3a0;color:white;">
-            <h5 class="modal-title" id="exampleModalLongTitle">
-            <i class="fa fa-calendar" style="margin-right: 5px;"></i>
-              Patient Profile
-            </h5>
-
-          </div>
-          <div class="modal-body">
-            <div class="card-header">
-              <div class="image">
-                <img
-                  src="https://static.vecteezy.com/system/resources/previews/009/292/244/original/default-avatar-icon-of-social-media-user-vector.jpg"
-                  alt="Admin"
-                  class="rounded-circle"
-                  width="100"
-                />
-              </div>
-              <div id="name" class="description">
-                
-              </div>
-            </div>
-            <div class="card-body">
-              <div class="body-content">
-                Contact Number:
-                <span class="content-data">
-
-                </span>
-              </div>
-              <div class="body-content">
-                Birth Date:
-                <span id="" class="content-data">
-                  
-                </span>
-              </div>
-              <div class="body-content">
-                Address:
-                <span class="content-data">
-
-                </span>
-              </div>
-              <div class="body-content">
-                Start Date:
-                <span class="content-data">
-
-                </span>
-              </div>
-              <div class="body-content">
-                End Date:
-                <span class="content-data">
-
-                </span>
-              </div>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn-secondary" data-dismiss="modal" style="border-radius: 20px;">Cancel</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
     <div class="container mt-4">
         
         <br>
@@ -86,10 +20,10 @@ Home
           <h3 style="color:#00c4c0;">Patient Dashboard Overview</h3>
 
 
-          <div class="col-md-4">
+          <!-- <div class="col-md-4">
             <i class="fas fa-search"></i>
           <input class="form-control" id="textSearch" style="float: right;margin-right:-350px;" placeholder="Search anything..." />
-          </div>
+          </div> -->
         </div>
 
         <br>
@@ -108,14 +42,78 @@ Home
             </thead>
             
             <tbody>
-              {% for userData in data.items %}
+              {% for userData in data %}
+              <div class="modal fade dashboardModal" id="dashboardModal" tabindex="-1" role="dialog" aria-labelledby="editAvailabilityTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+          
+                  <div class="modal-content">
+          
+                    <div class="modal-header" style="background-color:#03a3a0;color:white;">
+                      <h5 class="modal-title" id="exampleModalLongTitle">
+                      <i class="fa-solid fa-circle-user" style="margin-right: 5px;"></i>
+                        Patient Profile
+                      </h5>
+          
+                    </div>
+                    <div class="modal-body">
+                      <div class="card-header">
+                        <div class="image">
+                          {% if userData.image != 'default.jpg' and userData.image %}
+                            <img src="{% static userData.image %}" alt="profile image" class="rounded-circle" style="aspect-ratio: 1;" width="100">
+                          {% else %}
+                            <img src="https://static.vecteezy.com/system/resources/previews/009/292/244/original/default-avatar-icon-of-social-media-user-vector.jpg" alt="{{ user.username }}" class="rounded-circle" width="150">
+                          {% endif %} 
+                        </div>
+                        <div id="name" class="description">
+                          
+                        </div>
+                      </div>
+                      <div class="card-body">
+                        <div class="body-content">
+                          Contact Number:
+                          <span class="content-data">
+                            {{ userData.phone }}
+                          </span>
+                        </div>
+                        <div class="body-content">
+                          Birth Date:
+                          <span id="" class="content-data">
+                            {{ userData.birthDate }}
+                          </span>
+                        </div>
+                        <div class="body-content">
+                          Address:
+                          <span class="content-data">
+                            {{ userData.address }}
+                          </span>
+                        </div>
+                        <div class="body-content">
+                          Start Date:
+                          <span class="content-data">
+                            {{ userData.startDate }}
+                          </span>
+                        </div>
+                        <div class="body-content">
+                          End Date:
+                          <span class="content-data">
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-info" data-dismiss="modal" style="border-radius: 20px;">Cancel</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+          
               <tr class="dashboard-row">
-                <td >{{ userData.1.patientName }}</td>
-                {% if userData.1.latestMood == "No Entry" %}
-                  <td>{{ userData.1.latestMood }}</td>
+                <td >{{ userData.patientName }}</td>
+                {% if userData.latestMood == "No Entry" %}
+                  <td>{{ userData.latestMood }}</td>
                 {% else %}
                   <td class="mood-cell">
-                    <span class="mood-container {{ userData.1.latestMood }}">{{userData.1.latestMood}}</span>
+                    <span class="mood-container {{ userData.latestMood }}">{{userData.latestMood}}</span>
                   </td>
                 {% endif %}               
                 <td align="center">
@@ -124,16 +122,16 @@ Home
   
                   <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in text-gray-600"
                     aria-labelledby="userDropdown">
-                    <a class="dropdown-item text-gray-600 dashboardModalAppt" data-value="{{userData.0}}">
+                    <a class="dropdown-item text-gray-600 dashboardModalAppt">
                       <i class="fa fa-user fa-sm fa-fw mr-2"></i> View Profile
                     </a>
-                    <a class="dropdown-item text-gray-600" href="{% url 'viewPatientEntries' userId=userData.1.id %}">
+                    <a class="dropdown-item text-gray-600" href="{% url 'viewPatientEntries' userId=userData.id %}">
                         <i class="fa fa-book fa-sm fa-fw mr-2"></i> Shared Journal Entries
                     </a>
-                    <a class="dropdown-item text-gray-600" href="{% url 'emoticardList' userId=userData.1.id %}">
+                    <a class="dropdown-item text-gray-600" href="{% url 'emoticardList' userId=userData.id %}">
                         <i class="fa fa-pie-chart fa-sm fa-fw mr-2"></i> Emoticards
                     </a>
-                    <a class="dropdown-item text-gray-600" href="{% url 'noteView' userId=userData.1.id %}">
+                    <a class="dropdown-item text-gray-600" href="{% url 'noteView' userId=userData.id %}">
                         <i class="fa fa-clipboard fa-sm fa-fw mr-2"></i> Consultation Notes
                     </a>
   

@@ -48,7 +48,7 @@ User Registration
 
 
                                 <!--PAGE 1-->
-                                  <form role="form" method="post">
+                                  <form role="form" method="post" enctype="multipart/form-data">
                                       {% csrf_token %}
                                   <!--Email, password, first name, last name, sex, bday, cnum -->
 
@@ -138,17 +138,19 @@ User Registration
 
                                     <!--PAGE 3-->
                                     <div id="sregisterPage3" style="display:none">
-
-                                      <div class="form-group">
-                                        <label for="prcID">Please upload your PRC ID:</label>
-                                        <input type="file" id="prcID" name="prcID" accept="image/png, image/jpeg">
-                                      </div>
+                                        <div class="form-group">
+                                          <div>Please upload your PRC ID:</div>
+                                            <div class="custom-file">
+                                                <input type="file" class="custom-file-input" id="prcID" name="image_file" accept="image/png, image/jpeg" onchange="previewFile(); updateFileNameLabel(this);">
+                                                <label class="custom-file-label" for="prcID">Choose file</label>
+                                            </div>
+                                            <img id="prcIDPreview" src="#" alt="PRC ID Preview" style="display:none; max-width: 200px; max-height: 200px;">
+                                        </div>
                                         <div class="form-group">
                                             <label for="clinicAddress">Clinic Address:</label>
                                             <input type="text" class="form-control form-control-user"
                                               id="address" name="address" placeholder="Type in your address..." required>
                                         </div>
-
                                         <div class="form-group">
                                             <label for="licenseNumber">License Number:</label>
                                             <input type="text" class="form-control form-control-user"
@@ -159,11 +161,8 @@ User Registration
                                           <input type="date" class="form-control form-control-user input-daterange"
                                               id="licenseExpiry" name="licenseExpiry" placeholder="mm/dd/yyyy" required>
                                         </div>
-
-
                                         <br>
                                         <button id="prevSRegister2" type="button" class="btn-light2 btn-circle2 btn-xl2 prevSRegister2">🡰</button>
-
                                         <button type="submit" class="btn btn-info btn-user btn-block">Register</button>
                                         </div>
 

@@ -2,6 +2,7 @@ from django.contrib import admin
 from django.urls import include, path
 
 from . import views
+from summaryReports import views as summary
 
 # Journal, Appointments, Specialist, Emoticards, Timely Reports, Profile
 urlpatterns = [
@@ -12,4 +13,6 @@ urlpatterns = [
     path('', include('profileHub.urls')),
     path('', include('consultationNotes.urls')),
     path('specialist/', include('patientDashboard.urls')),
+    path('summaries/', summary.summaries, name='summaries'),
+    path('appointments/', include('appointments.urls')),
 ]

@@ -5,7 +5,7 @@
 
 <div class="container">
   <h3 class="h-bold welcomebanner">
-    Welcome back, <span class="fname">{{ user.first_name }}</span>!
+    Welcome back, <span class="fname">Dr. {{ user.first_name }}</span>!
   </h3>
   <h4 class="h-xlight title">What would you like to do today?</h4>
 </div>
@@ -18,8 +18,8 @@
         class="btnHome box text-center wow fadeInUp"
         data-wow-delay="0.2s"
       >
-        <i class="fa fa-user-circle fa-fw mr-1 specProfile bigger"></i>
-        <p class="btn-titles">Specialist's Profile</p>
+        <i class="fa-solid fa-stethoscope fa-fw mr-1 specProfile bigger"></i>
+        <p class="btn-titles">Specialist's Hub</p>
       </button>
     </a>
   </div>
@@ -27,7 +27,7 @@
   <div class="col-sm-3 col-md-3 no">
     <a href="{% url 'patientDashboardHome' %}">
       <button
-        id="sstones_btn"
+        id="PatientWellness_btn"
         class="btnPatientWellness btnHome box text-center wow fadeInUp"
         data-wow-delay="0.2s"
       >
@@ -36,6 +36,22 @@
       </button>
     </a>
   </div>
+
+  <div class="col-sm-3 col-md-3 no">
+    <a href="{% url 'appointmentPage' %}">
+      <button
+        id="apptTrackerbtn"
+        class="btnapptTracker btnHome box text-center wow fadeInUp"
+        data-wow-delay="0.2s"
+      >
+        <i class="far fa-clipboard fa-fw mr-1 apptTracker bigger"></i>
+        <p class="btn-titles">Appointment Tracker</p>
+      </button>
+    </a>
+  </div>
+
+
+
 
   <!-- <div class="col-sm-3 col-md-3 no">
           <button id="journal_btn" class="btnJournal btnHome box text-center wow fadeInUp" data-wow-delay="0.2s">

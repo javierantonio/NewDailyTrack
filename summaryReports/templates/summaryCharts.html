@@ -1,0 +1,19 @@
+{% extends 'specialistTemplate.html' %}
+{% load static %}
+{% block link %}
+<link rel="stylesheet" href='{% static 'summary.css' %}'>
+{% endblock link %}
+{% block content %}
+
+<div class="mood-section">
+    <div class="chart">
+        {{line|safe}}
+    </div>
+    
+    <div class="chart">
+        {{area|safe}}
+    </div>
+</div>
+
+
+{% endblock content %}

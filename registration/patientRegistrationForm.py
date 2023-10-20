@@ -53,7 +53,7 @@ def processPatientRegistration(request):
             current_date = datetime.now().date()
 
             if (relativedelta(current_date, datetime.strptime(birthday, '%Y-%m-%d').date())).years < 18:
-                subject = 'Guardian Email Confirmation'
+                subject = 'DailyTrack Guardian Email Confirmation'
                 if profile.sex == 'male':
                     pronoun = 'his'
                 elif profile.sex == 'female':
@@ -63,9 +63,9 @@ def processPatientRegistration(request):
                 html_content = render_to_string('guardianEmail.html', {'user': user, 'pronoun': pronoun})
                 sender_email = 'dailytrack@dailytrack.online'
                 recipient_email = request.POST['guardianEmail']
-                print(request.POST['guardianEmail'])
+                # print(request.POST['guardianEmail'])
                 text_content = strip_tags(html_content)
-                print("Sending email...")
+                # print("Sending email...")
                 msg = EmailMultiAlternatives(subject, text_content, sender_email, [recipient_email])
                 msg.attach_alternative(html_content, "text/html")
                 msg.send()
