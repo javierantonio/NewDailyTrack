@@ -14,6 +14,9 @@
                 </button>
             </div>
             <div class="modal-body" id="modalBody">
+                <span class="descriptor">Status:</span>
+                <span id="status"></span>        
+
                 <span class="descriptor">Date:</span>
                 <span id="date"></span>
 
@@ -21,7 +24,10 @@
                 <span id="start"></span>
 
                 <span class="descriptor">Time End:</span>
-                <span id="end"></span>                
+                <span id="end"></span>          
+
+                <span class="descriptor">Notes:</span>
+                <span id="note"></span>              
                 
             </div>
             <div class="modal-footer">
@@ -76,17 +82,20 @@
         });
         calendar.on('clickSchedule', function(event) {
             if (event.schedule) {
+                const note = event.schedule.note;
+                const status = event.schedule.status;
                 const title = 'Appointment with '+event.schedule.title;
                 const start = new Date (event.schedule.start);//start end status note
-                const end = event.schedule.end;
+                const end = new Date (event.schedule.end);
+                
                 
                 // Populate the modal with data
                 document.getElementById('modalTitle').innerText = title;
                 document.getElementById('date').innerText = months[start.getMonth()]+' '+start.getDate()+', '+start.getFullYear();
                 document.getElementById('start').innerText = start;
-                
-                // document.getElementById('start').innerText = start;
                 document.getElementById('end').innerText = end;
+                document.getElementById('note').innerText = note;
+                document.getElementById('status').innerText = status;
 
                 // Show the modal
                 $('#dateModal').modal('show');

@@ -8,6 +8,7 @@ class Appointments(models.Model) :
     uuid = models.CharField(primary_key=True, max_length=60, default=uuid.uuid4, editable=False)
     specialist = models.ForeignKey(Specialist, on_delete=models.CASCADE)
     patient = models.ForeignKey(Patient, on_delete=models.CASCADE)
+    createdBy = models.ForeignKey(Profile, on_delete=models.CASCADE, null=True)
     appointmentStart = models.DateTimeField(null=True)
     appointmentEnd = models.DateTimeField(null=True)    
     note = models.TextField(max_length=1500, blank=True, null=True)

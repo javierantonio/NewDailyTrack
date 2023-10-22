@@ -25,3 +25,8 @@ class PatientList(models.Model):
         #   Different Patient List Status and functions
         #   1. A - Active. A patient who is currently being monitored by the specialist.
         #   2. I - Inactive. A patient who is no longer being monitored by the specialist.
+    def combination(self):
+        return f"{self.patient} {self.specialist}"
+    
+    def __str__(self):
+        return self.combination()
