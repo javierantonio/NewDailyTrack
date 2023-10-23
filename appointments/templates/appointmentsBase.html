@@ -44,10 +44,12 @@
     <div class="side-item">
       <a href="{% url 'appointmentCalendar' %}">
         <button class="btn side-btn">
-          Calendar
-          <div class="selector-container">
-            <i class="fa fa-circle-chevron-right"></i>        
-          </div>
+          Calendar    
+          {% if active == 'calendar' %}   
+            <div class="selector-container">
+              <i class="fa fa-circle-chevron-right"></i>        
+            </div>
+          {% endif %}   
         </button>
       </a>
       
@@ -56,13 +58,23 @@
       <a href="{% url 'appointmentCreate' %}">
         <button class="btn side-btn">
           Create an Appointment
+          {% if active == 'create' %}   
+            <div class="selector-container">
+              <i class="fa fa-circle-chevron-right"></i>        
+            </div>
+          {% endif %}   
         </button>
       </a>
     </div>
     <div class="side-item">
-      <a href="{% url 'appointmentCreate' %}">
+      <a href="{% url 'appointmentHistory' %}">
         <button class="btn side-btn">
           Appointment History
+          {% if active == 'history' %}   
+            <div class="selector-container">
+              <i class="fa fa-circle-chevron-right"></i>        
+            </div>
+          {% endif %}   
         </button>
       </a>
     </div>  

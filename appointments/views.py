@@ -1,4 +1,4 @@
-import datetime
+from datetime import datetime
 import json
 from django.core import serializers
 from django.http import JsonResponse
@@ -40,10 +40,10 @@ def specialistCalendarView(request):
     #         event.save()
     #         form = SpecialistAppointment()
     else:    
-        appointments = getSpecialistAppointments(Specialist.objects.get(profile = userProfile))
-
+        appointments = getSpecialistAppointments(Specialist.objects.get(profile = userProfile), 'json')
+        print(appointments)
     # form.setPatientList(specialist = Specialist.objects.get(profile = userProfile))
-    return render(request, 'appointmentCalendar.html', context={'scheduledAppointments': appointments})
+    return render(request, 'appointmentCalendar.html', context={'scheduledAppointments': appointments, 'active': 'calendar'})
     return JsonResponse(getSpecialistAppointments(Specialist.objects.get(profile = userProfile)), safe=False)
     # return JsonResponse(getSpecialistAppointments(Specialist.objects.get(profile = userProfile)), safe=False)
     # if (userProfile.type == 'Specialist'):
@@ -70,26 +70,33 @@ def createAppointment(request):
             return redirect('appointmentCalendar')    
     else:          
         list = PatientList.objects.filter(specialist = specialistDetails)
-        patientsList = [person.patient for person in list]
-        print(patientsList)
-        return render(request, 'appointmentCreate.html', context={'patients': patientsList})
+        patientsList = [person.patient for person in list]        
+        return render(request, 'appointmentCreate.html', context={'patients': patientsList, 'active': 'create'})
 
-def getSpecialistAppointments(specialistId):
+def getSpecialistAppointments(specialistId, returnType):
     appointments = Appointments.objects.filter(specialist = specialistId)
     scheduledAppointments = []
     for element in appointments:   
-        data = {
+        print(element.createdBy)
+        dateAppointment = element.appointmentStart
+        data = {            
             'id': element.uuid,
-            'specialist': element.specialist.profile.user.first_name+' '+element.specialist.profile.user.last_name,
-            'patient': element.patient.profile.user.first_name+' '+element.patient.profile.user.last_name,
-            'start': serializeDatetime(element.appointmentStart),
-            'end': serializeDatetime(element.appointmentEnd),
-            'note': element.note,
-            'status': element.status,
+            'user': element.specialist.profile.user.first_name+' '+element.specialist.profile.user.last_name,
+            'attendee': element.patient.profile.user.first_name+' '+element.patient.profile.user.last_name,
+            # 'specialist': element.specialist.profile.user.first_name+' '+element.specialist.profile.user.last_name,
+            # 'patient': element.patient.profile.user.first_name+' '+element.patient.profile.user.last_name,
+            'start': (element.appointmentStart).strftime("%Y-%m-%d %H:%M:%S"),
+            'end': (element.appointmentEnd).strftime("%Y-%m-%d %H:%M:%S"),
+            'note': checkNull(element.note),
+            'status': translateStatus(element.status, dateAppointment),
+            'createdBy': checkNull(element.createdBy.user.first_name+' '+element.createdBy.user.last_name)
         }
         scheduledAppointments.append(data)
 
-    return json.dumps(scheduledAppointments)
+    if returnType == 'json':
+        return json.dumps(scheduledAppointments)
+    else:
+        return scheduledAppointments
 
 def getPatientAppointments(specialistId):
     appointments = Appointments.objects.filter(specialist = specialistId)
@@ -104,7 +111,7 @@ def getPatientAppointments(specialistId):
             'appointmentStart': element.appointmentStart,
             'appointmentEnd': element.appointmentEnd,
             'note': element.note,
-            'status': element.status,
+            'status': translateStatus(element.status),
         }
         
         index+=1
@@ -117,5 +124,36 @@ def serializeDatetime(obj):
     else:
         raise TypeError("Object not serializable")
 
+def appointmentHistory(request):
+    userProfile = Profile.objects.get(user=request.user)
+    appointments = getSpecialistAppointments(Specialist.objects.get(profile = userProfile), 'array')
+
+    return render(request, 'appointmentHistory.html', context={'scheduledAppointments':appointments, 'active': 'history'})
+
 # def createAppointment(request):
 #     return render(request, 'appointmentCreate.html')
+
+def translateStatus(status, date):
+    inputDate = date.date()
+    currentDate = datetime.now().date()
+
+    if status == 'P' and inputDate>currentDate:
+        return 'Pending'
+    elif status == 'C':
+        return 'Confirmed'
+    elif status == 'R':
+        return 'Rescheduled'
+    elif status == 'D':
+        return 'Declined'
+    else:
+        return 'Cancelled'
+    
+def checkNull(data):
+    if data:
+        return data
+    else:
+        return 'None'
+    
+# def checkRecipient(data, user):
+#     if data == user:
+#         return element.patient.profile.user.first_name+' '+element.patient.profile.user.last_name,

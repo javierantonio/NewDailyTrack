@@ -1,0 +1,29 @@
+{% extends 'appointmentsBase.html' %}
+
+{% block appointmentContent %}
+ <table>
+
+    <thead>
+        <tr>
+            <th>Patient Name</th>
+            <th>Date Schedule</th>
+            <th>Time Schedule</th>
+            <th>Note</th>
+            <th>Status</th>
+        </tr>
+    </thead> 
+    <tbody>
+        {% for appointment in scheduledAppointments %}
+            <tr class="dashboard-row">
+                <td>{{appointment.patient}}</td>
+                <td>{{appointment.start}} - {{appointment.end}}</td>
+                <td>{{appointment.start}} - {{appointment.end}}</td>
+                <td>{{appointment.note}}</td>
+                <td>{{appointment.status}}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+
+
+ </table>
+{% endblock %}

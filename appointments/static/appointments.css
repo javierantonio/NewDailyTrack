@@ -67,9 +67,20 @@
     position: absolute;
     width: 85%;
     text-align: right;
-    padding: 0.1em 0;
+    padding: 0;
     /* padding: 1.1rem 0.4rem; */
     font-size: 1.2rem;
     font-weight: 1000;
     color: #001a3f;
+}
+.modal-header-text{
+    display:flex;
+    flex-direction: column;
+}
+.modal-body{
+    display: flex;
+    flex-direction: column;
+}
+.descriptor{
+    font-weight: bold;
 }
