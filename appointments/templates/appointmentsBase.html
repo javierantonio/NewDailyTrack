@@ -40,11 +40,43 @@
 
 
 <div class="main-container">
-  <div class="top-container">
-    <div class="top-item">
-      <button id="createAppointment" class="btn btn-primary">
-        Create an Appointment
-      </button>
+  <div class="side-container">
+    <div class="side-item">
+      <a href="{% url 'appointmentCalendar' %}">
+        <button class="btn side-btn">
+          Calendar    
+          {% if active == 'calendar' %}   
+            <div class="selector-container">
+              <i class="fa fa-circle-chevron-right"></i>        
+            </div>
+          {% endif %}   
+        </button>
+      </a>
+      
+    </div>
+    <div class="side-item">
+      <a href="{% url 'appointmentCreate' %}">
+        <button class="btn side-btn">
+          Create an Appointment
+          {% if active == 'create' %}   
+            <div class="selector-container">
+              <i class="fa fa-circle-chevron-right"></i>        
+            </div>
+          {% endif %}   
+        </button>
+      </a>
+    </div>
+    <div class="side-item">
+      <a href="{% url 'appointmentHistory' %}">
+        <button class="btn side-btn">
+          Appointment History
+          {% if active == 'history' %}   
+            <div class="selector-container">
+              <i class="fa fa-circle-chevron-right"></i>        
+            </div>
+          {% endif %}   
+        </button>
+      </a>
     </div>  
   </div>
   <div class="content-container">

@@ -3,23 +3,60 @@
 {% load static %}
 
 <div class="main-container">
-    <form role="form" method="post">
-        {% csrf_token %}
-        <div class="form-group">
-            <label for="email">E-mail Address:</label>
-            <input type="email" class="form-control form-control-user"
-                id="email" name="email" placeholder="ex. juandelacruz34@example.com" required>
-        </div>
+  <form role="form" class="form" method="post">
+    {% csrf_token %}
+    <div class="form-group options">
+        <div class="options-label" for="patient">Patient Name:</div>
+        <select class="options-input" name="patient">
+            {% for choice in patients %}
+                <option value="{{ choice }}">{{ choice.profile.user.first_name }} {{ choice.profile.user.last_name }}</option>
+            {% endfor %}
+        </select>
+      </div>
+    <div class="form-group">
+      <label for="date">Date:</label>
+      <input
+        type="date"
+        class="form-control form-control-user input-daterange"
+        id="date"
+        name="date"
+        placeholder="mm/dd/yyyy"
+        required
+      />
+    </div>
 
-        <button
-            type="submit"
-            id="submit"
-            name="submit"
-            class="btn btn-primary"
-        >
-            Create Appointment
-        </button>
-    </form>
+    <div class="form-group input-group">
+      <!-- <div class="col-md-8" id="timepicker"> -->
+      <label for="timeStart" style="margin: 5px 10px 0 0">Time Start: </label
+      >&nbsp;
+
+      <input
+        type="time"
+        id="timeStart"
+        name="timeStart"
+        class="form-control"
+      />&nbsp;&nbsp;&nbsp;
+
+      <label for="timeEnd" style="margin: 5px 10px 0 10px">Time End:</label
+      >&nbsp;
+      <input type="time" id="timeEnd" name="timeEnd" class="form-control" />
+
+      <!-- </div> -->
+    </div>
+
+    <div class="form-group">
+        <label for="notes">Note:</label>
+        <textarea
+          class="form-control form-control-user"
+          id="notes"
+          name="notes"
+        ></textarea>
+    </div>
+
+    <button type="submit" id="submit" name="submit" class="btn btn-primary">
+      Create Appointment
+    </button>
+  </form>
 </div>
 
 {% endblock appointmentContent %}
