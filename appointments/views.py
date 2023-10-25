@@ -14,52 +14,18 @@ def landingAppointments(request):
 
 def specialistCalendarView(request):
     userProfile = Profile.objects.get(user=request.user)
-   
-
-    # patientList = PatientList.objects.filter(specialist = Specialist.objects.get(profile = userProfile))
-
-    # filteredList = [person.patient.profile for person in patientList]
-
-    # form.setSelectedPatient(PatientList.objects.filter(specialist = Specialist.objects.get(profile = userProfile)))
-    
-    # form.fields['patient'].queryset = filteredList
-    # form.fields['patient'].to_field_name = 'patient'
 
     if request.method == 'POST':
-        SpecialistAppointmentForm(request,Specialist.objects.get(profile = userProfile))
+        appointmentSelected = request.POST['appointment']
+        appointmentObject = Appointments.objects.get(uuid = appointmentSelected)
+        print(appointmentObject)
 
-    #     form = SpecialistAppointment()
-    #     print(request.POST['patient'])
-    #     patientProfile = Profile.objects.get(user = User.objects.get(email = request.POST['patient']))
-    #     form.fields['patient'] = Patient.objects.get(profile = patientProfile)
-    #     form.setSelectedPatient(selectedPatient = Patient.objects.get(profile = patientProfile))
-    #     form = SpecialistAppointment(request.POST)
-    #     if form.is_valid():
-    #         event = form.save(commit=False) 
-    #         event.specialist = request.user  # Set the user field
-    #         event.save()
-    #         form = SpecialistAppointment()
     else:    
         appointments = getSpecialistAppointments(Specialist.objects.get(profile = userProfile), 'json')
         print(appointments)
     # form.setPatientList(specialist = Specialist.objects.get(profile = userProfile))
     return render(request, 'appointmentCalendar.html', context={'scheduledAppointments': appointments, 'active': 'calendar'})
-    return JsonResponse(getSpecialistAppointments(Specialist.objects.get(profile = userProfile)), safe=False)
-    # return JsonResponse(getSpecialistAppointments(Specialist.objects.get(profile = userProfile)), safe=False)
-    # if (userProfile.type == 'Specialist'):
-    #     return render(request, 'appointmentCalendar.html', getSpecialistAppointments(Specialist.objects.get(profile = userProfile)))
-    # elif (userProfile.type == 'Patient'):
-    #     render(request, 'appointmentCalendar.html', context=getPatientAppointments(userProfile))
-
-# def querysetPatients(specialistProfile):
-#     list = PatientList.objects.filter(specialist = Specialist.objects.get(profile = specialistProfile))
-#     patientArray = []
-#     for item in list:
-#         patientData = Patient.objects.get(profile = item.patient)
-#         patientArray.append({
-#             'fields': patientData
-#             'model'
-#         })
+    
 
 def createAppointment(request):
     specialistDetails = Specialist.objects.get(profile = Profile.objects.get(user=request.user))
@@ -76,8 +42,7 @@ def createAppointment(request):
 def getSpecialistAppointments(specialistId, returnType):
     appointments = Appointments.objects.filter(specialist = specialistId)
     scheduledAppointments = []
-    for element in appointments:   
-        print(element.createdBy)
+    for element in appointments:           
         dateAppointment = element.appointmentStart
         data = {            
             'id': element.uuid,
@@ -157,3 +122,6 @@ def checkNull(data):
 # def checkRecipient(data, user):
 #     if data == user:
 #         return element.patient.profile.user.first_name+' '+element.patient.profile.user.last_name,
+
+def confirmAppointment(request):
+    print(request.POST)

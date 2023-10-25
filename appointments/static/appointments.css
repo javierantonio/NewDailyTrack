@@ -2,6 +2,27 @@
     width: 100%;
     height: 100%;
 }
+#dateTitle{
+    font-size: 2rem;
+    font-weight: 700;
+    height: 15%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+#modalTitle{
+    font-weight: 700;
+}
+#modalSubtitle{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+#appointment-id{
+    font-size: 0.75rem;
+    color: grey;
+}
 .main-container{
     width: 100%;
     height: 90vh;
@@ -77,6 +98,9 @@
     display:flex;
     flex-direction: column;
 }
+.modal-header{
+    padding: 1rem 1rem 0 1rem;
+}
 .modal-body{
     display: flex;
     flex-direction: column;
@@ -84,3 +108,4 @@
 .descriptor{
     font-weight: bold;
 }
+
