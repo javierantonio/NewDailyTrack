@@ -1,6 +1,6 @@
 from datetime import datetime, date
 from django import forms
-from .models import Appointments
+from .models import Appointments, DeclinedAppointments, AcceptedAppointments, RescheduledAppointments
 from patientDirectory.models import PatientList
 from registration.models import Profile, Specialist, Patient
 from django.forms.widgets import DateTimeInput
@@ -84,3 +84,45 @@ def SpecialistAppointmentForm(request, specialist):
             print(e)
             return False
  
+def ConfirmAppointment(appointment, user):
+    try:
+        appointment = AcceptedAppointments.objects.create(
+            appointment = appointment,
+            acceptedBy = user.profile
+        )
+        appointment.save()
+
+        return True
+    except Exception as e:
+        print(e)
+        return False
+
+def DeclineAppointment(appointment, reason, user):
+    try:
+        appointment = DeclinedAppointments.objects.create(
+            appointment = appointment,
+            declinedBy = user.profile,
+            reason = reason,
+        )
+        appointment.save()
+
+        return True
+    except Exception as e:
+        print(e)
+        return False
+
+def ReschedAppointment(request, user):
+    try:
+        appointment = RescheduledAppointments.objects.create(
+            oldAppointment = request['oldAppointment'],
+            newAppointment = request['newAppointment'],
+            rescheduledBy = user.profile,
+            status = 'P',
+        )
+        appointment.save()
+
+        return True
+    except Exception as e:
+        print(e)
+        return False
+

@@ -8,5 +8,7 @@ urlpatterns = [
     path('calendar/', views.specialistCalendarView, name='appointmentCalendar'),
     path('create/', views.createAppointment, name='appointmentCreate'),
     path('history/', views.appointmentHistory, name='appointmentHistory'),
-    path('ca/', views.confirmAppointment, name='appointmentConfirm'),
+    path('calendar/ca/', views.confirmAppointment, name='appointmentConfirm'),
+    path('calendar/da/', views.declineAppointment, name='appointmentDecline'),
+    path('calendar/ca/', views.rescheduleAppointment, name='appointmentResched'),
 ]

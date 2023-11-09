@@ -6,7 +6,7 @@ from django.shortcuts import redirect, render
 from patientDirectory.models import PatientList
 from registration.models import Profile, Specialist, Patient
 from .models import Appointments, DeclinedAppointments, AcceptedAppointments, RescheduledAppointments
-from .appointmentForm import SpecialistAppointmentForm
+from .appointmentForm import SpecialistAppointmentForm, ConfirmAppointment
 from django.contrib.auth.models import User
 
 def landingAppointments(request):
@@ -26,7 +26,6 @@ def specialistCalendarView(request):
     # form.setPatientList(specialist = Specialist.objects.get(profile = userProfile))
     return render(request, 'appointmentCalendar.html', context={'scheduledAppointments': appointments, 'active': 'calendar'})
     
-
 def createAppointment(request):
     specialistDetails = Specialist.objects.get(profile = Profile.objects.get(user=request.user))
     if request.method == 'POST':
@@ -124,4 +123,27 @@ def checkNull(data):
 #         return element.patient.profile.user.first_name+' '+element.patient.profile.user.last_name,
 
 def confirmAppointment(request):
+    specialistDetails = Specialist.objects.get(profile = Profile.objects.get(user=request.user))
+    appointment = Appointments.objects.get(uuid = request.POST['data'])
+    if request.method == 'POST':
+        if ConfirmAppointment(appointment, specialistDetails)==True:
+            appointment.status = 'A'
+            appointment.save()
+        return JsonResponse({'message': 'Appointment Confirmed!'})
+    return JsonResponse({'error': 'Invalid request method'})  
+    # else:          
+        # list = PatientList.objects.filter(specialist = specialistDetails)
+        # patientsList = [person.patient for person in list]        
+        # return render(request, 'appointmentCreate.html', context={'patients': patientsList, 'active': 'create'})
+
+def declineAppointment(request):
+    print(request.POST)
+
+def rescheduleAppointment(request):
+    print(request.POST)
+
+def confirmRescheduledAppointment(request):
+    print(request.POST)
+
+def declineRescheduledAppointment(request):
     print(request.POST)

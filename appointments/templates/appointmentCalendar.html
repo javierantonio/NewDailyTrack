@@ -15,7 +15,7 @@
           <!--Appointment with Patient-->
           <h6 id="modalSubtitle">
             <span>Created by: <span id="appointment-set"></span></span>
-            
+
             <span id="appointment-id"></span>
           </h6>
           <!--Date created-->
@@ -57,12 +57,8 @@
       </div>
       <div class="modal-footer">
         <div id="btn-set">
-            {% csrf_token %}
-          <button
-            id="confirm-button"
-            type="button"
-            class="btn btn-success"
-          >
+          {% csrf_token %}
+          <button id="confirm-button" type="button" class="btn btn-success">
             Confirm
           </button>
           <button id="decline-button" type="button" class="btn btn-danger">
@@ -306,7 +302,8 @@
     const displayedMonth = displayedDate.getMonth(); // Month is 0-based, so add 1
     const displayedYear = displayedDate.getFullYear();
 
-    document.getElementById("dateTitle").innerText = months[displayedMonth]+' '+displayedYear;
+    document.getElementById("dateTitle").innerText =
+      months[displayedMonth] + " " + displayedYear;
 
     events.forEach(function (event) {
       calendar.createSchedules([
@@ -336,8 +333,7 @@
           //   color: event.status === 'Pending' ? '#4cb4e0' : event.status === 'Confirmed' ? '#1fa342' : event.status === 'Declined' ? '#404040' : '#4cb4e0'
         },
       ]);
-    });    
-
+    });
 
     // EVENT LISTENERS
     calendar.on("clickSchedule", function (event) {
@@ -439,7 +435,6 @@
       }
     });
 
-    
     // $(".confirm-button").click(function(){
     //     const id = document.getElementById('appointment-id').innerText;
 
@@ -453,7 +448,7 @@
     //         url: '/appointments/calendar/ca/',
     //         data: {
     //             csrfmiddlewaretoken: csrfToken,
-    //             appointment: id 
+    //             appointment: id
     //         },
     //         success: function(response) {
     //             console.log(response);
@@ -464,44 +459,91 @@
     //     });
     //     }
     // })
-    $("#decline-button").click(function(){
-        console.log('decline')
-    })
-    $("#resched-button").click(function(){
-        console.log('resched')
-    })
-  });  
-
-  
+    $("#decline-button").click(function () {
+      console.log("decline");
+    });
+    $("#resched-button").click(function () {
+      console.log("resched");
+    });
+  });
 </script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-    $(document).ready(function () {
-    $("#confirm-button").click(function(){
-      var code = document.getElementById('appointment-id').innerText;
-      
+  $(document).ready(function () {
+    $("#confirm-button").click(function () {
+      var id = document.getElementById("appointment-id").innerText;
+      sendPayload(id,"#confirmedModal")
+    });
+    $("#decline-button").click(function () {
+      var code = document.getElementById("appointment-id").innerText;
+
+      var csrfToken = document.querySelector(
+        'input[name="csrfmiddlewaretoken"]'
+      ).value;
+
+      $.ajax({
+        type: "POST",
+        url: "/appointments/calendar/da/",
+        data: {
+          csrfmiddlewaretoken: csrfToken,
+          code: code,
+        },
+        success: function (response) {
+          console.log(response);
+        },
+        error: function (error) {
+          console.error("Error:", error);
+        },
+      });
+    });
+    $("#resched-button").click(function () {
+      var code = document.getElementById("appointment-id").innerText;
+
+      var csrfToken = document.querySelector(
+        'input[name="csrfmiddlewaretoken"]'
+      ).value;
+
+      $.ajax({
+        type: "POST",
+        url: "/appointments/calendar/ra/",
+        data: {
+          csrfmiddlewaretoken: csrfToken,
+          code: code,
+        },
+        success: function (response) {
+          console.log(response);
+        },
+        error: function (error) {
+          console.error("Error:", error);
+        },
+      });
+    });
+    
+    function sendPayload(data, modal){
       var csrfToken = document.querySelector('input[name="csrfmiddlewaretoken"]').value;
 
-    //   notif = confirm('Terminate the Patient Invite?')
-    //   if(notif){
-        $.ajax({
-          type: "POST",
-          url: "/appointments/calendar/ca/",
-          data: {
-            csrfmiddlewaretoken: csrfToken,
-            code: code
-          },
-          success: function(response) {
-            console.log(response);
-          },
-          error: function(error) {
-            console.error('Error:', error);
-          }
-        });
-    //   }
-    })
-    
-  })
+      $.ajax({
+        type: "POST",
+        url: "/appointments/calendar/ca/",
+        data: {
+          csrfmiddlewaretoken: csrfToken,
+          data: data,
+        },
+        success: function (response) {
+          console.log(response);
+          alert(response.message)
+          location.reload()
+        },
+        error: function (response) {
+          console.error(response);
+          alert(response.message)
+          location.reload()
+        },
+      });
+
+      $(modal).modal("hide");
+    }
+  });
 </script>
 
 {% endblock appointmentContent %}
