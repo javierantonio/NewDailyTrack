@@ -1,10 +1,11 @@
-{% extends 'appointmentsBase.html' %}
-{% block appointmentContent %}
+{% extends 'appointmentsBase.html' %} 
+{% block appointmentContent %} 
 {% load static %}
 
 <div id="dateTitle"></div>
 <div id="calendar"></div>
 
+<!-- VIEW SCHEDULES -->
 <!-- PENDING -->
 <div id="pendingModal" class="modal fade" tabindex="-1" role="dialog">
   <div class="modal-dialog" role="document">
@@ -256,6 +257,85 @@
   </div>
 </div>
 
+<!-- CHANGE SCHEDULE STATUS -->
+<!-- DECLINE APPOINTMENT -->
+<div id="toDeclineModal" class="modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="modal-header-text">
+          <h5 id="modalTitle"></h5>
+          <!--Appointment with Patient-->
+          <h6 id="modalSubtitle">
+            Created by: <span id="appointment-set"></span>
+            <span id="appointment-id"></span>
+          </h6>
+          <!--Date created-->
+        </div>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form role="form" name="declineForm" method="post">
+        <div class="modal-body" id="modalBody">
+          <div class="section">
+            <span class="descriptor">Status:</span>
+            <span id="appointment-status"></span>
+          </div>
+
+          <div class="section">
+            <span class="descriptor">Date:</span>
+            <span id="date"></span>
+          </div>
+
+          <div class="section">
+            <span class="descriptor">Time Start:</span>
+            <span id="start"></span>
+          </div>
+
+          <div class="section">
+            <span class="descriptor">Time End:</span>
+            <span id="end"></span>
+          </div>
+
+          <div class="section">
+            <span class="descriptor">Notes:</span>
+            <span id="appointment-note"></span>
+          </div>
+
+          <div class="separator"></div>
+
+          
+            {% csrf_token %}
+            <div class="form-group">
+              <label for="reasonDecline">Reason for Declining the Appointment:</label>
+              <textarea
+                class="form-control form-control-user"
+                id="reasonDecline"
+                name="reasonDecline"
+              ></textarea>
+            </div>
+          
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">
+            Close
+          </button>
+          <button id="appointment-declined-button" type="button" class="btn btn-danger">
+            Decline Appointment
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
 <script type="application/json" id="scheduled-appointments">
   {{ scheduledAppointments|safe }}
 </script>
@@ -343,10 +423,11 @@
         const id = event.schedule.id;
         const status = event.schedule.state;
         const title = "Appointment with " + event.schedule.title;
-        const start = new Date(event.schedule.start); //start end status note
-        const end = new Date(event.schedule.end);
+        const start = String(new Date(event.schedule.start).getHours()).padStart(2,'0')+':'+String(new Date(event.schedule.start).getMinutes()).padStart(2,'0')+''; //start end status note
+        const end = String(new Date(event.schedule.end).getHours()).padStart(2,'0')+':'+String(new Date(event.schedule.end).getMinutes()).padStart(2,'0');
         const creator = event.schedule.attendees[0];
         const user = event.schedule.attendees[1];
+        const appointmentDate = new Date(event.schedule.start); 
 
         console.log(event.schedule);
 
@@ -364,11 +445,11 @@
             }
             modal.querySelector("#modalTitle").innerText = title;
             modal.querySelector("#date").innerText =
-              months[start.getMonth()] +
+              months[appointmentDate.getMonth()] +
               " " +
-              start.getDate() +
+              appointmentDate.getDate() +
               ", " +
-              start.getFullYear();
+              appointmentDate.getFullYear();
             modal.querySelector("#start").innerText = start;
             modal.querySelector("#end").innerText = end;
             modal.querySelector("#appointment-note").innerText = note;
@@ -459,9 +540,9 @@
     //     });
     //     }
     // })
-    $("#decline-button").click(function () {
-      console.log("decline");
-    });
+    // $("#decline-button").click(function () {
+    //   console.log("decline");
+    // });
     $("#resched-button").click(function () {
       console.log("resched");
     });
@@ -472,76 +553,73 @@
   $(document).ready(function () {
     $("#confirm-button").click(function () {
       var id = document.getElementById("appointment-id").innerText;
-      sendPayload(id,"#confirmedModal")
+      sendPayload(id, "ca");
     });
     $("#decline-button").click(function () {
-      var code = document.getElementById("appointment-id").innerText;
+      if (confirm("This action will cancel the appointment. Proceed?")) {
+        const id = document.getElementById("appointment-id").innerText;
 
-      var csrfToken = document.querySelector(
-        'input[name="csrfmiddlewaretoken"]'
-      ).value;
+        modal = document.getElementById("toDeclineModal");
 
-      $.ajax({
-        type: "POST",
-        url: "/appointments/calendar/da/",
-        data: {
-          csrfmiddlewaretoken: csrfToken,
-          code: code,
-        },
-        success: function (response) {
-          console.log(response);
-        },
-        error: function (error) {
-          console.error("Error:", error);
-        },
-      });
+        const note = document.getElementById("appointment-note").innerText;
+        const status = document.getElementById("appointment-status").innerText;
+        const title =
+          "Decline " + document.getElementById("modalTitle").innerText;
+        const start = document.getElementById("start").innerText //start end status note
+        const end = document.getElementById("end").innerText;
+        const creator = document.getElementById("appointment-set").innerText;
+        const appointmentDate = document.getElementById("date").innerText;
+        console.log(note, status, title, start, end, creator);
+        
+        modal.querySelector("#modalTitle").innerText = title;
+        modal.querySelector("#date").innerText = appointmentDate;
+        modal.querySelector("#start").innerText = start;
+        modal.querySelector("#end").innerText = end;
+        modal.querySelector("#appointment-note").innerText = note;
+        modal.querySelector("#appointment-status").innerText = status;
+        modal.querySelector("#appointment-set").innerText = creator;
+        modal.querySelector("#appointment-id").innerText = id;
+        $("#pendingModal").modal("hide");
+        $("#toDeclineModal").modal("show");
+        // sendPayload(id, 'da')
+      }
     });
     $("#resched-button").click(function () {
       var code = document.getElementById("appointment-id").innerText;
+      // sendPayload(id, 'ra')
+    });
+    $("#appointment-declined-button").click(function () {
+      const decline = $('form').serializeArray();
+      const id = document.getElementById("appointment-id").innerText;
 
+      sendPayload({id: id, data: decline[2].value}, "da");
+    });
+    
+
+    function sendPayload(data, url) {
       var csrfToken = document.querySelector(
         'input[name="csrfmiddlewaretoken"]'
       ).value;
 
       $.ajax({
         type: "POST",
-        url: "/appointments/calendar/ra/",
+        url: `/appointments/calendar/${url}/`,
         data: {
           csrfmiddlewaretoken: csrfToken,
-          code: code,
+          id: data.id||data,
+          data: data.data||data,
         },
         success: function (response) {
           console.log(response);
-        },
-        error: function (error) {
-          console.error("Error:", error);
-        },
-      });
-    });
-    
-    function sendPayload(data, modal){
-      var csrfToken = document.querySelector('input[name="csrfmiddlewaretoken"]').value;
-
-      $.ajax({
-        type: "POST",
-        url: "/appointments/calendar/ca/",
-        data: {
-          csrfmiddlewaretoken: csrfToken,
-          data: data,
-        },
-        success: function (response) {
-          console.log(response);
-          alert(response.message)
-          location.reload()
+          alert(response.message);
+          location.reload();
         },
         error: function (response) {
           console.error(response);
-          alert(response.message)
-          location.reload()
+          alert(response.message);
+          location.reload();
         },
       });
-
-      $(modal).modal("hide");
     }
   });
 </script>

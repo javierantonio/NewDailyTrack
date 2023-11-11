@@ -6,7 +6,7 @@ from django.shortcuts import redirect, render
 from patientDirectory.models import PatientList
 from registration.models import Profile, Specialist, Patient
 from .models import Appointments, DeclinedAppointments, AcceptedAppointments, RescheduledAppointments
-from .appointmentForm import SpecialistAppointmentForm, ConfirmAppointment
+from .appointmentForm import SpecialistAppointmentForm, ConfirmAppointment, DeclineAppointment
 from django.contrib.auth.models import User
 
 def landingAppointments(request):
@@ -103,7 +103,7 @@ def translateStatus(status, date):
 
     if status == 'P' and inputDate>currentDate:
         return 'Pending'
-    elif status == 'C':
+    elif status == 'A':
         return 'Confirmed'
     elif status == 'R':
         return 'Rescheduled'
@@ -137,7 +137,14 @@ def confirmAppointment(request):
         # return render(request, 'appointmentCreate.html', context={'patients': patientsList, 'active': 'create'})
 
 def declineAppointment(request):
-    print(request.POST)
+    specialistDetails = Specialist.objects.get(profile = Profile.objects.get(user=request.user))
+    appointment = Appointments.objects.get(uuid = request.POST['id'])
+    if request.method == 'POST':
+        if DeclineAppointment(appointment, request.POST['data'], specialistDetails)==True:
+            appointment.status = 'D'
+            appointment.save()
+        return JsonResponse({'message': 'Appointment Declined!'})
+    return JsonResponse({'error': 'Invalid request method'})  
 
 def rescheduleAppointment(request):
     print(request.POST)
