@@ -1,7 +1,12 @@
+body{
+    height: 100%;
+    width: 100%;
+}
+
 .chart{
     height: 50vh;
     min-width: 10rem;
-    width: 100%;
+    /* width: 100%; */
 }
 
 .mood-section{
