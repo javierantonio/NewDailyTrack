@@ -6,40 +6,55 @@ from django.shortcuts import redirect, render
 from patientDirectory.models import PatientList
 from registration.models import Profile, Specialist, Patient
 from .models import Appointments, DeclinedAppointments, AcceptedAppointments, RescheduledAppointments
-from .appointmentForm import SpecialistAppointmentForm, ConfirmAppointment, DeclineAppointment
+from .appointmentForm import SpecialistAppointmentForm, PatientAppointmentForm, ConfirmAppointment, DeclineAppointment, ReschedAppointment
 from django.contrib.auth.models import User
 
 def landingAppointments(request):
     return render(request, 'appointmentsBase.html')
 
-def specialistCalendarView(request):
+def calendarView(request):
     userProfile = Profile.objects.get(user=request.user)
 
-    if request.method == 'POST':
-        appointmentSelected = request.POST['appointment']
-        appointmentObject = Appointments.objects.get(uuid = appointmentSelected)
-        print(appointmentObject)
+    # if request.method == 'POST':
+    #     appointmentSelected = request.POST['appointment']
+    #     appointmentObject = Appointments.objects.get(uuid = appointmentSelected)
+    #     print(appointmentObject)
 
-    else:    
-        appointments = getSpecialistAppointments(Specialist.objects.get(profile = userProfile), 'json')
-        print(appointments)
+    # else:    
+    appointments = getAppointments(userProfile, 'json')
+    print(appointments)
     # form.setPatientList(specialist = Specialist.objects.get(profile = userProfile))
     return render(request, 'appointmentCalendar.html', context={'scheduledAppointments': appointments, 'active': 'calendar'})
     
 def createAppointment(request):
-    specialistDetails = Specialist.objects.get(profile = Profile.objects.get(user=request.user))
+    userProfile = Profile.objects.get(user=request.user)   
+    
     if request.method == 'POST':
-        if SpecialistAppointmentForm(request, specialistDetails)==True:
+        if(userProfile.type=='Specialist'):
+            createForm = SpecialistAppointmentForm(request)             
+        else:
+            createForm =  PatientAppointmentForm(request)
+        #After creating record
+        if createForm==True:
             return redirect('appointmentCalendar')
         else:
-            return redirect('appointmentCalendar')    
-    else:          
-        list = PatientList.objects.filter(specialist = specialistDetails)
-        patientsList = [person.patient for person in list]        
-        return render(request, 'appointmentCreate.html', context={'patients': patientsList, 'active': 'create'})
+            return redirect('appointmentCalendar') 
+    else:    
+        if(userProfile.type=='Specialist'):      
+            list = PatientList.objects.filter(specialist = Specialist.objects.get(profile = userProfile))
+            usersList = [person.patient for person in list]
+        else:
+            list = PatientList.objects.filter(patient = Patient.objects.get(profile=userProfile))
+            usersList = [person.specialist for person in list]     
+        print(usersList)
+        return render(request, 'appointmentCreate.html', context={'recipients': usersList, 'active': 'create', 'userType':userProfile.type})
 
-def getSpecialistAppointments(specialistId, returnType):
-    appointments = Appointments.objects.filter(specialist = specialistId)
+def getAppointments(userProfile, returnType):
+    if(userProfile.type=='Specialist'):
+        appointments = Appointments.objects.filter(specialist = Specialist.objects.get(profile = userProfile))
+    else:
+        appointments = Appointments.objects.filter(patient = Patient.objects.get(profile = userProfile))
+     
     scheduledAppointments = []
     for element in appointments:           
         dateAppointment = element.appointmentStart
@@ -56,7 +71,10 @@ def getSpecialistAppointments(specialistId, returnType):
             'createdBy': checkNull(element.createdBy.user.first_name+' '+element.createdBy.user.last_name)
         }
         scheduledAppointments.append(data)
-
+        if(userProfile.type=='Patient'):
+            data['user'] = element.patient.profile.user.first_name+' '+element.patient.profile.user.last_name
+            data['attendee'] = element.specialist.profile.user.first_name+' '+element.specialist.profile.user.last_name
+   
     if returnType == 'json':
         return json.dumps(scheduledAppointments)
     else:
@@ -90,7 +108,7 @@ def serializeDatetime(obj):
 
 def appointmentHistory(request):
     userProfile = Profile.objects.get(user=request.user)
-    appointments = getSpecialistAppointments(Specialist.objects.get(profile = userProfile), 'array')
+    appointments = getAppointments(userProfile, 'array')
 
     return render(request, 'appointmentHistory.html', context={'scheduledAppointments':appointments, 'active': 'history'})
 
@@ -123,10 +141,14 @@ def checkNull(data):
 #         return element.patient.profile.user.first_name+' '+element.patient.profile.user.last_name,
 
 def confirmAppointment(request):
-    specialistDetails = Specialist.objects.get(profile = Profile.objects.get(user=request.user))
+    userProfile = Profile.objects.get(user=request.user)
+    if(userProfile.type=='Specialist'):
+        userDetails = Specialist.objects.get(profile = Profile.objects.get(user=request.user))
+    else:
+        userDetails = Specialist.objects.get(profile = Profile.objects.get(user=request.user))
     appointment = Appointments.objects.get(uuid = request.POST['data'])
     if request.method == 'POST':
-        if ConfirmAppointment(appointment, specialistDetails)==True:
+        if ConfirmAppointment(appointment, userDetails)==True:
             appointment.status = 'A'
             appointment.save()
         return JsonResponse({'message': 'Appointment Confirmed!'})
@@ -137,17 +159,36 @@ def confirmAppointment(request):
         # return render(request, 'appointmentCreate.html', context={'patients': patientsList, 'active': 'create'})
 
 def declineAppointment(request):
-    specialistDetails = Specialist.objects.get(profile = Profile.objects.get(user=request.user))
+    userProfile = Profile.objects.get(user=request.user)
+    if(userProfile.type=='Specialist'):
+        userDetails = Specialist.objects.get(profile = Profile.objects.get(user=request.user))
+    else:
+        userDetails = Specialist.objects.get(profile = Profile.objects.get(user=request.user))
     appointment = Appointments.objects.get(uuid = request.POST['id'])
     if request.method == 'POST':
-        if DeclineAppointment(appointment, request.POST['data'], specialistDetails)==True:
+        if DeclineAppointment(appointment, request.POST['data'], userDetails)==True:
             appointment.status = 'D'
             appointment.save()
         return JsonResponse({'message': 'Appointment Declined!'})
     return JsonResponse({'error': 'Invalid request method'})  
 
 def rescheduleAppointment(request):
+    # ReschedAppointment
     print(request.POST)
+    profile = Profile.objects.get(user=request.user)
+    data = {
+        'id': request.POST['id'],
+        'date': request.POST['data[date]'],
+        'timeStart': request.POST['data[timeStart]'],
+        'timeEnd': request.POST['data[timeEnd]'],
+        'reason': request.POST['data[reason]'],
+        'reschedBy': profile,
+    }
+    
+    if ReschedAppointment(data)==True:
+        return JsonResponse({'message': 'Appointment Declined!'})
+    return JsonResponse({'error': 'Invalid request method'}) 
+    # print(request.POST['data[timeStart]'])
 
 def confirmRescheduledAppointment(request):
     print(request.POST)

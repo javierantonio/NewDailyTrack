@@ -65,9 +65,9 @@
           <button id="decline-button" type="button" class="btn btn-danger">
             Decline
           </button>
-          <button id="resched-button" type="button" class="btn btn-info">
+          <!-- <button id="resched-button" type="button" class="btn btn-info">
             Reschedule
-          </button>
+          </button> -->
         </div>
         <button type="button" class="btn btn-secondary" data-dismiss="modal">
           Close
@@ -309,9 +309,7 @@
           </div>
 
           <div class="separator"></div>
-
           
-            {% csrf_token %}
             <div class="form-group">
               <label for="reasonDecline">Reason for Declining the Appointment:</label>
               <textarea
@@ -325,10 +323,108 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">
-            Close
+            Cancel
           </button>
           <button id="appointment-declined-button" type="button" class="btn btn-danger">
             Decline Appointment
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- RESCHEDULE APPOINTMENT -->
+<div id="toReschedModal" class="modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="modal-header-text">
+          <h5 id="modalTitle"></h5>
+          <!--Appointment with Patient-->
+          <h6 id="modalSubtitle">
+            Created by: <span id="appointment-set"></span>
+            <span id="appointment-id"></span>
+          </h6>
+          <!--Date created-->
+        </div>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form role="form" name="reschedForm" method="post">
+        <div class="modal-body" id="modalBody">
+          <div class="section">
+            <span class="descriptor">Status:</span>
+            <span id="appointment-status"></span>
+          </div>
+          <div class="section">
+            <span class="descriptor">Date:</span>
+            <span id="date"></span>
+          </div>
+          <div class="section">
+            <span class="descriptor">Time Start:</span>
+            <span id="start"></span>
+          </div>
+          <div class="section">
+            <span class="descriptor">Time End:</span>
+            <span id="end"></span>
+          </div>
+          <div class="section">
+            <span class="descriptor">Notes:</span>
+            <span id="appointment-note"></span>
+          </div>
+
+          <div class="separator"></div>
+          
+          <div class="form-group">
+            <label for="date">New Appointment Date:</label>
+            <input
+              type="date"
+              class="form-control form-control-user input-daterange"
+              id="date"
+              name="date"
+              placeholder="mm/dd/yyyy"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <div class="form-content">
+              <label for="timeStart">Time Start: </label>
+              <input
+                type="time"
+                id="timeStart"
+                name="timeStart"
+                class="form-control formTime"
+              />
+            </div>
+            <div class="form-content">
+              <label for="timeEnd">Time End:</label>
+              <input type="time" id="timeEnd" name="timeEnd" class="form-control formTime" />
+            </div>
+            
+          </div>
+          <div class="form-group">
+            <label for="reasonResched">Reason for Rescheduling the Appointment:</label>
+            <textarea
+              class="form-control form-control-user"
+              id="reasonResched"
+              name="reasonResched"
+            ></textarea>
+          </div>
+          
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">
+            Cancel
+          </button>
+          <button id="appointment-resched-button" type="button" class="btn btn-info">
+            Reschedule Appointment
           </button>
         </div>
       </form>
@@ -417,6 +513,20 @@
 
     // EVENT LISTENERS
     calendar.on("clickSchedule", function (event) {
+      var months = [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December",
+    ];
       if (event.schedule) {
         console.log(event.schedule);
         const note = event.schedule.body;
@@ -462,11 +572,11 @@
             modal = document.getElementById("confirmedModal");
             modal.querySelector("#modalTitle").innerText = title;
             modal.querySelector("#date").innerText =
-              months[start.getMonth()] +
+              months[appointmentDate.getMonth()] +
               " " +
-              start.getDate() +
+              appointmentDate.getDate() +
               ", " +
-              start.getFullYear();
+              appointmentDate.getFullYear();
             modal.querySelector("#start").innerText = start;
             modal.querySelector("#end").innerText = end;
             modal.querySelector("#appointment-note").innerText = note;
@@ -479,11 +589,11 @@
             modal = document.getElementById("reschedModal");
             modal.querySelector("#modalTitle").innerText = title;
             modal.querySelector("#date").innerText =
-              months[start.getMonth()] +
+              months[appointmentDate.getMonth()] +
               " " +
-              start.getDate() +
+              appointmentDate.getDate() +
               ", " +
-              start.getFullYear();
+              appointmentDate.getFullYear();
             modal.querySelector("#start").innerText = start;
             modal.querySelector("#end").innerText = end;
             modal.querySelector("#appointment-note").innerText = note;
@@ -499,11 +609,11 @@
             modal = document.getElementById("declinedModal");
             modal.querySelector("#modalTitle").innerText = title;
             modal.querySelector("#date").innerText =
-              months[start.getMonth()] +
+              months[appointmentDate.getMonth()] +
               " " +
-              start.getDate() +
+              appointmentDate.getDate() +
               ", " +
-              start.getFullYear();
+              appointmentDate.getFullYear();
             modal.querySelector("#start").innerText = start;
             modal.querySelector("#end").innerText = end;
             modal.querySelector("#appointment-note").innerText = note;
@@ -585,14 +695,58 @@
       }
     });
     $("#resched-button").click(function () {
-      var code = document.getElementById("appointment-id").innerText;
-      // sendPayload(id, 'ra')
+      const id = document.getElementById("appointment-id").innerText;
+
+      modal = document.getElementById("toReschedModal");
+
+      const note = document.getElementById("appointment-note").innerText;
+      const status = document.getElementById("appointment-status").innerText;
+      const title =
+        "Reschedule " + document.getElementById("modalTitle").innerText;
+      const start = document.getElementById("start").innerText //start end status note
+      const end = document.getElementById("end").innerText;
+      const creator = document.getElementById("appointment-set").innerText;
+      const appointmentDate = document.getElementById("date").innerText;
+      console.log(note, status, title, start, end, creator);
+      
+      modal.querySelector("#modalTitle").innerText = title;
+      modal.querySelector("#date").innerText = appointmentDate;
+      modal.querySelector("#start").innerText = start;
+      modal.querySelector("#end").innerText = end;
+      modal.querySelector("#appointment-note").innerText = note;
+      modal.querySelector("#appointment-status").innerText = status;
+      modal.querySelector("#appointment-set").innerText = creator;
+      modal.querySelector("#appointment-id").innerText = id;
+
+      $("#pendingModal").modal("hide");
+      $("#toReschedModal").modal("show");
+      // sendPayload(id, 'da')
     });
+    
     $("#appointment-declined-button").click(function () {
       const decline = $('form').serializeArray();
       const id = document.getElementById("appointment-id").innerText;
 
-      sendPayload({id: id, data: decline[2].value}, "da");
+      sendPayload({id: id, data: decline[1].value}, "da");
+    });
+    $("#appointment-resched-button").click(function () {
+      const form = $('form').serializeArray();
+      const oldAppointment = document.getElementById("appointment-id").innerText;
+      console.log(form)
+
+      const date=form[2].value;
+      const timeStart = form[3].value;
+      const timeEnd = form[4].value;
+      const reason = form[5].value;
+
+      const data = {
+        date: date,
+        start: timeStart,
+        end: timeEnd,
+        reason: reason
+      }
+
+      sendPayload({id: oldAppointment, data: {date,timeStart,timeEnd,reason}}, "ra");
     });
     
 
