@@ -366,12 +366,22 @@
                     <td>{{ specialist.specialistName }}</td>
                     <td>{{ specialist.contactNumber }}</td>
                     <td>{{ specialist.dateStarted }}</td>
-                    <td>{{ specialist.status }}</td>
                     <td>
-                      
-                      <a id="disconnectSpecialist" class="disconnectSpecialist" data-code="{{specialist.enrollmentCode}}">
-                        Disconnect</a>
+                      {% if specialist.status == 'A' %}
+                      <span class="badge badge-info">Active</span>
+                      {% elif specialist.status == 'I' %}
+                      <span class="badge badge-secondary">Inactive</span>
+                      {% endif %}  
                     </td>
+                    <td>
+                      {% if specialist.status == 'A' %}
+                      <a id="disconnectSpecialist" class="disconnectSpecialist" data-code="{{specialist.enrollmentCode}}">
+                        <button class="btn btn-danger btn-sm">Disconnect</button></a>
+                    {% elif specialist.status == 'I' %}
+                      <button class="btn btn-secondary btn-sm disabled">
+                        Disconnected</button>                    
+                    {% endif %} 
+                  </td>
                     <!-- <td><i class="fa-solid fa-eye fa-sm fa-fw mr-1"></i>View</td> -->
                   </tr>
                   {% endfor %}
@@ -460,17 +470,20 @@
               </thead>
 
               <tbody>
-                <tr>
-                  <td><span class="badge badge-info">Pending</span></td>
-                  <td><span class="badge badge-success">Accepted</span></td>
-                  <td><span class="badge badge-secondary">Cancelled</span></td>
-                </tr>
                 {% for patient in patientsData.1 %}
                 <tr>
                   <th scope="row">{{ patient.enrollmentCode }}</th>
                   <td>{{ patient.patientEmail }}</td>
                   <td>{{ patient.created_at }}</td>                  
-                  <td>{{ patient.enrollmentStatus }}</td>
+                  <td>                    
+                    {% if patient.enrollmentStatus == 'A' %}
+                    <span class="badge badge-success">Accepted</span>
+                    {% elif patient.enrollmentStatus == 'P' %}
+                    <span class="badge badge-info">Pending</span>
+                    {% elif patient.enrollmentStatus == 'T' %}
+                    <span class="badge badge-secondary">Cancelled</span>
+                    {% endif %}
+                  </td>
                   
                   <!-- <a href="{# url 'removePatient' code=patient.enrollmentCode #}"></a> -->
                 </tr>
@@ -501,13 +514,24 @@
                   <th scope="row">{{ patient.enrollmentCode }}</th>
                   <td>{{ patient.patientName }}</td>
                   <td>{{ patient.created_at }}</td>
-                  <td>{{ patient.status }}</td>
+                  <td>
+                    {% if patient.status == 'A' %}
+                    <span class="badge badge-info">Active</span>
+                    {% elif patient.status == 'I' %}
+                    <span class="badge badge-secondary">Inactive</span>
+                    {% endif %}    
+                  </td>
                   <td>
                     {% csrf_token %}
+                    {% if patient.status == 'A' %}
                     <a id="disconnectPatient" class="disconnectPatient" data-code="{{patient.enrollmentCode}}">
                       <button class="btn btn-danger btn-sm">
                       Disconnect</button></a>
-                  </td>
+                    {% elif patient.status == 'I' %}
+                      <button class="btn btn-secondary btn-sm disabled">
+                        Disconnected</button>
+                      </td>
+                    {% endif %} 
                   <!-- <a href="{# url 'removePatient' code=patient.enrollmentCode #}"></a> -->
                 </tr>
                 {% endfor %}
@@ -545,7 +569,6 @@
     </div>
   </div>
 </div>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
   $(document).ready(function () {
     // $(".disconnectPatient").click(function(){
@@ -575,7 +598,7 @@
             code: code
           },
           success: function(response) {
-            console.log(response);
+            window.location.reload(true);
           },
           error: function(error) {
             console.error('Error:', error);
@@ -600,7 +623,7 @@
             code: code
           },
           success: function(response) {
-            console.log(response);
+            window.location.reload(true);
           },
           error: function(error) {
             console.error('Error:', error);
@@ -623,7 +646,8 @@
 
           },
           success: function(response) {
-            console.log(response);
+            window.location.reload(true);
+
           },
           error: function(error) {
             console.error('Error:', error);

@@ -237,11 +237,9 @@ def removeInvitedPatient(request):
     invitedPatient = Enrollment.objects.get(enrollmentCode = request.POST['code'])
     invitedPatient.enrollmentStatus = 'T'
     invitedPatient.save()
-    return redirect('specialistHub')
 
 def removeRegisteredPatient(request):
     patient = PatientList.objects.get(enrollmentCode = get_object_or_404(Enrollment, enrollmentCode=request.POST['code']))
     patient.patientListStatus = 'I'
     patient.save()
-    return redirect('landing')
     

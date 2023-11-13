@@ -14,6 +14,13 @@ class Enrollment(models.Model):
         #   1. P - Pending. A patient who has not yet availed the code.
         #   2. A - Availed. A patient who has availed the code.
         #   3. T - Terminated. A code that has been terminated by the specialist.
+    def save(self, *args, **kwargs):
+        # Check if enrollmentCode is not already set
+        if self.enrollmentStatus == 'P':
+            # Use the id and a portion of uuid to generate a unique code
+            self.enrollmentCode = f"{self.id}-{uuid.uuid4().hex[:6]}"
+
+        super().save(*args, **kwargs)
 
 class PatientList(models.Model):
     specialist = models.ForeignKey('registration.Specialist', on_delete=models.CASCADE, related_name='patientlist')
