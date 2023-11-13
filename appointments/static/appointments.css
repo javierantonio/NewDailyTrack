@@ -2,6 +2,27 @@
     width: 100%;
     height: 100%;
 }
+#dateTitle{
+    font-size: 2rem;
+    font-weight: 700;
+    height: 15%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+#modalTitle{
+    font-weight: 700;
+}
+#modalSubtitle{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+#appointment-id{
+    font-size: 0.75rem;
+    color: grey;
+}
 .main-container{
     width: 100%;
     height: 90vh;
@@ -49,6 +70,10 @@
     width: 90%;
 }
 
+.options-label{
+    width: 11%;
+}
+
 .side-btn{
     border: 2px solid pink;
     border-radius: 20px;
@@ -77,10 +102,41 @@
     display:flex;
     flex-direction: column;
 }
+.modal-header{
+    padding: 1rem 1rem 0 1rem;
+}
 .modal-body{
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    flex-wrap: wrap;
 }
 .descriptor{
     font-weight: bold;
+}
+.separator{
+    display: flex;
+    flex-grow: 1;
+    background-color: gray;
+    height: 1px;
+    margin: 1rem 0;
+    width: 100%;
+}
+.section{
+    display: flex;
+    min-width: 50%;
+    gap: 0.5rem;
+}
+.form-group{
+    width: 100%;
+    gap: 1rem;
+}
+.form-content{
+    display: flex;
+    gap: 0.75rem;
+    align-items: flex-end;
+    margin-bottom: 1em;
+    justify-content: space-around;
+}
+.formTime{
+    width: 80%;
 }
