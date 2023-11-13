@@ -1,9 +1,9 @@
 body {
-    overflow-x: hidden;
-    /* font: 20px 'Ubuntu', sans-serif; */
-    background-image: url('../img/bg/journal_bg.png');
-    background-size: cover;
-  }
+  overflow-x: hidden;
+  /* font: 20px 'Ubuntu', sans-serif; */
+  background-image: url("../img/bg/journal_bg.png");
+  background-size: cover;
+}
 
 .jjournal {
   scroll-behavior: smooth;
@@ -28,8 +28,8 @@ body {
   margin: 40px;
   padding: 20px;
 }
-.created-at{
-  color:black;
+.created-at {
+  color: black;
 }
 .log {
   margin: 20px;
@@ -127,7 +127,6 @@ body {
 
 .title {
   color: white;
-  
 }
 
 .bich {
@@ -150,7 +149,7 @@ body {
   border-top-right-radius: 25px;
   border-bottom-right-radius: 25px;
   height: 50%;
-  gap:1rem;
+  gap: 1rem;
 }
 
 .journal-menu ul {
@@ -222,12 +221,12 @@ body {
   transform: scale(1.1);
 }
 .menu.active a {
-    text-decoration: none; 
-    color: #e03b54;
-    font-size: 22px;
-    border-left: 3px solid;
-    border-color: #f53f5a;
-  }
+  text-decoration: none;
+  color: #e03b54;
+  font-size: 22px;
+  border-left: 3px solid;
+  border-color: #f53f5a;
+}
 .caf {
   margin: 5px -5px 5px 5px;
   font-size: 1rem;
@@ -260,11 +259,13 @@ body {
 }
 
 .glasscard {
-  background: rgba( 255, 255, 255, 0.25 );
-box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
-backdrop-filter: blur( 7px );
--webkit-backdrop-filter: blur( 7px );
-border-radius: 10px;
-padding: 15px;
-margin-top: 20px;
+  background: rgba(255, 255, 255, 0.25);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(7px);
+  -webkit-backdrop-filter: blur(7px);
+  border-radius: 10px;
+  padding: 15px;
+  margin-top: 20px;
+  overflow: auto;
+  height: 80%;
 }

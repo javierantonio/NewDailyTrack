@@ -1,17 +1,32 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
+from registration.models import Specialist, Profile
 
 from steppingStones.models import SteppingStone
 from appointments.models import Appointments
+from patientDirectory.models import PatientList
 
 import plotly.express as px
 import pandas as pd
 
 def summaries(request):
+    mood_data = list()
+
+    userProfile = Profile.objects.get(user=request.user)
+    patients = PatientList.objects.filter(specialist = Specialist.objects.get(profile = userProfile))
+    usersList = [person.patient for person in patients]
+    
+    if not usersList:
+        return render(request, 'summaryEmptyPatient.html')
+
+    for user in usersList:
+        mood_data.extend(SteppingStone.objects.filter(patient = user).values())
+        # print(mood_data)
     # Get data for mood levels
-    mood_data = SteppingStone.objects.all()
-    mood_df = pd.DataFrame.from_records(mood_data.values())
+    # mood_data = SteppingStone.objects.all()
+    mood_df = pd.DataFrame.from_records(mood_data)
+    print(mood_df.columns)
 
     # Get data for appointment status
     appointment_data = Appointments.objects.all()
@@ -44,8 +59,9 @@ def summaries(request):
         hovertemplate='%{x}: %{y}',  # Tooltip format
     )
 
-    line = px.line(x=[c.created_at for c in mood_data],
-                  y=[c.moodLevel for c in mood_data],
+    print(mood_data)
+    line = px.line(x=[c['created_at'] for c in mood_data],
+                  y=[c['moodLevel'] for c in mood_data],
                   title='Mood Fluctuations',
                   labels={'x': 'Date', 'y': 'Mood Levels'},
     )

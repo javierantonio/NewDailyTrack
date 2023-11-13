@@ -1,0 +1,199 @@
+{% if userType == 'Patient' %}
+    {% include "patientTemplate.html" %}
+{% elif userType == 'Specialist' %}
+    {% include "specialistTemplate.html" %}
+{% else %}
+    {% include "specialistTemplate.html" %}
+{% endif %}
+
+{% load static %} 
+{% block link %}
+
+
+{% endblock link %} 
+
+<link rel="stylesheet" href="{% static 'appointments.css' %}" />
+<!-- <script src="https://uicdn.toast.com/tui-calendar/latest/tui-calendar.js"></script> -->
+<script src="https://uicdn.toast.com/tui.code-snippet/latest/tui-code-snippet.js"></script>
+<link rel="stylesheet" href="https://uicdn.toast.com/tui-calendar/latest/tui-calendar.css">
+<script src="https://uicdn.toast.com/tui-calendar/latest/tui-calendar.js"></script>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+{% block content %}
+
+<div class="modal fade" id="eventModal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title">Create New Appointment</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <form method="post">
+          {% csrf_token %}
+        <div class="modal-body" id="modalBody">
+          
+            {{ form.as_p }}        
+        </div>
+        <div class="modal-footer">
+            <button type="submit" class="btn btn-primary">Confirm</button>
+          
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </form>
+    </div>
+</div>
+
+  
+</div>
+
+
+<div class="main-container">
+  <div class="side-container">
+    <div class="side-item">
+      <a href="{% url 'appointmentCalendar' %}">
+        <button class="btn side-btn">
+          Calendar    
+          {% if active == 'calendar' %}   
+            <div class="selector-container">
+              <i class="fa fa-circle-chevron-right"></i>        
+            </div>
+          {% endif %}   
+        </button>
+      </a>
+      
+    </div>
+    <div class="side-item">
+      <a href="{% url 'appointmentCreate' %}">
+        <button class="btn side-btn">
+          Create an Appointment
+          {% if active == 'create' %}   
+            <div class="selector-container">
+              <i class="fa fa-circle-chevron-right"></i>        
+            </div>
+          {% endif %}   
+        </button>
+      </a>
+    </div>
+    <div class="side-item">
+      <a href="{% url 'appointmentHistory' %}">
+        <button class="btn side-btn">
+          Appointment History
+          {% if active == 'history' %}   
+            <div class="selector-container">
+              <i class="fa fa-circle-chevron-right"></i>        
+            </div>
+          {% endif %}   
+        </button>
+      </a>
+    </div>  
+  </div>
+  <div class="content-container">
+      {% block appointmentContent %} 
+      {% endblock appointmentContent %}
+  </div>
+</div>
+
+<script>
+  const createAppointmentButton = document.getElementById('createAppointment');
+      const eventModal = document.getElementById('eventModal');
+
+      createAppointmentButton.addEventListener('click', function() {
+        $('#eventModal').modal('show');
+      });
+  
+  
+</script>
+
+<!-- <script>
+  const events = {{ scheduledAppointments|safe }};
+  console.log(events);
+</script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const calendar = new tui.Calendar(document.getElementById("calendar"), {
+      defaultView: "month", // Initial view (e.g., 'week', 'month', 'day')
+      useCreationPopup: true, // Enable event creation popup// Configuration options go here
+    });
+
+    // Add events to the calendar
+    events.forEach(function (event) {
+      calendar.createSchedules([
+        {
+          id: event.id,
+          calendarId: "1",
+          title: event.specialist,
+          category: "time",
+          start: event.start,
+          end: event.end,
+          body: event.note,
+        },
+      ]);
+    });
+  });
+</script> -->
+
+<!-- <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    fetch("/appointments/calendar")
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data)
+        // Now, the 'data' variable holds the parsed JSON response
+        const events = data;
+
+        const calendar = new tui.Calendar(document.getElementById("calendar"), {
+          defaultView: "month", // Initial view (e.g., 'week', 'month', 'day')
+          useCreationPopup: true, // Enable event creation popup// Configuration options go here
+        });
+
+        // Add events to the calendar
+        events.forEach(function (event) {
+          calendar.createSchedules([
+            {
+              id: event.id,
+              calendarId: "1",
+              title: event.specialist,
+              category: "time",
+              start: event.start,
+              end: event.end,
+              body: event.note,
+            },
+          ]);
+        });
+      })
+      .catch((error) => console.error("Error:", error));
+  });
+</script> -->
+<!-- 
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        fetch('/appointments/calendar/')
+            .then(response => {
+                const contentType = response.headers.get('Content-Type');
+                if (contentType && contentType.indexOf('application/json') !== -1) {
+                    return response.json();  // It's JSON, parse it
+                } else {
+                    return response.text();  // It's HTML, retrieve it as text
+                }
+            })
+            .then(data => {
+                if (typeof data === 'object') {
+                    // JSON data
+                    const events = data;
+                    // Handle JSON data as needed
+                } else if (typeof data === 'string') {
+                    // HTML content
+                    // Insert the HTML content into a specific element
+                    document.getElementById('calendar-container').innerHTML = data;
+                    console.log(data.context);
+                }
+            })
+            .catch(error => console.error('Error:', error));
+    });
+</script> -->
+
+
+
+{% endblock content %}

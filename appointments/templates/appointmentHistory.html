@@ -1,29 +1,51 @@
 {% extends 'appointmentsBase.html' %}
-
 {% block appointmentContent %}
- <table>
-
+<div class="history-main">
+  <div class="container">
+    <label
+      for="specialistsAdded"
+      style="font-size: larger; color: rgb(19, 156, 194); font-weight: bold"
+    >
+      Your Appointment History</label
+    >
+  </div>
+  <div class="container">
+    <p></p>
+  </div>
+  <table class="table table-bordered">
     <thead>
-        <tr>
-            <th>Patient Name</th>
-            <th>Date Schedule</th>
-            <th>Time Schedule</th>
-            <th>Note</th>
-            <th>Status</th>
-        </tr>
-    </thead> 
+      <tr>
+        <th scope="col">Date</th>
+        <th scope="col">Time Start</th>
+        <th scope="col">Time End</th>
+        <th scope="col">Appointment With</th>
+        <th scope="col">Notes</th>
+        <th scope="col">Status</th>
+      </tr>
+    </thead>
+
     <tbody>
-        {% for appointment in scheduledAppointments %}
-            <tr class="dashboard-row">
-                <td>{{appointment.patient}}</td>
-                <td>{{appointment.start}} - {{appointment.end}}</td>
-                <td>{{appointment.start}} - {{appointment.end}}</td>
-                <td>{{appointment.note}}</td>
-                <td>{{appointment.status}}</td>
-            </tr>
-        {% endfor %}
+      {% for appointment in scheduledAppointments %}
+      <tr>
+        <td>{{appointment.date}}</td>
+        <td>{{appointment.start|slice:"10:16"}}</td>
+        <td>{{appointment.end|slice:"10:16"}}</td>
+        <td>{{appointment.attendee}}</td>
+        <td>{{appointment.note}}</td>
+        <td>
+          {% if appointment.status == 'Pending'%}
+          <span class="badge badge-info">Pending</span>
+          {% elif appointment.status == 'Cancelled' %}
+          <span class="badge badge-secondary">Cancelled</span>
+          {% elif appointment.status == 'Confirmed' %}
+          <span class="badge badge-success">Confirmed</span>
+          {% elif appointment.status == 'Declined' %}
+          <span class="badge badge-danger">Declined</span>
+          {% endif %}
+        </td>
+      </tr>
+      {% endfor %}
     </tbody>
-
-
- </table>
+  </table>
+</div>
 {% endblock %}

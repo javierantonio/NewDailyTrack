@@ -51,6 +51,14 @@
 .side-item{
     padding: 0.75rem;
     position: relative;
+    text-decoration: none;
+}
+
+a{
+    text-decoration: none;
+}
+a:hover{
+    text-decoration: none;
 }
 
 .form{
@@ -90,10 +98,10 @@
     justify-content: flex-end;
     /* height: 100%; */
     position: absolute;
-    width: 85%;
+    width: 90%;
     text-align: right;
-    padding: 0;
-    /* padding: 1.1rem 0.4rem; */
+    /* padding: 0; */
+    padding: 1.5% 0;
     font-size: 1.2rem;
     font-weight: 1000;
     color: #001a3f;
@@ -139,4 +147,16 @@
 }
 .formTime{
     width: 80%;
+}
+
+.tui-full-calendar .tui-full-calendar-left-container .tui-full-calendar-time-date-schedule-container ul {
+    list-style: none; /* Remove bullets */
+    padding-left: 0;   /* Remove left padding */
+}
+.tui-full-calendar-weekday-schedule-bullet{
+    opacity: 0;
+}
+
+.history-main{
+    padding: 2rem;
 }

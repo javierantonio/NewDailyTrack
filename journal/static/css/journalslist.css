@@ -3,6 +3,9 @@ body {
   margin: 0;
   overflow-y: hidden;
 }
+.display {
+  overflow: auto;
+}
 .journal-title {
   display: flex;
   font-weight: 700;
@@ -59,7 +62,7 @@ body {
 }
 
 .list-container {
-  height: 90%;
+  height: 100%;
   width: 100%;
   display: flex;
   flex-direction: row;

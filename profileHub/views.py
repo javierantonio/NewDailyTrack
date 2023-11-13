@@ -1,5 +1,5 @@
 from django.shortcuts import get_object_or_404, render, redirect
-from django.http import HttpResponse, JsonResponse
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse
 from django.core.exceptions import ObjectDoesNotExist
@@ -111,8 +111,7 @@ def getSpecialist(request):
         userData = Profile.objects.get(user=request.user)
         specialistData = Specialist.objects.get(profile=userData)
         # return HttpResponse(specialistData)
-        if(request.method == "POST"):
-            addPatient(request.POST['patientEmail'], userData)
+        print(request.method)
         context = {
             'type': userData.type,
             'firstName': userData.user.first_name,
@@ -127,6 +126,13 @@ def getSpecialist(request):
             'prcID': specialistData.prcID,
             'specialistType': specialistData.specialistType,                    
         }
+        if(request.method == "POST"):
+            addPatient(request.POST['patientEmail'], userData)
+            return HttpResponseRedirect('/specialist-hub/')
+            # request.method = "GET"
+            # return render(request, 'profile.html', context={'data':context,'patientsData':getPatientDirectory(request.user)})
+            
+        # return redirect(reverse('specialistHub'),context={'data':context,'patientsData':getPatientDirectory(request.user)})
         return render(request, 'profile.html', context={'data':context,'patientsData':getPatientDirectory(request.user)})
     return HttpResponse("You do not have permission to view this entrsy.")
 
@@ -237,9 +243,15 @@ def removeInvitedPatient(request):
     invitedPatient = Enrollment.objects.get(enrollmentCode = request.POST['code'])
     invitedPatient.enrollmentStatus = 'T'
     invitedPatient.save()
+    redirect(reverse('specialistHub'))
 
 def removeRegisteredPatient(request):
+    userData = Profile.objects.get(user=request.user)
     patient = PatientList.objects.get(enrollmentCode = get_object_or_404(Enrollment, enrollmentCode=request.POST['code']))
     patient.patientListStatus = 'I'
     patient.save()
+    if userData.type == 'Specialist':
+        redirect(reverse('specialistHub'))
+    else:
+        redirect(reverse('patientHub'))
     

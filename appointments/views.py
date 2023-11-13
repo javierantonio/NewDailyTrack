@@ -24,7 +24,7 @@ def calendarView(request):
     appointments = getAppointments(userProfile, 'json')
     print(appointments)
     # form.setPatientList(specialist = Specialist.objects.get(profile = userProfile))
-    return render(request, 'appointmentCalendar.html', context={'scheduledAppointments': appointments, 'active': 'calendar'})
+    return render(request, 'appointmentCalendar.html', context={'scheduledAppointments': appointments, 'active': 'calendar','userType':userProfile.type})
     
 def createAppointment(request):
     userProfile = Profile.objects.get(user=request.user)   
@@ -64,6 +64,8 @@ def getAppointments(userProfile, returnType):
             'attendee': element.patient.profile.user.first_name+' '+element.patient.profile.user.last_name,
             # 'specialist': element.specialist.profile.user.first_name+' '+element.specialist.profile.user.last_name,
             # 'patient': element.patient.profile.user.first_name+' '+element.patient.profile.user.last_name,
+            # 'date': element.appointmentStart,
+            'date': (element.appointmentStart).strftime("%B %d, %Y"),
             'start': (element.appointmentStart).strftime("%Y-%m-%d %H:%M:%S"),
             'end': (element.appointmentEnd).strftime("%Y-%m-%d %H:%M:%S"),
             'note': checkNull(element.note),
@@ -110,7 +112,10 @@ def appointmentHistory(request):
     userProfile = Profile.objects.get(user=request.user)
     appointments = getAppointments(userProfile, 'array')
 
-    return render(request, 'appointmentHistory.html', context={'scheduledAppointments':appointments, 'active': 'history'})
+    # for data in appointments:
+    #     data['start'] = data['start'].
+
+    return render(request, 'appointmentHistory.html', context={'scheduledAppointments':appointments, 'active': 'history', 'userType':userProfile.type})
 
 # def createAppointment(request):
 #     return render(request, 'appointmentCreate.html')
@@ -142,10 +147,11 @@ def checkNull(data):
 
 def confirmAppointment(request):
     userProfile = Profile.objects.get(user=request.user)
+    print(userProfile.type)
     if(userProfile.type=='Specialist'):
         userDetails = Specialist.objects.get(profile = Profile.objects.get(user=request.user))
     else:
-        userDetails = Specialist.objects.get(profile = Profile.objects.get(user=request.user))
+        userDetails = Patient.objects.get(profile = Profile.objects.get(user=request.user))
     appointment = Appointments.objects.get(uuid = request.POST['data'])
     if request.method == 'POST':
         if ConfirmAppointment(appointment, userDetails)==True:

@@ -1,6 +1,6 @@
-{% if data.type == 'Patient' %}
+{% if type == 'Patient' or data.type == 'Patient' %}
     {% include "patientTemplate.html" %}
-{% elif data.type == 'Specialist' %}
+{% elif type == 'Specialist' or data.type == 'Specialist' %}
     {% include "specialistTemplate.html" %}
 {% else %}
     {% include "specialistTemplate.html" %}

@@ -497,11 +497,10 @@
           isReadOnly: true,
           isPending: event.status === "Pending" ? true : false,
           customStyle: `border-radius: 5px; background-color: ${
-            event.status === "Pending" || event.status === "Rescheduled"
-              ? "#7dadfa"
-              : event.status === "Confirmed"
-              ? "#1fa342"
-              : "#737272"
+            event.status === "Pending" ? "#82cbff" : event.status === "Cancelled" ? "#c7c7c7" :
+               event.status === "Confirmed"
+              ? "#66f69d"
+              : "#ffafaf"
           };`,
           //   bgColor: '#f77c1f',
           //   dragColor: '#f77c1f',
