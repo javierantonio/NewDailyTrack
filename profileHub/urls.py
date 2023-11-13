@@ -9,6 +9,7 @@ urlpatterns = [
     path('', login.views.login, name='login'),
     path('patient-hub/', views.getPatient, name='patientHub'),
     path('specialist-hub/', views.getSpecialist, name='specialistHub'),
+    path('specialist-hub/s', views.getSpecialist, name='specialistHubReload'),
     path('patient-hub/edit/', views.editPatient, name='patientEdit'),
     path('specialist-hub/edit/', views.editSpecialist, name='specialistEdit'),
     path('specialist-hub/t/', views.removeInvitedPatient, name='disconnectPatient'),

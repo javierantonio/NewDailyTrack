@@ -22,11 +22,6 @@
                     <span class="mr-2 d-none d-lg-inline">
                         <i class="fa fa-book fa-fw mr-1"></i> iJournal</span></a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'appointmentPage' %}">
-                      <i class="far fa-clipboard"></i>
-                    Appointment Tracker <span class="sr-only">(current)</span></a>
-                </li>
 
                 <!-- <li class="nav-item ">
                     <a class="nav-link" href="doodle.html">
@@ -42,6 +37,12 @@
 
                 <li class="nav-item ">
                     <a class="nav-link" href="{% url 'emoticardList' userId=request.session.id %}"><i class="fa fa-chart-pie fa-fw mr-1"></i> Emoticards</a>
+                </li>
+                
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'appointmentPage' %}">
+                      <i class="far fa-clipboard"></i>
+                    Appointment Tracker <span class="sr-only">(current)</span></a>
                 </li>
 
                 <li class="nav-item dropdown no-arrow">
