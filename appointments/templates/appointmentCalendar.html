@@ -2,98 +2,780 @@
 {% block appointmentContent %} 
 {% load static %}
 
+<div id="dateTitle"></div>
 <div id="calendar"></div>
 
-<div id="dateModal" class="modal fade" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="modalTitle"></h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body" id="modalBody">
-                <span class="descriptor">Date:</span>
-                <span id="date"></span>
+<!-- VIEW SCHEDULES -->
+<!-- PENDING -->
+<div id="pendingModal" class="modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="modal-header-text">
+          <h5 id="modalTitle"></h5>
+          <!--Appointment with Patient-->
+          <h6 id="modalSubtitle">
+            <span>Created by: <span id="appointment-set"></span></span>
 
-                <span class="descriptor">Time Start:</span>
-                <span id="start"></span>
-
-                <span class="descriptor">Time End:</span>
-                <span id="end"></span>                
-                
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            </div>
+            <span id="appointment-id"></span>
+          </h6>
+          <!--Date created-->
         </div>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" id="modalBody">
+        <div class="section">
+          <span class="descriptor">Status:</span>
+          <span id="appointment-status"></span>
+        </div>
+
+        <div class="section">
+          <span class="descriptor">Date:</span>
+          <span id="date"></span>
+        </div>
+
+        <div class="section">
+          <span class="descriptor">Time Start:</span>
+          <span id="start"></span>
+        </div>
+
+        <div class="section">
+          <span class="descriptor">Time End:</span>
+          <span id="end"></span>
+        </div>
+
+        <div class="section">
+          <span class="descriptor">Notes:</span>
+          <span id="appointment-note"></span>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <div id="btn-set">
+          {% csrf_token %}
+          <button id="confirm-button" type="button" class="btn btn-success">
+            Confirm
+          </button>
+          <button id="decline-button" type="button" class="btn btn-danger">
+            Decline
+          </button>
+          <!-- <button id="resched-button" type="button" class="btn btn-info">
+            Reschedule
+          </button> -->
+        </div>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+          Close
+        </button>
+      </div>
     </div>
+  </div>
 </div>
 
+<!-- CONFIRMED -->
+<div id="confirmedModal" class="modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="modal-header-text">
+          <h5 id="modalTitle"></h5>
+          <!--Appointment with Patient-->
+          <h6 id="modalSubtitle">
+            Created by: <span id="appointment-set"></span>
+            <span id="appointment-id"></span>
+          </h6>
+          <!--Date created-->
+        </div>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" id="modalBody">
+        <div class="section">
+          <span class="descriptor">Status:</span>
+          <span id="appointment-status"></span>
+        </div>
+
+        <div class="section">
+          <span class="descriptor">Date:</span>
+          <span id="date"></span>
+        </div>
+
+        <div class="section">
+          <span class="descriptor">Time Start:</span>
+          <span id="start"></span>
+        </div>
+
+        <div class="section">
+          <span class="descriptor">Time End:</span>
+          <span id="end"></span>
+        </div>
+
+        <div class="section">
+          <span class="descriptor">Notes:</span>
+          <span id="appointment-note"></span>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- DECLINED -->
+<div id="declinedModal" class="modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="modal-header-text">
+          <h5 id="modalTitle"></h5>
+          <!--Appointment with Patient-->
+          <h6 id="modalSubtitle">
+            Created by: <span id="appointment-set"></span>
+            <span id="appointment-id"></span>
+          </h6>
+          <!--Date created-->
+        </div>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" id="modalBody">
+        <div class="section">
+          <span class="descriptor">Status:</span>
+          <span id="appointment-status"></span>
+        </div>
+
+        <div class="section">
+          <span class="descriptor">Date:</span>
+          <span id="date"></span>
+        </div>
+
+        <div class="section">
+          <span class="descriptor">Time Start:</span>
+          <span id="start"></span>
+        </div>
+
+        <div class="section">
+          <span class="descriptor">Time End:</span>
+          <span id="end"></span>
+        </div>
+
+        <div class="section">
+          <span class="descriptor">Notes:</span>
+          <span id="appointment-note"></span>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- RESCHEDULED -->
+<div id="reschedModal" class="modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="modal-header-text">
+          <h5 id="modalTitle"></h5>
+          <!--Appointment with Patient-->
+          <h6 id="modalSubtitle">
+            Created by: <span id="appointment-set"></span>
+            <span id="appointment-id"></span>
+          </h6>
+          <!--Date created-->
+        </div>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" id="modalBody">
+        <div class="section">
+          <span class="descriptor">Status:</span>
+          <span id="appointment-status"></span>
+        </div>
+
+        <div class="section">
+          <span class="descriptor">Date:</span>
+          <span id="date"></span>
+        </div>
+
+        <div class="section">
+          <span class="descriptor">Time Start:</span>
+          <span id="start"></span>
+        </div>
+
+        <div class="section">
+          <span class="descriptor">Time End:</span>
+          <span id="end"></span>
+        </div>
+
+        <div class="section">
+          <span class="descriptor">Notes:</span>
+          <span id="appointment-note"></span>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button id="confirm-button" type="button" class="btn btn-success">
+          Confirm
+        </button>
+        <button id="decline-button" type="button" class="btn btn-danger">
+          Decline
+        </button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CHANGE SCHEDULE STATUS -->
+<!-- DECLINE APPOINTMENT -->
+<div id="toDeclineModal" class="modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="modal-header-text">
+          <h5 id="modalTitle"></h5>
+          <!--Appointment with Patient-->
+          <h6 id="modalSubtitle">
+            Created by: <span id="appointment-set"></span>
+            <span id="appointment-id"></span>
+          </h6>
+          <!--Date created-->
+        </div>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form role="form" name="declineForm" method="post">
+        <div class="modal-body" id="modalBody">
+          <div class="section">
+            <span class="descriptor">Status:</span>
+            <span id="appointment-status"></span>
+          </div>
+
+          <div class="section">
+            <span class="descriptor">Date:</span>
+            <span id="date"></span>
+          </div>
+
+          <div class="section">
+            <span class="descriptor">Time Start:</span>
+            <span id="start"></span>
+          </div>
+
+          <div class="section">
+            <span class="descriptor">Time End:</span>
+            <span id="end"></span>
+          </div>
+
+          <div class="section">
+            <span class="descriptor">Notes:</span>
+            <span id="appointment-note"></span>
+          </div>
+
+          <div class="separator"></div>
+          
+            <div class="form-group">
+              <label for="reasonDecline">Reason for Declining the Appointment:</label>
+              <textarea
+                class="form-control form-control-user"
+                id="reasonDecline"
+                name="reasonDecline"
+              ></textarea>
+            </div>
+          
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">
+            Cancel
+          </button>
+          <button id="appointment-declined-button" type="button" class="btn btn-danger">
+            Decline Appointment
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- RESCHEDULE APPOINTMENT -->
+<div id="toReschedModal" class="modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="modal-header-text">
+          <h5 id="modalTitle"></h5>
+          <!--Appointment with Patient-->
+          <h6 id="modalSubtitle">
+            Created by: <span id="appointment-set"></span>
+            <span id="appointment-id"></span>
+          </h6>
+          <!--Date created-->
+        </div>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form role="form" name="reschedForm" method="post">
+        <div class="modal-body" id="modalBody">
+          <div class="section">
+            <span class="descriptor">Status:</span>
+            <span id="appointment-status"></span>
+          </div>
+          <div class="section">
+            <span class="descriptor">Date:</span>
+            <span id="date"></span>
+          </div>
+          <div class="section">
+            <span class="descriptor">Time Start:</span>
+            <span id="start"></span>
+          </div>
+          <div class="section">
+            <span class="descriptor">Time End:</span>
+            <span id="end"></span>
+          </div>
+          <div class="section">
+            <span class="descriptor">Notes:</span>
+            <span id="appointment-note"></span>
+          </div>
+
+          <div class="separator"></div>
+          
+          <div class="form-group">
+            <label for="date">New Appointment Date:</label>
+            <input
+              type="date"
+              class="form-control form-control-user input-daterange"
+              id="date"
+              name="date"
+              placeholder="mm/dd/yyyy"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <div class="form-content">
+              <label for="timeStart">Time Start: </label>
+              <input
+                type="time"
+                id="timeStart"
+                name="timeStart"
+                class="form-control formTime"
+              />
+            </div>
+            <div class="form-content">
+              <label for="timeEnd">Time End:</label>
+              <input type="time" id="timeEnd" name="timeEnd" class="form-control formTime" />
+            </div>
+            
+          </div>
+          <div class="form-group">
+            <label for="reasonResched">Reason for Rescheduling the Appointment:</label>
+            <textarea
+              class="form-control form-control-user"
+              id="reasonResched"
+              name="reasonResched"
+            ></textarea>
+          </div>
+          
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">
+            Cancel
+          </button>
+          <button id="appointment-resched-button" type="button" class="btn btn-info">
+            Reschedule Appointment
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
 
 <script type="application/json" id="scheduled-appointments">
-    {{ scheduledAppointments|safe }}
+  {{ scheduledAppointments|safe }}
 </script>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        var months = [
-            'January', 'February', 'March', 'April',
-            'May', 'June', 'July', 'August',
-            'September', 'October', 'November', 'December'
-        ];
-        // Access the JSON data from the embedded <script> tag
-        const scheduledAppointmentsData = JSON.parse(document.getElementById('scheduled-appointments').textContent);
+  document.addEventListener("DOMContentLoaded", function () {
+    var months = [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December",
+    ];
+    // Access the JSON data from the embedded <script> tag
+    const scheduledAppointmentsData = JSON.parse(
+      document.getElementById("scheduled-appointments").textContent
+    );
 
-        // Now, the 'scheduledAppointmentsData' variable holds the parsed JSON data
-        const events = scheduledAppointmentsData;
+    // Now, the 'scheduledAppointmentsData' variable holds the parsed JSON data
+    const events = scheduledAppointmentsData;
 
-        const calendar = new tui.Calendar(document.getElementById("calendar"), {
-            defaultView: "month", // Initial view (e.g., 'week', 'month', 'day')
-            // useDetailPopUp: true,
-            // template: {
-            //     popupDetailBody: function(schedule) {
-            //         // Customize the popup content based on the 'schedule' object
-            //         return 'Custom detail popup content';
-            //     }
-            // },
-            // useCreationPopup: true, // Enable event creation popup
-            // Configuration options go here
-        });
-        events.forEach(function (event) {
-          calendar.createSchedules([
-            {
-              id: event.id,
-              calendarId: "1",
-              title: event.patient,
-              category: "time",
-              start: event.start,
-              end: event.end,
-              body: event.note,
-            },
-          ]);
-        });
-        calendar.on('clickSchedule', function(event) {
-            if (event.schedule) {
-                const title = 'Appointment with '+event.schedule.title;
-                const start = new Date (event.schedule.start);//start end status note
-                const end = event.schedule.end;
-                
-                // Populate the modal with data
-                document.getElementById('modalTitle').innerText = title;
-                document.getElementById('date').innerText = months[start.getMonth()]+' '+start.getDate()+', '+start.getFullYear();
-                document.getElementById('start').innerText = start;
-                
-                // document.getElementById('start').innerText = start;
-                document.getElementById('end').innerText = end;
+    const calendar = new tui.Calendar(document.getElementById("calendar"), {
+      defaultView: "month", // Initial view (e.g., 'week', 'month', 'day')
+      theme: {
+        milestone: {
+          bgColor: "blue",
+          // Other style properties...
+        },
+        // Add more styles as needed...
+      },
+    });
 
-                // Show the modal
-                $('#dateModal').modal('show');
+    // Get the currently displayed date
+    const displayedDate = calendar.getDate();
+
+    // Extract the month and year
+    const displayedMonth = displayedDate.getMonth(); // Month is 0-based, so add 1
+    const displayedYear = displayedDate.getFullYear();
+
+    document.getElementById("dateTitle").innerText =
+      months[displayedMonth] + " " + displayedYear;
+
+    events.forEach(function (event) {
+      calendar.createSchedules([
+        {
+          //Location attribute will be used for reasons declined/rescheduled
+          id: event.id,
+          calendarId: "1",
+          title: event.attendee,
+          attendees: [event.createdBy, event.user],
+          category: "time",
+          start: event.start,
+          end: event.end,
+          body: event.note,
+          state: event.status,
+          isReadOnly: true,
+          isPending: event.status === "Pending" ? true : false,
+          customStyle: `border-radius: 5px; background-color: ${
+            event.status === "Pending" || event.status === "Rescheduled"
+              ? "#7dadfa"
+              : event.status === "Confirmed"
+              ? "#1fa342"
+              : "#737272"
+          };`,
+          //   bgColor: '#f77c1f',
+          //   dragColor: '#f77c1f',
+          //   color: '#fff',
+          //   color: event.status === 'Pending' ? '#4cb4e0' : event.status === 'Confirmed' ? '#1fa342' : event.status === 'Declined' ? '#404040' : '#4cb4e0'
+        },
+      ]);
+    });
+
+    // EVENT LISTENERS
+    calendar.on("clickSchedule", function (event) {
+      var months = [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December",
+    ];
+      if (event.schedule) {
+        console.log(event.schedule);
+        const note = event.schedule.body;
+        const id = event.schedule.id;
+        const status = event.schedule.state;
+        const title = "Appointment with " + event.schedule.title;
+        const start = String(new Date(event.schedule.start).getHours()).padStart(2,'0')+':'+String(new Date(event.schedule.start).getMinutes()).padStart(2,'0')+''; //start end status note
+        const end = String(new Date(event.schedule.end).getHours()).padStart(2,'0')+':'+String(new Date(event.schedule.end).getMinutes()).padStart(2,'0');
+        const creator = event.schedule.attendees[0];
+        const user = event.schedule.attendees[1];
+        const appointmentDate = new Date(event.schedule.start); 
+
+        console.log(event.schedule);
+
+        // Populate the modal with data
+
+        switch (status) {
+          case "Pending":
+            console.log(creator, user, title);
+            console.log(creator === user);
+            modal = document.getElementById("pendingModal");
+            if (creator == user) {
+              $("#btn-set").hide();
+            } else {
+              $("#btn-set").show();
             }
-        });
+            modal.querySelector("#modalTitle").innerText = title;
+            modal.querySelector("#date").innerText =
+              months[appointmentDate.getMonth()] +
+              " " +
+              appointmentDate.getDate() +
+              ", " +
+              appointmentDate.getFullYear();
+            modal.querySelector("#start").innerText = start;
+            modal.querySelector("#end").innerText = end;
+            modal.querySelector("#appointment-note").innerText = note;
+            modal.querySelector("#appointment-status").innerText = status;
+            modal.querySelector("#appointment-set").innerText = creator;
+            modal.querySelector("#appointment-id").innerText = id;
+            $("#pendingModal").modal("show");
+            break;
+          case "Confirmed":
+            modal = document.getElementById("confirmedModal");
+            modal.querySelector("#modalTitle").innerText = title;
+            modal.querySelector("#date").innerText =
+              months[appointmentDate.getMonth()] +
+              " " +
+              appointmentDate.getDate() +
+              ", " +
+              appointmentDate.getFullYear();
+            modal.querySelector("#start").innerText = start;
+            modal.querySelector("#end").innerText = end;
+            modal.querySelector("#appointment-note").innerText = note;
+            modal.querySelector("#appointment-status").innerText = status;
+            modal.querySelector("#appointment-set").innerText = creator;
+            modal.querySelector("#appointment-id").innerText = id;
+            $("#confirmedModal").modal("show");
+            break;
+          case "Rescheduled":
+            modal = document.getElementById("reschedModal");
+            modal.querySelector("#modalTitle").innerText = title;
+            modal.querySelector("#date").innerText =
+              months[appointmentDate.getMonth()] +
+              " " +
+              appointmentDate.getDate() +
+              ", " +
+              appointmentDate.getFullYear();
+            modal.querySelector("#start").innerText = start;
+            modal.querySelector("#end").innerText = end;
+            modal.querySelector("#appointment-note").innerText = note;
+            modal.querySelector("#appointment-status").innerText = status;
+            modal.querySelector("#appointment-set").innerText = creator;
+            modal.querySelector("#appointment-id").innerText = id;
+            if (creator !== user) {
+              $("#btn-set").hide();
+            }
+            $("#reschedModal").modal("show");
+            break;
+          default:
+            modal = document.getElementById("declinedModal");
+            modal.querySelector("#modalTitle").innerText = title;
+            modal.querySelector("#date").innerText =
+              months[appointmentDate.getMonth()] +
+              " " +
+              appointmentDate.getDate() +
+              ", " +
+              appointmentDate.getFullYear();
+            modal.querySelector("#start").innerText = start;
+            modal.querySelector("#end").innerText = end;
+            modal.querySelector("#appointment-note").innerText = note;
+            modal.querySelector("#appointment-status").innerText = status;
+            modal.querySelector("#appointment-set").innerText = creator;
+            modal.querySelector("#appointment-id").innerText = id;
+            $("#declinedModal").modal("show");
+            break;
+        }
+      }
+    });
+
+    // $(".confirm-button").click(function(){
+    //     const id = document.getElementById('appointment-id').innerText;
+
+    //     console.log(id);
+
+    //     const csrfToken = document.querySelector('input[name="csrfmiddlewaretoken"]').value;
+
+    //     if(true){
+    //         $.ajax({
+    //         type: 'POST',
+    //         url: '/appointments/calendar/ca/',
+    //         data: {
+    //             csrfmiddlewaretoken: csrfToken,
+    //             appointment: id
+    //         },
+    //         success: function(response) {
+    //             console.log(response);
+    //         },
+    //         error: function(error) {
+    //             console.error('Error:', error);
+    //         }
+    //     });
+    //     }
+    // })
+    // $("#decline-button").click(function () {
+    //   console.log("decline");
+    // });
+    $("#resched-button").click(function () {
+      console.log("resched");
+    });
+  });
+</script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+  $(document).ready(function () {
+    $("#confirm-button").click(function () {
+      var id = document.getElementById("appointment-id").innerText;
+      sendPayload(id, "ca");
+    });
+    $("#decline-button").click(function () {
+      if (confirm("This action will cancel the appointment. Proceed?")) {
+        const id = document.getElementById("appointment-id").innerText;
+
+        modal = document.getElementById("toDeclineModal");
+
+        const note = document.getElementById("appointment-note").innerText;
+        const status = document.getElementById("appointment-status").innerText;
+        const title =
+          "Decline " + document.getElementById("modalTitle").innerText;
+        const start = document.getElementById("start").innerText //start end status note
+        const end = document.getElementById("end").innerText;
+        const creator = document.getElementById("appointment-set").innerText;
+        const appointmentDate = document.getElementById("date").innerText;
+        console.log(note, status, title, start, end, creator);
+        
+        modal.querySelector("#modalTitle").innerText = title;
+        modal.querySelector("#date").innerText = appointmentDate;
+        modal.querySelector("#start").innerText = start;
+        modal.querySelector("#end").innerText = end;
+        modal.querySelector("#appointment-note").innerText = note;
+        modal.querySelector("#appointment-status").innerText = status;
+        modal.querySelector("#appointment-set").innerText = creator;
+        modal.querySelector("#appointment-id").innerText = id;
+        $("#pendingModal").modal("hide");
+        $("#toDeclineModal").modal("show");
+        // sendPayload(id, 'da')
+      }
+    });
+    $("#resched-button").click(function () {
+      const id = document.getElementById("appointment-id").innerText;
+
+      modal = document.getElementById("toReschedModal");
+
+      const note = document.getElementById("appointment-note").innerText;
+      const status = document.getElementById("appointment-status").innerText;
+      const title =
+        "Reschedule " + document.getElementById("modalTitle").innerText;
+      const start = document.getElementById("start").innerText //start end status note
+      const end = document.getElementById("end").innerText;
+      const creator = document.getElementById("appointment-set").innerText;
+      const appointmentDate = document.getElementById("date").innerText;
+      console.log(note, status, title, start, end, creator);
+      
+      modal.querySelector("#modalTitle").innerText = title;
+      modal.querySelector("#date").innerText = appointmentDate;
+      modal.querySelector("#start").innerText = start;
+      modal.querySelector("#end").innerText = end;
+      modal.querySelector("#appointment-note").innerText = note;
+      modal.querySelector("#appointment-status").innerText = status;
+      modal.querySelector("#appointment-set").innerText = creator;
+      modal.querySelector("#appointment-id").innerText = id;
+
+      $("#pendingModal").modal("hide");
+      $("#toReschedModal").modal("show");
+      // sendPayload(id, 'da')
     });
     
+    $("#appointment-declined-button").click(function () {
+      const decline = $('form').serializeArray();
+      const id = document.getElementById("appointment-id").innerText;
+
+      sendPayload({id: id, data: decline[1].value}, "da");
+    });
+    $("#appointment-resched-button").click(function () {
+      const form = $('form').serializeArray();
+      const oldAppointment = document.getElementById("appointment-id").innerText;
+      console.log(form)
+
+      const date=form[2].value;
+      const timeStart = form[3].value;
+      const timeEnd = form[4].value;
+      const reason = form[5].value;
+
+      const data = {
+        date: date,
+        start: timeStart,
+        end: timeEnd,
+        reason: reason
+      }
+
+      sendPayload({id: oldAppointment, data: {date,timeStart,timeEnd,reason}}, "ra");
+    });
+    
+
+    function sendPayload(data, url) {
+      var csrfToken = document.querySelector(
+        'input[name="csrfmiddlewaretoken"]'
+      ).value;
+
+      $.ajax({
+        type: "POST",
+        url: `/appointments/calendar/${url}/`,
+        data: {
+          csrfmiddlewaretoken: csrfToken,
+          id: data.id||data,
+          data: data.data||data,
+        },
+        success: function (response) {
+          console.log(response);
+          alert(response.message);
+          location.reload();
+        },
+        error: function (response) {
+          console.error(response);
+          alert(response.message);
+          location.reload();
+        },
+      });
+    }
+  });
 </script>
 
 {% endblock appointmentContent %}
