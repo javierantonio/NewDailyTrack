@@ -50,37 +50,57 @@ def createAppointment(request):
         return render(request, 'appointmentCreate.html', context={'recipients': usersList, 'active': 'create', 'userType':userProfile.type})
 
 def getAppointments(userProfile, returnType):
-    if(userProfile.type=='Specialist'):
-        appointments = Appointments.objects.filter(specialist = Specialist.objects.get(profile = userProfile))
-    else:
-        appointments = Appointments.objects.filter(patient = Patient.objects.get(profile = userProfile))
-     
-    scheduledAppointments = []
-    for element in appointments:           
-        dateAppointment = element.appointmentStart
-        data = {            
-            'id': element.uuid,
-            'user': element.specialist.profile.user.first_name+' '+element.specialist.profile.user.last_name,
-            'attendee': element.patient.profile.user.first_name+' '+element.patient.profile.user.last_name,
-            # 'specialist': element.specialist.profile.user.first_name+' '+element.specialist.profile.user.last_name,
-            # 'patient': element.patient.profile.user.first_name+' '+element.patient.profile.user.last_name,
-            # 'date': element.appointmentStart,
-            'date': (element.appointmentStart).strftime("%B %d, %Y"),
-            'start': (element.appointmentStart).strftime("%Y-%m-%d %H:%M:%S"),
-            'end': (element.appointmentEnd).strftime("%Y-%m-%d %H:%M:%S"),
-            'note': checkNull(element.note),
-            'status': translateStatus(element.status, dateAppointment),
-            'createdBy': checkNull(element.createdBy.user.first_name+' '+element.createdBy.user.last_name)
-        }
-        scheduledAppointments.append(data)
-        if(userProfile.type=='Patient'):
-            data['user'] = element.patient.profile.user.first_name+' '+element.patient.profile.user.last_name
-            data['attendee'] = element.specialist.profile.user.first_name+' '+element.specialist.profile.user.last_name
-   
-    if returnType == 'json':
-        return json.dumps(scheduledAppointments)
-    else:
+    try:
+        if(userProfile.type=='Specialist'):
+            appointments = Appointments.objects.filter(specialist = Specialist.objects.get(profile = userProfile))
+        else:
+            appointments = Appointments.objects.filter(patient = Patient.objects.get(profile = userProfile))
+        
+        scheduledAppointments = []
+        for element in appointments:           
+            dateAppointment = element.appointmentStart
+            data = {            
+                'id': element.uuid,
+                'user': element.specialist.profile.user.first_name+' '+element.specialist.profile.user.last_name,
+                'attendee': element.patient.profile.user.first_name+' '+element.patient.profile.user.last_name,
+                # 'specialist': element.specialist.profile.user.first_name+' '+element.specialist.profile.user.last_name,
+                # 'patient': element.patient.profile.user.first_name+' '+element.patient.profile.user.last_name,
+                # 'date': element.appointmentStart,
+                'date': (element.appointmentStart).strftime("%B %d, %Y"),
+                'start': (element.appointmentStart).strftime("%Y-%m-%d %H:%M:%S"),
+                'end': (element.appointmentEnd).strftime("%Y-%m-%d %H:%M:%S"),
+                'note': checkNull(element.note),
+                'status': translateStatus(element.status, dateAppointment),
+                'createdBy': checkNull(element.createdBy.user.first_name+' '+element.createdBy.user.last_name)
+            }
+            scheduledAppointments.append(data)
+            if(userProfile.type=='Patient'):
+                data['user'] = element.patient.profile.user.first_name+' '+element.patient.profile.user.last_name
+                data['attendee'] = element.specialist.profile.user.first_name+' '+element.specialist.profile.user.last_name
+    
+        if returnType == 'json':
+            return json.dumps(scheduledAppointments)
+        else:
+            return scheduledAppointments
+    except:
+        scheduledAppointments = [
+                {            
+                'id':'',
+                'user':'',
+                'attendee':'',
+                # 'specialist':'',
+                # 'patient':'',
+                # 'date':'',
+                'date':'',
+                'start':'',
+                'end':'',
+                'note':'',
+                'status':'',
+                'createdBy':'',
+                }
+            ]
         return scheduledAppointments
+
 
 def getPatientAppointments(specialistId):
     appointments = Appointments.objects.filter(specialist = specialistId)

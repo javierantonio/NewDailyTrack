@@ -29,6 +29,7 @@ def getPatient(request):
                         print("account already registered to the specialist")
                 except ObjectDoesNotExist:
                     registerSpecialist(enrolledAccount, patientData)
+                    return HttpResponseRedirect('/patient-hub/')
             except:
                 print("code doesn't exist")
         else:

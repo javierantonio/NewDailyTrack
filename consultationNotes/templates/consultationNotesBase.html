@@ -9,6 +9,11 @@
 {% endblock link %} 
 
 {% block content %}
+<div class="header-title">Consultation Notes with 
+  <div class="header-content">
+    {{patient.user.first_name}} {{patient.user.last_name}}
+  </div>
+</div>
 <div class="specjournal bg2">
   {% include 'sidebar.html' %}
   {% block notesContent %} 

@@ -454,7 +454,7 @@
     ];
     // Access the JSON data from the embedded <script> tag
     const scheduledAppointmentsData = JSON.parse(
-      document.getElementById("scheduled-appointments").textContent
+      document.getElementById("scheduled-appointments").textContent||''
     );
 
     // Now, the 'scheduledAppointmentsData' variable holds the parsed JSON data
